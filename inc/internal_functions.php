@@ -12,6 +12,59 @@ use PrintMyBlog\system\Context;
 use PrintMyBlog\system\CustomPostTypes;
 
 /**
+ * Whether PMB is allowed to make requests to external services.
+ * @return bool
+ */
+function pmb_external_requests_enabled()
+{
+    return ! defined('PMB_DISABLE_EXTERNAL_REQUESTS') || ! PMB_DISABLE_EXTERNAL_REQUESTS;
+}
+
+function pmb_is_premium()
+{
+    return false;
+}
+
+function pmb_is_free_plan()
+{
+    return true;
+}
+
+function pmb_has_required_plan($plan = '')
+{
+    return false;
+}
+
+function pmb_upgrade_url()
+{
+    return admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
+}
+
+function pmb_is_registered_install()
+{
+    return false;
+}
+
+function pmb_is_anonymous_install()
+{
+    return false;
+}
+
+function pmb_connect_again()
+{
+}
+
+function pmb_license()
+{
+    return null;
+}
+
+function pmb_site_registration()
+{
+    return null;
+}
+
+/**
  * Adds a help icon with text
  * @param string $explanation
  * @return string
@@ -47,18 +100,7 @@ function pmb_hover_tip($explanation = '', $extra_css_classes = '', $url = '')
  */
 function pmb_pro_print_service_only($explanation = '')
 {
-    if (pmb_fs()->is_plan__premium_only('hobbyist')) {
-        return '';
-    } else {
-        $upgrade_url = pmb_fs()->get_upgrade_url();
-        $hover_text = '<b><a href="' . $upgrade_url . '">' .
-            __('Purchase Required', 'print-my-blog') .
-            '</a></b>';
-        if ($explanation) {
-            $hover_text .= '<br>' . $explanation;
-        }
-        return pmb_hover_tip($hover_text, 'pmb-pro-only', $upgrade_url);
-    }
+    return '';
 }
 
 /**
@@ -77,23 +119,7 @@ function pmb_pro_print_service_only_e($explanation = '')
  */
 function pmb_pro_print_service_best($explanation = '')
 {
-    if (pmb_fs()->is_plan__premium_only('hobbyist')) {
-        return '';
-    } else {
-        $upgrade_url = pmb_fs()->get_upgrade_url();
-        $hover_text = '<b>' .
-            sprintf(
-            // translators: 1: opening anchor tag, 2: closing anchor tag.
-                __('Works better with %1$sPro PDF Service%2$s', 'print-my-blog'),
-                '<a href="' . $upgrade_url . '">',
-                '</a>'
-            ) .
-            '</b>';
-        if ($explanation) {
-            $hover_text .= '<br>' . $explanation;
-        }
-        return pmb_hover_tip($hover_text, 'pmb-pro-best', $upgrade_url);
-    }
+    return '';
 }
 
 /**
@@ -123,19 +149,7 @@ function pmb_pro_better_e($explanation = '')
  */
 function pmb_pro_better($explanation = '')
 {
-    $url = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
-    $hover_text = '<b>' .
-        sprintf(
-                // translators: 1: opening anchor tag, 2: closing anchor tag.
-            __('More Advanced Features in %1$sPro Print%2$s', 'print-my-blog'),
-            '<a href="' . esc_url($url) . '">',
-            '</a>'
-        ) .
-        '</b>';
-    if ($explanation) {
-        $hover_text .= '<br>' . $explanation;
-    }
-    return pmb_hover_tip($hover_text, '', $url);
+    return '';
 }
 
 
@@ -320,7 +334,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
                                 ?>"
                                 target="_blank"><span
                                     class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a><?php
-                        if (pmb_fs()->is_plan__premium_only('founding_members')) {
+                        if (pmb_has_required_plan('founding_members')) {
                             $label = '';
                             if ($post_type->name !== CustomPostTypes::CONTENT) {
                                 $print_material = null;
@@ -438,12 +452,11 @@ function pmb_get_filename($url, $remove_extension = false){
  */
 function pmb_use_pmb_central(){
     $use_pmb_central = 0;
-    try{
-        if (pmb_fs()->is_plan__premium_only('business') || (defined('PMB_USE_CENTRAL') && PMB_USE_CENTRAL)) {
-            $use_pmb_central = 1;
-        }
-    }catch(Freemius_Exception $e){
-        // ignore it
+    if (! pmb_external_requests_enabled()) {
+        return $use_pmb_central;
+    }
+    if (pmb_has_required_plan('business') || (defined('PMB_USE_CENTRAL') && PMB_USE_CENTRAL)) {
+        $use_pmb_central = 1;
     }
 
     return $use_pmb_central;

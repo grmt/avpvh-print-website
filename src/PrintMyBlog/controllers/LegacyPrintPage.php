@@ -73,6 +73,7 @@ class LegacyPrintPage extends BaseController
             global $pmb_site_name,
                    $pmb_site_description,
                    $pmb_site_url,
+                   $pmb_download_file_name,
                    $pmb_show_site_title,
                    $pmb_show_site_tagline,
                    $pmb_show_site_url,
@@ -179,6 +180,7 @@ class LegacyPrintPage extends BaseController
                 $pmb_taxonomy_filters = array();
             }
             $pmb_format = $this->getFromRequest('pmb_f', $this->getFromRequest('format', 'print'));
+            $pmb_download_file_name = $this->getDownloadFileName($pmb_site_name, $pmb_format);
             $pmb_browser = $this->getBrowser();
             return PMB_TEMPLATES_DIR . 'print_page.php';
         }
@@ -251,6 +253,7 @@ class LegacyPrintPage extends BaseController
     public function enqueueScripts()
     {
         do_action('PrintMyBlog\controllers\PmbPrintPage->enqueueScripts');
+        $format = $this->getFromRequest('format', 'print');
         wp_enqueue_script(
             'pmb_print_page',
             PMB_ASSETS_URL . 'scripts/print-page.js',
@@ -272,6 +275,11 @@ class LegacyPrintPage extends BaseController
             filemtime(PMB_ASSETS_DIR . 'styles/tiled-gallery.css')
         );
         wp_enqueue_style('pmb-plugin-compatibility');
+        if ($format === 'epub') {
+            $this->enqueueLocalEpubScripts();
+        } elseif ($format === 'word') {
+            $this->enqueueLocalWordScripts();
+        }
 
         $post_type = $this->getFromRequest('post-type', 'post');
         if ($post_type === 'post') {
@@ -302,11 +310,12 @@ class LegacyPrintPage extends BaseController
             'post_type' => $post_type,
             'rendering_wait' => $this->getFromRequest('rendering-wait', 500),
             'include_inline_js' => (bool) $this->getFromRequest('include-inline-js', false),
+            'exclude_external_content' => (bool) $this->getFromRequest('exclude-external-content', false),
             'links' => (string) $this->getFromRequest('links', 'include'),
             'filters' => (object) $this->getFromRequest('taxonomies', new stdClass()),
             'foogallery' => function_exists('foogallery_fs'),
             'is_user_logged_in' => is_user_logged_in(),
-            'format' => $this->getFromRequest('format', 'print'),
+            'format' => $format,
             'statuses' => $statuses,
             'author' => $this->getFromRequest('pmb-author', null),
             'post' => $this->getFromRequest('pmb-post', null),
@@ -399,6 +408,138 @@ class LegacyPrintPage extends BaseController
         );
         $this->enqueueInlineStyleBasedOnOptions();
         $this->loadThemeCompatibilityScriptsAndStylesheets();
+    }
+
+    /**
+     * @param string $site_name
+     * @param string $format
+     * @return string
+     */
+    protected function getDownloadFileName($site_name, $format)
+    {
+        $extension_map = [
+            'epub' => '.epub',
+            'word' => '.doc',
+        ];
+        if (! isset($extension_map[$format])) {
+            return '';
+        }
+        return sanitize_file_name($site_name . '-' . gmdate('Y-m-d') . $extension_map[$format]);
+    }
+
+    /**
+     * @return void
+     */
+    protected function enqueueLocalEpubScripts()
+    {
+        wp_enqueue_script('pmb_general');
+        wp_register_script(
+            'epub-gen-memory',
+            PMB_SCRIPTS_URL . 'libs/epub-gen-memory__premium_only.min.js',
+            [],
+            filemtime(PMB_SCRIPTS_DIR . 'libs/epub-gen-memory__premium_only.min.js')
+        );
+        wp_register_script(
+            'pmb-filesaver',
+            PMB_SCRIPTS_URL . 'libs/filesaver__premium_only.min.js',
+            [],
+            filemtime(PMB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js')
+        );
+        wp_enqueue_script(
+            'pmb-epub',
+            PMB_SCRIPTS_URL . 'epub-generator.js',
+            ['epub-gen-memory', 'jquery', 'pmb-beautifier-functions', 'pmb-filesaver', 'pmb_general'],
+            filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
+        );
+        wp_localize_script('pmb-epub', 'pmb_pro', $this->getLocalDocumentGeneratorData('epub'));
+        wp_localize_script('pmb-epub', 'pmb_design_options', [
+            'image_size' => $this->getImageRelativeSize(),
+            'fonts_to_embed' => [],
+        ]);
+    }
+
+    /**
+     * @return void
+     */
+    protected function enqueueLocalWordScripts()
+    {
+        wp_enqueue_script('pmb_general');
+        wp_register_script(
+            'pmb-filesaver',
+            PMB_SCRIPTS_URL . 'libs/filesaver__premium_only.min.js',
+            [],
+            filemtime(PMB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js')
+        );
+        wp_enqueue_style(
+            'pmb-word',
+            PMB_STYLES_URL . 'pmb-word.css',
+            [],
+            filemtime(PMB_STYLES_DIR . 'pmb-word.css')
+        );
+        wp_enqueue_script(
+            'pmb-word',
+            PMB_SCRIPTS_URL . 'pmb-word__premium_only.js',
+            ['jquery', 'pmb-filesaver', 'pmb_general'],
+            filemtime(PMB_SCRIPTS_DIR . 'pmb-word__premium_only.js')
+        );
+        wp_localize_script('pmb-word', 'pmb_pro', $this->getLocalDocumentGeneratorData('word'));
+        wp_localize_script('pmb-word', 'pmb_design_options', [
+            'image_size' => $this->getImageRelativeSize(),
+        ]);
+    }
+
+    /**
+     * @param string $format
+     * @return array
+     */
+    protected function getLocalDocumentGeneratorData($format)
+    {
+        return [
+            'title' => $this->getFromRequest('title', get_bloginfo('name')),
+            'authors' => $this->getQuickPrintAuthors(),
+            'cover' => '',
+            'css' => $this->getQuickPrintGeneratorCss($format),
+            'version' => '3',
+            'translations' => [
+                'many_articles' => __('Your document is very big and you might have errors downloading the file. If so, try printing fewer posts at a time.', 'print-my-blog'),
+                'many_images' => __('Your document has lots of images and you might have errors downloading the file. If so, try reducing image size or printing fewer posts at a time.', 'print-my-blog'),
+            ],
+            'domain' => pmb_get_domain(),
+            'site_url' => site_url(),
+        ];
+    }
+
+    /**
+     * @param string $format
+     * @return string
+     */
+    protected function getQuickPrintGeneratorCss($format)
+    {
+        $css = pmb_get_contents(PMB_ASSETS_DIR . 'styles/pmb-print-page-common.css')
+            . pmb_get_contents(PMB_ASSETS_DIR . 'styles/print-page.css')
+            . pmb_get_contents(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css');
+        if ($format === 'epub' && file_exists(PMB_STYLES_DIR . 'pmb-epub.css')) {
+            $css .= pmb_get_contents(PMB_STYLES_DIR . 'pmb-epub.css');
+        }
+        if ($format === 'word' && file_exists(PMB_STYLES_DIR . 'pmb-word.css')) {
+            $css .= pmb_get_contents(PMB_STYLES_DIR . 'pmb-word.css');
+        }
+        return $css;
+    }
+
+    /**
+     * @return array|string
+     */
+    protected function getQuickPrintAuthors()
+    {
+        $user_id_to_filter_by = $this->getFromRequest('pmb-author', null);
+        if ($user_id_to_filter_by) {
+            $author = get_userdata($user_id_to_filter_by);
+            if ($author) {
+                return [$author->display_name];
+            }
+        }
+        return '';
     }
 
     /**

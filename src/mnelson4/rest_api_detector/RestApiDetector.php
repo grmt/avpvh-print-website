@@ -67,6 +67,14 @@ class RestApiDetector
      */
     public function getSiteInfo()
     {
+        if (! pmb_external_requests_enabled()) {
+            $this->setName(get_bloginfo('name'));
+            $this->setDescription(get_bloginfo('description'));
+            $this->setRestApiUrl(get_rest_url());
+            $this->setSite(get_bloginfo('url'));
+            $this->setLocal(true);
+            return true;
+        }
         // check for a site request param
         $site = $this->getSite();
         if (empty($site)) {

@@ -46,14 +46,15 @@ class DefaultFileFormats
         );
 
         // only show it enabled if this version of PMB has the necessary files included.
-        $ebook_supported = false;
-        $word_supported = false;
-        if (pmb_fs()->is__premium_only()) {
-            $ebook_supported = true;
-            if (pmb_fs()->is_plan__premium_only('founding_members')) {
-                $word_supported = true;
-            }
-        }
+        $ebook_supported =
+            file_exists(PMB_SCRIPTS_DIR . 'libs/epub-gen-memory__premium_only.min.js') &&
+            file_exists(PMB_SCRIPTS_DIR . 'libs/web-streams-ponyfill__premium_only.min.js') &&
+            file_exists(PMB_SCRIPTS_DIR . 'libs/streamsaver__premium_only.min.js') &&
+            file_exists(PMB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js') &&
+            file_exists(PMB_SCRIPTS_DIR . 'epub-generator.js');
+        $word_supported =
+            file_exists(PMB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js') &&
+            file_exists(PMB_SCRIPTS_DIR . 'pmb-word__premium_only.js');
         pmb_register_file_format(
             self::EPUB,
             [
@@ -65,7 +66,7 @@ class DefaultFileFormats
                 'color' => '#ffcc00',
                 'extension' => 'epub',
                 'supported' => $ebook_supported,
-                'upsell' => __('Create unlimited ePubs with any purchase.', 'print-my-blog'),
+                'upsell' => '',
             ]
         );
         pmb_register_file_format(
@@ -79,7 +80,7 @@ class DefaultFileFormats
                 'color' => '#ffbdde',
                 'extension' => 'doc',
                 'supported' => $word_supported,
-                'upsell' => __('Create unlimited Word Documents with a Pro Plan.', 'print-my-blog'),
+                'upsell' => '',
             ]
         );
     }

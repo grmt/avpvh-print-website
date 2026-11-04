@@ -207,7 +207,7 @@ class ProjectsListTable extends WP_List_Table
 <span class="pmb-dont-break-phrase">| &nbsp; 
         <?php
         // only show duplicate feature for Professional and Business licenses
-        if (pmb_fs()->is_plan__premium_only('founding_members')) {
+        if (pmb_has_required_plan('founding_members')) {
             ?>
     <a class="pmb-duplicate" href="
             <?php

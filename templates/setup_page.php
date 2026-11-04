@@ -51,10 +51,13 @@ pmb_render_template('partials/free_header.php');
 						    'help_text' => esc_html__('Make a PDF file, intended for reading from a computer or other device, using your browser or a browser extension.', 'print-my-blog'),
 						    'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F'
 					    ),
-					    'ebook' => array(
-						    'label' => esc_html__('eBook (ePub or MOBI)', 'print-my-blog'),
-						    'help_text' => esc_html__('Make a free eBook using dotEPUB.', 'print-my-blog'),
-						    'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F'
+					    'epub' => array(
+						    'label' => esc_html__('eBook (ePub)', 'print-my-blog'),
+						    'help_text' => esc_html__('Create an ePub file locally in your browser for reading on eReaders, tablets, and phones.', 'print-my-blog'),
+					    ),
+					    'word' => array(
+						    'label' => esc_html__('Word Document', 'print-my-blog'),
+						    'help_text' => esc_html__('Create a Word-compatible document locally in your browser for editing in Word, Google Docs, or LibreOffice.', 'print-my-blog'),
 					    ),
 					    'html' => array(
 						    'label' => esc_html__('HTML', 'print-my-blog'),
@@ -108,9 +111,10 @@ pmb_render_template('partials/free_header.php');
                                 <label><input class="pmb-order" type="radio" name="order-date" value="desc"><?php esc_html_e('Newest First', 'print-my-blog'); ?></label>
                             </div>
                             <div id="pmb-order-by-menu">
-                                <p><?php esc_html_e('Pages will be ordered using the "Order" attribute:', 'print-my-blog'); ?></p>
-                                <label><input class="pmb-order" type="radio" name="order-menu" value="asc" checked="checked"><?php esc_html_e('From Lowest to Highest', 'print-my-blog'); ?></label><br>
-                                <label><input class="pmb-order" type="radio" name="order-menu" value="desc" ><?php esc_html_e('From Highest to Lowest', 'print-my-blog'); ?></label>
+                                <p><?php esc_html_e('Pages will be ordered:', 'print-my-blog'); ?></p>
+                                <label><input class="pmb-order" type="radio" name="order-menu" value="menu" checked="checked"><?php esc_html_e('Menu Hierarchy (Top Down, Left to Right)', 'print-my-blog'); ?></label><br>
+                                <label><input class="pmb-order" type="radio" name="order-menu" value="alpha" ><?php esc_html_e('H1 Alphabetical', 'print-my-blog'); ?></label><br>
+                                <label><input class="pmb-order" type="radio" name="order-menu" value="desc" ><?php esc_html_e('Menu Hierarchy Reversed', 'print-my-blog'); ?></label>
                             </div>
                         </td>
                     </tr>

@@ -1,6 +1,6 @@
 {
   "name": "print-my-blog",
-  "version": "0.0.0",
+  "version": "3.27.14.1",
   "description": "Print, PDF, and eBook WordPress Converter plugin",
   "repository": {
     "type": "git",
@@ -9,7 +9,10 @@
   "scripts": {
     "start": "wp-scripts start",
     "build": "wp-scripts build",
-    "browserify": "browserify"
+    "browserify": "browserify",
+    "package:plugin": "bash scripts/package-plugin.sh",
+    "deploy:playwright": "node scripts/deploy-plugin.mjs",
+    "install:vscode-secret-storage": "bash scripts/install-vscode-extension.sh"
   },
   "license": "GPL-2.0+",
   "bugs": {
@@ -17,6 +20,7 @@
   },
   "homepage": "git+https://github.com/mnelson4/printmyblog",
   "devDependencies": {
-    "@wordpress/scripts": "^19.0.0"
+    "@wordpress/scripts": "^31.7.0",
+    "playwright": "^1.52.0"
   }
 }

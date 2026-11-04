@@ -9,10 +9,11 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 3.27.14
+ * Version: 3.27.14.1
  * Requires at least: 4.7
  * Requires PHP: 5.4
  * Text Domain: print-my-blog
+ * Update URI: https://github.com/grmt/printmyblog
  */
 
 
@@ -122,7 +123,7 @@ if (defined('PMB_VERSION')) {
     add_action('admin_notices', 'pmb_minimum_wp_version_error', 1, 0);
 } else {
     // it's all good! start bootstraping PMB.
-    define('PMB_VERSION', '3.27.14');
+    define('PMB_VERSION', '3.27.14.1');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
@@ -144,6 +145,9 @@ if (defined('PMB_VERSION')) {
     define('PMB_DESIGNS_DIR', PMB_DIR . 'designs/');
     define('TWINE_MAIN_FILE', PMB_MAIN_FILE);
     define('PMB_SUPPORT_EMAIL', 'please@printmy.blog');
+    if (! defined('PMB_DISABLE_EXTERNAL_REQUESTS')) {
+        define('PMB_DISABLE_EXTERNAL_REQUESTS', true);
+    }
 
     /* WPML support */
     if (! defined('WPML_LOAD_API_SUPPORT')) {
@@ -162,60 +166,6 @@ if (defined('PMB_VERSION')) {
     register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
     define('PMB_PRINTPAGE_SLUG', 'print-my-blog');
     require_once 'bootstrap.php';
-
-    if (function_exists('pmb_fs')) {
-        pmb_fs()->set_basename(true, __FILE__);
-    } else {
-        if (! function_exists('pmb_fs')) {
-            /**
-             * Initialize Freemius' code.
-             * @return Freemius
-             * @throws Freemius_Exception
-             */
-            function pmb_fs()
-            {
-                global $pmb_fs;
-
-                if (! isset($pmb_fs)) {
-                    // Include Freemius SDK.
-                    require_once dirname(__FILE__) . '/freemius/start.php';
-                    // don't ask to opt in if it's a tastewp site
-                    $site_url = get_site_url();
-                    $is_demo_site = (bool)preg_match('~https:\/\/([^\.]*\.[^-]*-tastewp\.com|[^.]*.instawp.xyz)~', $site_url);
-                    $pmb_fs = fs_dynamic_init(
-                        array(
-                            'id' => '5396',
-                            'slug' => 'print-my-blog',
-                            'premium_slug' => 'print-my-blog-pro',
-                            'type' => 'plugin',
-                            'public_key' => 'pk_0443e9596f0e906d282bf05b115dd',
-                            'is_premium' => true,
-                            'premium_suffix' => 'Pro',
-                            // If your plugin is a serviceware, set this option to false.
-                            'has_premium_version' => true,
-                            'has_addons' => false,
-                            'has_paid_plans' => true,
-                            'menu' => array(
-                                'slug' => 'print-my-blog-projects',
-                                'first-path' => 'admin.php?page=print-my-blog-now&welcome=1',
-                                'contact' => false,
-                                'support' => false,
-                            ),
-                            'anonymous_mode' => $is_demo_site
-                        )
-                    );
-                }
-
-                return $pmb_fs;
-            }
-
-
-            // Init Freemius.
-            pmb_fs();
-            // Signal that SDK was initiated.
-            do_action('pmb_fs_loaded');
-        }
-    }
 
     // Disable the active theme if generating a PDF.
     // This needs to be done super early

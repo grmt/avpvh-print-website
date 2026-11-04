@@ -4,8 +4,6 @@ namespace PrintMyBlog\controllers;
 
 use Dompdf\Renderer\Text;
 use Exception;
-use FS_Plugin_License;
-use FS_Site;
 use PrintMyBlog\controllers\helpers\ProjectsListTable;
 use PrintMyBlog\db\PostFetcher;
 use PrintMyBlog\db\TableManager;
@@ -454,7 +452,7 @@ class Admin extends BaseController
         $note_about_missing_formats = '';
         if ($unsupported_formats) {
             $unsupported_formats_string = implode(', ', $unsupported_formats);
-            $note_about_missing_formats = sprintf(__('Note: you need to upgrade your license to access the following formats: %s', 'print-my-blog'), $unsupported_formats_string);
+            $note_about_missing_formats = sprintf(__('Note: the following formats are not available in this build: %s', 'print-my-blog'), $unsupported_formats_string);
         }
         $subsections['formats'] = new CheckboxMultiInput(
             $format_options,
@@ -641,7 +639,7 @@ class Admin extends BaseController
                                 __('You will need to first %1$screate a GitHub account%2$s. If you prefer to use email support please %3$spurchase a license that offers email support.%2$s', 'print-my-blog'),
                                 '<a target="_blank" href="https://github.com/signup">',
                                 '</a>',
-                                '<a href="' . esc_url(pmb_fs()->get_upgrade_url()) . '">'
+                                '<a href="' . esc_url(pmb_upgrade_url()) . '">'
                             )
                             . '</p>'
                     ),
@@ -724,7 +722,7 @@ class Admin extends BaseController
             [],
             filemtime(PMB_STYLES_DIR . 'pmb-admin.css')
         );
-        if (pmb_fs()->is_plan__premium_only('hobbyist')) {
+        if (pmb_has_required_plan('hobbyist')) {
             // Paid users don't need to be reminded what's pro and what's not
             wp_add_inline_style(
                 'pmb_admin',
@@ -832,13 +830,11 @@ class Admin extends BaseController
                             ],
                             filemtime(PMB_STYLES_DIR . 'pmb-generate.css')
                         );
-                        $license = pmb_fs()->_get_license();
-                        $site = pmb_fs()->get_site();
-
                         wp_localize_script(
                             'pmb-generate',
                             'pmb_generate',
                             [
+                                'external_requests_enabled' => pmb_external_requests_enabled(),
                                 'generate_ajax_data' => apply_filters(
                                     '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
                                     [
@@ -853,9 +849,9 @@ class Admin extends BaseController
                                 'use_pmb_central_for_previews' => pmb_use_pmb_central(),
                                 'license_data' => [
                                     'endpoint' => $this->pmb_central->getCentralUrl(),
-                                    'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
-                                    'install_id' => $site instanceof FS_Site ? $site->id : '',
-                                    'authorization_header' => $site instanceof FS_Site ? $this->pmb_central->getSiteAuthorizationHeader() : '',
+                                    'license_id' => '',
+                                    'install_id' => '',
+                                    'authorization_header' => '',
                                 ],
 
                                 'doc_attrs' => apply_filters(
@@ -1192,27 +1188,7 @@ class Admin extends BaseController
         }
         $generations = $this->project->getAllGenerations();
         $license_info = null;
-        if (pmb_fs()->is__premium_only()) {
-            $license = pmb_fs()->_get_license();
-            if ($license instanceof FS_Plugin_License) {
-                try {
-                    $license_info = $this->pmb_central->getCreditsInfo();
-                } catch (Exception $e) {
-                    $this->notification_manager->addTextNotificationForCurrentUser(
-                        'warning',
-                        sprintf(
-                            // translators: %s error message.
-                            __('There was an error communicating with Print My Blog Central. It was %s', 'print-my-blog'),
-                            $e->getMessage()
-                        )
-                    );
-                    $this->notification_manager->showOneTimeNotifications();
-                }
-            }
-            $upgrade_url = pmb_fs()->get_upgrade_url();
-        } else {
-            $upgrade_url = pmb_fs()->get_upgrade_url();
-        }
+        $upgrade_url = pmb_upgrade_url();
         $this->renderProjectTemplate(
             'project_edit_generate.php',
             [
@@ -2043,21 +2019,7 @@ class Admin extends BaseController
     public function maybeRefreshCreditCache()
     {
         if (isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account') {
-            if (pmb_fs()->_get_license() instanceof FS_Plugin_License) {
-                try {
-                    $this->pmb_central->getCreditsInfo(true);
-                } catch (Exception $e) {
-                    $this->notification_manager->addTextNotificationForCurrentUser(
-                        'warning',
-                        sprintf(
-                            // translators: 1: error message.
-                            __('There was an error communicating with Print My Blog Central. It was %s', 'print-my-blog'),
-                            $e->getMessage()
-                        )
-                    );
-                    $this->notification_manager->showOneTimeNotifications();
-                }
-            }
+            return;
         }
     }
 
@@ -2210,7 +2172,7 @@ class Admin extends BaseController
         global $post;
         $actions = [];
         // only paying members get the duplicate buttons
-        if (pmb_fs()->is_plan__premium_only('founding_members')) {
+        if (pmb_has_required_plan('founding_members')) {
             if ($post->post_type === CustomPostTypes::CONTENT) {
                 $original_id = get_post_meta($post->ID, '_pmb_original_post', true);
                 $post_type = get_post_type_object(get_post_type($original_id));

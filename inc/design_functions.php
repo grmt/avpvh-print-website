@@ -161,7 +161,7 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
 
     // instruct PMB print service to add "powered by" for free users and cheap plans
     $show_powered_by = true;
-    if (pmb_fs()->is_plan__premium_only('hobby')) {
+    if (pmb_has_required_plan('hobby')) {
         $show_powered_by = false;
     }
     if ($design->getSetting('powered_by') || $show_powered_by) {

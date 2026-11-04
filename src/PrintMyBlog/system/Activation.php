@@ -95,19 +95,19 @@ class Activation extends BaseActivation
         parent::detectActivation();
         // If someone upgrades to premium, ask for their license key immediately
         if (
-            pmb_fs()->is_premium() &&
+            pmb_is_premium() &&
             in_array(
                 $this->request_type->getRequestType(),
                 [RequestType::REQUEST_TYPE_UPDATE, RequestType::REQUEST_TYPE_REACTIVATION],
                 true
             ) &&
-            pmb_fs()->is_anonymous() &&
-            pmb_fs()->is_registered()
+            pmb_is_anonymous_install() &&
+            pmb_is_registered_install()
         ) {
             // although freemius rechecks on each reactivation, don't recheck on each update
             $rechecked = get_option('pmb_rechecked_on_upgrade', false);
             if (! $rechecked) {
-                pmb_fs()->connect_again();
+                pmb_connect_again();
                 update_option('pmb_rechecked_on_upgrade', true);
             }
         }
@@ -122,7 +122,7 @@ class Activation extends BaseActivation
                 );
                 exit;
         }
-        // while pmb_fs() declares anonymous mode, this is needed to send users to welcome page
+        // Keep redirecting users to the welcome page on new installs and reactivations.
         if (
             in_array(
                 $this->request_type->getRequestType(),
@@ -131,7 +131,7 @@ class Activation extends BaseActivation
                     RequestType::REQUEST_TYPE_REACTIVATION,
                 ),
                 true
-            ) && (pmb_fs()->is_anonymous() || pmb_fs()->is_registered())
+            )
         ) {
             $this->redirectToActivationPage();
         }

@@ -21,8 +21,6 @@ use Twine\system\RequestType;
 use Twine\system\VersionHistory;
 use mnelson4\AdminNotices\Notices;
 use Twine\system\Init as BaseInit;
-use pmb_fs;
-
 /**
  * Class Init
  *

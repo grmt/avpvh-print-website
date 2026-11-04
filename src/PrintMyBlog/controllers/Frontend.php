@@ -3,8 +3,6 @@
 namespace PrintMyBlog\controllers;
 
 use Exception;
-use FS_Plugin_License;
-use FS_Site;
 use PrintMyBlog\domain\FrontendPrintSettings;
 use PrintMyBlog\domain\PrintNowSettings;
 use PrintMyBlog\entities\ProjectProgress;
@@ -248,8 +246,6 @@ class Frontend extends BaseController
             filemtime(PMB_STYLES_DIR . 'pmb-loading.css')
         );
 
-        $license = pmb_fs()->_get_license();
-        $site = pmb_fs()->get_site();
         $format = Array2::setOr($_REQUEST, 'pmb_f',DefaultFileFormats::DIGITAL_PDF);
         $design = $this->project->getDesignFor($format);
         $use_theme = $design->getPmbMeta('use_theme');
@@ -257,6 +253,7 @@ class Frontend extends BaseController
             'pmb_loading',
             'pmb_loading',
             [
+                'external_requests_enabled' => pmb_external_requests_enabled(),
                 'generate_ajax_data' => apply_filters(
                     '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
                     [
@@ -272,9 +269,9 @@ class Frontend extends BaseController
                 'use_pmb_central_for_previews' => pmb_use_pmb_central(),
                 'license_data' => [
                     'endpoint' => $this->pmb_central->getCentralUrl(),
-                    'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
-                    'install_id' => $site instanceof FS_Site ? $site->id : '',
-                    'authorization_header' => $site instanceof FS_Site ? $this->pmb_central->getSiteAuthorizationHeader() : '',
+                    'license_id' => '',
+                    'install_id' => '',
+                    'authorization_header' => '',
                 ],
 
                 'doc_attrs' => apply_filters(

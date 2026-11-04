@@ -3,8 +3,6 @@
 namespace PrintMyBlog\services\generators;
 
 use Exception;
-use FS_Plugin_License;
-use FS_Site;
 use PrintMyBlog\entities\DesignTemplate;
 use PrintMyBlog\entities\SectionTemplate;
 use PrintMyBlog\orm\entities\Design;
@@ -68,29 +66,24 @@ class PdfGenerator extends HtmlBaseGenerator
                 filemtime($script_file)
             );
         }
-        $license = pmb_fs()->_get_license();
-        if ($license instanceof FS_Plugin_License) {
-            $license_info = $this->getPmbCentral()->getCreditsInfo();
-        } else {
-            $license_info = null;
-        }
-        $site = pmb_fs()->get_site();
+        $license_info = null;
         $use_pmb_central = 0;
-        if (pmb_fs()->is_plan__premium_only('business') || (defined('PMB_USE_CENTRAL') && PMB_USE_CENTRAL)) {
+        if (pmb_has_required_plan('business') || (defined('PMB_USE_CENTRAL') && PMB_USE_CENTRAL)) {
             $use_pmb_central = 1;
         }
         wp_localize_script(
             'pmb_pro_page',
             'pmb_pro',
             [
+                'external_requests_enabled' => pmb_external_requests_enabled(),
                 'site_url' => site_url(),
                 'domain' => pmb_get_domain(),
                 'use_pmb_central_for_previews' => $use_pmb_central,
                 'license_data' => [
                     'endpoint' => $this->getPmbCentral()->getCentralUrl(),
-                    'license_id' => $license instanceof FS_Plugin_License ? $license->id : '',
-                    'install_id' => $site instanceof FS_Site ? $site->id : '',
-                    'authorization_header' => $site instanceof FS_Site ? $this->getPmbCentral()->getSiteAuthorizationHeader() : '',
+                    'license_id' => '',
+                    'install_id' => '',
+                    'authorization_header' => '',
                 ],
                 'pmb_nonce' => wp_create_nonce('pmb_pro_page'),
                 'ajaxurl' => admin_url('admin-ajax.php'),
@@ -116,7 +109,7 @@ class PdfGenerator extends HtmlBaseGenerator
                             'javascript' => true, // before sending the HTML to DocRaptor, we turn all the "script" tags into "disabled-script"; and all the "prince-script" into "script" tags.
                         ],
                         'tag' => substr(
-                            $this->project_generation->getGeneratedIntermediaryFileUrl() . ($license instanceof FS_Plugin_License ? ', license:' . $license->id : ''),
+                            $this->project_generation->getGeneratedIntermediaryFileUrl(),
                             0,
                             200
                         ),
@@ -216,18 +209,6 @@ class PdfGenerator extends HtmlBaseGenerator
     public function addPrintWindowToPage()
     {
         $license_info = null;
-        if (pmb_fs()->is__premium_only()) {
-            try {
-                $license = pmb_fs()->_get_license();
-                if ($license instanceof FS_Plugin_License) {
-                    $license_info = $this->getPmbCentral()->getCreditsInfo();
-                }
-                // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-            } catch (Exception $e) {
-                // error retrieving credits info. We should have warned the user about this earlier.
-                // This probably means their subscription isn't good anymore. Treat it like they have none.
-            }
-        }
         // this is like require or include; escaping happens in the template file.
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo pmb_get_contents(

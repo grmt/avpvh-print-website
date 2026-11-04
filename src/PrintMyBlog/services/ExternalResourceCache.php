@@ -51,6 +51,10 @@ class ExternalResourceCache
      */
     public function writeAndMapFile($external_url)
     {
+        if (! pmb_external_requests_enabled()) {
+            $this->external_resouce_manager->map($external_url, null);
+            return false;
+        }
         $start_of_querystring = strpos($external_url, '?');
         if (! $start_of_querystring === false) {
             $querystring = substr($external_url, $start_of_querystring);
