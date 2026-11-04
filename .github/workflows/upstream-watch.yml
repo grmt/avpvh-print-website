@@ -1,0 +1,66 @@
+name: Upstream watch
+
+# Print My Blog is maintained here as our own plugin. This keeps an eye on
+# mnelson4/printmyblog: once a week it lists the upstream commits since
+# .github/upstream-reviewed in one open issue labelled "upstream".
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: List new upstream commits
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UPSTREAM: mnelson4/printmyblog
+        run: |
+          REVIEWED=$(tr -d '[:space:]' < .github/upstream-reviewed)
+          git fetch --quiet --filter=blob:none "https://github.com/${UPSTREAM}.git" master
+          LATEST=$(git rev-parse FETCH_HEAD)
+
+          COMMITS=$(git log --no-merges --reverse \
+            --format="- [\`%h\`](https://github.com/${UPSTREAM}/commit/%H) %s (%as)" \
+            "${REVIEWED}..FETCH_HEAD")
+          ISSUE=$(gh issue list --label upstream --state open --json number --jq '.[0].number // empty')
+
+          if [ -z "${COMMITS}" ]; then
+            echo "Nothing new upstream since ${REVIEWED}."
+            exit 0
+          fi
+
+          COUNT=$(printf '%s\n' "${COMMITS}" | wc -l)
+          {
+            echo "Nieuwe commits in [${UPSTREAM}](https://github.com/${UPSTREAM}) sinds \`${REVIEWED:0:8}\`:"
+            echo
+            echo "${COMMITS}"
+            echo
+            echo "[Vergelijk](https://github.com/${UPSTREAM}/compare/${REVIEWED}...${LATEST})"
+            echo
+            echo "Overnemen:"
+            echo
+            echo '```bash'
+            echo "git fetch https://github.com/${UPSTREAM}.git master"
+            echo "git cherry-pick <commit>"
+            echo '```'
+            echo
+            echo "Na het bekijken: zet \`.github/upstream-reviewed\` op \`${LATEST}\` (in een PR) en sluit dit issue."
+          } > body.md
+
+          TITLE="Upstream: ${COUNT} nieuwe commit(s)"
+          if [ -n "${ISSUE}" ]; then
+            gh issue edit "${ISSUE}" --title "${TITLE}" --body-file body.md
+          else
+            gh label create upstream --color 0e8a16 --description "Changes in mnelson4/printmyblog" --force
+            gh issue create --title "${TITLE}" --label upstream --body-file body.md
+          fi
