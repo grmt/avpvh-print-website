@@ -11,14 +11,14 @@
  * Author URI: https://printmy.blog
  * Version: 3.27.18.1
  * Requires at least: 4.7
- * Requires PHP: 5.4
+ * Requires PHP: 8.4
  * Text Domain: print-my-blog
  * Update URI: https://github.com/grmt/printmyblog
  */
 
 
 if (! defined('PMB_MIN_PHP_VER_REQUIRED')) {
-    define('PMB_MIN_PHP_VER_REQUIRED', '5.4.0');
+    define('PMB_MIN_PHP_VER_REQUIRED', '8.4.0');
 }
 if (! defined('PMB_MIN_WP_VER_REQUIRED')) {
     define('PMB_MIN_WP_VER_REQUIRED', '4.7');

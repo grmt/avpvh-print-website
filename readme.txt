@@ -3,7 +3,7 @@ Contributors: mnelson4, ryanvdk, szepeviktor, printmybl0g
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 4.6
 Tested up to: 7.0
-Requires PHP: 5.4
+Requires PHP: 8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
