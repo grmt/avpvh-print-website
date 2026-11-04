@@ -1,0 +1,33 @@
+{
+  "name": "printmyblog-vscode-secret-storage",
+  "displayName": "Print My Blog Secret Storage",
+  "description": "Workspace commands for storing the WordPress admin password in VS Code SecretStorage.",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:printmyblog.setWpAdminPassword",
+    "onCommand:printmyblog.getWpAdminPassword",
+    "onCommand:printmyblog.clearWpAdminPassword",
+    "onCommand:printmyblog.deployPlugin"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "printmyblog.deployPlugin",
+        "title": "Print My Blog: Deploy Plugin to WordPress"
+      },
+      {
+        "command": "printmyblog.setWpAdminPassword",
+        "title": "Print My Blog: Save WP Admin Password"
+      },
+      {
+        "command": "printmyblog.clearWpAdminPassword",
+        "title": "Print My Blog: Clear WP Admin Password"
+      }
+    ]
+  }
+}

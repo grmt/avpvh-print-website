@@ -4,7 +4,7 @@
     "license": "GPL-2.0-or-later",
     "type": "wordpress-plugin",
     "require": {
-        "php": ">=5.4"
+        "php": ">=8.4"
     },
     "require-dev": {
         "szepeviktor/phpstan-wordpress": "^0.7.0",

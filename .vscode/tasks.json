@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Print My Blog: Package Plugin",
+      "type": "shell",
+      "command": "npm run package:plugin",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Print My Blog: Deploy Plugin to WordPress",
+      "type": "shell",
+      "command": "npm run deploy:playwright",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "WP_ADMIN_PASSWORD": "${command:printmyblog.getWpAdminPassword}"
+        }
+      },
+      "dependsOn": "Print My Blog: Package Plugin",
+      "problemMatcher": []
+    }
+  ]
+}

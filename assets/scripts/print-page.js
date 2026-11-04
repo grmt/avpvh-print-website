@@ -31,6 +31,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.ordered_comments = [];
     this.rendering_wait = pmb_instance_vars.rendering_wait;
     this.include_inline_js = pmb_instance_vars.include_inline_js;
+    this.excludeExternalContent = pmb_instance_vars.exclude_external_content;
     this.links = pmb_instance_vars.links;
     this.showUrl = pmb_instance_vars.show_url;
     this.showId = pmb_instance_vars.show_id;
@@ -329,23 +330,30 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         var posts_to_render = this.posts;
         if(this.post_type === 'page') {
             this.status_span.html( this.translations.organizing_posts);
-            // Sort according to order (don't worry about hierarchy yet).
-            this.posts = this.posts.sort(
-                (a, b) => {
-                    var menu_comparison = a.menu_order - b.menu_order;
-                    if( menu_comparison > 0) {
-                        return 1;
-                    } else if( menu_comparison < 0 ) {
-                        return -1;
-                    } else {
-                        // ok do an alphabetical comparison
-                        return a.title.rendered > b.title.rendered;
+            if(this.order === 'alpha'){
+                this.ordered_posts = this.posts.sort(
+                    (a, b) => {
+                        return this.comparePostTitles(a, b);
                     }
-                }
-            );
-            posts_to_render = this.getChildrenOf(0);
-            this.organizePostsInPage(posts_to_render);
-            this.dontForgotOrphanPages();
+                );
+            } else {
+                // Sort according to menu order first, then walk the hierarchy top-down.
+                this.posts = this.posts.sort(
+                    (a, b) => {
+                        var menu_comparison = a.menu_order - b.menu_order;
+                        if( menu_comparison > 0) {
+                            return 1;
+                        } else if( menu_comparison < 0 ) {
+                            return -1;
+                        } else {
+                            return this.comparePostTitles(a, b);
+                        }
+                    }
+                );
+                posts_to_render = this.getChildrenOf(0);
+                this.organizePostsInPage(posts_to_render);
+                this.dontForgotOrphanPages();
+            }
         } else {
             this.ordered_posts = this.posts;
         }
@@ -353,6 +361,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 		if(this.order === 'desc'){
 			this.ordered_posts.reverse();
 		}
+    };
+
+    this.comparePostTitles = function(a, b) {
+        return this.getPostTitle(a).localeCompare(this.getPostTitle(b));
     };
 
 
@@ -467,7 +479,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.prettyUpPrintedPage = function()
     {
-        pmb_convert_youtube_videos_to_images();
+        if (! this.excludeExternalContent && pmb.external_requests_enabled !== false) {
+            pmb_convert_youtube_videos_to_images();
+        }
 
         // Don't float things if we have more than one column. There's just not enough room for that
         if(this.columns > 1){
@@ -554,12 +568,20 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         if(this.format !== 'ebook'){
             // added CSS class "entry" for Hueman theme https://wordpress.org/themes/hueman/ whch adds that CSS class on the frontend
             // and uses it for styling.
-            html_to_add += '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' entry hentry pmb-post-article">'
+            html_to_add += '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' entry hentry pmb-post-article pmb-section" data-depth="0">'
 			+ '<header class="pmb-post-header entry-header">';
         }
         if(this.showTitle) {
-            html_to_add += '<h1 class="entry-title">'
-				+ this.maybeStripShortcodes(this.getPostTitle(post))
+            var post_title_html = this.maybeStripShortcodes(this.getPostTitle(post));
+            if (this.shouldLinkBrowserHeadings(post)) {
+                post_title_html = '<a class="pmb-heading-link pmb-post-title-link" href="'
+                    + this.escapeAttribute(post.link)
+                    + '">'
+                    + post_title_html
+                    + '</a>';
+            }
+            html_to_add += '<h1 class="entry-title pmb-title">'
+				+ post_title_html
 				+ '</h1>';
         }
         if(this.format !== 'ebook'){
@@ -595,7 +617,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 		}
 		html_to_add += '</div>'
 			+ '<div class="entry-content post-content">';
-		if(this.showFeaturedImage){
+        if(this.showFeaturedImage){
             html_to_add += this.getFeaturedImageHtml(post);
         }
 
@@ -620,7 +642,14 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 					}
 				}
 			}
-			html_to_add += this.maybeStripShortcodes(content_html);
+			content_html = this.maybeStripShortcodes(content_html);
+            if (this.excludeExternalContent) {
+                content_html = this.stripExternalContent(content_html);
+            }
+            if (this.shouldLinkBrowserHeadings(post)) {
+                content_html = this.addLinksToHeadings(content_html, post.link);
+            }
+			html_to_add += content_html;
 		}
         html_to_add += '</div>';
 		if(this.format !== 'ebook'){
@@ -647,6 +676,119 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         p.remove();
         return escaped_html;
     }
+
+    /**
+     * Escapes a string for safe use in an HTML attribute.
+     * @param str
+     * @returns {string}
+     */
+    this.escapeAttribute = function(str){
+        return this.escapeHTML(str).replace(/"/g, '&quot;');
+    };
+
+    this.normalizeUrl = function(url){
+        if(typeof url !== 'string' || url === ''){
+            return null;
+        }
+        try {
+            return new URL(url, pmb.site_url);
+        } catch (error) {
+            return null;
+        }
+    };
+
+    this.isExternalUrl = function(url){
+        var normalized_url = this.normalizeUrl(url);
+        var normalized_site_url = this.normalizeUrl(pmb.site_url);
+        if(normalized_url === null || normalized_site_url === null){
+            return false;
+        }
+        if(! ['http:', 'https:'].includes(normalized_url.protocol)){
+            return false;
+        }
+        return normalized_url.host !== normalized_site_url.host;
+    };
+
+    this.stripExternalContent = function(content_html){
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML = content_html;
+        var src_attributes = ['src', 'data-src', 'poster'];
+        var external_resource_nodes = wrapper.querySelectorAll('img, iframe, video, audio, source, embed, script');
+        for (var i = 0; i < external_resource_nodes.length; i++) {
+            var node = external_resource_nodes[i];
+            var remove_node = false;
+            for (var j = 0; j < src_attributes.length; j++) {
+                var attribute = src_attributes[j];
+                if (node.hasAttribute(attribute) && this.isExternalUrl(node.getAttribute(attribute))) {
+                    remove_node = true;
+                    break;
+                }
+            }
+            if (! remove_node && node.hasAttribute('srcset')) {
+                var srcset = node.getAttribute('srcset').split(',');
+                for (var k = 0; k < srcset.length; k++) {
+                    var src_candidate = srcset[k].trim().split(' ')[0];
+                    if (this.isExternalUrl(src_candidate)) {
+                        remove_node = true;
+                        break;
+                    }
+                }
+            }
+            if (remove_node) {
+                node.remove();
+            }
+        }
+
+        var anchors = wrapper.querySelectorAll('a[href]');
+        for (var anchor_index = 0; anchor_index < anchors.length; anchor_index++) {
+            var anchor = anchors[anchor_index];
+            if (this.isExternalUrl(anchor.getAttribute('href'))) {
+                while (anchor.firstChild) {
+                    anchor.parentNode.insertBefore(anchor.firstChild, anchor);
+                }
+                anchor.remove();
+            }
+        }
+        return wrapper.innerHTML;
+    };
+
+    /**
+     * Whether browser-print headings should link back to the original post.
+     * @param post
+     * @returns {boolean}
+     */
+    this.shouldLinkBrowserHeadings = function(post){
+        return ! this.excludeExternalContent
+            && this.links !== 'remove'
+            && typeof post.link === 'string'
+            && post.link !== '';
+    };
+
+    /**
+     * Wraps H1/H2 contents in hyperlinks to the original post, unless the heading already contains a link.
+     * @param content_html
+     * @param post_link
+     * @returns {string}
+     */
+    this.addLinksToHeadings = function(content_html, post_link){
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML = content_html;
+        var headings = wrapper.querySelectorAll('h1, h2');
+        for (var i = 0; i < headings.length; i++) {
+            var heading = headings[i];
+            if (heading.querySelector('a')) {
+                continue;
+            }
+            var linked_heading = document.createElement('a');
+            linked_heading.className = 'pmb-heading-link';
+            linked_heading.setAttribute('href', post_link);
+            while (heading.firstChild) {
+                linked_heading.appendChild(heading.firstChild);
+            }
+            heading.appendChild(linked_heading);
+        }
+        return wrapper.innerHTML;
+    };
 
     /**
      * Gets the post's title and removes "Protected:" and "Private:" from it.
@@ -741,6 +883,9 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             }
 
             if(featured_media_url !== null) {
+                if(this.excludeExternalContent && this.isExternalUrl(featured_media_url)) {
+                    return '';
+                }
                 return '<div class="pmb-image single-featured-image-header"><img src="' + featured_media_url + '" class="wp-post-image"/></div>';
             }
         }
@@ -778,6 +923,10 @@ function PmbPrintPage(pmb_instance_vars, translations) {
         let html = '';
         for(let i=0; i<comments.length; i++){
             let comment = comments[i];
+            let comment_content = comment.content.rendered;
+            if (this.excludeExternalContent) {
+                comment_content = this.stripExternalContent(comment_content);
+            }
             let even_text;
             if(even){
                 even_text = 'even';
@@ -806,7 +955,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
                 '\t\t\t\t\t\t\t\t\t</footer><!-- .comment-meta -->\n' +
                 '\n' +
                 '\t\t\t\t<div class="comment-content">\n' +
-                '\t\t\t\t\t'+comment.content.rendered+
+                '\t\t\t\t\t'+comment_content+
                 '\t\t\t\t</div><!-- .comment-content -->\n' +
                 '\n';
 

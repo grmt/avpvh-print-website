@@ -20,11 +20,19 @@ class PmbCentral
      */
     public function getCreditsInfo($refresh = false)
     {
-        $license_id = pmb_fs()->_get_license()->id;
+        if (! pmb_external_requests_enabled()) {
+            return [
+                'remaining_credits' => 0,
+                'expiry_date' => gmdate('c', strtotime('+1 year')),
+            ];
+        }
+        $license = pmb_license();
+        $license_id = $license ? $license->id : 0;
         if (! $license_id) {
             throw new Exception(__('No license ID available', 'print-my-blog'));
         }
-        $install_id = pmb_fs()->get_site()->id;
+        $site = pmb_site_registration();
+        $install_id = $site ? $site->id : 0;
         $transient_name = $this->getCreditsTransientName();
         $credit_data = false;
         if ($refresh) {
@@ -79,11 +87,14 @@ class PmbCentral
      */
     public function getSiteSignature()
     {
-        $site = pmb_fs()->get_site();
-        if (! $site) {
-            throw new Exception(__('There is no site registered with Freemius', 'print-my-blog'));
+        if (! pmb_external_requests_enabled()) {
+            return '';
         }
-        $site_private_key = pmb_fs()->get_site()->secret_key;
+        $site = pmb_site_registration();
+        if (! $site) {
+            throw new Exception(__('There is no site registration available', 'print-my-blog'));
+        }
+        $site_private_key = $site->secret_key;
         // create the signature that verifies we own this license and install.
         $nonce = gmdate('Y-m-d');
         $pk_hash = hash('sha512', $site_private_key . '|' . $nonce);
@@ -98,6 +109,9 @@ class PmbCentral
      */
     public function getSiteAuthorizationHeader()
     {
+        if (! pmb_external_requests_enabled()) {
+            return '';
+        }
         return 'PMB ' . $this->getSiteSignature();
     }
 
@@ -115,7 +129,14 @@ class PmbCentral
      */
     public function reduceCredits()
     {
-        $license_id = pmb_fs()->_get_license()->id;
+        if (! pmb_external_requests_enabled()) {
+            return [
+                'remaining_credits' => 0,
+                'expiry_date' => gmdate('c', strtotime('+1 year')),
+            ];
+        }
+        $license = pmb_license();
+        $license_id = $license ? $license->id : 0;
         $transient_name = $this->getCreditsTransientName();
         $credit_data = get_transient($transient_name);
         if ($credit_data === false) {
@@ -141,6 +162,9 @@ class PmbCentral
      */
     public function getCentralUrl()
     {
+        if (! pmb_external_requests_enabled()) {
+            return '';
+        }
         if (defined('PMB_CENTRAL_URL')) {
             $central_base_url = PMB_CENTRAL_URL;
         } else {

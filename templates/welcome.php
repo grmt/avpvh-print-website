@@ -1,7 +1,7 @@
 <div class="wrap nosubsub pmb-welcome">
     <h1>🎉<?php printf(
             esc_html__( 'Welcome to %s!', 'print-my-blog' ),
-            pmb_fs()->is_premium() && !pmb_fs()->is_free_plan() ?
+            pmb_is_premium() && ! pmb_is_free_plan() ?
                 __('Print My Blog Pro', 'print-my-blog') :
             __('Print My Blog', 'print-my-blog')
         ); ?>🎉</h1>
@@ -44,10 +44,10 @@
                 <h2><?php esc_html_e( 'Make Professional Books and Documents', 'print-my-blog' ); ?></h2>
                 <p>
                     <a class="button button-primary" href="<?php echo admin_url( PMB_ADMIN_PROJECTS_PAGE_PATH );?>">
-                    <?php esc_html_e( 'Use Pro Print', 'print-my-blog' );
+                    <?php esc_html_e( 'Use Projects', 'print-my-blog' );
                         ?>
                     </a>
-                    <span class="description"><?php esc_html_e('Free and Paid Options', 'print-my-blog');?></span>
+                    <span class="description"><?php esc_html_e('Create PDFs, ePub files, and Word documents', 'print-my-blog');?></span>
                 </p>
                 <ul class="pmb-ul">
                     <li><?php esc_html_e( 'Drag-and-drop content into projects', 'print-my-blog' ); ?></li>

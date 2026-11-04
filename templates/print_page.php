@@ -11,6 +11,9 @@
  * @since 1.0
  * @version 1.0
  */
+/**
+ * @var string $pmb_download_file_name
+ */
 if(apply_filters('pmb-print-page-treat-as-single', true)){
     $wp_query->is_home = false;$wp_query->is_single = true;
 }
@@ -73,14 +76,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
         <div class="pmb-print-ready pmb-print-instructions">
             <?php do_action('pmb_print_page_ready_instructions_start');?>
             <?php
-            if ($pmb_format === 'ebook') {
-                ?>
-                <p>
-                    <?php esc_html_e('You may now use dotEPUB to create the eBook.', 'print-my-blog'); ?>
-                    <a href="https://wordpress.org/plugins/print-my-blog/#%0Ahow%20do%20i%20create%20an%20ebook%20using%20print%20my%20blog%3F%0A" target="_blank"><?php esc_html_e('How?', 'print-my-blog'); ?></a>
-                </p>
-                <?php
-            } else if ($pmb_format === 'pdf') {
+            if ($pmb_format === 'pdf') {
                 if(in_array($pmb_browser, ['chrome','desktop_safari'])) {
                     ?>
                     <input disabled="disabled" class="pmb-print-page-print-button" type="submit" onclick="window.print()"
@@ -165,6 +161,18 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 ?>
                 <input type="submit" onclick="pmb_copy()" value="<?php esc_attr_e('Copy to Clipboard', 'print-my-blog'); ?>"/>
                 <?php
+            } elseif ($pmb_format === 'epub') {
+                ?>
+                <a class="button button-primary pmb-disabled" id="download_link" download="<?php echo esc_attr($pmb_download_file_name);?>" href="javascript:void(0)"><?php esc_html_e('Download ePub', 'print-my-blog'); ?></a>
+                <div class="pmb-small-instructions"><?php esc_html_e('Build an ePub file locally in your browser.', 'print-my-blog'); ?></div>
+                <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
+                <?php
+            } elseif ($pmb_format === 'word') {
+                ?>
+                <a class="button button-primary pmb-disabled" id="download_link" download="<?php echo esc_attr($pmb_download_file_name);?>" href="javascript:void(0)"><?php esc_html_e('Download Word Document', 'print-my-blog'); ?></a>
+                <div class="pmb-small-instructions"><?php esc_html_e('Build a Word-compatible document locally in your browser.', 'print-my-blog'); ?></div>
+                <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
+                <?php
             } else { // default: print
                 ?>
                 <input type="submit" disabled="disabled" class="pmb-print-page-print-button"  onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
@@ -182,28 +190,18 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
     </div>
 </div>
 
-<div class="pmb-posts site dotEPUBcontent" id="content">
+<div class="pmb-posts site pmb-project-content" id="content">
     <?php
-    if ($pmb_format !== 'ebook') {
-    // dotEPUB skips the title and description if they're not in the same div.
-    // But it's nice for print and PDFs to have that area be in a different stylable div.
+    if (in_array($pmb_format,['print','pdf'] )){
     ?>
-    <?php
-        if (in_array($pmb_format,['print','pdf'] )){
-        ?>
     <div class="pmb-preview-note"><?php esc_html_e('Use your browser’s "print preview" for the best preview.', 'print-my-blog'); ?></div>
     <?php } ?>
     <div class="pmb-posts-header">
         <?php
-        } else {
         ?>
-        <div class="pmb-posts-body">
-            <?php
-            }
-            ?>
 
             <?php if ($pmb_show_site_title) { ?>
-                <h1 class="site-title" id="dotEPUBtitle"><?php echo $pmb_site_name; ?></h1>
+                <h1 class="site-title"><?php echo $pmb_site_name; ?></h1>
             <?php } ?>
             <?php if ($pmb_show_site_tagline) { ?>
                 <p class="site-description"><?php echo $pmb_site_description; ?></p>
@@ -315,13 +313,11 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 do_action('pmb_print_page_after_printed_on', $pmb_show_date_printed, $pmb_show_credit);
                 ?></p>
             <?php
-            if ($pmb_format !== 'ebook') {
-            // If this is a print copy, we need to close this header div and open the pmb-posts-body div.
+            // Close the print page header and open the posts body.
             ?>
         </div>
         <div class="pmb-posts-body">
             <?php
-            }
             ?>
 
 

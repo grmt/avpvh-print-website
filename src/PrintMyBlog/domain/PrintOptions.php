@@ -203,6 +203,11 @@ class PrintOptions
                 'help' => esc_html__('If you left shortcodes from deactivated plugins or themes in your posts or have other content enclosed by square brackets, they are automatically removed from printouts. Check this to leave them.', 'print-my-blog'),
                 //phpcs:enable
             ],
+            'exclude_external_content' => [
+                'label' => esc_html__('Exclude External Content', 'print-my-blog'),
+                'default' => false,
+                'help' => esc_html__('Do not load external images, embeds, media, or external hyperlinks in the print page. Useful when you want a self-contained printout.', 'print-my-blog'),
+            ],
         ];
     }
 
@@ -215,8 +220,6 @@ class PrintOptions
         $overrides = [];
         switch ($format) {
             case 'pdf':
-                break;
-            case 'ebook':
                 break;
             case 'print':
             default:

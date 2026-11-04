@@ -60,10 +60,6 @@ class FrontendPrintSettings
                 'admin_label' => esc_html__('PDF', 'print-my-blog'),
                 'default' => esc_html__('PDF 📄', 'print-my-blog'),
             ),
-            'ebook' => array(
-                'admin_label' => esc_html__('eBook', 'print-my-blog'),
-                'default' => esc_html__('eBook 📱', 'print-my-blog'),
-            ),
         );
         // Remove emojis if the database doesn't support it.
         global $wpdb;
@@ -80,8 +76,8 @@ class FrontendPrintSettings
                     $settings['default']
                 );
             } else {
-                $this->formats[$key]['admin_label'] = str_replace(['🖨', '📄', '📱'], ['', '', ''], $settings['admin_label']);
-                $this->formats[$key]['default'] = str_replace(['🖨', '📄', '📱'], ['', '', ''], $settings['default']);
+                $this->formats[$key]['admin_label'] = str_replace(['🖨', '📄'], ['', ''], $settings['admin_label']);
+                $this->formats[$key]['default'] = str_replace(['🖨', '📄'], ['', ''], $settings['default']);
             }
         }
         // Initialize the settings with the defaults.

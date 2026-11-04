@@ -46,6 +46,13 @@ window.DocRaptor = {
     }
 }
 
+function pmb_external_requests_are_disabled() {
+    return (window.pmb_generate && window.pmb_generate.external_requests_enabled === false)
+        || (window.pmb_loading && window.pmb_loading.external_requests_enabled === false)
+        || (window.pmb_pro && window.pmb_pro.external_requests_enabled === false)
+        || (window.pmb && window.pmb.external_requests_enabled === false);
+}
+
 function PmbAsyncPdfCreation(
     use_printmyblog_middleman,
     authorization_data,
@@ -103,6 +110,10 @@ function PmbAsyncPdfCreation(
         return jquery_request_settings;
     }
     this.begin = function(){
+        if (pmb_external_requests_are_disabled()) {
+            this.error('External PDF services are disabled in this local-only build.');
+            return;
+        }
         if(typeof this.doc_attrs['document_url'] !== 'undefined'){
             this.doc_attrs['document_url'] += '?uniqueness=' + (Math.round(Math.random() * 100000 ))
         }

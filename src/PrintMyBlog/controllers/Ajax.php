@@ -438,7 +438,7 @@ class Ajax extends BaseController
                 ]
             );
         }
-        $updated_credit_info = $this->pmb_central->reduceCredits(pmb_fs()->_get_license()->id);
+        $updated_credit_info = $this->pmb_central->reduceCredits();
         wp_send_json_success(
             $updated_credit_info
         );

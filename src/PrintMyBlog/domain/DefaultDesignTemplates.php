@@ -99,7 +99,7 @@ class DefaultDesignTemplates
                                                                         'footnote' => new InputOption(__('Replace with footnote', 'print-my-blog')),
                                                                     ],
                                                                     [
-                                                                        'default' => pmb_fs()->is_premium() ? 'footnote' : 'parens',
+                                                                        'default' => pmb_is_premium() ? 'footnote' : 'parens',
                                                                         'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes and page references only work with Pro PDF Service', 'print-my-blog')),
                                                                         'html_help_text' => __('How to display hyperlinks to content included in this project.', 'print-my-blog'),
                                                                     ]
@@ -132,7 +132,7 @@ class DefaultDesignTemplates
                                                                         ),
                                                                     ],
                                                                     [
-                                                                        'default' => pmb_fs()->is_premium() ? 'footnote' : 'remove',
+                                                                        'default' => pmb_is_premium() ? 'footnote' : 'remove',
                                                                         'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_print_service_only(__('Footnotes require Pro', 'print-my-blog')),
                                                                         'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'print-my-blog'),
                                                                     ]
@@ -991,10 +991,10 @@ class DefaultDesignTemplates
             __('Your theme, "%1$s", can be used in conjunction with your design. Themes are often not intended for print and can conflict with the design, but you may have content that looks broken without the theme.', 'print-my-blog'),
             $theme->name
         );
-        if (! pmb_fs()->is_plan__premium_only('business')) {
+        if (! pmb_has_required_plan('business')) {
             $use_theme_help_text = __('Note: this option is only supported for the business license.', 'print-my-blog') . '<br>' . $use_theme_help_text;
         }
-        if (pmb_fs()->is_plan__premium_only('hobby')) {
+        if (pmb_has_required_plan('hobby')) {
             $powered_by_in_pro_service = false;
         } else {
             $powered_by_in_pro_service = true;
@@ -1211,7 +1211,6 @@ class DefaultDesignTemplates
     /**
      * Gets a form section regarding how to handle links, footnotes, page refs, etc.
      * @return FormSectionDetails
-     * @throws \Freemius_Exception
      * @throws \Twine\forms\helpers\ImproperUsageException
      */
     public function getLinksInputs()
@@ -1240,7 +1239,7 @@ class DefaultDesignTemplates
                                         ),
                                     ],
                                     [
-                                        'default' => pmb_fs()->is_premium() ? 'parens' : 'remove',
+                                        'default' => pmb_is_premium() ? 'parens' : 'remove',
                                         'html_label_text' => __('Internal Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes and page references only work with Pro PDF Service', 'print-my-blog')),
                                         'html_help_text' => __(
                                             'How to display hyperlinks to content included in this project.',
@@ -1277,7 +1276,7 @@ class DefaultDesignTemplates
                                         ),
                                     ],
                                     [
-                                        'default' => pmb_fs()->is_premium() ? 'footnote' : 'leave',
+                                        'default' => pmb_is_premium() ? 'footnote' : 'leave',
                                         'html_label_text' => __('External Hyperlinks', 'print-my-blog') . pmb_pro_print_service_best(__('Footnotes require Pro', 'print-my-blog')),
                                         'html_help_text' => __(
                                             'How to display hyperlinks to content not included in this project.',
