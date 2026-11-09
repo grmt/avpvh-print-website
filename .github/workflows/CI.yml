@@ -1,0 +1,39 @@
+name: "CI"
+on:
+  push:
+    # "**" also covers "fix/..."-style branch names.
+    branches: "**"
+  pull_request:
+  # The release workflow runs CI and zips its build.
+  workflow_call:
+jobs:
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v7
+
+      # git archive honours export-ignore in .gitattributes: exactly what the
+      # release ZIP holds. The compiled assets and vendor/'s autoloader are in
+      # git, so there is nothing to build.
+      - name: "Package what a release ships"
+        run: |
+          mkdir build
+          git archive HEAD | tar -x -C build
+
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v7
+        with:
+          name: "build-artifact"
+          path: build
+
+  # Shared with the other own plugins: PHP floor, syntax on 8.4 and 8.5,
+  # PHPCompatibility and the WordPress.org Plugin Check on the build.
+  plugin-checks:
+    name: "Shared"
+    needs: build
+    uses: grmt/wp-plugin-ci/.github/workflows/plugin-checks.yml@main
+    with:
+      slug: print-my-blog
+      artifact: build-artifact

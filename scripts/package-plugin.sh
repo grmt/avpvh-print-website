@@ -10,19 +10,9 @@ STAGING_DIR="$ROOT_DIR/dist/${PLUGIN_DIR_NAME}"
 rm -rf "$STAGING_DIR"
 mkdir -p "$STAGING_DIR" "$OUTPUT_DIR"
 
-rsync -a \
-  --delete \
-  --exclude '.git/' \
-  --exclude '.github/' \
-  --exclude '.idea/' \
-  --exclude '.vscode/' \
-  --exclude '.env' \
-  --exclude 'node_modules/' \
-  --exclude 'dist/' \
-  --exclude 'tests/' \
-  --exclude 'playwright-report/' \
-  --exclude 'test-results/' \
-  "$ROOT_DIR/" "$STAGING_DIR/"
+# git archive honours export-ignore in .gitattributes: the same files as
+# CI's build and the release ZIP (committed state only, so commit first).
+git -C "$ROOT_DIR" archive HEAD | tar -x -C "$STAGING_DIR"
 
 rm -f "$OUTPUT_PATH"
 (
