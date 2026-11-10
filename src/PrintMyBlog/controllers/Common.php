@@ -1,8 +1,8 @@
 <?php
 
-namespace PrintMyBlog\controllers;
+namespace Avpvh\PrintWebsite\controllers;
 
-use Twine\controllers\BaseController;
+use Avpvh\PrintWebsite\Twine\controllers\BaseController;
 
 /**
  * Class PmbCommon
@@ -41,119 +41,119 @@ class Common extends BaseController
     public function registerCommonStuff()
     {
         wp_register_script(
-            'pmb_general',
-            PMB_SCRIPTS_URL . 'pmb-general.js',
+            'avpvh-print-website-general',
+            AVPVH_PRWB_SCRIPTS_URL . 'pmb-general.js',
             ['jquery', 'wp-pointer'],
-            filemtime(PMB_SCRIPTS_DIR . 'pmb-general.js')
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-general.js')
         );
         wp_register_style(
-            'pmb-jquery-ui',
-            PMB_ASSETS_URL . 'styles/libs/jquery-ui/jquery-ui.min.css',
+            'avpvh-print-website-jquery-ui',
+            AVPVH_PRWB_ASSETS_URL . 'styles/libs/jquery-ui/jquery-ui.min.css',
             array(),
             '1.11.4'
         );
         wp_register_style(
-            'pmb_print_common',
-            PMB_ASSETS_URL . 'styles/pmb-print-page-common.css',
+            'avpvh-print-website-print-common',
+            AVPVH_PRWB_ASSETS_URL . 'styles/pmb-print-page-common.css',
             array(),
-            filemtime(PMB_ASSETS_DIR . 'styles/pmb-print-page-common.css')
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/pmb-print-page-common.css')
         );
         wp_register_style(
-            'pmb_print_common_pdf',
-            PMB_ASSETS_URL . 'styles/pmb-print-page-common-pdf.css',
-            array('pmb_print_common'),
-            filemtime(PMB_ASSETS_DIR . 'styles/pmb-print-page-common-pdf.css')
+            'avpvh-print-website-print-common-pdf',
+            AVPVH_PRWB_ASSETS_URL . 'styles/pmb-print-page-common-pdf.css',
+            array('avpvh-print-website-print-common'),
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/pmb-print-page-common-pdf.css')
         );
         wp_register_style(
-            'pmb_pro_page',
-            PMB_ASSETS_URL . 'styles/pmb-pro-print-page.css',
-            array('dashicons', 'pmb_print_common'),
-            filemtime(PMB_ASSETS_DIR . 'styles/pmb-pro-print-page.css')
+            'avpvh-print-website-pro-page',
+            AVPVH_PRWB_ASSETS_URL . 'styles/pmb-pro-print-page.css',
+            array('dashicons', 'avpvh-print-website-print-common'),
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/pmb-pro-print-page.css')
         );
         wp_register_script(
-            'pmb_pro_page',
-            PMB_ASSETS_URL . 'scripts/pmb-pro-print-page.js',
+            'avpvh-print-website-pro-page',
+            AVPVH_PRWB_ASSETS_URL . 'scripts/pmb-pro-print-page.js',
             array('jquery'),
-            filemtime(PMB_ASSETS_DIR . 'scripts/pmb-pro-print-page.js')
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'scripts/pmb-pro-print-page.js')
         );
         wp_register_script(
             'jquery-debounce',
-            PMB_ASSETS_URL . 'scripts/libs/jquery.debounce-1.1.min.js',
+            AVPVH_PRWB_ASSETS_URL . 'scripts/libs/jquery.debounce-1.1.min.js',
             ['jquery'],
             '1.1'
         );
         wp_register_script(
-            'pmb-select2',
-            PMB_ASSETS_URL . 'scripts/libs/select2/select2.min.js',
+            'avpvh-print-website-select2',
+            AVPVH_PRWB_ASSETS_URL . 'scripts/libs/select2/select2.min.js',
             [],
             '4.0.6'
         );
         wp_register_style(
-            'pmb-select2',
-            PMB_ASSETS_URL . 'styles/libs/select2.min.css',
+            'avpvh-print-website-select2',
+            AVPVH_PRWB_ASSETS_URL . 'styles/libs/select2.min.css',
             [],
             '4.0.6'
         );
         wp_register_script(
-            'pmb-modal',
-            PMB_ASSETS_URL . 'scripts/pmb-modal.js',
+            'avpvh-print-website-modal',
+            AVPVH_PRWB_ASSETS_URL . 'scripts/pmb-modal.js',
             ['jquery-ui-dialog'],
             '1.0.0'
         );
         wp_register_script(
             'docraptor',
-            PMB_SCRIPTS_URL . 'docraptor.js',
+            AVPVH_PRWB_SCRIPTS_URL . 'docraptor.js',
             [],
             '1.0.0'
         );
         // Enqueue the CSS for compatibility with known troublemaking plugins.
         wp_register_style(
-            'pmb-plugin-compatibility',
-            PMB_ASSETS_URL . 'styles/plugin-compatibility.css',
+            'avpvh-print-website-plugin-compatibility',
+            AVPVH_PRWB_ASSETS_URL . 'styles/plugin-compatibility.css',
             array(),
-            filemtime(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css')
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/plugin-compatibility.css')
         );
         wp_register_script(
-            'pmb-qrcode',
-            PMB_SCRIPTS_URL . 'libs/qrcode.min.js',
+            'avpvh-print-website-qrcode',
+            AVPVH_PRWB_SCRIPTS_URL . 'libs/qrcode.min.js',
             [],
-            filemtime(PMB_SCRIPTS_DIR . 'libs/qrcode.min.js')
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'libs/qrcode.min.js')
         );
         wp_register_script(
-            'pmb-beautifier-functions',
-            PMB_SCRIPTS_URL . 'print-page-beautifier-functions.js',
-            ['pmb-qrcode'],
-            filemtime(PMB_SCRIPTS_DIR . 'print-page-beautifier-functions.js')
+            'avpvh-print-website-beautifier-functions',
+            AVPVH_PRWB_SCRIPTS_URL . 'print-page-beautifier-functions.js',
+            ['avpvh-print-website-qrcode'],
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'print-page-beautifier-functions.js')
         );
         wp_localize_script(
-            'pmb-beautifier-functions',
-            'pmb',
+            'avpvh-print-website-beautifier-functions',
+            'avpvh_prwb',
             [
                 'site_url' => site_url(),
                 'site_url_attr' => esc_attr(site_url()),
-                'play_button_gif' => PMB_IMAGES_URL . 'play-button.gif',
-                'external_requests_enabled' => pmb_external_requests_enabled(),
+                'play_button_gif' => AVPVH_PRWB_IMAGES_URL . 'play-button.gif',
+                'external_requests_enabled' => avpvh_prwb_external_requests_enabled(),
             ]
         );
         wp_register_script(
-            'pmb-setup-page',
-            PMB_ASSETS_URL . 'scripts/setup-page.js',
-            ['jquery-debounce', 'pmb-select2', 'wp-api', 'jquery-ui-datepicker'],
-            filemtime(PMB_ASSETS_DIR . 'scripts/setup-page.js')
+            'avpvh-print-website-setup-page',
+            AVPVH_PRWB_ASSETS_URL . 'scripts/setup-page.js',
+            ['jquery-debounce', 'avpvh-print-website-select2', 'wp-api', 'jquery-ui-datepicker'],
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'scripts/setup-page.js')
         );
         wp_register_style(
-            'pmb-setup-page',
-            PMB_ASSETS_URL . 'styles/setup-page.css',
-            ['pmb_common', 'pmb-select2', 'pmb-jquery-ui'],
-            filemtime(PMB_ASSETS_DIR . 'styles/setup-page.css')
+            'avpvh-print-website-setup-page',
+            AVPVH_PRWB_ASSETS_URL . 'styles/setup-page.css',
+            ['avpvh-print-website-common', 'avpvh-print-website-select2', 'avpvh-print-website-jquery-ui'],
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/setup-page.css')
         );
         wp_localize_script(
-            'pmb-setup-page',
-            'pmb_setup_page',
+            'avpvh-print-website-setup-page',
+            'avpvh_prwb_setup_page',
             [
                 'translations' => [
-                    'unknown_site_name' => esc_html__('Unknown site name', 'print-my-blog'),
-                    'no_categories' => esc_html__('No categories available.', 'print-my-blog'),
+                    'unknown_site_name' => esc_html__('Unknown site name', 'avpvh-print-website'),
+                    'no_categories' => esc_html__('No categories available.', 'avpvh-print-website'),
                 ],
                 'data' => [
                     'site_input_selector' => '#pmb-site',
@@ -181,10 +181,10 @@ class Common extends BaseController
     public function enqueueScripts()
     {
         wp_enqueue_style(
-            'pmb_common',
-            PMB_ASSETS_URL . 'styles/pmb-common.css',
+            'avpvh-print-website-common',
+            AVPVH_PRWB_ASSETS_URL . 'styles/pmb-common.css',
             array(),
-            filemtime(PMB_ASSETS_DIR . 'styles/pmb-common.css')
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/pmb-common.css')
         );
     }
 }

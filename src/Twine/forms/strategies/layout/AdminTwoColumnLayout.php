@@ -1,14 +1,14 @@
 <?php
 
-namespace Twine\forms\strategies\layout;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\layout;
 
-use Twine\forms\inputs\FormInputBase;
-use Twine\forms\inputs\HiddenInput;
-use Twine\forms\inputs\TextAreaInput;
-use Twine\forms\strategies\display\AdminFileUploaderDisplay;
-use Twine\forms\strategies\display\TextAreaDisplay;
-use Twine\forms\strategies\display\TextInputDisplay;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\HiddenInput;
+use Avpvh\PrintWebsite\Twine\forms\inputs\TextAreaInput;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\AdminFileUploaderDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\TextAreaDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\TextInputDisplay;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * Like the standard two-column form section layout, but this one adds css classes

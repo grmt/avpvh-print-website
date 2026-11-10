@@ -1,14 +1,14 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\helpers\ImproperUsageException;
-use Twine\forms\helpers\InputOption;
-use Twine\forms\strategies\normalization\BooleanNormalization;
-use Twine\forms\strategies\normalization\IntNormalization;
-use Twine\forms\strategies\normalization\ManyValuedNormalization;
-use Twine\forms\strategies\normalization\TextNormalization;
-use Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException;
+use Avpvh\PrintWebsite\Twine\forms\helpers\InputOption;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\BooleanNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\IntNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\ManyValuedNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\TextNormalization;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
 
 /**
  * FormInputWithOptionsBase
@@ -81,7 +81,7 @@ abstract class FormInputWithOptionsBase extends FormInputBase
                 throw new ImproperUsageException(
                     sprintf(
                         // translators: 1: classname, 2: classname
-                        __('A form input of type "%1$s" was passed in an arrya of non-options. It should be given an object of type "%2$s"', 'print-my-blog'),
+                        __('A form input of type "%1$s" was passed in an arrya of non-options. It should be given an object of type "%2$s"', 'avpvh-print-website'),
                         get_class($this),
                         InputOption::class
                     )

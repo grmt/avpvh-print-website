@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\helpers;
+namespace Avpvh\PrintWebsite\Twine\helpers;
 
 /**
  *

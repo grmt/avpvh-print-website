@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\domain;
+namespace Avpvh\PrintWebsite\domain;
 
 use Exception;
 use WP_Post;
 
 /**
  * Class PrintPageUrlGenerator
- * @package PrintMyBlog\domain
+ * @package Avpvh\PrintWebsite\domain
  */
 class PrintPageUrlGenerator
 {
@@ -50,7 +50,7 @@ class PrintPageUrlGenerator
     public function getBaseArgs()
     {
         $base_args = [
-            'print-my-blog' => '1',
+            'avpvh-print-website' => '1',
             'post-type' => $this->post->post_type,
         ];
         // Loose comparison ok in case post_password is null or false.
@@ -78,14 +78,14 @@ class PrintPageUrlGenerator
             $this->getBaseArgs(),
             $this->print_settings->getPrintOptionsAndValues($slug)
         );
-        $args['pmb_f'] = $slug;
+        $args['avpvh_prwb_f'] = $slug;
         $args['pmb-post'] = $this->post->ID;
         if (defined('ICL_LANGUAGE_CODE')) {
             $args['lang'] = ICL_LANGUAGE_CODE;
         }
         $url = add_query_arg(
             apply_filters(
-                '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $base_args',
+                '\Avpvh\PrintWebsite\controllers\PmbFrontend->addPrintButton $base_args',
                 $args,
                 $this->post,
                 $slug,

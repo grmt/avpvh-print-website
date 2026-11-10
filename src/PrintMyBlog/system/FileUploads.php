@@ -1,11 +1,11 @@
 <?php
 
 
-namespace PrintMyBlog\system;
+namespace Avpvh\PrintWebsite\system;
 
 /**
  * Class FileUploads
- * @package PrintMyBlog\system
+ * @package Avpvh\PrintWebsite\system
  */
 class FileUploads
 {

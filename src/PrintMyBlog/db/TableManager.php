@@ -1,20 +1,20 @@
 <?php
 
-namespace PrintMyBlog\db;
+namespace Avpvh\PrintWebsite\db;
 
 /**
  * Class InstallTables
  *
- * Installs the database tables needed by Print My Blog
+ * Installs the database tables needed by AV-PvH Print Website
  *
- * @package        Print My Blog
+ * @package        AV-PvH Print Website
  * @author         Mike Nelson
  *
  */
-class TableManager extends \Twine\db\TableManager
+class TableManager extends \Avpvh\PrintWebsite\Twine\db\TableManager
 {
-    const SECTIONS_TABLE = 'pmb_project_sections';
-    const EXTERNAL_RESOURCE_TABLE = 'pmb_external_resources';
+    const SECTIONS_TABLE = 'avpvh_prwb_project_sections';
+    const EXTERNAL_RESOURCE_TABLE = 'avpvh_prwb_external_resources';
 
     /**
      * Ensures PMB's tables exist.

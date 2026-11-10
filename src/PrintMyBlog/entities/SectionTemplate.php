@@ -1,10 +1,10 @@
 <?php
 
-namespace PrintMyBlog\entities;
+namespace Avpvh\PrintWebsite\entities;
 
 /**
  * Class SectionTemplate
- * @package PrintMyBlog\entities
+ * @package Avpvh\PrintWebsite\entities
  */
 class SectionTemplate
 {

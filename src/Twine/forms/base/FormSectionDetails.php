@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\forms\base;
+namespace Avpvh\PrintWebsite\Twine\forms\base;
 
-use Twine\forms\strategies\layout\AdminTwoColumnLayout;
-use Twine\forms\strategies\layout\DetailsSummaryLayout;
+use Avpvh\PrintWebsite\Twine\forms\strategies\layout\AdminTwoColumnLayout;
+use Avpvh\PrintWebsite\Twine\forms\strategies\layout\DetailsSummaryLayout;
 
 /**
  * Class FormSectionDetails
- * @package Twine\forms\base
+ * @package Avpvh\PrintWebsite\Twine\forms\base
  */
 class FormSectionDetails extends FormSection
 {
@@ -19,7 +19,7 @@ class FormSectionDetails extends FormSection
     /**
      * FormSectionDetails constructor.
      * @param array $options_array
-     * @throws \Twine\forms\helpers\ImproperUsageException
+     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
      */
     public function __construct($options_array = array())
     {

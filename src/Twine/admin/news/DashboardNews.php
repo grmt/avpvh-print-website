@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\admin\news;
+namespace Avpvh\PrintWebsite\Twine\admin\news;
 
-use Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
 
 if (!defined('ABSPATH')) {
     die('No direct access allowed');

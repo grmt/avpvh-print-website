@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\strategies\layout;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\layout;
 
-use Twine\forms\base\FormSection;
-use Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
 
 /**
  * TemplateLayout

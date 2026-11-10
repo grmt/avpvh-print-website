@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PLUGIN_DIR_NAME="print-my-blog"
+PLUGIN_DIR_NAME="avpvh-print-website"
 OUTPUT_PATH="${1:-$ROOT_DIR/dist/${PLUGIN_DIR_NAME}.zip}"
 OUTPUT_DIR="$(dirname "$OUTPUT_PATH")"
 STAGING_DIR="$ROOT_DIR/dist/${PLUGIN_DIR_NAME}"

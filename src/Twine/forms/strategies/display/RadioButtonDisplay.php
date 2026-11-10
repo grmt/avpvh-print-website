@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * Class RadioButtonDisplay
@@ -45,7 +45,7 @@ class RadioButtonDisplay extends CompoundInputDisplay
                     ),
                     'aria-label' => sprintf(
                         // translators: 1: label text, 2: display text
-                        __('%1$s: %2$s', 'print-my-blog'),
+                        __('%1$s: %2$s', 'avpvh-print-website'),
                         wp_strip_all_tags($input->htmlLabelText()),
                         wp_strip_all_tags($option->getDisplayText())
                     ),

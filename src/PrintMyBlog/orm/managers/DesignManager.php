@@ -1,26 +1,26 @@
 <?php
 
-namespace PrintMyBlog\orm\managers;
+namespace Avpvh\PrintWebsite\orm\managers;
 
-use PrintMyBlog\orm\entities\Design;
-use Twine\orm\managers\PostWrapperManager;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager;
 use \WP_Query;
 
 /**
  * Class DesignManager
- * @package PrintMyBlog\orm\managers
+ * @package Avpvh\PrintWebsite\orm\managers
  */
 class DesignManager extends PostWrapperManager
 {
     /**
      * @var string
      */
-    protected $class_to_instantiate = 'PrintMyBlog\orm\entities\Design';
+    protected $class_to_instantiate = 'Avpvh\PrintWebsite\orm\entities\Design';
 
     /**
      * @var string
      */
-    protected $cap_slug = 'pmb_design';
+    protected $cap_slug = 'avpvh_prwb_design';
 
     /**
      * @param string $format slug of format

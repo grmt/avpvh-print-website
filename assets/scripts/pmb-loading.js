@@ -1,8 +1,8 @@
 jQuery(document).ready(function () {
-    var querystring_args = pmb_get_querystring_vars();
-    var data = pmb_loading.generate_ajax_data;
+    var querystring_args = avpvh_prwb_get_querystring_vars();
+    var data = avpvh_prwb_loading.generate_ajax_data;
     jQuery.ajax({
-        url:pmb_loading.pmb_ajax,
+        url:avpvh_prwb_loading.avpvh_prwb_ajax,
         method:'POST',
         data:data,
         dataType:'json',
@@ -12,10 +12,10 @@ jQuery(document).ready(function () {
                 window.location.replace(response.url);
             }
         },
-        converters: pmb_jquery_ajax_converters,
+        converters: avpvh_prwb_jquery_ajax_converters,
     }).fail((jqXhr, text_message, text_status) => {
             // the server dhould have already recorded the error
-            alert(pmb_loading.translations.error_generating);
+            alert(avpvh_prwb_loading.translations.error_generating);
         }
     );
 });
@@ -24,7 +24,7 @@ jQuery(document).ready(function () {
  * from https://stackoverflow.com/questions/4656843/get-querystring-from-url-using-jquery
  * @returns {[]}
  */
-function pmb_get_querystring_vars() {
+function avpvh_prwb_get_querystring_vars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for (var i = 0; i < hashes.length; i++) {

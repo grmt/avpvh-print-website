@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\orm\entities;
+namespace Avpvh\PrintWebsite\orm\entities;
 
-use PrintMyBlog\system\Context;
+use Avpvh\PrintWebsite\system\Context;
 use stdClass;
 
 /**
  * Class ProjectSection
- * @package PrintMyBlog\orm\entities
+ * @package Avpvh\PrintWebsite\orm\entities
  */
 class ProjectSection
 {

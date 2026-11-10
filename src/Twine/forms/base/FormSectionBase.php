@@ -1,27 +1,27 @@
 <?php // phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
 
-namespace Twine\forms\base;
+namespace Avpvh\PrintWebsite\Twine\forms\base;
 
 use Exception;
-use Twine\forms\helpers\ImproperUsageException;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException;
 
-if (! defined('TWINE_SCRIPTS_URL')) {
-    if (! defined('TWINE_MAIN_FILE')) {
+if (! defined('AVPVH_PRWB_TWINE_SCRIPTS_URL')) {
+    if (! defined('AVPVH_PRWB_TWINE_MAIN_FILE')) {
         throw new Exception(
             __(
-                'In order to use Twine forms, you need to define TWINE_MAIN_FILE to be the main file of your plugin, then put Twine folder inside wp-content/plugins/yourplugin/src/Twine',
+                'In order to use Twine forms, you need to define AVPVH_PRWB_TWINE_MAIN_FILE to be the main file of your plugin, then put Twine folder inside wp-content/plugins/yourplugin/src/Twine',
                 'twine'
             )
         );
     }
-    $plugin_base_path = dirname(TWINE_MAIN_FILE);
-    $plugin_url = plugin_dir_url(TWINE_MAIN_FILE);
+    $plugin_base_path = dirname(AVPVH_PRWB_TWINE_MAIN_FILE);
+    $plugin_url = plugin_dir_url(AVPVH_PRWB_TWINE_MAIN_FILE);
     // Twine constants
-    define('TWINE_SCRIPTS_URL', $plugin_url . 'src/Twine/assets/scripts/');
-    define('TWINE_STYLES_URL', $plugin_url . 'src/Twine/assets/styles/');
+    define('AVPVH_PRWB_TWINE_SCRIPTS_URL', $plugin_url . 'src/Twine/assets/scripts/');
+    define('AVPVH_PRWB_TWINE_STYLES_URL', $plugin_url . 'src/Twine/assets/styles/');
 
-    define('TWINE_SCRIPTS_DIR', $plugin_base_path . '/src/Twine/assets/scripts/');
-    define('TWINE_STYLES_DIR', $plugin_base_path . '/src/Twine/assets/styles/');
+    define('AVPVH_PRWB_TWINE_SCRIPTS_DIR', $plugin_base_path . '/src/Twine/assets/scripts/');
+    define('AVPVH_PRWB_TWINE_STYLES_DIR', $plugin_base_path . '/src/Twine/assets/styles/');
 }
 // phpcs:enable PSR1.Files.SideEffects.FoundWithSymbols
 

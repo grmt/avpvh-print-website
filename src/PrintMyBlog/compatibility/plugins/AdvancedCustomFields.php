@@ -1,10 +1,10 @@
 <?php
 
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
 
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 
 class AdvancedCustomFields extends CompatibilityBase
 {

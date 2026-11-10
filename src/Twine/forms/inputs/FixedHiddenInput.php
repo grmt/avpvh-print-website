@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
 /**
  * Fixed_HiddenInput

@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
 /**
  * IntValidation
@@ -18,7 +18,7 @@ class IntValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = __('Only digits are allowed.', 'print-my-blog');
+            $validation_error_message = __('Only digits are allowed.', 'avpvh-print-website');
         }
         parent::__construct($validation_error_message);
     }

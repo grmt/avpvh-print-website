@@ -12,7 +12,7 @@
  * @version 1.0
  */
 /**
- * @var string $pmb_download_file_name
+ * @var string $avpvh_prwb_download_file_name
  */
 if(apply_filters('pmb-print-page-treat-as-single', true)){
     $wp_query->is_home = false;$wp_query->is_single = true;
@@ -28,19 +28,19 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
     <?php wp_head(); ?>
 </head>
 
-<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page pmb-format-' . $pmb_format))); ?>">
-<!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
+<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page pmb-format-' . $avpvh_prwb_format))); ?>">
+<!-- AV-PvH Print Website Version <?php echo AVPVH_PRWB_VERSION;?>-->
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
         <div class="pmb-window-buttons pmb-top-left pmb-small-instructions">
             <span class="pmb-loading-content">
                 <a href="javascript:history.back();">❌
-                    <?php esc_html_e('Cancel', 'print-my-blog'); ?>
+                    <?php esc_html_e('Cancel', 'avpvh-print-website'); ?>
                 </a>
             </span>
             <span class="pmb-print-ready">
                 <a href="javascript:history.back();">✅
-                    <?php esc_html_e('Return', 'print-my-blog'); ?>
+                    <?php esc_html_e('Return', 'avpvh-print-website'); ?>
                 </a>
             </span>
         </div>
@@ -48,42 +48,42 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
             <div class="pmb-help pmb-top">
             <span class="pmb-help-ask"><?php printf(
                 // translators: 1: a bunch of HTML for emoji buttons
-                    __('What do you think? %1$s', 'print-my-blog'),
-                    '<a id="pmb-help-love" href="javascript:pmb_help_show(\'pmb-help-happy-text\');" title="'
-                    . __('Love it (shows feedback options)', 'print-my-blog')
-                    . '">😃</a> <a id="pmb-help-sad" href="javascript:pmb_help_show(\'pmb-help-sad-text\');" title="'
-                    . __('Don’t like something (shows feedback options)', 'print-my-blog')
+                    __('What do you think? %1$s', 'avpvh-print-website'),
+                    '<a id="pmb-help-love" href="javascript:avpvh_prwb_help_show(\'pmb-help-happy-text\');" title="'
+                    . __('Love it (shows feedback options)', 'avpvh-print-website')
+                    . '">😃</a> <a id="pmb-help-sad" href="javascript:avpvh_prwb_help_show(\'pmb-help-sad-text\');" title="'
+                    . __('Don’t like something (shows feedback options)', 'avpvh-print-website')
                     . '")>☹️</a>'
                 ); ?>
             </span>
                 <span class="pmb-help-happy-text" style="display:none"><?php printf(
                     // translators: 1: opening link tag, 2: closing link tag
-                        __('Nice! %1$sPlease leave a review%2$s.', 'print-my-blog'),
-                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'print-my-blog') . '">',
+                        __('Nice! %1$sPlease leave a review%2$s.', 'avpvh-print-website'),
+                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'avpvh-print-website') . '">',
                         '</a>'
                     ); ?></span>
                 <span class="pmb-help-sad-text" style="display:none"><?php printf(
                     // translators: 1: opening link tag, 2: closing link tag.
-                        __('That’s disappointing. %1$sPlease tell us how to improve.%2$s', 'print-my-blog'),
-                        '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank" title="' . __('Plugin support forum (opens in new tab)', 'print-my-blog') . '">',
+                        __('That’s disappointing. %1$sPlease tell us how to improve.%2$s', 'avpvh-print-website'),
+                        '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank" title="' . __('Plugin support forum (opens in new tab)', 'avpvh-print-website') . '">',
                         '</a>'
                     ); ?></span>
             </div>
         <?php }?>
         <div class="pmb-waiting-area">
-            <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing', 'print-my-blog'); ?></h1>
+            <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing', 'avpvh-print-website'); ?></h1>
         </div>
         <div class="pmb-print-ready pmb-print-instructions">
-            <?php do_action('pmb_print_page_ready_instructions_start');?>
+            <?php do_action('avpvh_prwb_print_page_ready_instructions_start');?>
             <?php
-            if ($pmb_format === 'pdf') {
-                if(in_array($pmb_browser, ['chrome','desktop_safari'])) {
+            if ($avpvh_prwb_format === 'pdf') {
+                if(in_array($avpvh_prwb_browser, ['chrome','desktop_safari'])) {
                     ?>
                     <input disabled="disabled" class="pmb-print-page-print-button" type="submit" onclick="window.print()"
-                           value="<?php esc_attr_e('Print to PDF', 'print-my-blog'); ?>"/><?php
+                           value="<?php esc_attr_e('Print to PDF', 'avpvh-print-website'); ?>"/><?php
                 } else {
                     ?>
-                    <p><?php esc_html_e('Use your browser to print to PDF.', 'print-my-blog'); ?></p>
+                    <p><?php esc_html_e('Use your browser to print to PDF.', 'avpvh-print-website'); ?></p>
                     <?php
                 }
                 if(is_user_logged_in()) {
@@ -91,64 +91,64 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     <a
                             target="_blank"
                             href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20quick%20print%3F"
-                            title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"
+                            title="<?php esc_html_e('opens in new tab', 'avpvh-print-website'); ?>"
                     >
-                        <?php esc_html_e('How?', 'print-my-blog'); ?>
+                        <?php esc_html_e('How?', 'avpvh-print-website'); ?>
                     </a>
                     <?php
                 } else {
-                    if ($pmb_browser === 'firefox') {
+                    if ($avpvh_prwb_browser === 'firefox') {
                         ?>
                         <details class="pmb-details">
-                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How?', 'print-my-blog'); ?>
+                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How?', 'avpvh-print-website'); ?>
                             </summary>
                             <div class="pmb-reveal-details">
                                 <ol>
-                                    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/print-to-pdf-document/" target="_blank" title="<?php esc_html_e('opens in new tab', 'print-my-blog'); ?>"><?php esc_html_e('Download Print to PDF Browser Extension', 'print-my-blog'); ?></a></li>
-                                    <li><?php esc_html_e('Click the extension’s button.', 'print-my-blog'); ?></li>
+                                    <li><a href="https://addons.mozilla.org/en-US/firefox/addon/print-to-pdf-document/" target="_blank" title="<?php esc_html_e('opens in new tab', 'avpvh-print-website'); ?>"><?php esc_html_e('Download Print to PDF Browser Extension', 'avpvh-print-website'); ?></a></li>
+                                    <li><?php esc_html_e('Click the extension’s button.', 'avpvh-print-website'); ?></li>
                                 </ol>
                             </div>
                         </details>
                         <?php
-                    } elseif($pmb_browser === 'chrome') {
+                    } elseif($avpvh_prwb_browser === 'chrome') {
                         ?>
                         <details class="pmb-details">
-                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How?', 'print-my-blog'); ?>
+                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How?', 'avpvh-print-website'); ?>
                             </summary>
                             <div class="pmb-reveal-details">
-                                <p><?php esc_html_e('After clicking "Print to PDF", set the "Destination" to "Save as PDF."', 'print-my-blog'); ?></p>
+                                <p><?php esc_html_e('After clicking "Print to PDF", set the "Destination" to "Save as PDF."', 'avpvh-print-website'); ?></p>
                             </div>
                         </details>
                         <?php
-                    } elseif($pmb_browser === 'desktop_safari') {
+                    } elseif($avpvh_prwb_browser === 'desktop_safari') {
                         ?>
             <details class="pmb-details">
                 <summary
-                        class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Safari on Desktop', 'print-my-blog'); ?>
+                        class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Safari on Desktop', 'avpvh-print-website'); ?>
                 </summary>
                 <div class="pmb-reveal-details">
                     <ol>
-                        <li><?php esc_html_e('Click "Print to PDF"', 'print-my-blog'); ?></li>
-                        <li><?php esc_html_e('Choose to "Save as PDF."', 'print-my-blog'); ?></li>
+                        <li><?php esc_html_e('Click "Print to PDF"', 'avpvh-print-website'); ?></li>
+                        <li><?php esc_html_e('Choose to "Save as PDF."', 'avpvh-print-website'); ?></li>
                     </ol>
                 </div>
             </details>
             <?php
-                    } elseif( $pmb_browser === 'mobile_safari'){
+                    } elseif( $avpvh_prwb_browser === 'mobile_safari'){
                         ?>
                         <details class="pmb-details">
-                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Mobile Safari', 'print-my-blog'); ?>
+                            <summary class="pmb-reveal-options pmb-inline"><?php esc_html_e('How on Mobile Safari', 'avpvh-print-website'); ?>
                             </summary>
                             <div class="pmb-reveal-details">
                                 <ol>
                                     <li>
-                                        <?php esc_html_e('Click the share button', 'print-my-blog'); ?>
+                                        <?php esc_html_e('Click the share button', 'avpvh-print-website'); ?>
                                     </li>
                                     <li>
-                                        <?php esc_html_e('Click "Options" and choose PDF', 'print-my-blog'); ?>
+                                        <?php esc_html_e('Click "Options" and choose PDF', 'avpvh-print-website'); ?>
                                     </li>
                                     <li>
-                                        <?php esc_html_e('Save to Files', 'print-my-blog'); ?>
+                                        <?php esc_html_e('Save to Files', 'avpvh-print-website'); ?>
                                     </li>
                                 </ol>
                             </div>
@@ -156,27 +156,27 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         <?php
                     }
                 }
-                ?><p class="pmb-help"><?php esc_html_e('Note: Google Chrome and Microsoft Edge are recommended for producing PDFs.', 'print-my-blog');?></_E></_E></_E></p><?php
-            } elseif($pmb_format === 'html'){// HTML
+                ?><p class="pmb-help"><?php esc_html_e('Note: Google Chrome and Microsoft Edge are recommended for producing PDFs.', 'avpvh-print-website');?></_E></_E></_E></p><?php
+            } elseif($avpvh_prwb_format === 'html'){// HTML
                 ?>
-                <input type="submit" onclick="pmb_copy()" value="<?php esc_attr_e('Copy to Clipboard', 'print-my-blog'); ?>"/>
+                <input type="submit" onclick="avpvh_prwb_copy()" value="<?php esc_attr_e('Copy to Clipboard', 'avpvh-print-website'); ?>"/>
                 <?php
-            } elseif ($pmb_format === 'epub') {
+            } elseif ($avpvh_prwb_format === 'epub') {
                 ?>
-                <a class="button button-primary pmb-disabled" id="download_link" download="<?php echo esc_attr($pmb_download_file_name);?>" href="javascript:void(0)"><?php esc_html_e('Download ePub', 'print-my-blog'); ?></a>
-                <div class="pmb-small-instructions"><?php esc_html_e('Build an ePub file locally in your browser.', 'print-my-blog'); ?></div>
+                <a class="button button-primary pmb-disabled" id="download_link" download="<?php echo esc_attr($avpvh_prwb_download_file_name);?>" href="javascript:void(0)"><?php esc_html_e('Download ePub', 'avpvh-print-website'); ?></a>
+                <div class="pmb-small-instructions"><?php esc_html_e('Build an ePub file locally in your browser.', 'avpvh-print-website'); ?></div>
                 <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
                 <?php
-            } elseif ($pmb_format === 'word') {
+            } elseif ($avpvh_prwb_format === 'word') {
                 ?>
-                <a class="button button-primary pmb-disabled" id="download_link" download="<?php echo esc_attr($pmb_download_file_name);?>" href="javascript:void(0)"><?php esc_html_e('Download Word Document', 'print-my-blog'); ?></a>
-                <div class="pmb-small-instructions"><?php esc_html_e('Build a Word-compatible document locally in your browser.', 'print-my-blog'); ?></div>
+                <a class="button button-primary pmb-disabled" id="download_link" download="<?php echo esc_attr($avpvh_prwb_download_file_name);?>" href="javascript:void(0)"><?php esc_html_e('Download Word Document', 'avpvh-print-website'); ?></a>
+                <div class="pmb-small-instructions"><?php esc_html_e('Build a Word-compatible document locally in your browser.', 'avpvh-print-website'); ?></div>
                 <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
                 <?php
             } else { // default: print
                 ?>
-                <input type="submit" disabled="disabled" class="pmb-print-page-print-button"  onclick="window.print()" value="<?php esc_attr_e('Print', 'print-my-blog'); ?>"/>
-                <div class="pmb-small-instructions"><?php esc_html_e('Use your browser to print.', 'print-my-blog'); ?></div>
+                <input type="submit" disabled="disabled" class="pmb-print-page-print-button"  onclick="window.print()" value="<?php esc_attr_e('Print', 'avpvh-print-website'); ?>"/>
+                <div class="pmb-small-instructions"><?php esc_html_e('Use your browser to print.', 'avpvh-print-website'); ?></div>
                 <?php
             }
             ?>
@@ -192,40 +192,40 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
 
 <div class="pmb-posts site pmb-project-content" id="content">
     <?php
-    if (in_array($pmb_format,['print','pdf'] )){
+    if (in_array($avpvh_prwb_format,['print','pdf'] )){
     ?>
-    <div class="pmb-preview-note"><?php esc_html_e('Use your browser’s "print preview" for the best preview.', 'print-my-blog'); ?></div>
+    <div class="pmb-preview-note"><?php esc_html_e('Use your browser’s "print preview" for the best preview.', 'avpvh-print-website'); ?></div>
     <?php } ?>
     <div class="pmb-posts-header">
         <?php
         ?>
 
-            <?php if ($pmb_show_site_title) { ?>
-                <h1 class="site-title"><?php echo $pmb_site_name; ?></h1>
+            <?php if ($avpvh_prwb_show_site_title) { ?>
+                <h1 class="site-title"><?php echo $avpvh_prwb_site_name; ?></h1>
             <?php } ?>
-            <?php if ($pmb_show_site_tagline) { ?>
-                <p class="site-description"><?php echo $pmb_site_description; ?></p>
+            <?php if ($avpvh_prwb_show_site_tagline) { ?>
+                <p class="site-description"><?php echo $avpvh_prwb_site_description; ?></p>
             <?php } ?>
             <?php
-            if ($pmb_show_filters) {
+            if ($avpvh_prwb_show_filters) {
                 // If they specified an after date, show it
-                if ($pmb_after_date && $pmb_before_date) {
-                    if($pmb_after_date === $pmb_before_date){
-                        $date_range_string = sprintf('published on %1$s,', $pmb_after_date);
+                if ($avpvh_prwb_after_date && $avpvh_prwb_before_date) {
+                    if($avpvh_prwb_after_date === $avpvh_prwb_before_date){
+                        $date_range_string = sprintf('published on %1$s,', $avpvh_prwb_after_date);
                     } else {
-                        $date_range_string = sprintf('published from %1$s to %2$s,', $pmb_after_date, $pmb_before_date);
+                        $date_range_string = sprintf('published from %1$s to %2$s,', $avpvh_prwb_after_date, $avpvh_prwb_before_date);
                     }
-                } elseif ($pmb_after_date && !$pmb_before_date) {
+                } elseif ($avpvh_prwb_after_date && !$avpvh_prwb_before_date) {
                     $date_range_string = sprintf(
                     // translators: 1: date string
-                        esc_html__('published on %1$s and later,', 'print-my-blog'),
-                        $pmb_after_date
+                        esc_html__('published on %1$s and later,', 'avpvh-print-website'),
+                        $avpvh_prwb_after_date
                     );
-                } elseif (!$pmb_after_date && $pmb_before_date) {
+                } elseif (!$avpvh_prwb_after_date && $avpvh_prwb_before_date) {
                     $date_range_string = sprintf(
                     // translators: 1: date string
-                        esc_html__('published on %1$s and earlier,', 'print-my-blog'),
-                        $pmb_before_date
+                        esc_html__('published on %1$s and earlier,', 'avpvh-print-website'),
+                        $avpvh_prwb_before_date
                     );
                 } else {
                     $date_range_string = '';
@@ -233,12 +233,12 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
 
                 // Figure out taxonomy filters used and how to display them.
                 $taxonomy_filters_strings = array();
-                foreach ($pmb_taxonomy_filters as $taxonomy_filter) {
+                foreach ($avpvh_prwb_taxonomy_filters as $taxonomy_filter) {
                     $taxonomy = $taxonomy_filter['taxonomy'];
                     $terms = $taxonomy_filter['terms'];
                     $taxonomy_filters_strings[] = sprintf(
                     // translators: 1 taxonomy name, 2: list of terms that apply to this post
-                        esc_html__('%1$s: %2$s', 'print-my-blog'),
+                        esc_html__('%1$s: %2$s', 'avpvh-print-website'),
                         count($terms) > 1 ? $taxonomy->labels->name : $taxonomy->labels->singular_name,
                         implode(', ', $terms)
                     );
@@ -248,14 +248,14 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     sprintf(
                     // @translators: $s, the categories and terms used to filter this print-out,
                     //  eg "Category: WordPress, Blogging; Term: Computers, Headphones".
-                        esc_html__('with %s,', 'print-my-blog'),
+                        esc_html__('with %s,', 'avpvh-print-website'),
                         implode('; ', $taxonomy_filters_strings)
                     ) :
                     '';
-                if($pmb_author){
-                    $filters_string .= ' ' . sprintf(esc_html__('by %s', 'print-my-blog'), $pmb_author->display_name);
+                if($avpvh_prwb_author){
+                    $filters_string .= ' ' . sprintf(esc_html__('by %s', 'avpvh-print-website'), $avpvh_prwb_author->display_name);
                 }
-                $content_description = $pmb_post_type . ' ' . $date_range_string . ' ' . $filters_string;
+                $content_description = $avpvh_prwb_post_type . ' ' . $date_range_string . ' ' . $filters_string;
 
                 ?>
                 <?php
@@ -265,15 +265,15 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
             ?>
             <p class="pmb-printout-meta">
                 <?php
-                if ($pmb_show_site_url && $content_description) {
+                if ($avpvh_prwb_show_site_url && $content_description) {
                     printf(
                     // translators: 1 description of printout, 2: site URL
-                        esc_html__('%1$s from %2$s.', 'print-my-blog'),
+                        esc_html__('%1$s from %2$s.', 'avpvh-print-website'),
                         $content_description,
-                        $pmb_site_url
+                        $avpvh_prwb_site_url
                     );
-                } elseif ($pmb_show_site_url && ! $content_description) {
-                        echo $pmb_site_url;
+                } elseif ($avpvh_prwb_show_site_url && ! $content_description) {
+                        echo $avpvh_prwb_site_url;
                 } elseif ($content_description) {
                     // if we're not showing the site's URL, but there's a content description to show, by all means...
                     // it should still be shown.
@@ -281,36 +281,36 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                         _x(
                             '%s.',
                             'Description of what\'s in the printout. Eg the post type, dante range, and filters.',
-                            'print-my-blog'),
+                            'avpvh-print-website'),
                         $content_description
                     );
                 }
                 ?><?php
                 //give it some space
                 echo ' ';
-                if ($pmb_show_date_printed && $pmb_show_credit) {
+                if ($avpvh_prwb_show_date_printed && $avpvh_prwb_show_credit) {
 
                     printf(
                     // translators: 1: date, 2: opening link tag, 3: closing link tag
-                        esc_html__('Printed on %1$s using %2$sPrint My Blog%3$s', 'print-my-blog'),
+                        esc_html__('Printed on %1$s using %2$sAV-PvH Print Website%3$s', 'avpvh-print-website'),
                         date_i18n(get_option('date_format')),
                         '<a href="https://wordpress.org/plugins/print-my-blog/">',
                         '</a>'
                     );
-                } elseif ($pmb_show_date_printed) {
+                } elseif ($avpvh_prwb_show_date_printed) {
                     // translators: 1: date
                     printf(
-                        esc_html__('Printed on %1$s', 'print-my-blog'),
+                        esc_html__('Printed on %1$s', 'avpvh-print-website'),
                         date_i18n(get_option('date_format'))
                     );
-                } elseif ($pmb_show_credit) {
+                } elseif ($avpvh_prwb_show_credit) {
                     printf(
-                        esc_html__('Printed using %1$sPrint My Blog%2$s', 'print-my-blog'),
+                        esc_html__('Printed using %1$sAV-PvH Print Website%2$s', 'avpvh-print-website'),
                         '<a href="https://wordpress.org/plugins/print-my-blog/">',
                         '</a>'
                     );
                 }
-                do_action('pmb_print_page_after_printed_on', $pmb_show_date_printed, $pmb_show_credit);
+                do_action('avpvh_prwb_print_page_after_printed_on', $avpvh_prwb_show_date_printed, $avpvh_prwb_show_credit);
                 ?></p>
             <?php
             // Close the print page header and open the posts body.
@@ -322,7 +322,7 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
 
 
         </div>
-        <?php do_action('pmb_print_page_after_posts');?>
+        <?php do_action('avpvh_prwb_print_page_after_posts');?>
     </div>
     <?php wp_footer(); ?>
 

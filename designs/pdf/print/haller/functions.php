@@ -2,11 +2,11 @@
 // Add filters, action callback, and functions you want to use in your design.
 // Note that this file only gets included when gnerating a new project, not on every pageload.
 add_action(
-    'pmb_pdf_generation_start',
-    function (\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design) {
-        global $pmb_design;
-        $pmb_design = $design;
-        add_action('wp_enqueue_scripts', 'pmb_enqueue_haller_script', 1001);
+    'avpvh_prwb_pdf_generation_start',
+    function (\Avpvh\PrintWebsite\entities\ProjectGeneration $project_generation, \Avpvh\PrintWebsite\orm\entities\Design $design) {
+        global $avpvh_prwb_design;
+        $avpvh_prwb_design = $design;
+        add_action('wp_enqueue_scripts', 'avpvh_prwb_enqueue_haller_script', 1001);
     },
     10,
     2
@@ -16,32 +16,32 @@ add_action(
  * Adds scripts to print page
  * @throws Exception
  */
-function pmb_enqueue_haller_script()
+function avpvh_prwb_enqueue_haller_script()
 {
-    global $pmb_design;
-    $css = pmb_design_styles($pmb_design);
+    global $avpvh_prwb_design;
+    $css = avpvh_prwb_design_styles($avpvh_prwb_design);
     $css .= '@media print, screen {
-                @page { size:' . $pmb_design->getSetting('page_width') . ' ' . $pmb_design->getSetting('page_height') . ';
+                @page { size:' . $avpvh_prwb_design->getSetting('page_width') . ' ' . $avpvh_prwb_design->getSetting('page_height') . ';
                 }
             }';
 
-    $columns = (int)$pmb_design->getSetting('columns');
+    $columns = (int)$avpvh_prwb_design->getSetting('columns');
     $css .= '.pmb-front-matter, .pmb-main-matter, .pmb-back-matter{columns:' . $columns . '}';
 
-    if ($pmb_design->getSetting('images_full_column')) {
+    if ($avpvh_prwb_design->getSetting('images_full_column')) {
         $css .= ' figure.wp-caption:not(.mayer-no-resize, .emoji), figure.wp-block-image:not(.mayer-no-resize, .emoji), .pmb-posts .pmb-image img:not(.mayer-no-resize, .emoji), img:not(.mayer-no-resize, .emoji){width:100% !important;height:auto;}
         .wp-block-image:not(.mayer-no-resize) figure{margin:0 0 0 0; width:100%}';
     }
-    if ($pmb_design->getSetting('no_extra_columns')) {
+    if ($avpvh_prwb_design->getSetting('no_extra_columns')) {
         $css .= '.pmb-section:not(.pmb-single-column) .wp-block-columns{display:block;}';
     }
     wp_add_inline_style(
-        'pmb_print_common',
+        'avpvh-print-website-print-common',
         $css
     );
     wp_localize_script(
-        'pmb-design',
-        'pmb_design_options',
-        pmb_design_settings($pmb_design)
+        'avpvh-print-website-design',
+        'avpvh_prwb_design_options',
+        avpvh_prwb_design_settings($avpvh_prwb_design)
     );
 }

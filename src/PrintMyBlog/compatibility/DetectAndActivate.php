@@ -1,31 +1,31 @@
 <?php
 
-namespace PrintMyBlog\compatibility;
+namespace Avpvh\PrintWebsite\compatibility;
 
-use PrintMyBlog\compatibility\plugins\AdvancedCustomFields;
-use PrintMyBlog\compatibility\plugins\AdvancedExcerpt;
-use PrintMyBlog\compatibility\plugins\CoBlocks;
-use PrintMyBlog\compatibility\plugins\ContactForm7;
-use PrintMyBlog\compatibility\plugins\EasyFootnotes;
-use PrintMyBlog\compatibility\plugins\GoogleLanguageTranslator;
-use PrintMyBlog\compatibility\plugins\GTranslate;
-use PrintMyBlog\compatibility\plugins\Hustle;
-use PrintMyBlog\compatibility\plugins\JetPack;
-use PrintMyBlog\compatibility\plugins\LazyLoadingFeaturePlugin;
-use PrintMyBlog\compatibility\plugins\PaidMembershipsPro;
-use PrintMyBlog\compatibility\plugins\TablePress;
-use PrintMyBlog\compatibility\plugins\Wpml;
-use PrintMyBlog\compatibility\plugins\WpVrView;
-use PrintMyBlog\compatibility\plugins\YoastSeo;
-use PrintMyBlog\system\Context;
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\compatibility\plugins\AdvancedCustomFields;
+use Avpvh\PrintWebsite\compatibility\plugins\AdvancedExcerpt;
+use Avpvh\PrintWebsite\compatibility\plugins\CoBlocks;
+use Avpvh\PrintWebsite\compatibility\plugins\ContactForm7;
+use Avpvh\PrintWebsite\compatibility\plugins\EasyFootnotes;
+use Avpvh\PrintWebsite\compatibility\plugins\GoogleLanguageTranslator;
+use Avpvh\PrintWebsite\compatibility\plugins\GTranslate;
+use Avpvh\PrintWebsite\compatibility\plugins\Hustle;
+use Avpvh\PrintWebsite\compatibility\plugins\JetPack;
+use Avpvh\PrintWebsite\compatibility\plugins\LazyLoadingFeaturePlugin;
+use Avpvh\PrintWebsite\compatibility\plugins\PaidMembershipsPro;
+use Avpvh\PrintWebsite\compatibility\plugins\TablePress;
+use Avpvh\PrintWebsite\compatibility\plugins\Wpml;
+use Avpvh\PrintWebsite\compatibility\plugins\WpVrView;
+use Avpvh\PrintWebsite\compatibility\plugins\YoastSeo;
+use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 
 /**
  * Class DetectAndActivate
  *
  * Description
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         2.1.4
  *
@@ -74,7 +74,7 @@ class DetectAndActivate
                 $compatiblity_mods_to_activate[] = new ContactForm7();
             }
             if (defined('ICL_SITEPRESS_VERSION')) {
-                $compatiblity_mods_to_activate[] = Context::instance()->reuse('PrintMyBlog\compatibility\plugins\Wpml');
+                $compatiblity_mods_to_activate[] = Context::instance()->reuse('Avpvh\PrintWebsite\compatibility\plugins\Wpml');
             }
             if (defined('JETPACK__VERSION')) {
                 $compatiblity_mods_to_activate[] = new JetPack();
@@ -120,4 +120,4 @@ class DetectAndActivate
     }
 }
 // End of file DetectAndActivate.php
-// Location: PrintMyBlog\compatibility/DetectAndActivate.php
+// Location: Avpvh\PrintWebsite\compatibility/DetectAndActivate.php

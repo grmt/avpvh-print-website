@@ -1,20 +1,20 @@
 <?php
 
-namespace PrintMyBlog\controllers;
+namespace Avpvh\PrintWebsite\controllers;
 
-use PrintMyBlog\domain\PrintButtons;
-use PrintMyBlog\entities\DesignTemplate;
-use PrintMyBlog\entities\FileFormat;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\system\Context;
-use Twine\controllers\BaseController;
+use Avpvh\PrintWebsite\domain\PrintButtons;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
+use Avpvh\PrintWebsite\entities\FileFormat;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\Twine\controllers\BaseController;
 
 /**
  * Class Shortcodes
  *
  * Adds and executes shortcodes.
- * @package PrintMyBlog\controllers
+ * @package Avpvh\PrintWebsite\controllers
  */
 class Shortcodes extends BaseController
 {
@@ -24,54 +24,25 @@ class Shortcodes extends BaseController
      */
     public function setHooks()
     {
-        add_shortcode(
-            'pmb_print_buttons',
-            [$this, 'printButtons' ]
-        );
-        add_shortcode(
-            'pmb_print_page_url',
-            [$this, 'printPageUrl']
-        );
-        add_shortcode(
-            'pmb_project_title',
-            [$this, 'projectTitle']
-        );
-        add_shortcode(
-            'pmb_toc',
-            [$this, 'tableOfContents']
-        );
-        add_shortcode(
-            'pmb_title_page',
-            [$this, 'titlePage']
-        );
-        add_shortcode(
-            'pmb_byline',
-            [$this, 'pmbByline']
-        );
-        add_shortcode(
-            'pmb_footnote',
-            [$this, 'footnote']
-        );
-        add_shortcode(
-            'pmb_web_only_text',
-            [$this, 'webOnlyText']
-        );
-        add_shortcode(
-            'pmb_web_only_blocks',
-            [$this, 'webOnlyBlocks']
-        );
-        add_shortcode(
-            'pmb_print_only_text',
-            [$this, 'printOnlyText']
-        );
-        add_shortcode(
-            'pmb_print_only_blocks',
-            [$this, 'printOnlyBlocks']
-        );
-        add_shortcode(
-            'pmb_project_setting',
-            [$this, 'projectSetting']
-        );
+        $shortcodes = [
+            'print_buttons' => 'printButtons',
+            'print_page_url' => 'printPageUrl',
+            'project_title' => 'projectTitle',
+            'toc' => 'tableOfContents',
+            'title_page' => 'titlePage',
+            'byline' => 'pmbByline',
+            'footnote' => 'footnote',
+            'web_only_text' => 'webOnlyText',
+            'web_only_blocks' => 'webOnlyBlocks',
+            'print_only_text' => 'printOnlyText',
+            'print_only_blocks' => 'printOnlyBlocks',
+            'project_setting' => 'projectSetting',
+        ];
+        foreach ($shortcodes as $name => $method) {
+            add_shortcode('avpvh_print_website_' . $name, [$this, $method]);
+            // The Print My Blog names, so content written before the rename keeps working.
+            add_shortcode('pmb_' . $name, [$this, $method]);
+        }
     }
 	// @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 
@@ -138,7 +109,7 @@ class Shortcodes extends BaseController
             $atts[$key] = str_replace('"', '', html_entity_decode($val, ENT_COMPAT));
         }
 
-        $url = Context::instance()->reuse('PrintMyBlog\domain\PrintPageUrlGenerator', [$atts['ID']])->getUrl($atts['format']);
+        $url = Context::instance()->reuse('Avpvh\PrintWebsite\domain\PrintPageUrlGenerator', [$atts['ID']])->getUrl($atts['format']);
         // remove the starting "http://" and "https://" because, if used in an anchor link, those get added automatically
         if (! $atts['add_protocol']) {
             $url = str_replace(
@@ -162,7 +133,7 @@ class Shortcodes extends BaseController
             ],
             $atts
         );
-        return Context::instance()->reuse('PrintMyBlog\domain\PrintButtons')->getHtmlForPrintButtons($atts['ID']);
+        return Context::instance()->reuse('Avpvh\PrintWebsite\domain\PrintButtons')->getHtmlForPrintButtons($atts['ID']);
     }
 
     /**
@@ -170,9 +141,9 @@ class Shortcodes extends BaseController
      */
     public function projectTitle()
     {
-        global $pmb_project;
-        if ($pmb_project instanceof Project) {
-            return $pmb_project->getPublishedTitle();
+        global $avpvh_prwb_project;
+        if ($avpvh_prwb_project instanceof Project) {
+            return $avpvh_prwb_project->getPublishedTitle();
         }
         return '<-- pmb there is no project title because this post is not being viewed as part of a project. '
         . 'You should probably not show this post to site visitors by making it private.-->';
@@ -184,7 +155,7 @@ class Shortcodes extends BaseController
     public function tableOfContents()
     {
         return apply_filters(
-            '\PrintMyBlog\controllers\Shortcodes->tableOfContents',
+            '\Avpvh\PrintWebsite\controllers\Shortcodes->tableOfContents',
             '<div  class="pmb-toc">
 	        <ul id="pmb-toc-list" class="pmb-toc-list ">
 	            <!-- Populated dynamically by JS -->
@@ -195,22 +166,22 @@ class Shortcodes extends BaseController
 
     /**
      * @return string
-     * @throws \PrintMyBlog\exceptions\TemplateDoesNotExist
+     * @throws \Avpvh\PrintWebsite\exceptions\TemplateDoesNotExist
      */
     public function titlePage()
     {
-        global $pmb_project, $pmb_design, $pmb_format;
+        global $avpvh_prwb_project, $avpvh_prwb_design, $avpvh_prwb_format;
         if (
-            $pmb_design instanceof Design
-            && $pmb_design->getDesignTemplate() instanceof DesignTemplate
-            && $pmb_design->getDesignTemplate()->supports(DesignTemplate::TEMPLATE_TITLE_PAGE)
+            $avpvh_prwb_design instanceof Design
+            && $avpvh_prwb_design->getDesignTemplate() instanceof DesignTemplate
+            && $avpvh_prwb_design->getDesignTemplate()->supports(DesignTemplate::TEMPLATE_TITLE_PAGE)
         ) {
-            $template_path = $pmb_design->getDesignTemplate()->getTemplatePathToDivision(
+            $template_path = $avpvh_prwb_design->getDesignTemplate()->getTemplatePathToDivision(
                 DesignTemplate::TEMPLATE_TITLE_PAGE
             );
             require $template_path;
         } else {
-            return do_shortcode('<h1>[pmb_project_title]</h1>');
+            return do_shortcode('<h1>[avpvh_print_website_project_title]</h1>');
         }
     }
 
@@ -219,9 +190,9 @@ class Shortcodes extends BaseController
      */
     public function pmbByline()
     {
-        global $pmb_project;
-        if ($pmb_project instanceof Project) {
-            return $pmb_project->getPmbMeta('byline');
+        global $avpvh_prwb_project;
+        if ($avpvh_prwb_project instanceof Project) {
+            return $avpvh_prwb_project->getPmbMeta('byline');
         }
         return '<-- pmb there is no project byline because this post is not being viewed as part of a project. '
             . 'You should probably not show this post to site visitors by making it private.-->';
@@ -248,20 +219,20 @@ class Shortcodes extends BaseController
      */
     public function projectSetting($atts)
     {
-        global $pmb_project, $pmb_format;
+        global $avpvh_prwb_project, $avpvh_prwb_format;
         $key = isset($atts['name']) ? (string)$atts['name'] : '';
 
         $key = sanitize_key($key);
 
         if ($key) {
-            if ($pmb_project instanceof Project) {
-                return $pmb_project->getSetting($key);
+            if ($avpvh_prwb_project instanceof Project) {
+                return $avpvh_prwb_project->getSetting($key);
             } else {
                 return 'Project Setting ' . $key;
             }
         } else {
-            if ($pmb_project instanceof Project && $pmb_format instanceof FileFormat) {
-                return '[pmb_project_setting] requires you provide the setting\'s name. Available settings are: ' . wp_json_encode($pmb_project->getDesignFor($pmb_format)->getSettings());
+            if ($avpvh_prwb_project instanceof Project && $avpvh_prwb_format instanceof FileFormat) {
+                return '[avpvh_print_website_project_setting] requires you provide the setting\'s name. Available settings are: ' . wp_json_encode($avpvh_prwb_project->getDesignFor($avpvh_prwb_format)->getSettings());
             } else {
                 return 'Project Setting ' . $key;
             }

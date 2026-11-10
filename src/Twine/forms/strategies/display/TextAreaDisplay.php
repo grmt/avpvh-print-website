@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
-use Twine\forms\inputs\TextAreaInput;
-use Twine\forms\strategies\validation\FullHtmlValidation;
+use Avpvh\PrintWebsite\Twine\forms\inputs\TextAreaInput;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\FullHtmlValidation;
 
 /**
  * Class TextAreaDisplay
- * @package Twine\forms\strategies\display
+ * @package Avpvh\PrintWebsite\Twine\forms\strategies\display
  */
 class TextAreaDisplay extends DisplayBase
 {
@@ -41,7 +41,7 @@ class TextAreaDisplay extends DisplayBase
             ) {
                 $html .= '<p class="twine-question-desc">' . sprintf(
                     // translators: 1: list of alloed htm;l tags
-                    __('(allowed tags: %1$s)', 'print-my-blog'),
+                    __('(allowed tags: %1$s)', 'avpvh-print-website'),
                     $validation_strategy->getListOfAllowedTags()
                 ) . '</p>';
             }

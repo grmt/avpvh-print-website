@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 
 /**
  * TextValidation

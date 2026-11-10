@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 use WP_Error;
 
 /**
@@ -25,23 +25,23 @@ class AdminFileUploaderDisplay extends DisplayBase
         wp_enqueue_media();
         wp_enqueue_script('media-upload');
         wp_enqueue_script(
-            'pmb-media-uploader',
-            TWINE_SCRIPTS_URL . 'media-uploader.js',
+            'avpvh-print-website-media-uploader',
+            AVPVH_PRWB_TWINE_SCRIPTS_URL . 'media-uploader.js',
             [],
             '1.0.0'
         );
         wp_enqueue_style(
-            'pmb-media-uploader',
-            TWINE_STYLES_URL . 'media-uploader.css',
+            'avpvh-print-website-media-uploader',
+            AVPVH_PRWB_TWINE_STYLES_URL . 'media-uploader.css',
             [],
             '1.0.0'
         );
         wp_localize_script(
-            'pmb-media-uploader',
+            'avpvh-print-website-media-uploader',
             'twine_media_uploader',
             [
                 'translations' => [
-                    'choose' => __('Choose File', 'print-my-blog')
+                    'choose' => __('Choose File', 'avpvh-print-website')
                 ]
             ]
         );
@@ -60,8 +60,8 @@ class AdminFileUploaderDisplay extends DisplayBase
         $html_generator = Html::instance();
         $html = $html_generator->link(
             '#',
-            __('Choose File', 'print-my-blog'),
-            __('Click to select an existing file, or upload a new one.', 'print-my-blog'),
+            __('Choose File', 'avpvh-print-website'),
+            __('Click to select an existing file, or upload a new one.', 'avpvh-print-website'),
             '',
             'twine_media_upload button'
         );

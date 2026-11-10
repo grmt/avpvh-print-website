@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\system;
+namespace Avpvh\PrintWebsite\Twine\system;
 
 use Exception;
 use ReflectionClass;
@@ -11,7 +11,7 @@ use ReflectionException;
  *
  * Description
  *
- * @package        Print My Blog
+ * @package        AV-PvH Print Website
  * @author         Mike Nelson
  * @since          $VID:$
  *

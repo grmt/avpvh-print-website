@@ -9,7 +9,7 @@
  * @link      https://github.com/mnelson4/admin-notices
  */
 
-namespace mnelson4\AdminNotices;
+namespace Avpvh\PrintWebsite\mnelson4\AdminNotices;
 
 /**
  * The Dismiss class, responsible for dismissing and checking the status of admin notices.

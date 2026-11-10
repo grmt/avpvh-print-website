@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\normalization;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\normalization;
 
-use Twine\forms\strategies\FormInputStrategyBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\FormInputStrategyBase;
 
 /**
  * NormalizationBase

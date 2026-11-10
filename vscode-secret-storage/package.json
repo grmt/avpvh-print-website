@@ -1,6 +1,6 @@
 {
   "name": "printmyblog-vscode-secret-storage",
-  "displayName": "Print My Blog Secret Storage",
+  "displayName": "AV-PvH Print Website Secret Storage",
   "description": "Workspace commands for storing the WordPress admin password in VS Code SecretStorage.",
   "version": "0.0.1",
   "private": true,
@@ -18,15 +18,15 @@
     "commands": [
       {
         "command": "printmyblog.deployPlugin",
-        "title": "Print My Blog: Deploy Plugin to WordPress"
+        "title": "AV-PvH Print Website: Deploy Plugin to WordPress"
       },
       {
         "command": "printmyblog.setWpAdminPassword",
-        "title": "Print My Blog: Save WP Admin Password"
+        "title": "AV-PvH Print Website: Save WP Admin Password"
       },
       {
         "command": "printmyblog.clearWpAdminPassword",
-        "title": "Print My Blog: Clear WP Admin Password"
+        "title": "AV-PvH Print Website: Clear WP Admin Password"
       }
     ]
   }

@@ -1,12 +1,12 @@
-function pmb_generate_doc_from_html(is_preview, success_callback, failure_callback){
-    var use_middleman = parseInt(pmb_pro.use_pmb_central_for_previews) || ! is_preview;
+function avpvh_prwb_generate_doc_from_html(is_preview, success_callback, failure_callback){
+    var use_middleman = parseInt(avpvh_prwb_pro.use_avpvh_prwb_central_for_previews) || ! is_preview;
     if(use_middleman){
-        var authorization_data = pmb_pro.license_data;
+        var authorization_data = avpvh_prwb_pro.license_data;
     } else {
         var authorization_data = 'YOUR_API_KEY_HERE';
     }
 
-    var dynamic_doc_attrs = JSON.parse(JSON.stringify(pmb_pro.doc_attrs));
+    var dynamic_doc_attrs = JSON.parse(JSON.stringify(avpvh_prwb_pro.doc_attrs));
     // if this a preview, always override whether its a test request or not.
     if(is_preview){
         dynamic_doc_attrs.test = true;
@@ -63,32 +63,32 @@ function pmb_generate_doc_from_html(is_preview, success_callback, failure_callba
  * Generates the test document from the current page, downloads it, and enables downloading the paid PDF
  * @param jqelement
  */
-function pmb_generate_test_doc(jqelement) {
-    pmb_generate_doc_from_html(
+function avpvh_prwb_generate_test_doc(jqelement) {
+    avpvh_prwb_generate_doc_from_html(
         true,
         (download_url) => {
 
-            pmb_stop_doing_button(jqelement);
+            avpvh_prwb_stop_doing_button(jqelement);
             jQuery('.pmb-download-live').removeClass('pmb-disabled');
-            jQuery('.pmb-pro-description').html(pmb_pro.translations.pro_description);
+            jQuery('.pmb-pro-description').html(avpvh_prwb_pro.translations.pro_description);
             window.location.href = download_url;
         },
         (error_message) => {
             // jQuery('.pmb-downloading-live-pdf').hide();
             // jQuery('.pmb-error-downloading-test-pdf').show();
             if(error_message === 'Socket error downloading document content from supplied url.'){
-                error_message = pmb_pro.translations.socket_error;
+                error_message = avpvh_prwb_pro.translations.socket_error;
             }
-            pmb_stop_doing_button(jqelement);
+            avpvh_prwb_stop_doing_button(jqelement);
             jQuery.ajax(
-                pmb_pro.ajaxurl,
+                avpvh_prwb_pro.ajaxurl,
                 {
                     'method': 'POST',
                     'data':{
-                        'action':'pmb_report_error',
+                        'action':'avpvh_prwb_report_error',
                         'error': error_message,
-                        'project_id': pmb_pro.project_id,
-                        'format': pmb_pro.format
+                        'project_id': avpvh_prwb_pro.project_id,
+                        'format': avpvh_prwb_pro.format
                     }
                 }
             );
@@ -101,19 +101,19 @@ function pmb_generate_test_doc(jqelement) {
  * Generates the paid document from the current page and downloads it
  * @param jqelement
  */
-function pmb_generate_live_doc(jqelement) {
-    pmb_generate_doc_from_html(
+function avpvh_prwb_generate_live_doc(jqelement) {
+    avpvh_prwb_generate_doc_from_html(
         false,
         (download_url) => {
-            pmb_stop_doing_button(jqelement);
+            avpvh_prwb_stop_doing_button(jqelement);
             window.location.href = download_url;
             jQuery.ajax(
-                pmb_pro.ajaxurl,
+                avpvh_prwb_pro.ajaxurl,
                 {
                     'method': 'POST',
                     'data':{
-                        'action':'pmb_reduce_credits',
-                        '_wpnonce':pmb_pro.pmb_nonce,
+                        'action':'avpvh_prwb_reduce_credits',
+                        '_wpnonce':avpvh_prwb_pro.avpvh_prwb_nonce,
                     }
                 }
             );
@@ -122,19 +122,19 @@ function pmb_generate_live_doc(jqelement) {
         },
         (error_message) => {
             if(error_message === 'Socket error downloading document content from supplied url.'){
-                error_message = pmb_pro.translations.socket_error;
+                error_message = avpvh_prwb_pro.translations.socket_error;
             }
-            pmb_stop_doing_button(jqelement);
+            avpvh_prwb_stop_doing_button(jqelement);
             jQuery.ajax(
-                pmb_pro.ajaxurl,
+                avpvh_prwb_pro.ajaxurl,
                 {
                     'method': 'POST',
                     'data':{
-                        'action':'pmb_report_error',
+                        'action':'avpvh_prwb_report_error',
                         'error': error_message,
-                        'project_id': pmb_pro.project_id,
-                        'format': pmb_pro.format,
-                        '_wpnonce':pmb_pro.pmb_nonce,
+                        'project_id': avpvh_prwb_pro.project_id,
+                        'format': avpvh_prwb_pro.format,
+                        '_wpnonce':avpvh_prwb_pro.avpvh_prwb_nonce,
                     }
                 }
             );
@@ -146,7 +146,7 @@ function pmb_generate_live_doc(jqelement) {
  * Hide a targeted print option and replace it with a refresh button and message. The purpose of this function is to avoid rendering issues when two generation buttons are clicked consecutively. 
  * @param {*} option_to_hide The jQuery element of the .pmb-print-option element to hide. Must be either "browser" or "propdf".
  */
-function pmb_hide_print_option(option_to_hide) {
+function avpvh_prwb_hide_print_option(option_to_hide) {
     const refresh_window_option = jQuery('#pmb-print-refresh-window-option');
     const print_with_browser_option = jQuery('#pmb-print-with-browser-option');
     const print_with_pro_pdf_option = jQuery('#pmb-print-pro-pdf-option');
@@ -173,22 +173,22 @@ function pmb_hide_print_option(option_to_hide) {
 }
 
 /**
- * Callbacks that listen for document.pmb_doc_conversion_requested should set pmb_doc_conversion_request_handled to TRUE immediately, otherwise
+ * Callbacks that listen for document.avpvh_prwb_doc_conversion_requested should set avpvh_prwb_doc_conversion_request_handled to TRUE immediately, otherwise
  * we'll assume no callback was set and so we'll just proceed with converting the file.
  * @type {boolean}
  */
-var pmb_doc_conversion_request_handled = false;
+var avpvh_prwb_doc_conversion_request_handled = false;
 /**
  * Keeps track of if we've finished preparing the entire print page. (So we don't process stuff over and over again if the print button
  * gets pressed again.)
  * @type boolean
  */
-var pmb_pro_page_rendered = false;
+var avpvh_prwb_pro_page_rendered = false;
 jQuery(document).on('ready', function(){
     console.log("Loading document");
     var download_test_button = jQuery('.pmb-download-test');
     setTimeout(function(){
-            pmb_stop_doing_button(download_test_button);
+            avpvh_prwb_stop_doing_button(download_test_button);
         },
         2000
     );
@@ -204,54 +204,54 @@ jQuery(document).on('ready', function(){
     });
     download_test_button.click(function(event){
         //Hide the Print with Browser print option and replace it with a refresh button and message.
-        pmb_hide_print_option('browser');
+        avpvh_prwb_hide_print_option('browser');
 
         var jqelement = jQuery(event.currentTarget);
-        pmb_doing_button(jqelement);
-        if(pmb_pro_page_rendered){
-            pmb_generate_test_doc(jqelement);
+        avpvh_prwb_doing_button(jqelement);
+        if(avpvh_prwb_pro_page_rendered){
+            avpvh_prwb_generate_test_doc(jqelement);
         } else {
-            // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
+            // wait for the design to call document.avpvh_prwb_doc_conversion_ready (and to set avpvh_prwb_doc_conversion_request_handled
             // to true)  before proceeding with converting HTML to ePub
-            jQuery(document).on('pmb_doc_conversion_ready', function(){
-                pmb_generate_test_doc(jqelement);
+            jQuery(document).on('avpvh_prwb_doc_conversion_ready', function(){
+                avpvh_prwb_generate_test_doc(jqelement);
             });
-            jQuery(document).trigger('pmb_doc_conversion_requested');
-            // trigger document.pmb_wrap_up for legacy code.
-            jQuery(document).trigger('pmb_wrap_up');
-            pmb_pro_page_rendered = true;
+            jQuery(document).trigger('avpvh_prwb_doc_conversion_requested');
+            // trigger document.avpvh_prwb_wrap_up for legacy code.
+            jQuery(document).trigger('avpvh_prwb_wrap_up');
+            avpvh_prwb_pro_page_rendered = true;
         }
     });
     jQuery('.pmb-download-live').click(function(event){
         var jqelement = jQuery(event.currentTarget);
-        pmb_generate_live_doc(jqelement);
-        pmb_doing_button(jqelement);
+        avpvh_prwb_generate_live_doc(jqelement);
+        avpvh_prwb_doing_button(jqelement);
     });
     jQuery('#pmb-print-with-browser').click(function(event){
-        if(pmb_pro_page_rendered){
+        if(avpvh_prwb_pro_page_rendered){
             window.print();
         } else {
             //Hide the Pro PDF Service print option and replace it with a refresh button and message.
-            pmb_hide_print_option('propdf');
+            avpvh_prwb_hide_print_option('propdf');
 
             var jqelement = jQuery(event.currentTarget);
-            pmb_doing_button(jqelement);
-            // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
+            avpvh_prwb_doing_button(jqelement);
+            // wait for the design to call document.avpvh_prwb_doc_conversion_ready (and to set avpvh_prwb_doc_conversion_request_handled
             // to true)  before proceeding with converting HTML to ePub
-            jQuery(document).on('pmb_doc_conversion_ready', function(){
+            jQuery(document).on('avpvh_prwb_doc_conversion_ready', function(){
                 window.print();
                 setTimeout(
                     function(){
-                        pmb_stop_doing_button(jqelement);
+                        avpvh_prwb_stop_doing_button(jqelement);
                     },
                     2000
                 );
             });
             jQuery('.pmb-pro-only').remove();
-            jQuery(document).trigger('pmb_doc_conversion_requested');
-            // trigger document.pmb_wrap_up for legacy code.
-            jQuery(document).trigger('pmb_wrap_up');
-            pmb_pro_page_rendered = true;
+            jQuery(document).trigger('avpvh_prwb_doc_conversion_requested');
+            // trigger document.avpvh_prwb_wrap_up for legacy code.
+            jQuery(document).trigger('avpvh_prwb_wrap_up');
+            avpvh_prwb_pro_page_rendered = true;
         }
 
     });

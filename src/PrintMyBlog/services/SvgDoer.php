@@ -1,11 +1,11 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
 /**
  * Class SvgDoer
  * SVG-related functions
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class SvgDoer
 {

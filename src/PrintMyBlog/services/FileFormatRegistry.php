@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
-use PrintMyBlog\entities\FileFormat;
-use PrintMyBlog\factories\FileFormatFactory;
+use Avpvh\PrintWebsite\entities\FileFormat;
+use Avpvh\PrintWebsite\factories\FileFormatFactory;
 
 /**
  * Class FileFormatRegistry
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class FileFormatRegistry
 {

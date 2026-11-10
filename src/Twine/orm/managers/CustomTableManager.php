@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\orm\managers;
+namespace Avpvh\PrintWebsite\Twine\orm\managers;
 
 use ReflectionClass;
-use Twine\orm\entities\CustomTableRow;
+use Avpvh\PrintWebsite\Twine\orm\entities\CustomTableRow;
 
 /**
  * Class CustomTableManager
- * @package Twine\orm\managers
+ * @package Avpvh\PrintWebsite\Twine\orm\managers
  */
 abstract class CustomTableManager
 {
@@ -22,7 +22,7 @@ abstract class CustomTableManager
 
     /**
      * @var string fully qualified classname of the entities representing database rows
-     * (which are child instances of Twine\orm\entities\CustomTableRow)
+     * (which are child instances of Avpvh\PrintWebsite\Twine\orm\entities\CustomTableRow)
      */
     protected $entity_classname;
 

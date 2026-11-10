@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\services\filesystem;
+namespace Avpvh\PrintWebsite\Twine\services\filesystem;
 
 /**
  * Class ThingOnServer
- * @package Twine\services\filesystem
+ * @package Avpvh\PrintWebsite\Twine\services\filesystem
  */
 abstract class ThingOnServer
 {

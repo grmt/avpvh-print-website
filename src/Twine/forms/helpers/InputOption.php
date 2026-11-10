@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\helpers;
+namespace Avpvh\PrintWebsite\Twine\forms\helpers;
 
 /**
  * Class InputOption
- * @package Twine\forms\helpers
+ * @package Avpvh\PrintWebsite\Twine\forms\helpers
  */
 class InputOption
 {

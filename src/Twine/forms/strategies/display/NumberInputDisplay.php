@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
 use EventEspresso\core\services\container\exceptions\InstantiationException;
 use InvalidArgumentException;
@@ -78,7 +78,7 @@ class NumberInputDisplay extends DisplayBase
                 // translators: 1: label text, 2: classname, 3: value text
                 esc_html__(
                     'The %1$s parameter value for %2$s must be numeric or null, %3$s was passed into the constructor.',
-                    'print-my-blog'
+                    'avpvh-print-website'
                 ),
                 $argument_label,
                 __CLASS__,

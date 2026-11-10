@@ -46,11 +46,11 @@ window.DocRaptor = {
     }
 }
 
-function pmb_external_requests_are_disabled() {
-    return (window.pmb_generate && window.pmb_generate.external_requests_enabled === false)
-        || (window.pmb_loading && window.pmb_loading.external_requests_enabled === false)
-        || (window.pmb_pro && window.pmb_pro.external_requests_enabled === false)
-        || (window.pmb && window.pmb.external_requests_enabled === false);
+function avpvh_prwb_external_requests_are_disabled() {
+    return (window.avpvh_prwb_generate && window.avpvh_prwb_generate.external_requests_enabled === false)
+        || (window.avpvh_prwb_loading && window.avpvh_prwb_loading.external_requests_enabled === false)
+        || (window.avpvh_prwb_pro && window.avpvh_prwb_pro.external_requests_enabled === false)
+        || (window.avpvh_prwb && window.avpvh_prwb.external_requests_enabled === false);
 }
 
 function PmbAsyncPdfCreation(
@@ -110,7 +110,7 @@ function PmbAsyncPdfCreation(
         return jquery_request_settings;
     }
     this.begin = function(){
-        if (pmb_external_requests_are_disabled()) {
+        if (avpvh_prwb_external_requests_are_disabled()) {
             this.error('External PDF services are disabled in this local-only build.');
             return;
         }

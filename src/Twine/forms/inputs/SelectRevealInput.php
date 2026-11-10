@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\base\FormSectionBase;
-use Twine\forms\helpers\InputOption;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionBase;
+use Avpvh\PrintWebsite\Twine\forms\helpers\InputOption;
 
 /**
  * Class Select_Reveal_Input

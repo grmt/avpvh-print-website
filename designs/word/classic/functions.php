@@ -2,28 +2,28 @@
 // Add filters, action callback, and functions you want to use in your design.
 // Note that this file only gets included when generating a new project, not on every pageload.
 add_action(
-	'pmb_pdf_generation_start',
-	function(\PrintMyBlog\entities\ProjectGeneration $project_generation, \PrintMyBlog\orm\entities\Design $design){
-	    global $pmb_design;
-	    $pmb_design = $design;
-	    add_action('wp_enqueue_scripts', 'pmb_enqueue_classic_script', 1001);
+	'avpvh_prwb_pdf_generation_start',
+	function(\Avpvh\PrintWebsite\entities\ProjectGeneration $project_generation, \Avpvh\PrintWebsite\orm\entities\Design $design){
+	    global $avpvh_prwb_design;
+	    $avpvh_prwb_design = $design;
+	    add_action('wp_enqueue_scripts', 'avpvh_prwb_enqueue_classic_script', 1001);
 	},
 	10,
 	2
 );
 
-function pmb_enqueue_classic_script(){
+function avpvh_prwb_enqueue_classic_script(){
     /**
-     * @var $pmb_design \PrintMyBlog\orm\entities\Design
+     * @var $avpvh_prwb_design \Avpvh\PrintWebsite\orm\entities\Design
      */
-    global $pmb_design;
+    global $avpvh_prwb_design;
     wp_add_inline_style(
-        'pmb_print_common',
-        $pmb_design->getSetting('custom_css')
+        'avpvh-print-website-print-common',
+        $avpvh_prwb_design->getSetting('custom_css')
     );
     wp_localize_script(
-        'pmb-design',
-        'pmb_design_options',
-        pmb_design_settings($pmb_design)
+        'avpvh-print-website-design',
+        'avpvh_prwb_design_options',
+        avpvh_prwb_design_settings($avpvh_prwb_design)
     );
 }

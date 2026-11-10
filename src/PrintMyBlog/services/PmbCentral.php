@@ -1,6 +1,6 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
 use Exception;
 use WP_Error;
@@ -8,7 +8,7 @@ use WP_Error;
 /**
  * Class PmbCentral
  * Communicates with printmy.blog.
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class PmbCentral
 {
@@ -20,18 +20,18 @@ class PmbCentral
      */
     public function getCreditsInfo($refresh = false)
     {
-        if (! pmb_external_requests_enabled()) {
+        if (! avpvh_prwb_external_requests_enabled()) {
             return [
                 'remaining_credits' => 0,
                 'expiry_date' => gmdate('c', strtotime('+1 year')),
             ];
         }
-        $license = pmb_license();
+        $license = avpvh_prwb_license();
         $license_id = $license ? $license->id : 0;
         if (! $license_id) {
-            throw new Exception(__('No license ID available', 'print-my-blog'));
+            throw new Exception(__('No license ID available', 'avpvh-print-website'));
         }
-        $site = pmb_site_registration();
+        $site = avpvh_prwb_site_registration();
         $install_id = $site ? $site->id : 0;
         $transient_name = $this->getCreditsTransientName();
         $credit_data = false;
@@ -87,12 +87,12 @@ class PmbCentral
      */
     public function getSiteSignature()
     {
-        if (! pmb_external_requests_enabled()) {
+        if (! avpvh_prwb_external_requests_enabled()) {
             return '';
         }
-        $site = pmb_site_registration();
+        $site = avpvh_prwb_site_registration();
         if (! $site) {
-            throw new Exception(__('There is no site registration available', 'print-my-blog'));
+            throw new Exception(__('There is no site registration available', 'avpvh-print-website'));
         }
         $site_private_key = $site->secret_key;
         // create the signature that verifies we own this license and install.
@@ -109,7 +109,7 @@ class PmbCentral
      */
     public function getSiteAuthorizationHeader()
     {
-        if (! pmb_external_requests_enabled()) {
+        if (! avpvh_prwb_external_requests_enabled()) {
             return '';
         }
         return 'PMB ' . $this->getSiteSignature();
@@ -120,7 +120,7 @@ class PmbCentral
      */
     public function getCreditsTransientName()
     {
-        return 'pmb_license_credits';
+        return 'avpvh_prwb_license_credits';
     }
 
     /**
@@ -129,13 +129,13 @@ class PmbCentral
      */
     public function reduceCredits()
     {
-        if (! pmb_external_requests_enabled()) {
+        if (! avpvh_prwb_external_requests_enabled()) {
             return [
                 'remaining_credits' => 0,
                 'expiry_date' => gmdate('c', strtotime('+1 year')),
             ];
         }
-        $license = pmb_license();
+        $license = avpvh_prwb_license();
         $license_id = $license ? $license->id : 0;
         $transient_name = $this->getCreditsTransientName();
         $credit_data = get_transient($transient_name);
@@ -162,11 +162,11 @@ class PmbCentral
      */
     public function getCentralUrl()
     {
-        if (! pmb_external_requests_enabled()) {
+        if (! avpvh_prwb_external_requests_enabled()) {
             return '';
         }
-        if (defined('PMB_CENTRAL_URL')) {
-            $central_base_url = PMB_CENTRAL_URL;
+        if (defined('AVPVH_PRWB_CENTRAL_URL')) {
+            $central_base_url = AVPVH_PRWB_CENTRAL_URL;
         } else {
             $central_base_url = 'https://printmy.blog/wp-json/pmb/v1/';
         }

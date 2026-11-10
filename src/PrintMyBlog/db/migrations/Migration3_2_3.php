@@ -1,14 +1,14 @@
 <?php
 
-namespace PrintMyBlog\db\migrations;
+namespace Avpvh\PrintWebsite\db\migrations;
 
-use PrintMyBlog\system\CustomPostTypes;
-use Twine\db\migrations\MigrationBase;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
+use Avpvh\PrintWebsite\Twine\db\migrations\MigrationBase;
 
 // phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
 /**
  * Class Migration3_2_3
- * @package PrintMyBlog\db\migrations
+ * @package Avpvh\PrintWebsite\db\migrations
  */
 class Migration3_2_3 extends MigrationBase
 {

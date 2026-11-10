@@ -27,7 +27,7 @@ async function requestPassword(context) {
   }
 
   await savePassword(context, password);
-  void vscode.window.showInformationMessage('Print My Blog admin password saved to VS Code SecretStorage.');
+  void vscode.window.showInformationMessage('AV-PvH Print Website admin password saved to VS Code SecretStorage.');
   return password;
 }
 
@@ -35,11 +35,11 @@ function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand('printmyblog.deployPlugin', async () => {
       const tasks = await vscode.tasks.fetchTasks();
-      const deployTask = tasks.find((task) => task.name === 'Print My Blog: Deploy Plugin to WordPress');
+      const deployTask = tasks.find((task) => task.name === 'AV-PvH Print Website: Deploy Plugin to WordPress');
 
       if (!deployTask) {
         void vscode.window.showErrorMessage(
-          'Could not find the task "Print My Blog: Deploy Plugin to WordPress".'
+          'Could not find the task "AV-PvH Print Website: Deploy Plugin to WordPress".'
         );
         return;
       }
@@ -55,7 +55,7 @@ function activate(context) {
         return;
       }
       await savePassword(context, password);
-      void vscode.window.showInformationMessage('Print My Blog admin password saved to VS Code SecretStorage.');
+      void vscode.window.showInformationMessage('AV-PvH Print Website admin password saved to VS Code SecretStorage.');
     })
   );
 
@@ -74,7 +74,7 @@ function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand('printmyblog.clearWpAdminPassword', async () => {
       await context.secrets.delete(SECRET_KEY);
-      void vscode.window.showInformationMessage('Print My Blog admin password removed from VS Code SecretStorage.');
+      void vscode.window.showInformationMessage('AV-PvH Print Website admin password removed from VS Code SecretStorage.');
     })
   );
 }

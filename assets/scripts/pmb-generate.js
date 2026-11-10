@@ -3,11 +3,11 @@ jQuery(document).ready(function () {
         event.preventDefault();
         var format_slug = event.currentTarget.getAttribute('data-format');
         var use_theme = event.currentTarget.getAttribute('data-use-theme');
-        var data = pmb_generate.generate_ajax_data;
-        data['pmb_use_theme'] = use_theme;
+        var data = avpvh_prwb_generate.generate_ajax_data;
+        data['avpvh_prwb_use_theme'] = use_theme;
         data.format = format_slug;
         jQuery.ajax({
-            url:pmb_generate.pmb_ajax,
+            url:avpvh_prwb_generate.avpvh_prwb_ajax,
             method:'POST',
             data:data,
             dataType:'json',
@@ -17,10 +17,10 @@ jQuery(document).ready(function () {
                     window.location.href = response.url;
                 }
             },
-            converters: pmb_jquery_ajax_converters,
+            converters: avpvh_prwb_jquery_ajax_converters,
         }).fail((jqXhr, text_message, text_status) => {
                 // the server dhould have already recorded the error
-                alert(pmb_generate.translations.error_generating);
+                alert(avpvh_prwb_generate.translations.error_generating);
             }
         );
     });
@@ -29,10 +29,10 @@ jQuery(document).ready(function () {
         jQuery('.pmb-downloading-test-pdf').show();
         event.preventDefault();
         var format = event.currentTarget.getAttribute('data-format');
-        pmb_open_modal(
+        avpvh_prwb_open_modal(
             '.pmb-download-preview-dialog-' + format,
         );
-        pmb_generate_doc(
+        avpvh_prwb_generate_doc(
             event.currentTarget,
             (download_url) => {
                 jQuery('.pmb-downloading-test-pdf').hide();
@@ -43,7 +43,7 @@ jQuery(document).ready(function () {
                 jQuery('.pmb-downloading-test-pdf').hide();
                 jQuery('.pmb-error-downloading-test-pdf').show();
                 if(error_message === 'Socket error downloading document content from supplied url.'){
-                    error_message = pmb_generate.translations.socket_error;
+                    error_message = avpvh_prwb_generate.translations.socket_error;
                 }
                 alert(error_message);
             }
@@ -55,7 +55,7 @@ jQuery(document).ready(function () {
         jQuery('.pmb-downloading-live-pdf').show();
         event.preventDefault();
 
-        pmb_generate_doc(
+        avpvh_prwb_generate_doc(
             event.currentTarget,
             (download_url) => {
                 // ok! reduce credits then
@@ -66,7 +66,7 @@ jQuery(document).ready(function () {
                     {
                         'method': 'POST',
                         'data':{
-                            'action':'pmb_reduce_credits'
+                            'action':'avpvh_prwb_reduce_credits'
                         }
                     }
                 );
@@ -78,7 +78,7 @@ jQuery(document).ready(function () {
                 jQuery('.pmb-downloading-live-pdf').hide();
                 jQuery('.pmb-error-downloading-test-pdf').show();
                 if(error_message === 'Socket error downloading document content from supplied url.'){
-                    error_message = pmb_generate.translations.socket_error;
+                    error_message = avpvh_prwb_generate.translations.socket_error;
                 }
                 alert(error_message);
             }
@@ -86,18 +86,18 @@ jQuery(document).ready(function () {
     });
 });
 
-function pmb_generate_doc(currentTarget, success_callback, failure_callback){
+function avpvh_prwb_generate_doc(currentTarget, success_callback, failure_callback){
     var format = currentTarget.getAttribute('data-format');
     var html_url = currentTarget.getAttribute('data-html-url');
     var is_preview = parseInt(currentTarget.getAttribute('data-preview'));
-    var use_middleman = parseInt(pmb_generate.use_pmb_central_for_previews) || ! is_preview;
+    var use_middleman = parseInt(avpvh_prwb_generate.use_avpvh_prwb_central_for_previews) || ! is_preview;
     if(use_middleman){
-        var authorization_data = pmb_generate.license_data;
+        var authorization_data = avpvh_prwb_generate.license_data;
     } else {
         var authorization_data = 'YOUR_API_KEY_HERE';
     }
 
-    var dynamic_doc_attrs = JSON.parse(JSON.stringify(pmb_generate.doc_attrs));
+    var dynamic_doc_attrs = JSON.parse(JSON.stringify(avpvh_prwb_generate.doc_attrs));
     // if this a preview, always override whether its a test request or not.
     if(is_preview){
         dynamic_doc_attrs.test = true;
@@ -124,7 +124,7 @@ function pmb_generate_doc(currentTarget, success_callback, failure_callback){
  * from https://stackoverflow.com/questions/4656843/get-querystring-from-url-using-jquery
  * @returns {[]}
  */
-function pmb_get_querystring_vars() {
+function avpvh_prwb_get_querystring_vars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for (var i = 0; i < hashes.length; i++) {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\strategies\normalization;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\normalization;
 
-use Twine\entities\FileSubmission;
-use Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\entities\FileSubmission;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 
 /**
  * FileNormalization
@@ -29,7 +29,7 @@ class FileNormalization extends NormalizationBase
             return $value_to_normalize;
         } else {
             throw new ValidationError(
-                esc_html__('The file input has an invalid format.', 'print-my-blog')
+                esc_html__('The file input has an invalid format.', 'avpvh-print-website')
             );
         }
     }

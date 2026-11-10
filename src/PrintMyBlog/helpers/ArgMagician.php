@@ -1,12 +1,12 @@
 <?php
 
-namespace PrintMyBlog\helpers;
+namespace Avpvh\PrintWebsite\helpers;
 
-use PrintMyBlog\entities\FileFormat;
+use Avpvh\PrintWebsite\entities\FileFormat;
 
 /**
  * Class ArgMagician
- * @package PrintMyBlog\helpers
+ * @package Avpvh\PrintWebsite\helpers
  */
 class ArgMagician
 {

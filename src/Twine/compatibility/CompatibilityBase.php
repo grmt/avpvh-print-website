@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\compatibility;
+namespace Avpvh\PrintWebsite\Twine\compatibility;
 
 /**
  * Class Base
@@ -28,4 +28,4 @@ abstract class CompatibilityBase
     }
 }
 // End of file Base.php
-// Location: Twine\compatibility/Base.php
+// Location: Avpvh\PrintWebsite\Twine\compatibility/Base.php

@@ -1,14 +1,14 @@
 <?php
 
-namespace PrintMyBlog\factories;
+namespace Avpvh\PrintWebsite\factories;
 
-use PrintMyBlog\entities\FileFormat;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\system\Context;
+use Avpvh\PrintWebsite\entities\FileFormat;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\system\Context;
 
 /**
  * Class ProjectGenerationFactory
- * @package PrintMyBlog\factories
+ * @package Avpvh\PrintWebsite\factories
  * Makes us some ProjectGeneration objects and makes sure their dependencies get injected.
  */
 class ProjectGenerationFactory
@@ -21,7 +21,7 @@ class ProjectGenerationFactory
     public function create(Project $project, FileFormat $format)
     {
         return Context::instance()->useNew(
-            'PrintMyBlog\entities\ProjectGeneration',
+            'Avpvh\PrintWebsite\entities\ProjectGeneration',
             [
                 $project,
                 $format,

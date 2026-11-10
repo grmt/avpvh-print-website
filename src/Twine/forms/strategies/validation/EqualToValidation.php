@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
 use EventEspresso\core\domain\services\factories\EmailAddressFactory;
 use EventEspresso\core\domain\services\validation\email\EmailValidationException;
@@ -33,7 +33,7 @@ class EqualToValidation extends TextValidation
         if (! $validation_error_message) {
             $validation_error_message = apply_filters(
                 'FH_EqualToValidation____construct__validation_error_message',
-                esc_html__('Fields do not match.', 'print-my-blog')
+                esc_html__('Fields do not match.', 'avpvh-print-website')
             );
         }
         parent::__construct($validation_error_message);

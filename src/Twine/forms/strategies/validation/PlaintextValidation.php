@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 
 /**
  * Class PlaintextValidation
@@ -24,7 +24,7 @@ class PlaintextValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = __('HTML tags are not permitted in this field', 'print-my-blog');
+            $validation_error_message = __('HTML tags are not permitted in this field', 'avpvh-print-website');
         }
         parent::__construct($validation_error_message);
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
-use PrintMyBlog\entities\SectionTemplate;
-use PrintMyBlog\system\Context;
+use Avpvh\PrintWebsite\entities\SectionTemplate;
+use Avpvh\PrintWebsite\system\Context;
 
 /**
  * Class SectionTemplateRegistry
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class SectionTemplateRegistry
 {
@@ -38,7 +38,7 @@ class SectionTemplateRegistry
      * @param string $slug
      * @param string[] $design_templates
      * @param callable $callback
-     * @throws \PrintMyBlog\exceptions\DesignTemplateDoesNotExist
+     * @throws \Avpvh\PrintWebsite\exceptions\DesignTemplateDoesNotExist
      */
     public function register($slug, $design_templates, $callback)
     {
@@ -76,13 +76,13 @@ class SectionTemplateRegistry
 
     /**
      * @param string $slug
-     * @param array $args_callback see PrintMyBlog\entities\SectionTemplate::__construct to see what should be passed in
+     * @param array $args_callback see Avpvh\PrintWebsite\entities\SectionTemplate::__construct to see what should be passed in
      * @return object
      */
     protected function createNew($slug, $args_callback)
     {
         $template = Context::instance()->useNew(
-            'PrintMyBlog\entities\SectionTemplate',
+            'Avpvh\PrintWebsite\entities\SectionTemplate',
             [
                 call_user_func($args_callback),
             ]

@@ -1,16 +1,16 @@
 <?php
 
-namespace Twine\forms\strategies\layout;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\layout;
 
-use Twine\forms\base\FormSectionBase;
-use Twine\forms\base\FormSectionDetails;
-use Twine\forms\base\FormSection;
-use Twine\forms\inputs\FormInputBase;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionBase;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionDetails;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * Class DetailsSummaryLayout
- * @package Twine\forms\strategies\layout
+ * @package Avpvh\PrintWebsite\Twine\forms\strategies\layout
  */
 class DetailsSummaryLayout extends FormSectionLayoutBase
 {
@@ -41,7 +41,7 @@ class DetailsSummaryLayout extends FormSectionLayoutBase
 
     /**
      * @return string
-     * @throws \Twine\forms\helpers\ImproperUsageException
+     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
      */
     public function layoutFormBegin()
     {
@@ -49,7 +49,7 @@ class DetailsSummaryLayout extends FormSectionLayoutBase
         if ($this->form_section instanceof FormSectionDetails) {
             $summary = $this->form_section->getSummary();
         } else {
-            $summary = __('Show Options', 'print-my-blog');
+            $summary = __('Show Options', 'avpvh-print-website');
         }
 
         return $this->displayFormWideErrors()

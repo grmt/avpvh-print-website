@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\services\filesystem;
+namespace Avpvh\PrintWebsite\Twine\services\filesystem;
 
 /**
  * Class Folder
- * @package Twine\services\filesystem
+ * @package Avpvh\PrintWebsite\Twine\services\filesystem
  */
 class Folder extends ThingOnServer
 {

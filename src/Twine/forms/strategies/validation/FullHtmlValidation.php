@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use Twine\forms\helpers\ValidationError;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * Class FullHtmlValidation
@@ -27,7 +27,7 @@ class FullHtmlValidation extends ValidationBase
         if (! $validation_error_message) {
             $validation_error_message = sprintf(
             // translators: 1: html for a line break, 2: list of allowed tags
-                __('You are using HTML that might be beyond your permission. Only the following HTML tags are allowed:%1$s%2$s, and the following attributes: %3$s. If you are using the style attribute, make sure you don’t end in a semicolon and remove whitespace between CSS properties (e.g. "style=\'color:red;height:12px\'")', 'print-my-blog'),
+                __('You are using HTML that might be beyond your permission. Only the following HTML tags are allowed:%1$s%2$s, and the following attributes: %3$s. If you are using the style attribute, make sure you don’t end in a semicolon and remove whitespace between CSS properties (e.g. "style=\'color:red;height:12px\'")', 'avpvh-print-website'),
                 '<br />',
                 $this->getListOfAllowedTags(),
                 $this->getListOfAllowedAttributes()
@@ -110,7 +110,7 @@ class FullHtmlValidation extends ValidationBase
                 'div' => $allowed_attributes,
             )
         );
-        return apply_filters('Twine\forms\strategies\validation\FullHtmlValidation::getAllowedTags', $tags_we_allow);
+        return apply_filters('Avpvh\PrintWebsite\Twine\forms\strategies\validation\FullHtmlValidation::getAllowedTags', $tags_we_allow);
     }
 
 

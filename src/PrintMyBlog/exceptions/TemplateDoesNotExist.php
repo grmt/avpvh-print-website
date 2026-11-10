@@ -1,12 +1,12 @@
 <?php
 
-namespace PrintMyBlog\exceptions;
+namespace Avpvh\PrintWebsite\exceptions;
 
 use Exception;
 
 /**
  * Class TemplateDoesNotExist
- * @package PrintMyBlog\exceptions
+ * @package Avpvh\PrintWebsite\exceptions
  */
 class TemplateDoesNotExist extends Exception
 {
@@ -19,7 +19,7 @@ class TemplateDoesNotExist extends Exception
         parent::__construct(
             sprintf(
                 // translators: %s: file path
-                __('Template file "%s" should exist but doesn\'t.', 'print-my-blog'),
+                __('Template file "%s" should exist but doesn\'t.', 'avpvh-print-website'),
                 $template_file
             )
         );

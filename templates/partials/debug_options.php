@@ -1,16 +1,16 @@
 <?php
 // Template to show the HTML for layout options
 /**
- * @var $print_options PrintMyBlog\domain\PrintOptions
- * @var $displayer Twine\services\display\FormInputs
+ * @var $print_options Avpvh\PrintWebsite\domain\PrintOptions
+ * @var $displayer Avpvh\PrintWebsite\Twine\services\display\FormInputs
  */
 
-use PrintMyBlog\domain\PrintOptions;
-use PrintMyBlog\services\display\FormInputs;
+use Avpvh\PrintWebsite\domain\PrintOptions;
+use Avpvh\PrintWebsite\services\display\FormInputs;
 
 ?>
 <details class="pmb-details">
-    <summary class="pmb-reveal-options"><?php esc_html_e('Troubleshooting Options','print-my-blog' );?></summary>
+    <summary class="pmb-reveal-options"><?php esc_html_e('Troubleshooting Options','avpvh-print-website' );?></summary>
     <div class="pmb-reveal-details">
         <table class="form-table">
             <tbody>

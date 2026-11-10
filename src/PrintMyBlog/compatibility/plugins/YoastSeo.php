@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
-use PrintMyBlog\system\CustomPostTypes;
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 
 /**
  * Class YoastSeo
- * @package PrintMyBlog\compatibility\plugins
+ * @package Avpvh\PrintWebsite\compatibility\plugins
  */
 class YoastSeo extends CompatibilityBase
 {
@@ -21,7 +21,7 @@ class YoastSeo extends CompatibilityBase
     }
 
     /**
-     * Filters the sitemap to remove pmb_content. See https://wordpress.org/support/topic/pmb_content-sitemap-xml/
+     * Filters the sitemap to remove avpvh_prwb_content. See https://wordpress.org/support/topic/avpvh_prwb_content-sitemap-xml/
      * @param array $links
      * @return array
      */

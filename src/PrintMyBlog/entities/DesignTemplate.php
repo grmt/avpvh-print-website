@@ -1,18 +1,18 @@
 <?php
 
-namespace PrintMyBlog\entities;
+namespace Avpvh\PrintWebsite\entities;
 
 use Exception;
-use PrintMyBlog\exceptions\TemplateDoesNotExist;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\managers\DesignManager;
-use PrintMyBlog\services\FileFormatRegistry;
-use PrintMyBlog\services\SectionTemplateRegistry;
-use Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\exceptions\TemplateDoesNotExist;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\managers\DesignManager;
+use Avpvh\PrintWebsite\services\FileFormatRegistry;
+use Avpvh\PrintWebsite\services\SectionTemplateRegistry;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
 
 /**
  * Class DesignTemplate
- * @package PrintMyBlog\entities
+ * @package Avpvh\PrintWebsite\entities
  */
 class DesignTemplate
 {
@@ -114,12 +114,12 @@ class DesignTemplate
      * @type string title sometimes shown to users
      * @type string format "print_pdf" or "digital_pdf"
      * @type string dir directory of the design (folder that ocntains its `functions.php`)
-     * @type callable design_form_callback returns \Twine\forms\base\FormSection to use on the "Customize Design" step
-     * @type callable project_form_callback returns a \Twine\forms\base\FormSection that will be merged with that of
+     * @type callable design_form_callback returns \Avpvh\PrintWebsite\Twine\forms\base\FormSection to use on the "Customize Design" step
+     * @type callable project_form_callback returns a \Avpvh\PrintWebsite\Twine\forms\base\FormSection that will be merged with that of
      * other designs used for the project on the "Edit Metadata" step.
      * @type string docs URL of documentation
      * @type string[] $supports can include 'front_matter', 'back_matter','part','volume','anthology'
-     * @type string[] $custom_templates includes slugs of custom templates registered with pmb_register_section_template()
+     * @type string[] $custom_templates includes slugs of custom templates registered with avpvh_prwb_register_section_template()
      * @type string $default_design_slug string of the default design that uses this design template
      * }
      */
@@ -390,10 +390,10 @@ class DesignTemplate
     public function divisionLabelSingular($level)
     {
         $display = [
-            __('article', 'print-my-blog'),
-            __('part', 'print-my-blog'),
-            __('volume', 'print-my-blog'),
-            __('anthology', 'print-my-blog'),
+            __('article', 'avpvh-print-website'),
+            __('part', 'avpvh-print-website'),
+            __('volume', 'avpvh-print-website'),
+            __('anthology', 'avpvh-print-website'),
         ];
         return $display[$level];
     }
@@ -421,7 +421,7 @@ class DesignTemplate
 
     /**
      * Adds the template to the list of custom template slugs used by this design template.
-     * It is assumed this custom template has already been registered with pmb_register_section_template()
+     * It is assumed this custom template has already been registered with avpvh_prwb_register_section_template()
      * @param string $custom_template_slug
      */
     public function addCustomTemplate($custom_template_slug)

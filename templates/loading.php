@@ -23,14 +23,14 @@
     <?php wp_head(); ?>
 </head>
 
-<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page pmb-format-' . $pmb_format))); ?>">
-<!-- Print My Blog Version <?php echo PMB_VERSION;?>-->
+<body class="<?php echo str_replace('has-sidebar', '', implode(' ',get_body_class('pmb-print-page pmb-format-' . $avpvh_prwb_format))); ?>">
+<!-- AV-PvH Print Website Version <?php echo AVPVH_PRWB_VERSION;?>-->
 <div class="pmb-waiting-message-fullpage pmb-extra-content">
     <div class="pmb-waiting-message-outer-container">
         <div class="pmb-window-buttons pmb-top-left pmb-small-instructions">
             <span class="pmb-loading-content">
                 <a href="javascript:history.back();">❌
-                    <?php esc_html_e('Cancel', 'print-my-blog'); ?>
+                    <?php esc_html_e('Cancel', 'avpvh-print-website'); ?>
                 </a>
             </span>
 
@@ -39,7 +39,7 @@
 
         <?php }?>
         <div class="pmb-waiting-area">
-            <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Generating...', 'print-my-blog'); ?></h1>
+            <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Generating...', 'avpvh-print-website'); ?></h1>
             <div class="pmb-spinner-container">
                 <div class="pmb-spinner"></div>
             </div>

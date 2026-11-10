@@ -1,14 +1,14 @@
 <?php
 
-namespace PrintMyBlog\orm\managers;
+namespace Avpvh\PrintWebsite\orm\managers;
 
-use PrintMyBlog\db\TableManager;
-use PrintMyBlog\orm\entities\ExternalResource;
+use Avpvh\PrintWebsite\db\TableManager;
+use Avpvh\PrintWebsite\orm\entities\ExternalResource;
 use stdClass;
 
 /**
  * Class ExternalResourceManager
- * @package PrintMyBlog\orm\managers
+ * @package Avpvh\PrintWebsite\orm\managers
  */
 class ExternalResourceManager
 {

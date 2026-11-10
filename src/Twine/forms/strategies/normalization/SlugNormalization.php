@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\forms\strategies\normalization;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\normalization;
 
 /**
  * SlugNormalization

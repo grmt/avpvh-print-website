@@ -1,14 +1,14 @@
 <?php
 
-namespace PrintMyBlog\domain;
+namespace Avpvh\PrintWebsite\domain;
 
-use PrintMyBlog\system\CustomPostTypes;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
 use WP_Error;
 use WP_Post;
 
 /**
  * Class DefaultProjectContents
- * @package PrintMyBlog\domain
+ * @package Avpvh\PrintWebsite\domain
  */
 class DefaultProjectContents
 {
@@ -37,15 +37,15 @@ class DefaultProjectContents
     protected function getDefaultContents()
     {
         return apply_filters(
-            'PrintMyBlog\domain\DefaultProjectContents->getDefaultContents()',
+            'Avpvh\PrintWebsite\domain\DefaultProjectContents->getDefaultContents()',
             [
                 'pmb-title-page' => [
-                    'post_title' => __('Title Page', 'print-my-blog'),
-                    'post_content' => '[pmb_title_page]',
+                    'post_title' => __('Title Page', 'avpvh-print-website'),
+                    'post_content' => '[avpvh_print_website_title_page]',
                 ],
                 'pmb-toc' => [
-                    'post_title' => __('Table of Contents', 'print-my-blog'),
-                    'post_content' => '[pmb_toc]',
+                    'post_title' => __('Table of Contents', 'avpvh-print-website'),
+                    'post_content' => '[avpvh_print_website_toc]',
                 ],
             ]
         );

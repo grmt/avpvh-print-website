@@ -1,6 +1,6 @@
 <?php
 
-namespace PrintMyBlog\domain;
+namespace Avpvh\PrintWebsite\domain;
 
 use Exception;
 
@@ -9,7 +9,7 @@ use Exception;
  *
  * Description
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         $VID:$
  *
@@ -53,12 +53,12 @@ class FrontendPrintSettings
         }
         $this->formats = array(
             'print' => array(
-                'admin_label' => esc_html__('Print', 'print-my-blog'),
-                'default' => esc_html__('Print 🖨', 'print-my-blog'),
+                'admin_label' => esc_html__('Print', 'avpvh-print-website'),
+                'default' => esc_html__('Print 🖨', 'avpvh-print-website'),
             ),
             'pdf' => array(
-                'admin_label' => esc_html__('PDF', 'print-my-blog'),
-                'default' => esc_html__('PDF 📄', 'print-my-blog'),
+                'admin_label' => esc_html__('PDF', 'avpvh-print-website'),
+                'default' => esc_html__('PDF 📄', 'avpvh-print-website'),
             ),
         );
         // Remove emojis if the database doesn't support it.
@@ -130,7 +130,7 @@ class FrontendPrintSettings
             throw new Exception(
                 sprintf(
                     // translators: %s: format slug
-                    __('Invalid format "%s".', 'print-my-blog'),
+                    __('Invalid format "%s".', 'avpvh-print-website'),
                     $format_slug
                 )
             );
@@ -392,4 +392,4 @@ class FrontendPrintSettings
     }
 }
 // End of file Settings.php
-// Location: PrintMyBlog\domain/Settings.php
+// Location: Avpvh\PrintWebsite\domain/Settings.php

@@ -1,14 +1,14 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\strategies\display\TextInputDisplay;
-use Twine\forms\strategies\normalization\TextNormalization;
-use Twine\forms\strategies\validation\PlaintextValidation;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\TextInputDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\TextNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\PlaintextValidation;
 
 /**
  * Class ColorInput
- * @package Twine\forms\inputs
+ * @package Avpvh\PrintWebsite\Twine\forms\inputs
  */
 class ColorInput extends FormInputBase
 {

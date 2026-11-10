@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
 /**
  * Class FloatValidation
@@ -22,7 +22,7 @@ class FloatValidation extends ValidationBase
         if (! $validation_error_message) {
             $validation_error_message = __(
                 'Only numeric characters, commas, periods, and spaces, please!',
-                'print-my-blog'
+                'avpvh-print-website'
             );
         }
         parent::__construct($validation_error_message);

@@ -1,16 +1,16 @@
 <?php
 
-namespace Twine\forms\base;
+namespace Avpvh\PrintWebsite\Twine\forms\base;
 
 use InvalidArgumentException;
-use Twine\forms\helpers\ImproperUsageException;
-use Twine\forms\helpers\ValidationError;
-use Twine\forms\inputs\FormInputBase;
-use Twine\forms\strategies\display\HiddenDisplay;
-use Twine\forms\strategies\layout\AdminTwoColumnLayout;
-use Twine\forms\strategies\layout\FormSectionLayoutBase;
-use Twine\forms\strategies\layout\TwoColumnLayout;
-use Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\HiddenDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\layout\AdminTwoColumnLayout;
+use Avpvh\PrintWebsite\Twine\forms\strategies\layout\FormSectionLayoutBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\layout\TwoColumnLayout;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
 
 /**
  * For containing info about a non-field form section, which contains other form sections/fields.
@@ -222,7 +222,7 @@ class FormSection extends FormSectionValidatable
                         'Subsection "%s" is not an instanceof FormSectionBase on form "%s". It is a "%s"',
                         $subsection_name,
                         get_class($this),
-                        $subsection ? get_class($subsection) : esc_html__('NULL', 'print-my-blog')
+                        $subsection ? get_class($subsection) : esc_html__('NULL', 'avpvh-print-website')
                     )
                 );
             }
@@ -491,7 +491,7 @@ class FormSection extends FormSectionValidatable
                     "Subsection '%s' is not an instanceof FormInputBase on form '%s'. It is a '%s'",
                     $name,
                     get_class($this),
-                    $subsection ? get_class($subsection) : esc_html__('NULL', 'print-my-blog')
+                    $subsection ? get_class($subsection) : esc_html__('NULL', 'avpvh-print-website')
                 )
             );
         }
@@ -650,8 +650,8 @@ class FormSection extends FormSectionValidatable
             // just enqueue the generic form scripts and initialize the form immediately in the JS
             self::wpEnqueueScripts(true);
         } else {
-            add_action('wp_enqueue_scripts', array('Twine\forms\base\FormSection', 'wpEnqueueScripts'));
-            add_action('admin_enqueue_scripts', array('Twine\forms\base\FormSection', 'wpEnqueueScripts'));
+            add_action('wp_enqueue_scripts', array('Avpvh\PrintWebsite\Twine\forms\base\FormSection', 'wpEnqueueScripts'));
+            add_action('admin_enqueue_scripts', array('Avpvh\PrintWebsite\Twine\forms\base\FormSection', 'wpEnqueueScripts'));
         }
         add_action('wp_footer', array($this, 'ensureScriptsLocalized'), 1);
         $this->enqueueAndLocalizeFormJs();
@@ -677,34 +677,34 @@ class FormSection extends FormSectionValidatable
     public static function wpEnqueueScripts($init_form_validation_automatically = true)
     {
         wp_register_script(
-            'twine-jquery-validate',
-            TWINE_SCRIPTS_URL . '/jquery.validate.min.js',
+            'avpvh-print-website-twine-jquery-validate',
+            AVPVH_PRWB_TWINE_SCRIPTS_URL . '/jquery.validate.min.js',
             array('jquery'),
-            filemtime(TWINE_SCRIPTS_DIR . 'jquery.validate.min.js')
+            filemtime(AVPVH_PRWB_TWINE_SCRIPTS_DIR . 'jquery.validate.min.js')
         );
         wp_register_script(
-            'twine-jquery-validate-additional-methods',
-            TWINE_SCRIPTS_URL . '/jquery.validate.additional-methods.min.js',
+            'avpvh-print-website-twine-jquery-validate-additional-methods',
+            AVPVH_PRWB_TWINE_SCRIPTS_URL . '/jquery.validate.additional-methods.min.js',
             array('jquery'),
-            filemtime(TWINE_SCRIPTS_DIR . 'jquery.validate.additional-methods.min.js')
+            filemtime(AVPVH_PRWB_TWINE_SCRIPTS_DIR . 'jquery.validate.additional-methods.min.js')
         );
         wp_enqueue_script(
-            'twine_form_section_validation',
-            TWINE_SCRIPTS_URL . '/form_section_validation.js',
-            array('twine-jquery-validate', 'jquery-ui-datepicker', 'twine-jquery-validate-additional-methods'),
-            filemtime(TWINE_SCRIPTS_DIR . 'form_section_validation.js'),
+            'avpvh-print-website-twine-form-section-validation',
+            AVPVH_PRWB_TWINE_SCRIPTS_URL . '/form_section_validation.js',
+            array('avpvh-print-website-twine-jquery-validate', 'jquery-ui-datepicker', 'avpvh-print-website-twine-jquery-validate-additional-methods'),
+            filemtime(AVPVH_PRWB_TWINE_SCRIPTS_DIR . 'form_section_validation.js'),
             true
         );
         wp_localize_script(
-            'twine_form_section_validation',
+            'avpvh-print-website-twine-form-section-validation',
             'twine_form_section_validation_init',
             array('init' => $init_form_validation_automatically ? '1' : '0')
         );
         wp_enqueue_style(
-            'twine-jquery-ui',
-            TWINE_STYLES_URL . '/jquery-ui-1.10.3.custom.css',
+            'avpvh-print-website-twine-jquery-ui',
+            AVPVH_PRWB_TWINE_STYLES_URL . '/jquery-ui-1.10.3.custom.css',
             [],
-            filemtime(TWINE_STYLES_DIR . 'jquery-ui-1.10.3.custom.css')
+            filemtime(AVPVH_PRWB_TWINE_STYLES_DIR . 'jquery-ui-1.10.3.custom.css')
         );
     }
 
@@ -718,17 +718,17 @@ class FormSection extends FormSectionValidatable
     {
         $this->ensureConstructFinalizedCalled();
         wp_enqueue_style(
-            'twine-forms',
-            TWINE_STYLES_URL . 'forms.css',
+            'avpvh-print-website-twine-forms',
+            AVPVH_PRWB_TWINE_STYLES_URL . 'forms.css',
             [],
-            filemtime(TWINE_STYLES_DIR . 'forms.css')
+            filemtime(AVPVH_PRWB_TWINE_STYLES_DIR . 'forms.css')
         );
         // actually, we don't want to localize just yet. There may be other forms on the page.
         // so we need to add our form section data to a static variable accessible by all form sections
         // and localize it just before the footer
         $this->localizeValidationRules();
-        add_action('wp_footer', array('Twine\forms\base\FormSection', 'localizeScriptForAllForms'), 2);
-        add_action('admin_footer', array('Twine\forms\base\FormSection', 'localizeScriptForAllForms'));
+        add_action('wp_footer', array('Avpvh\PrintWebsite\Twine\forms\base\FormSection', 'localizeScriptForAllForms'), 2);
+        add_action('admin_footer', array('Avpvh\PrintWebsite\Twine\forms\base\FormSection', 'localizeScriptForAllForms'));
     }
 
 
@@ -825,9 +825,9 @@ class FormSection extends FormSectionValidatable
         self::$js_localization['localized_error_messages'] = self::getLocalizedErrorMessages();
         $email_validation_level                                          = 'wp_default';
         self::$js_localization['email_validation_level']   = $email_validation_level;
-        wp_enqueue_script('twine_form_section_validation');
+        wp_enqueue_script('avpvh-print-website-twine-form-section-validation');
         wp_localize_script(
-            'twine_form_section_validation',
+            'avpvh-print-website-twine-form-section-validation',
             'twine_form_section_vars',
             self::$js_localization
         );
@@ -856,9 +856,9 @@ class FormSection extends FormSectionValidatable
         return array(
             'validUrl' => esc_html__(
                 'This is not a valid absolute URL. Eg, http://domain.com/monkey.jpg',
-                'print-my-blog'
+                'avpvh-print-website'
             ),
-            'regex'    => esc_html__('Please check your input', 'print-my-blog'),
+            'regex'    => esc_html__('Please check your input', 'avpvh-print-website'),
         );
     }
 
@@ -1345,7 +1345,7 @@ class FormSection extends FormSectionValidatable
     {
         $this->form_submission_success_message = ! empty($form_submission_success_message)
             ? $form_submission_success_message
-            : esc_html__('Form submitted successfully', 'print-my-blog');
+            : esc_html__('Form submitted successfully', 'avpvh-print-website');
     }
 
 
@@ -1486,11 +1486,11 @@ class FormSection extends FormSectionValidatable
                 } elseif ($form_section instanceof FormSectionValidatable) {
                     $label = $validation_error->getFormSection()->name();
                 } else {
-                    $label = esc_html__('Unknown', 'print-my-blog');
+                    $label = esc_html__('Unknown', 'avpvh-print-website');
                 }
                 $submission_error_messages[] = sprintf(
                     // translators: 1: input name, 2: validation error message
-                    __('%1$s : %2$s', 'print-my-blog'),
+                    __('%1$s : %2$s', 'avpvh-print-website'),
                     $label,
                     $validation_error->getMessage()
                 );

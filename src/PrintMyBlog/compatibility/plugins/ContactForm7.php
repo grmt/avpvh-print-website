@@ -1,12 +1,12 @@
 <?php
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 
 /**
  * Class ContactForm7
- * @package PrintMyBlog\compatibility\plugins
+ * @package Avpvh\PrintWebsite\compatibility\plugins
  */
 class ContactForm7 extends CompatibilityBase
 {
@@ -24,7 +24,7 @@ class ContactForm7 extends CompatibilityBase
     public function hideGoogleCaptchaBadge()
     {
         wp_add_inline_script(
-            'pmb_pro_page',
+            'avpvh-print-website-pro-page',
             '
             // Hide Google Recaptchas parent div because it adds an extra page to PDFs
             jQuery(document).ready(function(){

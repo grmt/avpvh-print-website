@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
-use Twine\forms\inputs\TextAreaInput;
-use Twine\forms\strategies\validation\FullHtmlValidation;
+use Avpvh\PrintWebsite\Twine\forms\inputs\TextAreaInput;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\FullHtmlValidation;
 
 /**
  * Class TextAreaDisplay
- * @package Twine\forms\strategies\display
+ * @package Avpvh\PrintWebsite\Twine\forms\strategies\display
  */
 class WysiwygDisplay extends TextAreaDisplay
 {

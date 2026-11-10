@@ -1,20 +1,20 @@
 <?php
 
-namespace PrintMyBlog\services\generators;
+namespace Avpvh\PrintWebsite\services\generators;
 
-use PrintMyBlog\entities\DesignTemplate;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\orm\entities\ProjectSection;
-use PrintMyBlog\services\ExternalResourceCache;
-use PrintMyBlog\system\CustomPostTypes;
-use Twine\services\filesystem\File;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\orm\entities\ProjectSection;
+use Avpvh\PrintWebsite\services\ExternalResourceCache;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
+use Avpvh\PrintWebsite\Twine\services\filesystem\File;
 use WP_Query;
 
 /**
  * Class HtmlBaseGenerator
  * Generators that create an HTML intermediary file.
- * @package PrintMyBlog\services\generators
+ * @package Avpvh\PrintWebsite\services\generators
  */
 abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
 {
@@ -25,8 +25,8 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     protected $file_writer;
 
     /**
-     * @global Project $pmb_project
-     * @global Design $pmb_design
+     * @global Project $avpvh_prwb_project
+     * @global Design $avpvh_prwb_design
      */
     protected function startGenerating()
     {
@@ -48,9 +48,9 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         parent::startGenerating();
         // Try to get enqueued after the theme, if we're doing that, so we get precedence.
         add_action('wp_enqueue_scripts', [$this, 'enqueueStylesAndScripts'], 1000);
-        do_action('pmb_pdf_generation_start', $this->project_generation, $this->design);
+        do_action('avpvh_prwb_pdf_generation_start', $this->project_generation, $this->design);
         add_filter('should_load_block_editor_scripts_and_styles', '__return_true');
-        add_action('pmb_pro_print_window', [$this, 'addPrintWindowToPage']);
+        add_action('avpvh_prwb_pro_print_window', [$this, 'addPrintWindowToPage']);
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT);
 
         wp_reset_postdata();
@@ -64,15 +64,15 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     {
         global $post;
         // determine which template to use, depending on the current section's height and how template specified
-        if ($post->pmb_section instanceof ProjectSection) {
-            $this->project_generation->setLastSection($post->pmb_section);
-            $template = $post->pmb_section->getTemplate();
+        if ($post->avpvh_prwb_section instanceof ProjectSection) {
+            $this->project_generation->setLastSection($post->avpvh_prwb_section);
+            $template = $post->avpvh_prwb_section->getTemplate();
             $template = $this->design->getDesignTemplate()->resolveSectionTemplateToUse($template);
             if ($template) {
                 $this->writeDesignTemplateInDivision($template);
             } else {
                 $this->writeDesignTemplateInDivision(
-                    pmb_map_section_to_division($post->pmb_section)
+                    avpvh_prwb_map_section_to_division($post->avpvh_prwb_section)
                 );
             }
         }
@@ -85,7 +85,7 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     protected function finishGenerating()
     {
         $this->writeDesignTemplateInDivision(DesignTemplate::IMPLIED_DIVISION_PROJECT, false);
-        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->finishGenerating', $this);
+        do_action('\Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase->finishGenerating', $this);
     }
 
     /**
@@ -184,7 +184,7 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         }
         while ($iterate_depth >= $current_depth) {
             $this->writeClosingForDesignTemplate(
-                pmb_map_section_to_division(
+                avpvh_prwb_map_section_to_division(
                     $previous_section
                 )
             );
@@ -193,7 +193,7 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         // take care of closing front_matter, main_matter, and back_matter
         if ($previous_section->getPlacement() !== $current_placement) {
             $this->writeClosingForDesignTemplate(
-                pmb_map_section_to_division($previous_section)
+                avpvh_prwb_map_section_to_division($previous_section)
             );
         }
     }
@@ -254,10 +254,10 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
         return add_query_arg(
             [
                 'ID' => $this->project->getWpPost()->ID,
-                'action' => \PrintMyBlog\controllers\Admin::SLUG_ACTION_EDIT_PROJECT,
-                'subaction' => \PrintMyBlog\entities\ProjectProgress::GENERATE_STEP,
+                'action' => \Avpvh\PrintWebsite\controllers\Admin::SLUG_ACTION_EDIT_PROJECT,
+                'subaction' => \Avpvh\PrintWebsite\entities\ProjectProgress::GENERATE_STEP,
             ],
-            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
         );
     }
 }

@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
     jQuery('.pmb-duplicate').click(function(){
-        return confirm(pmb_data.translations.confirm_duplicate);
+        return confirm(avpvh_prwb_data.translations.confirm_duplicate);
     });
 });

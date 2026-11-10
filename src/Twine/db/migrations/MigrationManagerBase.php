@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\db\migrations;
+namespace Avpvh\PrintWebsite\Twine\db\migrations;
 
-use Twine\system\RequestType;
-use Twine\system\VersionHistory;
+use Avpvh\PrintWebsite\Twine\system\RequestType;
+use Avpvh\PrintWebsite\Twine\system\VersionHistory;
 
 /**
  * Class MigrationManagerBase
- * @package Twine\db\migrations
+ * @package Avpvh\PrintWebsite\Twine\db\migrations
  */
 abstract class MigrationManagerBase
 {

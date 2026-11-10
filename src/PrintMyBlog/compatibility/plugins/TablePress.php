@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 use TablePress as TablePressInit;
 
 /**
  * Class TablePress
- * @package PrintMyBlog\compatibility\plugins
+ * @package Avpvh\PrintWebsite\compatibility\plugins
  */
 class TablePress extends CompatibilityBase
 {

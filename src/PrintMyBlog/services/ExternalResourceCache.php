@@ -1,16 +1,16 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
-use PrintMyBlog\orm\managers\ExternalResourceManager;
+use Avpvh\PrintWebsite\orm\managers\ExternalResourceManager;
 use stdClass;
-use Twine\services\filesystem\File;
-use Twine\services\filesystem\Folder;
+use Avpvh\PrintWebsite\Twine\services\filesystem\File;
+use Avpvh\PrintWebsite\Twine\services\filesystem\Folder;
 use WP_Error;
 
 /**
  * Class ExternalResourceCache
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class ExternalResourceCache
 {
@@ -51,7 +51,7 @@ class ExternalResourceCache
      */
     public function writeAndMapFile($external_url)
     {
-        if (! pmb_external_requests_enabled()) {
+        if (! avpvh_prwb_external_requests_enabled()) {
             $this->external_resouce_manager->map($external_url, null);
             return false;
         }
@@ -142,7 +142,7 @@ class ExternalResourceCache
     public function domainsToNotMap()
     {
         return apply_filters(
-            'PrintMyBlog\services\ExternalResourceCache->domainsToNotMap()',
+            'Avpvh\PrintWebsite\services\ExternalResourceCache->domainsToNotMap()',
             [
                 str_replace(['http://', 'https://'], '', site_url()),
                 '.wp.com',

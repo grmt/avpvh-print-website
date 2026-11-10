@@ -1,15 +1,15 @@
 <?php
 
-namespace PrintMyBlog\entities;
+namespace Avpvh\PrintWebsite\entities;
 
-use PrintMyBlog\services\DesignTemplateRegistry;
+use Avpvh\PrintWebsite\services\DesignTemplateRegistry;
 use Exception;
-use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
-use Twine\forms\helpers\ImproperUsageException;
+use Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException;
 
 /**
  * Class FileFormat
- * @package PrintMyBlog\entities
+ * @package Avpvh\PrintWebsite\entities
  */
 class FileFormat
 {
@@ -96,7 +96,7 @@ class FileFormat
         if (! isset($data['generator'])) {
             throw new ImproperUsageException(
                 // translators: %s format slug
-                __('No generator class specified for format "%s"', 'print-my-blog'),
+                __('No generator class specified for format "%s"', 'avpvh-print-website'),
                 $this->slug()
             );
         }
@@ -156,7 +156,7 @@ class FileFormat
     {
         $html = '<span class="pmb-emphasis" style="background-color:' . $this->color() . '">' . $this->titleAndIcon() . '</span>';
         if (! $this->supported() && $this->upsell()) {
-            $html .= pmb_pro_print_service_only($this->upsell());
+            $html .= avpvh_prwb_pro_print_service_only($this->upsell());
         }
         return $html;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
 /**
  *
@@ -47,28 +47,28 @@ class Select2Display extends SelectDisplay
         wp_deregister_style('select2');
         wp_register_script(
             'select2',
-            TWINE_SCRIPTS_URL . 'select2.min.js',
+            AVPVH_PRWB_TWINE_SCRIPTS_URL . 'select2.min.js',
             array(),
             '4.0.2',
             true
         );
         wp_register_style(
             'select2',
-            TWINE_STYLES_URL . 'select2.min.css',
+            AVPVH_PRWB_TWINE_STYLES_URL . 'select2.min.css',
             array(),
             '4.0.2',
             'all'
         );
         wp_enqueue_script(
             'form_section_select2_init',
-            TWINE_SCRIPTS_URL . 'form_section_select2_init.js',
+            AVPVH_PRWB_TWINE_SCRIPTS_URL . 'form_section_select2_init.js',
             array( 'select2' ),
             '1.0.0',
             true
         );
         wp_enqueue_style(
             'select2',
-            TWINE_STYLES_URL . 'select2.min.css',
+            AVPVH_PRWB_TWINE_STYLES_URL . 'select2.min.css',
             array(),
             '4.0.2',
             'all'

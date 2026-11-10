@@ -1,6 +1,6 @@
 <?php
 
-namespace mnelson4\rest_api_detector;
+namespace Avpvh\PrintWebsite\mnelson4\rest_api_detector;
 
 use WP_Error;
 
@@ -10,7 +10,7 @@ use WP_Error;
  * Finds the REST API base URL for the site requested. Works with both self-hosted sites and WordPress.com sites.
  *
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         $VID:$
  *
@@ -67,7 +67,7 @@ class RestApiDetector
      */
     public function getSiteInfo()
     {
-        if (! pmb_external_requests_enabled()) {
+        if (! avpvh_prwb_external_requests_enabled()) {
             $this->setName(get_bloginfo('name'));
             $this->setDescription(get_bloginfo('description'));
             $this->setRestApiUrl(get_rest_url());
@@ -107,7 +107,7 @@ class RestApiDetector
     protected function sanitizeSite($site)
     {
         // If the REST API Proxy Plugin isn't active, always use the current site.
-        if (! PMB_REST_PROXY_EXISTS) {
+        if (! AVPVH_PRWB_REST_PROXY_EXISTS) {
             return '';
         }
         if (empty($site)) {
@@ -184,7 +184,7 @@ class RestApiDetector
         $response_data = json_decode($response_body, true);
         if (! is_array($response_data)) {
             throw new RestApiDetectorError(
-                new WP_Error('no_json', __('The WordPress site has an error in its REST API data.', 'print-my-blog'))
+                new WP_Error('no_json', __('The WordPress site has an error in its REST API data.', 'avpvh-print-website'))
             );
         }
         if (isset($response_data['code'], $response_data['message'])) {
@@ -202,7 +202,7 @@ class RestApiDetector
         throw new RestApiDetectorError(
             new WP_Error(
                 'unknown_response',
-                __('The WordPress site responded with an unexpected response.', 'print-my-blog')
+                __('The WordPress site responded with an unexpected response.', 'avpvh-print-website')
             )
         );
     }

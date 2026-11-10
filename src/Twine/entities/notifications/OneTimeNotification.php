@@ -1,12 +1,12 @@
 <?php
 
-namespace Twine\entities\notifications;
+namespace Avpvh\PrintWebsite\Twine\entities\notifications;
 
-use Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
 
 /**
  * Class OneTimeNotification
- * @package Twine\entities\notifications
+ * @package Avpvh\PrintWebsite\Twine\entities\notifications
  */
 class OneTimeNotification
 {
@@ -26,7 +26,7 @@ class OneTimeNotification
 
     /**
      * OneTimeNotification constructor.
-     * @param array $options with keys 'type' (which is one of the constants on \Twine\entities\notifications\OneTimeNotification) and 'html' (sanitized HTML to dispplay to the user)
+     * @param array $options with keys 'type' (which is one of the constants on \Avpvh\PrintWebsite\Twine\entities\notifications\OneTimeNotification) and 'html' (sanitized HTML to dispplay to the user)
      */
     public function __construct($options)
     {
@@ -35,7 +35,7 @@ class OneTimeNotification
     }
 
     /**
-     * @param string $type matching one of the constants on \Twine\entities\notifications\OneTimeNotification
+     * @param string $type matching one of the constants on \Avpvh\PrintWebsite\Twine\entities\notifications\OneTimeNotification
      */
     protected function setType($type)
     {

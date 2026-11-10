@@ -1,20 +1,20 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
 use Exception;
-use PrintMyBlog\entities\DesignTemplate;
-use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\managers\DesignManager;
-use PrintMyBlog\system\CustomPostTypes;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
+use Avpvh\PrintWebsite\exceptions\DesignTemplateDoesNotExist;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\managers\DesignManager;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
 use WP_Post;
-use Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
 
 /**
  * Class DesignRegistry
  * For registering default designs to be created during activation.
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class DesignRegistry
 {
@@ -72,8 +72,8 @@ class DesignRegistry
      * @type string $url of the preview image
      * @type string $desc description of the preview image
      * }
-     * @type array $design_defaults which will be sent to design form via \Twine\forms\base\FormSection::populateDefaults
-     * @type array $project_defaults which will also be sent to the project metadata form via \Twine\forms\base\FormSection::populateDefaults
+     * @type array $design_defaults which will be sent to design form via \Avpvh\PrintWebsite\Twine\forms\base\FormSection::populateDefaults
+     * @type array $project_defaults which will also be sent to the project metadata form via \Avpvh\PrintWebsite\Twine\forms\base\FormSection::populateDefaults
      *
      * }
      * @throws Exception

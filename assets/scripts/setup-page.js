@@ -1,23 +1,23 @@
-function PmbSetupPage(pmb_instance_vars, translations) {
-	this.default_rest_url = pmb_instance_vars.default_rest_url;
-	this.ajax_url = pmb_instance_vars.ajax_url;
+function PmbSetupPage(avpvh_prwb_instance_vars, translations) {
+	this.default_rest_url = avpvh_prwb_instance_vars.default_rest_url;
+	this.ajax_url = avpvh_prwb_instance_vars.ajax_url;
 	this.proxy_for = '';
 	this.site_name = '';
-	this.spinner = jQuery(pmb_instance_vars.spinner_selector);
-	this.site_ok = jQuery(pmb_instance_vars.site_ok_selector);
-	this.site_bad = jQuery(pmb_instance_vars.site_bad_selector);
-	this.site_status = jQuery(pmb_instance_vars.site_status_selector);
-	this.dynamic_categories = jQuery(pmb_instance_vars.dynamic_categories_selector);
-	this.dynamic_categories_spinner = jQuery(pmb_instance_vars.dynamic_categories_spinner_selector);
-	this.post_type_selector = pmb_instance_vars.post_type_selector;
+	this.spinner = jQuery(avpvh_prwb_instance_vars.spinner_selector);
+	this.site_ok = jQuery(avpvh_prwb_instance_vars.site_ok_selector);
+	this.site_bad = jQuery(avpvh_prwb_instance_vars.site_bad_selector);
+	this.site_status = jQuery(avpvh_prwb_instance_vars.site_status_selector);
+	this.dynamic_categories = jQuery(avpvh_prwb_instance_vars.dynamic_categories_selector);
+	this.dynamic_categories_spinner = jQuery(avpvh_prwb_instance_vars.dynamic_categories_spinner_selector);
+	this.post_type_selector = avpvh_prwb_instance_vars.post_type_selector;
 	this.translations = translations;
 	this.taxonomies = {};
-	this.author = jQuery(pmb_instance_vars.author_selector);
-	this.nonce = pmb_instance_vars.nonce;
-	this.order_date = jQuery(pmb_instance_vars.order_date_selector);
-	this.order_menu = jQuery(pmb_instance_vars.order_menu_selector);
+	this.author = jQuery(avpvh_prwb_instance_vars.author_selector);
+	this.nonce = avpvh_prwb_instance_vars.nonce;
+	this.order_date = jQuery(avpvh_prwb_instance_vars.order_date_selector);
+	this.order_menu = jQuery(avpvh_prwb_instance_vars.order_menu_selector);
 
-	site_input = jQuery(pmb_instance_vars.site_input_selector);
+	site_input = jQuery(avpvh_prwb_instance_vars.site_input_selector);
 
 
 	this.init = function() {
@@ -75,7 +75,7 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 		this.site_ok.hide();
 
 		var data = {
-			'action': 'pmb_fetch_rest_api_url',
+			'action': 'avpvh_prwb_fetch_rest_api_url',
 			'site': site_url,
 			'_nonce': this.nonce
 		};
@@ -237,11 +237,11 @@ function PmbSetupPage(pmb_instance_vars, translations) {
 	};
 }
 
-var pmb_setup = null;
+var avpvh_prwb_setup = null;
 jQuery(document).ready(function () {
 	wp.api.loadPromise.done( function() {
-		// @var object pmb_setup_page
-        pmb_setup = new PmbSetupPage(pmb_setup_page.data, pmb_setup_page.translations);
-        pmb_setup.init();
+		// @var object avpvh_prwb_setup_page
+        avpvh_prwb_setup = new PmbSetupPage(avpvh_prwb_setup_page.data, avpvh_prwb_setup_page.translations);
+        avpvh_prwb_setup.init();
 	});
 });

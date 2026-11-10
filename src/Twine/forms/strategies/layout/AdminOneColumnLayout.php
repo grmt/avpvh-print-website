@@ -1,20 +1,20 @@
 <?php
 
-namespace Twine\forms\strategies\layout;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\layout;
 
 use Exception;
-use Twine\forms\base\FormSectionHtml;
-use Twine\forms\base\FormSection;
-use Twine\forms\inputs\FormInputBase;
-use Twine\forms\inputs\HiddenInput;
-use Twine\forms\strategies\display\AdminFileUploaderDisplay;
-use Twine\forms\strategies\display\TextAreaDisplay;
-use Twine\forms\strategies\display\TextInputDisplay;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionHtml;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\HiddenInput;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\AdminFileUploaderDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\TextAreaDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\TextInputDisplay;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * Class AdminOneColumnLayout
- * @package Twine\forms\strategies\layout
+ * @package Avpvh\PrintWebsite\Twine\forms\strategies\layout
  */
 class AdminOneColumnLayout extends FormSectionLayoutBase
 {

@@ -11,7 +11,7 @@ const { sprintf, __ } = wp.i18n;
 const PostTypeSwitcher = ( { children, className } ) => {
     return(
         <PluginPostStatusInfo>
-        <div dangerouslySetInnerHTML={{ __html: window.pmbBlockEditor.html }} />
+        <div dangerouslySetInnerHTML={{ __html: window.avpvhPrwbBlockEditor.html }} />
         </PluginPostStatusInfo>
 );
 };

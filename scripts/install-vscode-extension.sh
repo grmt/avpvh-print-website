@@ -59,4 +59,4 @@ if [[ -n "$WINDOWS_TARGET_BASE" && "$WINDOWS_TARGET_BASE" != "$PRIMARY_TARGET_BA
   install_target "$WINDOWS_TARGET_BASE"
 fi
 
-printf 'Reload VS Code, then run: Print My Blog: Save WP Admin Password\n'
+printf 'Reload VS Code, then run: AV-PvH Print Website: Save WP Admin Password\n'

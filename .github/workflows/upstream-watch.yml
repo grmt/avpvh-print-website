@@ -1,6 +1,6 @@
 name: Upstream watch
 
-# Print My Blog is maintained here as our own plugin. This keeps an eye on
+# AV-PvH Print Website is maintained here as our own plugin. This keeps an eye on
 # mnelson4/printmyblog: once a week it lists the upstream commits since
 # .github/upstream-reviewed in one open issue labelled "upstream".
 on:

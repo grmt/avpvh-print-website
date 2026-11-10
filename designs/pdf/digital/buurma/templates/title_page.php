@@ -1,15 +1,15 @@
 <?php
 /**
- * @var $pmb_project \PrintMyBlog\orm\entities\Project
- * @var $pmb_design \PrintMyBlog\orm\entities\Design
+ * @var $avpvh_prwb_project \Avpvh\PrintWebsite\orm\entities\Project
+ * @var $avpvh_prwb_design \Avpvh\PrintWebsite\orm\entities\Design
 *
  */
 ?>
 <div class="pmb-title-page">
-    <span class="buurma-issue"><?php $pmb_project->echoSetting('issue');?></span>
-        <h1 class="project-title"><?php $pmb_project->echoPublishedTitle(); ?></h1>
+    <span class="buurma-issue"><?php $avpvh_prwb_project->echoSetting('issue');?></span>
+        <h1 class="project-title"><?php $avpvh_prwb_project->echoPublishedTitle(); ?></h1>
 
-        <h2 class="project-byline"><?php $pmb_project->echoSetting('byline'); ?></h2>
-        <span class="project-date"><?php $pmb_project->echoSetting('date');?></span>
-    <div class="project-description"><?php $pmb_project->echoSetting('cover_preamble');?></div>
+        <h2 class="project-byline"><?php $avpvh_prwb_project->echoSetting('byline'); ?></h2>
+        <span class="project-date"><?php $avpvh_prwb_project->echoSetting('date');?></span>
+    <div class="project-description"><?php $avpvh_prwb_project->echoSetting('cover_preamble');?></div>
 </div>

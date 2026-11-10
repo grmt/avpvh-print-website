@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 
 /**
  * MaxLengthValidation
@@ -31,7 +31,7 @@ class MaxLengthValidation extends ValidationBase
         if ($validation_error_message === null) {
             $validation_error_message = sprintf(
                 // translators: 1: length requirement, a number
-                __('Input is too long. Maximum number of characters is %1$s', 'print-my-blog'),
+                __('Input is too long. Maximum number of characters is %1$s', 'avpvh-print-website'),
                 $max_length
             );
         }

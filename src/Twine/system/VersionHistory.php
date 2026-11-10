@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\system;
+namespace Avpvh\PrintWebsite\Twine\system;
 
 /**
  * Class VersionRecorder
  *
  * Keeps track of what version was last active, and the entire history of versions activated on this site.
  *
- * @package        Print My Blog
+ * @package        AV-PvH Print Website
  * @author         Mike Nelson
  * @since          $VID:$
  *

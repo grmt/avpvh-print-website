@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
-use Twine\forms\strategies\normalization\NormalizationBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\NormalizationBase;
 
 /**
  * Class SubmitInputDisplay

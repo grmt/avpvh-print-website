@@ -1,15 +1,15 @@
 <?php
 
-namespace PrintMyBlog\factories;
+namespace Avpvh\PrintWebsite\factories;
 
-use PrintMyBlog\entities\ProjectGeneration;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
-use PrintMyBlog\system\Context;
+use Avpvh\PrintWebsite\entities\ProjectGeneration;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase;
+use Avpvh\PrintWebsite\system\Context;
 
 /**
  * Class ProjectFileGeneratorFactory
- * @package PrintMyBlog\factories
+ * @package Avpvh\PrintWebsite\factories
  */
 class ProjectFileGeneratorFactory
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\strategies\normalization;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\normalization;
 
-use Twine\forms\helpers\ValidationError;
-use Twine\forms\strategies\validation\FloatValidation;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\FloatValidation;
 
 /**
  * FloatNormalization
@@ -41,7 +41,7 @@ class FloatNormalization extends NormalizationBase
             throw new ValidationError(
                 sprintf(
                     // translators: 1 submitted value, 2: expected type
-                    __('The value "%1$s" must be a string submitted for normalization, it was %2$s', 'print-my-blog'),
+                    __('The value "%1$s" must be a string submitted for normalization, it was %2$s', 'avpvh-print-website'),
                     // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
                     print_r($value_to_normalize, true),
                     gettype($value_to_normalize)

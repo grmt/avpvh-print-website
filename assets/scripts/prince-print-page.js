@@ -6,8 +6,8 @@ Prince.trackBoxes = true;
 // once the first pass of rendering is finished, let's make the "pmb-dynamic-resize" images take up the rest of the
 // page they're on. Prince will then need to re-render.
 Prince.registerPostLayoutFunc(function() {
-    pmb_continue_image_resizing();
-    pmb_extend_to_bottom();
+    avpvh_prwb_continue_image_resizing();
+    avpvh_prwb_extend_to_bottom();
 });
 
 /**
@@ -16,27 +16,27 @@ Prince.registerPostLayoutFunc(function() {
  * But if they're floating, the top-level block is a div which contains the figure (which floats).
  * The image's initial height effectively becomes the minimum height. The maximum height
  */
-function pmb_continue_image_resizing(){
+function avpvh_prwb_continue_image_resizing(){
     var resized_something = false;
 
     // To make this more efficient, grab the first image from each section followed by a pagebreak
-    if(pmb.page_per_post){
+    if(avpvh_prwb.page_per_post){
         var dynamic_resize_blocks = document.getElementsByClassName('pmb-section');
         for(var i=0; i<dynamic_resize_blocks.length; i++){
-            var resized_element = pmb_resize_an_image_inside(dynamic_resize_blocks[i]);
+            var resized_element = avpvh_prwb_resize_an_image_inside(dynamic_resize_blocks[i]);
             if(resized_element){
                 resized_something = true;
             }
         }
     } else {
-        if(pmb_resize_an_image_inside(document)){
+        if(avpvh_prwb_resize_an_image_inside(document)){
             resized_something = true;
         }
     }
 
 
     if(resized_something){
-        Prince.registerPostLayoutFunc(pmb_continue_image_resizing);
+        Prince.registerPostLayoutFunc(avpvh_prwb_continue_image_resizing);
     }
 }
 
@@ -46,7 +46,7 @@ function pmb_continue_image_resizing(){
  * @param element
  * @return boolean
  */
-function pmb_resize_an_image_inside(element){
+function avpvh_prwb_resize_an_image_inside(element){
     var dynamic_resize_blocks = element.getElementsByClassName("pmb-dynamic-resize");
 
     // just grab one block at a time because how the first image is resized will affect the subsequentn ones
@@ -93,7 +93,7 @@ function pmb_resize_an_image_inside(element){
                 footnotes_height = box_on_page['h'];
             }
         }
-        var max_allowable_height = pmb_px_to_pts(pmb.max_image_size);
+        var max_allowable_height = avpvh_prwb_px_to_pts(avpvh_prwb.max_image_size);
         // page_box.y is the distance from the top of the page to the bottom margin;
         // page_box.h is the distance from the bottom margin to the top margin
         // figure_box.y is the distance from the top of the page to the bottom-left corner of the figure
@@ -106,7 +106,7 @@ function pmb_resize_an_image_inside(element){
         // also gather the maximum heights from the original image
         var max_height_from_resolution_y_of_image = 100000;
         if('height' in figure_image.attributes){
-            max_height_from_resolution_y_of_image = pmb_px_to_pts(figure_image.attributes['height'].value);
+            max_height_from_resolution_y_of_image = avpvh_prwb_px_to_pts(figure_image.attributes['height'].value);
         }
 
         // resolution_height px     max_height pts
@@ -118,7 +118,7 @@ function pmb_resize_an_image_inside(element){
         }
         Log.info('IMG:' + figure_image.attributes['src'].value);
         Log.info(' page width:' + page_box.w);
-        Log.info('  pmb.max_image_size' + pmb.max_image_size);
+        Log.info('  avpvh_prwb.max_image_size' + avpvh_prwb.max_image_size);
         Log.info(' remaining_vertical_space ' + remaining_vertical_space + '(distance to bottom margin ' + page_box.y + ', figure bottom at ' + figure_box.y + ')');
         Log.info(' max_height_because_of_max_width' + max_height_because_of_max_width);
         Log.info(' max_height_from_resolution_y_of_image' + max_height_from_resolution_y_of_image);
@@ -170,8 +170,8 @@ function pmb_resize_an_image_inside(element){
     return a_dynamic_resize_block;
 }
 
-function pmb_extend_to_bottom(){
-    Log.info('pmb_extend_to_bottom');
+function avpvh_prwb_extend_to_bottom(){
+    Log.info('avpvh_prwb_extend_to_bottom');
     // find all elements that should extend to bottom
     var dynamic_resize_elements = document.getElementsByClassName('pmb-fill-remaining-height');
     if(dynamic_resize_elements.length){
@@ -181,8 +181,8 @@ function pmb_extend_to_bottom(){
         var element_box = element.getPrinceBoxes()[0];
         var page_box = PDF.pages[element_box.pageNum - 1];
         Log.info('element to resize');
-        pmb_print_props(element_box, 'element to resize box');
-        pmb_print_props(page_box, 'page box');
+        avpvh_prwb_print_props(element_box, 'element to resize box');
+        avpvh_prwb_print_props(page_box, 'page box');
         var remaining_vertical_space = element_box.y - (page_box.y - page_box.h) - 50;
         Log.info('resize to ' + remaining_vertical_space);
         // make the element fill that vertical height
@@ -190,7 +190,7 @@ function pmb_extend_to_bottom(){
         // remember not to do this one again
         element.className = element.className.replace(/pmb-fill-remaining-height/g, 'pmb-filled-remaining-height');
         // redraw and look again
-        Prince.registerPostLayoutFunc(pmb_extend_to_bottom);
+        Prince.registerPostLayoutFunc(avpvh_prwb_extend_to_bottom);
     } else {
         Log.info('nothing more to do');
     }
@@ -201,7 +201,7 @@ function pmb_extend_to_bottom(){
  * @param pixels
  * @returns {number}
  */
-function pmb_px_to_pts(pixels){
+function avpvh_prwb_px_to_pts(pixels){
     return pixels * (72 / 96);
 }
 
@@ -210,7 +210,7 @@ function pmb_px_to_pts(pixels){
  * @param obj
  * @param label
  */
-function pmb_print_props(obj, label){
+function avpvh_prwb_print_props(obj, label){
     Log.info(label);
     for(var prop in obj){
         var val = obj[prop];

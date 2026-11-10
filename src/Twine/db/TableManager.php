@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\db;
+namespace Avpvh\PrintWebsite\Twine\db;
 
 /**
  * Class TableManager
- * @package Twine\db
+ * @package Avpvh\PrintWebsite\Twine\db
  */
 abstract class TableManager
 {

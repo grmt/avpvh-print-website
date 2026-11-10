@@ -1,7 +1,7 @@
 <?php
 /**
- * @var $pmb_project \PrintMyBlog\orm\entities\Project
- * @var $pmb_design \PrintMyBlog\orm\entities\Design
+ * @var $avpvh_prwb_project \Avpvh\PrintWebsite\orm\entities\Project
+ * @var $avpvh_prwb_design \Avpvh\PrintWebsite\orm\entities\Design
  */
 ?>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
     <link rel="profile" href="http://gmpg.org/xfn/11">
-    <title><?php echo esc_html($pmb_project->getPublishedTitle()); ?></title>
+    <title><?php echo esc_html($avpvh_prwb_project->getPublishedTitle()); ?></title>
     <?php
     // @todo: we should instead render this after we've fetched all the posts and found all the scripts they depend on
     wp_head();

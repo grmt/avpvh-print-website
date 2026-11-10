@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\domain;
+namespace Avpvh\PrintWebsite\domain;
 
-use PrintMyBlog\system\Context;
+use Avpvh\PrintWebsite\system\Context;
 use WP_Post;
 
 /**
  * Class PrintButtons
- * @package PrintMyBlog\domain
+ * @package Avpvh\PrintWebsite\domain
  */
 class PrintButtons
 {
@@ -47,7 +47,7 @@ class PrintButtons
         /**
          * @var $url_generator PrintPageUrlGenerator
          */
-        $url_generator = Context::instance()->useNew('PrintMyBlog\domain\PrintPageUrlGenerator', [$post]);
+        $url_generator = Context::instance()->useNew('Avpvh\PrintWebsite\domain\PrintPageUrlGenerator', [$post]);
 
         $html = '<div class="pmb-print-this-page wp-block-button">';
         foreach ($this->print_settings->formats() as $slug => $settings) {

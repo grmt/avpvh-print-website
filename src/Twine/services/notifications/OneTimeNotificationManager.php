@@ -1,18 +1,18 @@
 <?php
 
-namespace Twine\services\notifications;
+namespace Avpvh\PrintWebsite\Twine\services\notifications;
 
-use Twine\entities\notifications\OneTimeNotification;
+use Avpvh\PrintWebsite\Twine\entities\notifications\OneTimeNotification;
 use WP_User;
 
 /**
  * Class OneTimeNotificationManager
  * Manages displaying messages to be shown once.
- * @package Twine\services\notifications
+ * @package Avpvh\PrintWebsite\Twine\services\notifications
  */
 class OneTimeNotificationManager
 {
-    const META_KEY = '_twine_ot_notifications';
+    const META_KEY = '_avpvh_prwb_twine_ot_notifications';
     /**
      * @var OneTimeNotification[]
      */
@@ -91,7 +91,7 @@ class OneTimeNotificationManager
     /**
      * Adds a one-time notification for any user.
      * @param WP_User $wp_user
-     * @param string $type constants on \Twine\entities\notifications\OneTimeNotification
+     * @param string $type constants on \Avpvh\PrintWebsite\Twine\entities\notifications\OneTimeNotification
      * @param string $html
      */
     public function addHtmlNotification($wp_user, $type, $html)
@@ -111,7 +111,7 @@ class OneTimeNotificationManager
 
     /**
      * Adds a one-time notification for the curren tuser
-     * @param string $type constants on \Twine\entities\notifications\OneTimeNotification
+     * @param string $type constants on \Avpvh\PrintWebsite\Twine\entities\notifications\OneTimeNotification
      * @param string $html
      */
     public function addHtmlNotificationForCurrentUser($type, $html)
@@ -121,7 +121,7 @@ class OneTimeNotificationManager
     }
 
     /**
-     * @param string $type constants on \Twine\entities\notifications\OneTimeNotification
+     * @param string $type constants on \Avpvh\PrintWebsite\Twine\entities\notifications\OneTimeNotification
      * @param string $html html to display
      */
     public function addTextNotificationForCurrentUser($type, $html)

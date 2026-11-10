@@ -1,12 +1,12 @@
 <?php
 
-namespace Twine\services\config;
+namespace Avpvh\PrintWebsite\Twine\services\config;
 
 use Exception;
 
 /**
  * Class Config
- * @package Twine\services\config
+ * @package Avpvh\PrintWebsite\Twine\services\config
  */
 abstract class Config
 {
@@ -112,7 +112,7 @@ abstract class Config
             throw new SettingNotDefinedException($setting_name);
         }
         return apply_filters(
-            '\Twine\services\config\Config::getSetting',
+            '\Avpvh\PrintWebsite\Twine\services\config\Config::getSetting',
             $this->settings[$setting_name],
             $setting_name,
             static::class,

@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \PrintMyBlog\orm\entities\Design $design
+ * @var \Avpvh\PrintWebsite\orm\entities\Design $design
  */
 ?>
 <div class="pmb-previews">

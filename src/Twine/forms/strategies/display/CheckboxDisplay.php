@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
 use Exception;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * Class CheckboxDisplay
@@ -32,7 +32,7 @@ class CheckboxDisplay extends CompoundInputDisplay
                     esc_html_x(
                         'Input values for checkboxes should be an array of values, but the value for input "%1$s" is "%2$s". Please verify that the input name is exactly "%3$s"',
                         'Input values for checkboxes should be an array of values, but the value for input "form-input-id" is "form-input-value". Please verify that the input name is exactly "form_input_name[]"',
-                        'print-my-blog'
+                        'avpvh-print-website'
                     ),
                     $input->htmlId(),
                     // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export

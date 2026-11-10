@@ -1,8 +1,8 @@
 <?php
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 
 /**
  * Class EasyFootnotes
@@ -12,7 +12,7 @@ use Twine\compatibility\CompatibilityBase;
  * See https://wordpress.org/support/topic/showing-footnotes-in-rest-api/ where I suggested a fix in
  * their plugin, but so far it hasn't been implemented.
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         2.1.4
  *
@@ -76,4 +76,4 @@ class EasyFootnotes extends CompatibilityBase
     }
 }
 // End of file EasyFootnotes.php
-// Location: PrintMyBlog\compatibility\plugins/EasyFootnotes.php
+// Location: Avpvh\PrintWebsite\compatibility\plugins/EasyFootnotes.php

@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 
 /**
  * Class GoogleLanguageTranslator
  * Plugin file: https://wordpress.org/plugins/gtranslate/
- * @package PrintMyBlog\compatibility\plugins
+ * @package Avpvh\PrintWebsite\compatibility\plugins
  */
 class GoogleLanguageTranslator extends CompatibilityBase
 {

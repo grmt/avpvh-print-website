@@ -1,9 +1,9 @@
 <?php
 
-namespace PrintMyBlog\db;
+namespace Avpvh\PrintWebsite\db;
 
-use PrintMyBlog\system\CustomPostTypes;
-use Twine\orm\managers\PostWrapperManager;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
+use Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager;
 use WP_Query;
 
 /**
@@ -11,7 +11,7 @@ use WP_Query;
  *
  * Description
  *
- * @package        Print My Blog
+ * @package        AV-PvH Print Website
  * @author         Mike Nelson
  * @since          $VID:$
  *

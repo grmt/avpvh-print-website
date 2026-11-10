@@ -1,14 +1,14 @@
 <?php
 
-use PrintMyBlog\controllers\Admin;
-use PrintMyBlog\orm\entities\Project;
+use Avpvh\PrintWebsite\controllers\Admin;
+use Avpvh\PrintWebsite\orm\entities\Project;
 /**
  * @var Project|null $project
  * @var bool $show_back
  * @var string $current_step
  * @var array $steps_to_urls
  */
-pmb_render_template('partials/pro_header.php');
+avpvh_prwb_render_template('partials/pro_header.php');
 ?>
 <div id="pmb-wizard-progress" class="pmb-progress">
 <?php

@@ -1,33 +1,33 @@
 <?php
 
-namespace PrintMyBlog\controllers;
+namespace Avpvh\PrintWebsite\controllers;
 
-use mnelson4\rest_api_detector\RestApiDetector;
-use mnelson4\rest_api_detector\RestApiDetectorError;
-use PrintMyBlog\db\PostFetcher;
-use PrintMyBlog\entities\ProjectGeneration;
-use PrintMyBlog\entities\ProjectProgress;
-use PrintMyBlog\orm\managers\ProjectManager;
-use PrintMyBlog\services\ExternalResourceCache;
-use PrintMyBlog\services\FileFormatRegistry;
-use PrintMyBlog\services\PmbCentral;
-use PrintMyBlog\system\Context;
-use PrintMyBlog\system\CustomPostTypes;
-use Twine\controllers\BaseController;
-use Twine\helpers\Array2;
-use Twine\orm\managers\PostWrapperManager;
-use Twine\services\filesystem\File;
+use Avpvh\PrintWebsite\mnelson4\rest_api_detector\RestApiDetector;
+use Avpvh\PrintWebsite\mnelson4\rest_api_detector\RestApiDetectorError;
+use Avpvh\PrintWebsite\db\PostFetcher;
+use Avpvh\PrintWebsite\entities\ProjectGeneration;
+use Avpvh\PrintWebsite\entities\ProjectProgress;
+use Avpvh\PrintWebsite\orm\managers\ProjectManager;
+use Avpvh\PrintWebsite\services\ExternalResourceCache;
+use Avpvh\PrintWebsite\services\FileFormatRegistry;
+use Avpvh\PrintWebsite\services\PmbCentral;
+use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
+use Avpvh\PrintWebsite\Twine\controllers\BaseController;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager;
+use Avpvh\PrintWebsite\Twine\services\filesystem\File;
 use WP_Error;
 use WP_Post_Type;
 use WP_Query;
-use PrintMyBlog\orm\entities\Project;
+use Avpvh\PrintWebsite\orm\entities\Project;
 
 /**
  * Class PmbAjax
  *
  * Handles AJAX requests
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         1.0.0
  *
@@ -50,7 +50,7 @@ class Ajax extends BaseController
     /**
      * @var PmbCentral
      */
-    protected $pmb_central;
+    protected $avpvh_prwb_central;
     /**
      * @var PostWrapperManager
      */
@@ -65,7 +65,7 @@ class Ajax extends BaseController
      * @param ProjectManager $project_manager
      * @param FileFormatRegistry $format_registry
      * @param PostFetcher $post_fetcher
-     * @param PmbCentral $pmb_central
+     * @param PmbCentral $avpvh_prwb_central
      * @param PostWrapperManager $post_manager
      * @param ExternalResourceCache $external_resource_map
      */
@@ -73,14 +73,14 @@ class Ajax extends BaseController
         ProjectManager $project_manager,
         FileFormatRegistry $format_registry,
         PostFetcher $post_fetcher,
-        PmbCentral $pmb_central,
+        PmbCentral $avpvh_prwb_central,
         PostWrapperManager $post_manager,
         ExternalResourceCache $external_resource_map
     ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
         $this->post_fetcher = $post_fetcher;
-        $this->pmb_central = $pmb_central;
+        $this->avpvh_prwb_central = $avpvh_prwb_central;
         $this->post_manager = $post_manager;
         $this->external_resouce_cache = $external_resource_map;
     }
@@ -92,22 +92,22 @@ class Ajax extends BaseController
     public function setHooks()
     {
         $this->addUnauthenticatedCallback(
-            'pmb_fetch_external_resource',
+            'avpvh_prwb_fetch_external_resource',
             'handleFetchExternalResource'
         );
         $this->addUnauthenticatedCallback(
-            'pmb_fetch_rest_api_url',
+            'avpvh_prwb_fetch_rest_api_url',
             'handleFetchRestApiUrl'
         );
         $this->addUnauthenticatedCallback(
-            'pmb_project_status',
+            'avpvh_prwb_project_status',
             'handleProjectStatus'
         );
-        add_action('wp_ajax_pmb_post_search', [$this, 'handlePostSearch']);
-        add_action('wp_ajax_pmb_add_print_material', [$this, 'addPrintMaterial']);
-        add_action('wp_ajax_pmb_reduce_credits', [$this, 'reduceCredits']);
-        add_action('wp_ajax_pmb_report_error', [$this, 'reportError']);
-        add_action('wp_ajax_pmb_duplicate_print_material', [$this, 'duplicatePrintMaterial']);
+        add_action('wp_ajax_avpvh_prwb_post_search', [$this, 'handlePostSearch']);
+        add_action('wp_ajax_avpvh_prwb_add_print_material', [$this, 'addPrintMaterial']);
+        add_action('wp_ajax_avpvh_prwb_reduce_credits', [$this, 'reduceCredits']);
+        add_action('wp_ajax_avpvh_prwb_report_error', [$this, 'reportError']);
+        add_action('wp_ajax_avpvh_prwb_duplicate_print_material', [$this, 'duplicatePrintMaterial']);
     }
 
     /**
@@ -127,7 +127,7 @@ class Ajax extends BaseController
     public function handleFetchRestApiUrl()
     {
         try {
-            // Use nonce set in \PrintMyBlog\controllers\Common::registerCommonStuff() and passed in setup-page.js's PmbSetupPage::updateRestApiUrl
+            // Use nonce set in \Avpvh\PrintWebsite\controllers\Common::registerCommonStuff() and passed in setup-page.js's PmbSetupPage::updateRestApiUrl
             if (! isset($_POST['_nonce']) || ! wp_verify_nonce(sanitize_key($_POST['_nonce']), 'wp_rest')) {
                 wp_send_json_error(
                     [
@@ -171,7 +171,7 @@ class Ajax extends BaseController
             return;
         }
         // report errors please
-        if ( defined('PMB_DEBUG') ? PMB_DEBUG : false ) {
+        if ( defined('AVPVH_PRWB_DEBUG') ? AVPVH_PRWB_DEBUG : false ) {
             // We want to see errors, so make sure they're set to display.
             // phpcs:disable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
             error_reporting(E_ALL);
@@ -215,7 +215,7 @@ class Ajax extends BaseController
                 <?php
                 esc_html_e(
                     'Nonce failure. Please refresh the page.',
-                    'print-my-blog'
+                    'avpvh-print-website'
                 );
                 ?>
             </div>
@@ -303,10 +303,10 @@ class Ajax extends BaseController
         if (! empty($_GET['pmb-order'])) {
             $query_params['order'] = $_GET['pmb-order'] === 'ASC' ? 'ASC' : 'DESC';
         }
-        $posts = get_posts(apply_filters('\PrintMyBlog\controllers\Ajax->handlePostSearch $query_params', $query_params));
-        $posts = apply_filters('\PrintMyBlog\controllers\Ajax->handlePostSearch $posts', $posts, $query_params);
+        $posts = get_posts(apply_filters('\Avpvh\PrintWebsite\controllers\Ajax->handlePostSearch $query_params', $query_params));
+        $posts = apply_filters('\Avpvh\PrintWebsite\controllers\Ajax->handlePostSearch $posts', $posts, $query_params);
         foreach ($posts as $post) {
-            pmb_content_item($post, $project, 0);
+            avpvh_prwb_content_item($post, $project, 0);
         }
         if ($requested_posts === count($posts)) {
             ?>
@@ -316,7 +316,7 @@ class Ajax extends BaseController
                         tabindex="0" id="pmb-load-more"
                         data-page="<?php echo esc_attr($page + 1); ?>"><span
                             class="dashicons dashicons-arrow-down-alt"></span>
-                    <?php esc_html_e('Show more...', 'print-my-blog'); ?>
+                    <?php esc_html_e('Show more...', 'avpvh-print-website'); ?>
                 </div>
             </div>
             <?php
@@ -326,7 +326,7 @@ class Ajax extends BaseController
                 <?php
                 esc_html_e(
                     'No results. Try changing your search and filter criteria.',
-                    'print-my-blog'
+                    'avpvh-print-website'
                 );
                 ?>
             </div>
@@ -344,15 +344,15 @@ class Ajax extends BaseController
             return wp_send_json_error(
                 [
                     'code' => 'nonce_failure',
-                    'message' => __('Nonce failure', 'print-my-blog'),
+                    'message' => __('Nonce failure', 'avpvh-print-website'),
                 ]
             );
         }
-        if (! current_user_can('publish_pmb_contents')) {
+        if (! current_user_can('publish_avpvh_prwb_contents')) {
             return wp_send_json_error(
                 [
                     'code' => 'unauthorized',
-                    'message' => __('You do not have sufficient permissions to do this.', 'print-my-blog'),
+                    'message' => __('You do not have sufficient permissions to do this.', 'avpvh-print-website'),
                 ]
             );
         }
@@ -368,7 +368,7 @@ class Ajax extends BaseController
         );
         $post = get_post($post_id);
         ob_start();
-        pmb_content_item($post, $project);
+        avpvh_prwb_content_item($post, $project);
         $html = ob_get_clean();
         wp_send_json_success(
             [
@@ -388,15 +388,15 @@ class Ajax extends BaseController
             return wp_send_json_error(
                 [
                     'code' => 'nonce_failure',
-                    'message' => __('Nonce failure', 'print-my-blog'),
+                    'message' => __('Nonce failure', 'avpvh-print-website'),
                 ]
             );
         }
-        if (! current_user_can('publish_pmb_contents')) {
+        if (! current_user_can('publish_avpvh_prwb_contents')) {
             return wp_send_json_error(
                 [
                     'code' => 'unauthorized',
-                    'message' => __('You do not have sufficient permissions to do this.', 'print-my-blog'),
+                    'message' => __('You do not have sufficient permissions to do this.', 'avpvh-print-website'),
                 ]
             );
         }
@@ -405,7 +405,7 @@ class Ajax extends BaseController
         $project = $this->project_manager->getById($project_id);
         $wrapped_post = $this->post_manager->getById($post_id);
         // check if a duplicate was already made
-        $print_materials = $this->post_manager->getByPostMeta('_pmb_original_post', (string)$post_id, 1);
+        $print_materials = $this->post_manager->getByPostMeta('_avpvh_prwb_original_post', (string)$post_id, 1);
         if ($print_materials) {
             $print_material = reset($print_materials);
             $print_material_post = $print_material->getWpPost();
@@ -413,7 +413,7 @@ class Ajax extends BaseController
             $print_material_post = $wrapped_post->duplicateAsPrintMaterial();
         }
         ob_start();
-        pmb_content_item($print_material_post, $project);
+        avpvh_prwb_content_item($print_material_post, $project);
         $html = ob_get_clean();
         wp_send_json_success(
             [
@@ -430,15 +430,15 @@ class Ajax extends BaseController
      */
     public function reduceCredits()
     {
-        if (! check_admin_referer('pmb_pro_page')) {
+        if (! check_admin_referer('avpvh_prwb_pro_page')) {
             return wp_send_json_error(
                 [
                     'code' => 'nonce_failure',
-                    'message' => __('Nonce failure', 'print-my-blog'),
+                    'message' => __('Nonce failure', 'avpvh-print-website'),
                 ]
             );
         }
-        $updated_credit_info = $this->pmb_central->reduceCredits();
+        $updated_credit_info = $this->avpvh_prwb_central->reduceCredits();
         wp_send_json_success(
             $updated_credit_info
         );
@@ -450,11 +450,11 @@ class Ajax extends BaseController
      */
     public function reportError()
     {
-        if (! check_admin_referer('pmb_pro_page')) {
+        if (! check_admin_referer('avpvh_prwb_pro_page')) {
             return wp_send_json_error(
                 [
                     'code' => 'nonce_failure',
-                    'message' => __('Nonce failure', 'print-my-blog'),
+                    'message' => __('Nonce failure', 'avpvh-print-website'),
                 ]
             );
         }
@@ -495,8 +495,8 @@ class Ajax extends BaseController
     {
         // check print page nonce. Access to the print page is only shared with authorized users and necessary external
         // services. So it acts as a temporary access token.
-        $valid_nonce = check_admin_referer('pmb_pro_page', '_pmb_nonce');
-        $authorized = current_user_can('edit_pmb_projects');
+        $valid_nonce = check_admin_referer('avpvh_prwb_pro_page', '_avpvh_prwb_nonce');
+        $authorized = current_user_can('edit_avpvh_prwb_projects');
         if (
             $valid_nonce
             && $authorized

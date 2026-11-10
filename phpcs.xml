@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Print My Blog Ruleset">
-    <description>Print My Blogs src directory follows PSR 12</description>
+<ruleset name="AV-PvH Print Website Ruleset">
+    <description>AV-PvH Print Websites src directory follows PSR 12</description>
 
     <file>src/</file>
     <exclude-pattern>src/Twine/admin/news/DashboardNews.php</exclude-pattern>

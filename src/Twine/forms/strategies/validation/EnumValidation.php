@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use Twine\forms\helpers\ImproperUsageException;
-use Twine\forms\helpers\ValidationError;
-use Twine\forms\inputs\FormInputWithOptionsBase;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputWithOptionsBase;
 
 /**
  * Class EnumValidation
@@ -30,7 +30,7 @@ class EnumValidation extends ValidationBase
         parent::validate($normalized_value);
         if (! $this->input instanceof FormInputWithOptionsBase) {
             throw new ImproperUsageException(
-                __('Cannot use Enum Validation Strategy with an input that doesn\'t have options', 'print-my-blog')
+                __('Cannot use Enum Validation Strategy with an input that doesn\'t have options', 'avpvh-print-website')
             );
         }
         $enum_options = $this->input->flatOptions();
@@ -61,7 +61,7 @@ class EnumValidation extends ValidationBase
             $enum_options = $this->input instanceof FormInputWithOptionsBase ? $this->input->flatOptions() : '';
             return sprintf(
                 // translators: 1: list of options.
-                __('This is not allowed option. Allowed options are %s.', 'print-my-blog'),
+                __('This is not allowed option. Allowed options are %s.', 'avpvh-print-website'),
                 implode(', ', $enum_options)
             );
         } else {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PrintMyBlog\system;
+namespace Avpvh\PrintWebsite\system;
 
 use WP_Post_Type;
 
@@ -9,7 +9,7 @@ use WP_Post_Type;
  *
  * Description
  *
- * @package        Print My Blog
+ * @package        AV-PvH Print Website
  * @author         Mike Nelson
  * @since          $VID:$
  *
@@ -35,9 +35,9 @@ class Capabilities
     public function grantCapabilities()
     {
         $post_types = get_post_types([], 'objects');
-        $pmb_post_types = $this->custom_post_types->getPostTypes();
+        $avpvh_prwb_post_types = $this->custom_post_types->getPostTypes();
         foreach ($post_types as $post_type) {
-            if ($post_type instanceof WP_Post_Type && in_array($post_type->name, $pmb_post_types, true)) {
+            if ($post_type instanceof WP_Post_Type && in_array($post_type->name, $avpvh_prwb_post_types, true)) {
                 $this->grantCapsForCPT($post_type);
             }
         }

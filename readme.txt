@@ -1,4 +1,4 @@
-=== Print My Blog - Print, PDF, & eBook Converter WordPress Plugin ===
+=== AV-PvH Print Website ===
 Contributors: mnelson4, ryanvdk, szepeviktor, printmybl0g
 Tags: print, PDF, backup, eBook, print button
 Requires at least: 7.1
@@ -7,7 +7,7 @@ Requires PHP: 8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.18.2
+Stable tag: 4.0.0
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 
@@ -15,7 +15,7 @@ Make printing your blog easy and impressive. For you & your visitors. One post o
 
 **Offline publishing for you, site visitors, and the world outside WordPress.**
 
-Print My Blog makes WordPress content useful outside of your website, like in print, PDFs, and other formats. It has 3 main features:
+AV-PvH Print Website makes WordPress content useful outside of your website, like in print, PDFs, and other formats. It has 3 main features:
 
 1. Quick Print: print thousands of posts in a few clicks
 2. Print Buttons: let site visitors print individual posts
@@ -55,7 +55,7 @@ https://youtu.be/shOjx-Ijung
 * optionally removes hyperlinks
 * optionally includes post excerpts
 * orders posts by date, and pages by the "order" attribute
-* place the “Print My Blog” Gutenberg block on a page and allow site visitors to print your blog too
+* place the “AV-PvH Print Website” Gutenberg block on a page and allow site visitors to print your blog too
 * no watermark in print-out, and attribution optional,
 * [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) compliant (no data is collected about you or your visitors)
 * free, open-source software, so you can use it for whatever you like without fear of changing terms of use,
@@ -73,13 +73,13 @@ https://www.youtube.com/watch?v=rvSo9NCOIX0
 **Print Button Features**
 
 * prints individual posts and/or pages just like Quick Print (e.g. omits the theme's header, sidebars, footer, etc.)
-* displays on all posts and/or pages, or specific ones using the shortcode `[pmb_print_buttons]`
+* displays on all posts and/or pages, or specific ones using the shortcode `[avpvh_print_website_print_buttons]`
 * enable buttons for print, PDF, and/or eBook
 * customize print output settings for each (using the same print settings from Quick Print)
-* place buttons above or below content, or somewhere in-between using the shortcode `[pmb_print_buttons]`
+* place buttons above or below content, or somewhere in-between using the shortcode `[avpvh_print_website_print_buttons]`
 * customize print button text (e.g. "Print", "Imprimir", or just a print emoji like 🖨)
 * buttons use theme's design
-* make more seamless integration with your design or content using the shortcode `[pmb_print_page_url]` to just get the URL of the print page ([see this FAQ for more details](https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20show%20the%20print%20buttons%20on%20posts%20or%20pages%3F))
+* make more seamless integration with your design or content using the shortcode `[avpvh_print_website_print_page_url]` to just get the URL of the print page ([see this FAQ for more details](https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20show%20the%20print%20buttons%20on%20posts%20or%20pages%3F))
 
 = Pro Print =
 Replace Google Docs and Microsoft Word with WordPress! Turn existing posts, pages, and custom post types—or write all new print materials—into professional-looking documents that are ready to share with customers and the world.
@@ -95,7 +95,7 @@ Example uses:
 * **new book from scratch**. Write new print-only materials that never appear on your website. Leverage WordPress' great editors and other plugins.
 * **lead magnets**. Compile content on a subject into a PDF and grant access after users signup for your email list.
 * **members-only content**. Combine with Restrict Content Pro or other plugins to only allow access to select downloadable PDFs of your content.
-* **printed course materials**. Create a course using an LMS (learning management system) plugin, and use Print My Blog for learners to print.
+* **printed course materials**. Create a course using an LMS (learning management system) plugin, and use AV-PvH Print Website for learners to print.
 * **event brochure**. Let event attendees print a useful copy of your event's details to take with them.
 * **printed user manual**. And digital user manual on the website.
 * **product brochure**. Use WooCommerce or other WordPress e-commerce plugins to make content accessible to those who would rather not browse online.
@@ -137,11 +137,11 @@ Some designs have features like:
 
 Read more about Pro Print in our [extensive user guide](https://printmy.blog/user-guide/).
 
-Wanna See it in Action? [Try Print My Blog on a Free Test Site Now](https://tastewp.com/plugins/print-my-blog)
+Wanna See it in Action? [Try AV-PvH Print Website on a Free Test Site Now](https://tastewp.com/plugins/print-my-blog)
 
 **Translations**
 
-Print My Blog includes translation files in the following languages:
+AV-PvH Print Website includes translation files in the following languages:
 
 * German
 * French
@@ -165,7 +165,7 @@ PMB strives to be compatible with all plugins. But here are some that are especi
 * [WPML](https://wpml.org) for more advanced translating of projects, and adding print buttons in different languages. [Read Translating Projects with WPML Plugin](https://printmy.blog/user-guide/design-layout/translating-projects-with-wpml-plugin/)
 * [TablePress](https://wordpress.org/plugins/tablepress/) makes tables look good in print too, even when they span multiple pages
 
-> ⚠️Incompability: Some users have reported incompability issues with the Divi theme. If you are using this theme, please use Print My Blog with caution and always back up your database before use. 
+> ⚠️Incompability: Some users have reported incompability issues with the Divi theme. If you are using this theme, please use AV-PvH Print Website with caution and always back up your database before use. 
 
 If you are delighted how PMB worked with another plugin, or had trouble, please let us know!
 
@@ -173,14 +173,14 @@ If you are delighted how PMB worked with another plugin, or had trouble, please 
 1. Preserve your blog for decades to come in a low-tech format.
 2. Make WordPress an alternative to Microsoft Word and Google Docs for publishing documents.
 
-= Alternatives to Print My Blog =
+= Alternatives to AV-PvH Print Website =
 
 If this doesn't meet your needs, there are good paid and free alternatives.
 
 **Alternatives to Quick Print**
 [printmy.blog](https://printmy.blog/now) we run a hosted version of this same plugin, so you can print your blog without even installing this. Especially useful for WordPress**.com** users, or those who can't install the plugin on their site. (Its free like Quick Print, but won't use your blog's styles.)
 [Anthologize](https://wordpress.org/plugins/anthologize/) is another great plugin for customizing your blog's content before exporting to an e-book format. Also free.
-[Blog To HTML](https://wordpress.org/plugins/blog-to-html/) is actually very similar to Print My Blog. It allows you to export your blog to HTML for eBook creation.
+[Blog To HTML](https://wordpress.org/plugins/blog-to-html/) is actually very similar to AV-PvH Print Website. It allows you to export your blog to HTML for eBook creation.
 [blogbooker](https://blogbooker.com/) prints a book, or creates a PDF, from your blog using their pre-made styles. (Paid service.)
 [blog2print](https://www.blog2print.com/) ditto, but temporarily requests your username and password. (Paid service.)
 
@@ -201,20 +201,20 @@ Best Wishes Publishing for Print with WordPress!
 
 == Installation ==
 
-> ⚠️IMPORTANT: Please make sure that you back up your database before running Print My Blog just in case there is an unexpected issue. 
+> ⚠️IMPORTANT: Please make sure that you back up your database before running AV-PvH Print Website just in case there is an unexpected issue. 
 
 1. Upload the plugin files to the `/wp-content/plugins/print-my-blog` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress.
 
 **To Print Your Blog using Quick Print**
 
-1. Under the "Print My Blog" menu item, click "Quick Print."
+1. Under the "AV-PvH Print Website" menu item, click "Quick Print."
 1. Select the format you want, and click "Prepare Print Page."
 1. When you see the "Print" button appear, click it. Your blog will be printed from your browser.
 
 **To Add Print Buttons to Posts and/or Pages**
 
-1. Under the "Print My Blog" menu item, click "Settings."
+1. Under the "AV-PvH Print Website" menu item, click "Settings."
 1. Beside "Show print buttons on:", check "Posts" and/or "Pages".
 1. Click "Save Settings".
 
@@ -222,13 +222,13 @@ Also [see this FAQ](https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20
 
 **To Print with Pro Print**
 
-1. Under "Print My Blog", click "Pro Print".
+1. Under "AV-PvH Print Website", click "Pro Print".
 1. Follow the instructions presented, or refer to our [user guide](https://printmy.blog/user-guide/).
 
 **To Add a Print Form for Visitors**
 
-1. Add a page using the block editor (added in WordPress 5.0), maybe call it something like "Print My Blog".
-1. Add the "Print My Blog" block anywhere you like.
+1. Add a page using the block editor (added in WordPress 5.0), maybe call it something like "AV-PvH Print Website".
+1. Add the "AV-PvH Print Website" block anywhere you like.
 1. Publish the post or page.
 1. You may want to add a link to the page in a menu, widget, or footer.
 
@@ -277,7 +277,7 @@ Mozilla Firefox (PDF)
 
 https://youtu.be/sU02oSPWj34
 
-= How do I create an eBook using Print My Blog? =
+= How do I create an eBook using AV-PvH Print Website? =
 Creating ePub eBooks requires payment, or you can create ePub eBooks using Quick Print and [dotEPUB browser extension](https:dotepub.com)
 
 https://youtu.be/M5ZZN3KsqOA
@@ -288,8 +288,8 @@ Once the eBook has been generated, you can read it from your computer (here's in
 
 = Some images aren't appearing =
 
-Print My Blog can work too fast for some webservers, meaning the webservers refuse to load all the content, most noticeably some images.
-In order to fix this, you need to tell Print My Blog to slow down. On the configuration page, show options, then scroll
+AV-PvH Print Website can work too fast for some webservers, meaning the webservers refuse to load all the content, most noticeably some images.
+In order to fix this, you need to tell AV-PvH Print Website to slow down. On the configuration page, show options, then scroll
 down to show Troubleshooting options, and increase "Post Rendering Wait-Time" (e.g. to 2000 milliseconds, or whatever
 value you need to in order to get all the images to load).
 
@@ -302,7 +302,7 @@ To fix this, just retry "Generate the PDF". Each time the browser will fetch mor
 = The Print Page says "There seems to be an error initializing...", or is stuck on "Loading Content", or I can't filter by categories or terms from the print setup page=
 *This isn't a problem for Pro Print (even when printing using your browser for free.) If you'd rather use Quick Print, keep reading...*
 
-A plugin has probably disabled the WP REST API, which Print My Blog uses for loading data.
+A plugin has probably disabled the WP REST API, which AV-PvH Print Website uses for loading data.
 
 This is often done by a security plugin.
 
@@ -311,7 +311,7 @@ This is often done by a security plugin.
 * Wordfence has a setting on their "All Options" page, under "Brute Force Proection", called "Prevent discovery of usernames through ‘/?author=N’ scans, the oEmbed API, and the WordPress REST API". [Disable it.](https://drive.google.com/file/d/1K3-2BjNSWQBUi1uPxq_l2gCj4xXZ44MD/view)
 * iThemes security has a setting under "WordPress Tweaks" called "REST API". [Switch it to "Default Access"](https://drive.google.com/file/d/1jvujNmQuMMUDWls1LNndHM8pmpP53Ktt/view) if you want to let site visitors print your blog.
 
-If none of the above help identify the issue, please use Print My Blog plugin's Help page or the [WordPress.org support forum](https://wordpress.org/support/plugin/print-my-blog/) to report the problem.
+If none of the above help identify the issue, please use AV-PvH Print Website plugin's Help page or the [WordPress.org support forum](https://wordpress.org/support/plugin/print-my-blog/) to report the problem.
 Along with that, it can also be helpful to follow the steps in the following video in order to provide more information about the error.
 https://www.youtube.com/watch?v=JNK39YuuhMM
 
@@ -319,7 +319,7 @@ https://www.youtube.com/watch?v=JNK39YuuhMM
 
 There may be text, images, and other stuff that looks great when viewed from a screen, but doesn't make sense to have in the printout. E.g. related posts, share buttons, etc.
 To remove them from printouts, [add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-screen-only".
-Alternatively, you can use the shortcodes `[pmb_web_only_text]...text, text, text...[/pmb_web_only_text]` and `[pmb_web_only_blocks]...paragraphs, images, other blocks...[/pmb_web_only_blocks]`.
+Alternatively, you can use the shortcodes `[avpvh_print_website_web_only_text]...text, text, text...[/avpvh_print_website_web_only_text]` and `[avpvh_print_website_web_only_blocks]...paragraphs, images, other blocks...[/avpvh_print_website_web_only_blocks]`.
 
 https://www.youtube.com/watch?v=xxNBkGafH_A
 
@@ -333,12 +333,12 @@ For example, if you want to hide all divs with CSS class "my-video" in printouts
 }
 `
 
-Also, if it's content automatically added by a plugin or theme, please let us know in the support forum, and we can hide that content in the next release of Print My Blog.
+Also, if it's content automatically added by a plugin or theme, please let us know in the support forum, and we can hide that content in the next release of AV-PvH Print Website.
 
 https://www.youtube.com/watch?v=IMBxCp7AVPE&feature=youtu.be
 
 = How do I make post content only appear in the printout? =
-Use the shortcodes `[pmb_print_only_text]...text, text, text...[/pmb_print_only_text]` and `[pmb_print_only_blocks]...paragraphs, images, other blocks...[/pmb_print_only_blocks]`.
+Use the shortcodes `[avpvh_print_website_print_only_text]...text, text, text...[/avpvh_print_website_print_only_text]` and `[avpvh_print_website_print_only_blocks]...paragraphs, images, other blocks...[/avpvh_print_website_print_only_blocks]`.
 
 https://www.youtube.com/watch?v=xxNBkGafH_A
 
@@ -372,23 +372,23 @@ The easiest way to print a draft post is to enable the front-end print buttons, 
 https://youtu.be/LemXhydDEvg
 
 = How do I show the print buttons on posts or pages? =
-**Using Print My Blog Settings and Custom Fields**
-You can add print buttons to all posts and/or pages from the WordPress admin dashboard, under "Print My Blog", click "Settings", then, next to "Show print buttons on:" select the posts and/or pages.
-If you don't want to show them on certain posts or pages, add the custom field named "pmb_buttons" to them with the value "hide".
-Alternatively, if you only want to show the button on specific posts or pages, add the custom field "pmb_buttons" to those posts or pages with the value "show".
+**Using AV-PvH Print Website Settings and Custom Fields**
+You can add print buttons to all posts and/or pages from the WordPress admin dashboard, under "AV-PvH Print Website", click "Settings", then, next to "Show print buttons on:" select the posts and/or pages.
+If you don't want to show them on certain posts or pages, add the custom field named "avpvh_prwb_buttons" to them with the value "hide".
+Alternatively, if you only want to show the button on specific posts or pages, add the custom field "avpvh_prwb_buttons" to those posts or pages with the value "show".
 
 https://www.youtube.com/watch?v=Ehep6GO5J6c
 
 https://www.youtube.com/watch?v=mWD8kDrhWMs
 
 **Using a Shortcode in the Post Body**
-You can add print buttons directly into your posts and pages by using the shortcode `[pmb_print_buttons]`. You can also supply it with the ID of a different post or page like so: `[pmb_print_buttons ID=123]`.
-You can alternatively use the shortcode `[pmb_print_page_url]` to just get the URL of the print page for more advanced integrations. You can supply it with the ID of a different post, and the `format` (defaults to "print", but also accepts "pdf" or "ebook"), and whether to `add_protocol` (i.e. by default, the URL begins with "http://" or "https://", but setting this to `0` will prevent that, in case it was already added), like so: `[pmb_print_page_url format=pdf add_protocol=0]` will produce the URL of the print page for a PDF but not add the "https://" onto the start of the URL.
+You can add print buttons directly into your posts and pages by using the shortcode `[avpvh_print_website_print_buttons]`. You can also supply it with the ID of a different post or page like so: `[avpvh_print_website_print_buttons ID=123]`.
+You can alternatively use the shortcode `[avpvh_print_website_print_page_url]` to just get the URL of the print page for more advanced integrations. You can supply it with the ID of a different post, and the `format` (defaults to "print", but also accepts "pdf" or "ebook"), and whether to `add_protocol` (i.e. by default, the URL begins with "http://" or "https://", but setting this to `0` will prevent that, in case it was already added), like so: `[avpvh_print_website_print_page_url format=pdf add_protocol=0]` will produce the URL of the print page for a PDF but not add the "https://" onto the start of the URL.
 
 https://www.youtube.com/watch?v=xxNBkGafH_A
 
 **In a Widget (e.g. sidebar or footer) using a Shortcode**
-Alternatively, you can add the print buttons to a widget. In the WordPress admin dashboard, under the "Appearance" menu item, click "Widgets". Add a shortcode widget and add `[pmb_print_buttons]` like mentioned previously. The print buttons will only appear on single posts (eg not on an archive page).
+Alternatively, you can add the print buttons to a widget. In the WordPress admin dashboard, under the "Appearance" menu item, click "Widgets". Add a shortcode widget and add `[avpvh_print_website_print_buttons]` like mentioned previously. The print buttons will only appear on single posts (eg not on an archive page).
 
 https://youtu.be/tLI1AAnxi-c
 
@@ -396,11 +396,11 @@ https://youtu.be/tLI1AAnxi-c
 If you'd like to add the print buttons somewhere in your theme's template files, add the following PHP code anywhere inside the loop:
 
 `
-<?php echo do_shortcode('[pmb_print_buttons]'); ?>
+<?php echo do_shortcode('[avpvh_print_website_print_buttons]'); ?>
 `
 or
 `
-<a href="<?php echo esc_url(do_shortcode('[pmb_print_page_url]')); ?>">View Print-Ready Version of Page</a>
+<a href="<?php echo esc_url(do_shortcode('[avpvh_print_website_print_page_url]')); ?>">View Print-Ready Version of Page</a>
 `
 
 = How do I change the color of the print buttons? =
@@ -429,7 +429,7 @@ div.pmb-print-this-page a{
 `
 
 = How do I customize the printouts made with the Print Buttons? =
-From the Print My Blog Settings page, click "Customize Buttons". From here you can customize:
+From the AV-PvH Print Website Settings page, click "Customize Buttons". From here you can customize:
 * whether print buttons appear by default above or below the post content
 * which print buttons appear (print, PDF, and eBook)
 * the text used on each button (translate them, use an emoji, etc.)
@@ -439,8 +439,8 @@ options are the same as when printing out multiple posts simultaneously: you can
 
 https://youtu.be/uPQ3vqm7A2g
 
-= How can I help translate Print My Blog? =
-Here's a video showing how to use Poedit to submit a translation of Print My Blog
+= How can I help translate AV-PvH Print Website? =
+Here's a video showing how to use Poedit to submit a translation of AV-PvH Print Website
 
 https://youtu.be/HnbCKywA_xo
 
@@ -451,7 +451,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Screenshots ==
 
-1. Print My Blog removes junk that doesn’t belong in a printout—like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
+1. AV-PvH Print Website removes junk that doesn’t belong in a printout—like ink-guzzling logos, menus, search-bars, sidebars, footer widgets, etc.
 2. Quick Print Setup page. Start printing right away, or customize which posts to print and how to print them.
 3. Print Button settings page. Select whether to show on posts or pages and save. Or customize the appearance of the buttons and printout.
 4. Print Buttons on a post. Notice how much clutter is removed from the printout!
@@ -461,6 +461,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 4.0.0 November 10, 2026 =
+* Renamed from Print My Blog to AV-PvH Print Website: plugin folder and main file `avpvh-print-website/avpvh-print-website.php`, text domain `avpvh-print-website`, PHP namespace `Avpvh\PrintWebsite`, prefix `avpvh_prwb_` / `AVPVH_PRWB_`.
+* Shortcodes are now `[avpvh_print_website_…]` (for example `[avpvh_print_website_print_buttons]`); the old `[pmb_…]` names keep working.
+* On first load the plugin moves the Print My Blog data over (settings, projects, designs, tables, capabilities, shortcodes in posts and widgets) and deactivates Print My Blog.
+
 = 3.27.18 October 12, 2026 =
 * Updated Freemius SDK to the latest version.
 
@@ -479,7 +484,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Enhancement: Updated Freemius to version 2.13.0.
 
 = 3.27.13 February 23, 2026 =
-* Bugfix: Fixed an Uncaught TypeError that might occur in pmb_set_image_dimension_attributes for some users. 
+* Bugfix: Fixed an Uncaught TypeError that might occur in avpvh_prwb_set_image_dimension_attributes for some users. 
 
 = 3.27.12 February 9, 2026 =
 * Bugfix: Several minor bug fixes and code improvements. 
@@ -518,11 +523,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Compatibility: for Pro Print, fix Javascript error sometimes occuring with Hustle plugin
 
 = 3.27.3 July 31, 2024 =
-* Bugfix, for Pro Print, also use PMB_DEBUG on "pmb_ajax" requests (which are what's actually used currently to create print pages)
+* Bugfix, for Pro Print, also use AVPVH_PRWB_DEBUG on "avpvh_prwb_ajax" requests (which are what's actually used currently to create print pages)
 
 = 3.27.2 July 19, 2024 =
 * Compatibility: for Pro Print with WPML, fix bug that prevented generating in a secondary language
-* Enhancement: for Pro Print, introduce constant PMB_DEBUG to control whether to display warnings when generating a project. Changed default to *not* show warnings.
+* Enhancement: for Pro Print, introduce constant AVPVH_PRWB_DEBUG to control whether to display warnings when generating a project. Changed default to *not* show warnings.
 
 
 = 3.27.1 June 21, 2024 =
@@ -553,10 +558,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 
 = 3.26.0 November 21, 2023 =
-* Enhancement: remove Print My Blog dashboard news as I was just told this is in violation of WordPress.org plugin guidelines.
+* Enhancement: remove AV-PvH Print Website dashboard news as I was just told this is in violation of WordPress.org plugin guidelines.
 * Bugfix: fix admin print buttons not including some HTML which could affect the design's layout
 * Bugfix: fix image quality adjusting so the CSS class `pmb-dont-change-image-quality` works as intended
-* Developer: simplify adding custom fonts to designs (introduces PrintMyBlog\domain\DefaultDesignTemplates::getPdfFontSettings() and adds custom font CSS if those settings are used)
+* Developer: simplify adding custom fonts to designs (introduces Avpvh\PrintWebsite\domain\DefaultDesignTemplates::getPdfFontSettings() and adds custom font CSS if those settings are used)
 * Enhancement: avoid pagebreaks between images and their captions
 * Feature: in Pro Print, introduce CSS class "pmb-snap" to snap a block or image to nearest page edge
 
@@ -594,13 +599,13 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 * Bugfix: in Admin Print Buttons, add a unique code onto print page URLs
 
 = 3.24.2 May 29, 2023 =
-* Feature: show Admin Print Buttons to Free users too (again, they can be removed from Print My Blog > Settings)
+* Feature: show Admin Print Buttons to Free users too (again, they can be removed from AV-PvH Print Website > Settings)
 
 = 3.24.1 May 29, 2023 =
-* Feature: display Admin Print Buttons by default (although they can still be removed from Print My Blog > Settings)
+* Feature: display Admin Print Buttons by default (although they can still be removed from AV-PvH Print Website > Settings)
 
 = 3.24.0 May 27 2023 =
-* Feature: add Admin Print Buttons, to quickly create PDF, eBooks and Word documents from individual posts, pages, and other post types. Go to Print My Blog > Settings to enable.
+* Feature: add Admin Print Buttons, to quickly create PDF, eBooks and Word documents from individual posts, pages, and other post types. Go to AV-PvH Print Website > Settings to enable.
 * Feature: add Designs page, where you can set the default design for each project and customize any design (even ones not in use on any projects currently.)
 
 = 3.23.5 May 16, 2023 =

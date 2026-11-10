@@ -1,12 +1,12 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
 use Exception;
-use Twine\forms\helpers\InputOption;
-use Twine\forms\inputs\FormInputWithOptionsBase;
-use Twine\helpers\Array2;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\forms\helpers\InputOption;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputWithOptionsBase;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  *
@@ -32,7 +32,7 @@ class SelectDisplay extends DisplayBase
     {
         if (! $this->input instanceof FormInputWithOptionsBase) {
             throw new Exception(
-                __('Cannot use Select Display Strategy with an input that doesn\'t have options', 'print-my-blog')
+                __('Cannot use Select Display Strategy with an input that doesn\'t have options', 'avpvh-print-website')
             );
         }
         $html_generator = Html::instance();

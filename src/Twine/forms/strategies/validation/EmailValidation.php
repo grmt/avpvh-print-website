@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
 use EventEspresso\core\domain\services\factories\EmailAddressFactory;
 use EventEspresso\core\domain\services\validation\email\EmailValidationException;
 use EventEspresso\core\exceptions\InvalidDataTypeException;
 use EventEspresso\core\exceptions\InvalidInterfaceException;
 use InvalidArgumentException;
-use Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 
 /**
  * Class EmailValidation
@@ -27,7 +27,7 @@ class EmailValidation extends TextValidation
     public function __construct($validation_error_message = '')
     {
         if (! $validation_error_message) {
-            $validation_error_message = esc_html__('Please enter a valid email address.', 'print-my-blog');
+            $validation_error_message = esc_html__('Please enter a valid email address.', 'avpvh-print-website');
         }
         parent::__construct($validation_error_message);
     }

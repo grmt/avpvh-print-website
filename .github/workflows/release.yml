@@ -48,10 +48,10 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: build-artifact
-          path: print-my-blog
+          path: avpvh-print-website
 
-      - name: Package print-my-blog.zip
-        run: zip -qr print-my-blog.zip print-my-blog
+      - name: Package avpvh-print-website.zip
+        run: zip -qr avpvh-print-website.zip avpvh-print-website
 
       - name: Create or Update GitHub Release
         env:
@@ -61,9 +61,9 @@ jobs:
           VERSION: ${{ steps.meta.outputs.version }}
         run: |
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" print-my-blog.zip --clobber
+            gh release upload "$TAG" avpvh-print-website.zip --clobber
           else
-            gh release create "$TAG" print-my-blog.zip \
-              --title "print-my-blog ${VERSION}" \
+            gh release create "$TAG" avpvh-print-website.zip \
+              --title "avpvh-print-website ${VERSION}" \
               --generate-notes
           fi

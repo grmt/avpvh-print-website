@@ -1,5 +1,5 @@
 /**
- * @var pmb_pro object
+ * @var avpvh_prwb_pro object
  * @param blob
  * @returns {Promise<unknown>}
  */
@@ -16,17 +16,17 @@ function blobToBase64(blob) {
 /**
  * Creates the ePub file from the current page's HTML and enables the download link when it's done.
  */
-function pmb_create_epub(){
+function avpvh_prwb_create_epub(){
     var epub_options = {
-        title: pmb_pro.title,
-        author:pmb_pro.authors,
+        title: avpvh_prwb_pro.title,
+        author:avpvh_prwb_pro.authors,
         verbose: true,
         ignoreFailedDownloads:true,
         prependChapterTitles:false,
         numberChaptersInTOC:false,
-        cover:pmb_pro.cover,
-        css:pmb_pro.css,
-        version: parseInt(pmb_pro.version),
+        cover:avpvh_prwb_pro.cover,
+        css:avpvh_prwb_pro.css,
+        version: parseInt(avpvh_prwb_pro.version),
         // fonts:[
         //     {
         //         filename:"Roboto.ttf",
@@ -34,8 +34,8 @@ function pmb_create_epub(){
         //     }
         // ]
     };
-    if(typeof(pmb_design_options.fonts_to_embed) !== 'undefined'){
-        epub_options.fonts = pmb_design_options.fonts_to_embed;
+    if(typeof(avpvh_prwb_design_options.fonts_to_embed) !== 'undefined'){
+        epub_options.fonts = avpvh_prwb_design_options.fonts_to_embed;
     }
     var sections = [];
     var found_toc = false;
@@ -44,7 +44,7 @@ function pmb_create_epub(){
         var chapter_data = {
             content:element.outerHTML,
             beforeToc: ! found_toc,
-            filename: pmb_hyperlink_to_filename(element.id)
+            filename: avpvh_prwb_hyperlink_to_filename(element.id)
         };
 
         var jqelement = jQuery(element);
@@ -78,63 +78,63 @@ function pmb_create_epub(){
     (async () => {
         var epub_blob = await epub(epub_options, sections);
         var download_button = jQuery('#download_link');
-        pmb_stop_doing_button(download_button);
+        avpvh_prwb_stop_doing_button(download_button);
         saveAs(epub_blob, download_button.attr('download').valueOf());
         //download_link.href = await blobToBase64(epub_blob);
     })();
 }
 
 /**
- * Callbacks that listen for document.pmb_doc_conversion_requested should set pmb_doc_conversion_request_handled to TRUE immediately, otherwise
+ * Callbacks that listen for document.avpvh_prwb_doc_conversion_requested should set avpvh_prwb_doc_conversion_request_handled to TRUE immediately, otherwise
  * we'll assume no callback was set and so we'll just proceed with converting the file.
  * @type {boolean}
  */
-var pmb_doc_conversion_request_handled = false;
+var avpvh_prwb_doc_conversion_request_handled = false;
 /**
  * Keeps track of if we've finished preparing the entire print page. (So we don't process stuff over and over again if the print button
  * gets pressed again.)
  * @type boolean
  */
-var pmb_pro_page_rendered = false;
+var avpvh_prwb_pro_page_rendered = false;
 jQuery(document).on('ready', function(){
     var download_button = jQuery('#download_link');
     setTimeout(function(){
-            pmb_stop_doing_button(download_button);
+            avpvh_prwb_stop_doing_button(download_button);
         },
         2000
     );
 
     download_button.click(function(){
-        if(pmb_pro_page_rendered){
-            pmb_create_epub();
+        if(avpvh_prwb_pro_page_rendered){
+            avpvh_prwb_create_epub();
         } else {
-            pmb_doing_button(download_button);
-            // wait for the design to call document.pmb_doc_conversion_ready (and to set pmb_doc_conversion_request_handled
+            avpvh_prwb_doing_button(download_button);
+            // wait for the design to call document.avpvh_prwb_doc_conversion_ready (and to set avpvh_prwb_doc_conversion_request_handled
             // to true)  before proceeding with converting HTML to ePub
-            jQuery(document).on('pmb_doc_conversion_ready', function(){
-                pmb_create_epub();
+            jQuery(document).on('avpvh_prwb_doc_conversion_ready', function(){
+                avpvh_prwb_create_epub();
             });
-            jQuery(document).trigger('pmb_doc_conversion_requested');
-            // trigger document.pmb_wrap_up for legacy code.
-            jQuery(document).trigger('pmb_wrap_up');
-            // as a backup, in case the design didn't listen for document.pmb_doc_conversion_requested just go ahead and execute it.
+            jQuery(document).trigger('avpvh_prwb_doc_conversion_requested');
+            // trigger document.avpvh_prwb_wrap_up for legacy code.
+            jQuery(document).trigger('avpvh_prwb_wrap_up');
+            // as a backup, in case the design didn't listen for document.avpvh_prwb_doc_conversion_requested just go ahead and execute it.
             setTimeout(
                 function(){
-                    if(! pmb_doc_conversion_request_handled){
-                        pmb_create_epub();
+                    if(! avpvh_prwb_doc_conversion_request_handled){
+                        avpvh_prwb_create_epub();
                     }
                 },
                 3000
             );
-            pmb_pro_page_rendered = true;
+            avpvh_prwb_pro_page_rendered = true;
         }
     });
 });
 
 
-// print-page-beautifier-functions.js's pmb_replace_internal_links_with_page_refs_and_footnotes has similar logic
-function pmb_replace_internal_links_with_epub_file_links(){
-    _pmb_for_each_hyperlink(
+// print-page-beautifier-functions.js's avpvh_prwb_replace_internal_links_with_page_refs_and_footnotes has similar logic
+function avpvh_prwb_replace_internal_links_with_epub_file_links(){
+    _avpvh_prwb_for_each_hyperlink(
         function(a, id_url, id_selector){
             // the URL is an anchor link to somewhere on the page (either to an article or to something inside an article)
             var section_element = jQuery(id_selector);
@@ -146,11 +146,11 @@ function pmb_replace_internal_links_with_epub_file_links(){
             // is it linking to an article?
             if( section_element[0].tagName == 'ARTICLE'){
                 // deduce its filename
-                var url_in_epub = pmb_hyperlink_to_filename(section_element.attr('id')) + '.xhtml';
+                var url_in_epub = avpvh_prwb_hyperlink_to_filename(section_element.attr('id')) + '.xhtml';
             } else {
                 // it's linking to something else on the page. Try adding its parent article's filename on front
                 var parent_article = section_element.parents('article');
-                var url_in_epub = pmb_hyperlink_to_filename(parent_article.attr('id')) + '.xhtml' + id_url;
+                var url_in_epub = avpvh_prwb_hyperlink_to_filename(parent_article.attr('id')) + '.xhtml' + id_url;
             }
 
             // replace with a hyperlink to that
@@ -168,14 +168,14 @@ function pmb_replace_internal_links_with_epub_file_links(){
  * @param hyperlink
  * @returns {*}
  */
-function pmb_hyperlink_to_filename(hyperlink){
+function avpvh_prwb_hyperlink_to_filename(hyperlink){
     return hyperlink.replaceAll('https://','').replaceAll('http://','').replaceAll('/','-').replaceAll(':','').replaceAll('.','-').replaceAll('?','-').replaceAll('#','-').replaceAll('&','-');
 }
 
 /**
  * iBooks expects an alt tags when zooming in on images, so set it using the title attribute or caption
  */
-function pmb_add_alt_tags(){
+function avpvh_prwb_add_alt_tags(){
     jQuery('img').each(function(index, element){
         if(element.hasAttribute('alt') && element.attributes['alt'].value !== ''){
             return;

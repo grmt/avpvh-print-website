@@ -1,27 +1,27 @@
 <?php
 
-namespace PrintMyBlog\system;
+namespace Avpvh\PrintWebsite\system;
 
-use PrintMyBlog\services\SvgDoer;
+use Avpvh\PrintWebsite\services\SvgDoer;
 
 /**
  * Class CustomPostTypes
  *
  * Description
  *
- * @package        Print My Blog
+ * @package        AV-PvH Print Website
  * @author         Mike Nelson
  * @since          $VID:$
  *
  */
 class CustomPostTypes
 {
-    const PROJECT = 'pmb_project';
-    const PROJECTS = 'pmb_projects';
-    const DESIGN = 'pmb_design';
-    const DESIGNS = 'pmb_designs';
-    const CONTENT = 'pmb_content';
-    const CONTENTS = 'pmb_contents';
+    const PROJECT = 'avpvh_prwb_project';
+    const PROJECTS = 'avpvh_prwb_projects';
+    const DESIGN = 'avpvh_prwb_design';
+    const DESIGNS = 'avpvh_prwb_designs';
+    const CONTENT = 'avpvh_prwb_content';
+    const CONTENTS = 'avpvh_prwb_contents';
     /**
      * @var SvgDoer
      */
@@ -43,16 +43,16 @@ class CustomPostTypes
         register_post_type(
             self::PROJECT,
             [
-                'label' => esc_html__('Projects', 'print-my-blog'),
-                'description' => esc_html__('Projects for printing with Print My Blog', 'print-my-blog'),
-                'capability_type' => 'pmb_project',
+                'label' => esc_html__('Projects', 'avpvh-print-website'),
+                'description' => esc_html__('Projects for printing with AV-PvH Print Website', 'avpvh-print-website'),
+                'capability_type' => 'avpvh_prwb_project',
                 'capabilities' => array(
-                    'publish_posts' => 'publish_pmb_projects',
-                    'edit_posts' => 'edit_pmb_projects',
-                    'edit_others_posts' => 'edit_others_pmb_projects',
-                    'delete_posts' => 'delete_pmb_projects',
-                    'delete_others_posts' => 'delete_others_pmb_projects',
-                    'read_private_posts' => 'read_private_pmb_projects',
+                    'publish_posts' => 'publish_avpvh_prwb_projects',
+                    'edit_posts' => 'edit_avpvh_prwb_projects',
+                    'edit_others_posts' => 'edit_others_avpvh_prwb_projects',
+                    'delete_posts' => 'delete_avpvh_prwb_projects',
+                    'delete_others_posts' => 'delete_others_avpvh_prwb_projects',
+                    'read_private_posts' => 'read_private_avpvh_prwb_projects',
                 ),
             ]
         );
@@ -61,46 +61,46 @@ class CustomPostTypes
         register_post_type(
             self::DESIGN,
             [
-                'label' => esc_html__('Designs', 'print-my-blog'),
-                'description' => esc_html__('Designs for printing with Print My Blog', 'print-my-blog'),
-                'capability_type' => 'pmb_design',
+                'label' => esc_html__('Designs', 'avpvh-print-website'),
+                'description' => esc_html__('Designs for printing with AV-PvH Print Website', 'avpvh-print-website'),
+                'capability_type' => 'avpvh_prwb_design',
                 'capabilities' => array(
-                    'publish_posts' => 'publish_pmb_designs',
-                    'edit_posts' => 'edit_pmb_designs',
-                    'edit_others_posts' => 'edit_others_pmb_designs',
-                    'delete_posts' => 'delete_pmb_designs',
-                    'delete_others_posts' => 'delete_others_pmb_designs',
-                    'read_private_posts' => 'read_private_pmb_designs',
+                    'publish_posts' => 'publish_avpvh_prwb_designs',
+                    'edit_posts' => 'edit_avpvh_prwb_designs',
+                    'edit_others_posts' => 'edit_others_avpvh_prwb_designs',
+                    'delete_posts' => 'delete_avpvh_prwb_designs',
+                    'delete_others_posts' => 'delete_others_avpvh_prwb_designs',
+                    'read_private_posts' => 'read_private_avpvh_prwb_designs',
                 ),
             ]
         );
         $this->setupMapMetaCaps(self::DESIGN);
 
         $labels = array(
-            'name'                  => _x('Print Materials', 'Post type general name', 'print-my-blog'),
-            'singular_name'         => _x('Print Material', 'Post type singular name', 'print-my-blog'),
-            'menu_name'             => _x('Print Materials', 'Admin Menu text', 'print-my-blog'),
-            'name_admin_bar'        => _x('Print Material', 'Add New on Toolbar', 'print-my-blog'),
-            'add_new'               => __('Add New', 'print-my-blog'),
-            'add_new_item'          => __('Add New Print Material', 'print-my-blog'),
-            'new_item'              => __('New Print Material', 'print-my-blog'),
-            'edit_item'             => __('Edit Print Material', 'print-my-blog'),
-            'view_item'             => __('View Print Material', 'print-my-blog'),
-            'all_items'             => __('All Print Materials', 'print-my-blog'),
-            'search_items'          => __('Search Print Materials', 'print-my-blog'),
-            'parent_item_colon'     => __('Parent Print Materials:', 'print-my-blog'),
-            'not_found'             => __('No Print Materials found.', 'print-my-blog'),
-            'not_found_in_trash'    => __('No Print Materials found in Trash.', 'print-my-blog'),
-            'featured_image'        => _x('Print Material Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'print-my-blog'),
-            'set_featured_image'    => _x('Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'print-my-blog'),
-            'remove_featured_image' => _x('Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'print-my-blog'),
-            'use_featured_image'    => _x('Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'print-my-blog'),
-            'archives'              => _x('Print Material archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'print-my-blog'),
-            'insert_into_item'      => _x('Insert into Print Material', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'print-my-blog'),
-            'uploaded_to_this_item' => _x('Uploaded to this Print Material', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'print-my-blog'),
-            'filter_items_list'     => _x('Filter Print Materials list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'print-my-blog'),
-            'items_list_navigation' => _x('Print Materials list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'print-my-blog'),
-            'items_list'            => _x('Print Materials list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'print-my-blog'),
+            'name'                  => _x('Print Materials', 'Post type general name', 'avpvh-print-website'),
+            'singular_name'         => _x('Print Material', 'Post type singular name', 'avpvh-print-website'),
+            'menu_name'             => _x('Print Materials', 'Admin Menu text', 'avpvh-print-website'),
+            'name_admin_bar'        => _x('Print Material', 'Add New on Toolbar', 'avpvh-print-website'),
+            'add_new'               => __('Add New', 'avpvh-print-website'),
+            'add_new_item'          => __('Add New Print Material', 'avpvh-print-website'),
+            'new_item'              => __('New Print Material', 'avpvh-print-website'),
+            'edit_item'             => __('Edit Print Material', 'avpvh-print-website'),
+            'view_item'             => __('View Print Material', 'avpvh-print-website'),
+            'all_items'             => __('All Print Materials', 'avpvh-print-website'),
+            'search_items'          => __('Search Print Materials', 'avpvh-print-website'),
+            'parent_item_colon'     => __('Parent Print Materials:', 'avpvh-print-website'),
+            'not_found'             => __('No Print Materials found.', 'avpvh-print-website'),
+            'not_found_in_trash'    => __('No Print Materials found in Trash.', 'avpvh-print-website'),
+            'featured_image'        => _x('Print Material Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'avpvh-print-website'),
+            'set_featured_image'    => _x('Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'avpvh-print-website'),
+            'remove_featured_image' => _x('Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'avpvh-print-website'),
+            'use_featured_image'    => _x('Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'avpvh-print-website'),
+            'archives'              => _x('Print Material archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'avpvh-print-website'),
+            'insert_into_item'      => _x('Insert into Print Material', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'avpvh-print-website'),
+            'uploaded_to_this_item' => _x('Uploaded to this Print Material', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'avpvh-print-website'),
+            'filter_items_list'     => _x('Filter Print Materials list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'avpvh-print-website'),
+            'items_list_navigation' => _x('Print Materials list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'avpvh-print-website'),
+            'items_list'            => _x('Print Materials list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'avpvh-print-website'),
         );
         register_post_type(
             self::CONTENT,
@@ -110,12 +110,12 @@ class CustomPostTypes
                 'has_archive' => true,
                 'public' => true,
                 'show_ui' => true,
-                'show_in_menu' => PMB_ADMIN_PROJECTS_PAGE_SLUG,
-                'rewrite' => array('slug' => 'pmb'),
+                'show_in_menu' => AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
+                'rewrite' => array('slug' => 'avpvh-print-website'),
                 'show_in_rest' => true,
                 'supports' => array('title', 'editor', 'revisions', 'author', 'thumbnail', 'custom-fields'),
                 'taxonomies' => array('category', 'post_tag'),
-                'menu_icon' => $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg'),
+                'menu_icon' => $this->svg_doer->getSvgDataAsColor(AVPVH_PRWB_DIR . 'assets/images/menu-icon.svg'),
                 'capability_type' => self::CONTENT,
                 'capabilities' => array(
                     'publish_posts' => 'publish_' . self::CONTENTS,

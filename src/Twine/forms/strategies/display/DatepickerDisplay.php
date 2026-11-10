@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
 /**
  * Class DatepickerDisplay
- * @package Twine\forms\strategies\display
+ * @package Avpvh\PrintWebsite\Twine\forms\strategies\display
  */
 class DatepickerDisplay extends TextInputDisplay
 {

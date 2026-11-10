@@ -1,8 +1,8 @@
 <?php
-define('TWINE_MAIN_FILE', __FILE__);
-define('PMB_DIR', __DIR__ . '/');
-define('PMB_VENDOR_DIR', PMB_DIR . 'vendor/');
-require PMB_VENDOR_DIR . 'autoload.php';
+define('AVPVH_PRWB_TWINE_MAIN_FILE', __FILE__);
+define('AVPVH_PRWB_DIR', __DIR__ . '/');
+define('AVPVH_PRWB_VENDOR_DIR', AVPVH_PRWB_DIR . 'vendor/');
+require AVPVH_PRWB_VENDOR_DIR . 'autoload.php';
 
 // Add WPML functions for PHPstan
 if (! function_exists('wpml_get_active_languages')) {
