@@ -63,7 +63,7 @@
 
     .pmb-back-matter {
         display: block;
-        page: back;
+        page: back-matter;
     }
     @page back-matter {
         @top-left {

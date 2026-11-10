@@ -39,10 +39,18 @@ class PdfGenerator extends HtmlBaseGenerator
             null,
             filemtime(AVPVH_PRWB_STYLES_DIR . 'pmb-pro-pdf.css')
         );
+        // Paged.js lays the content out in pages in the browser, using the designs' CSS Paged Media rules.
+        wp_enqueue_script(
+            'avpvh-print-website-pagedjs',
+            AVPVH_PRWB_SCRIPTS_URL . 'libs/paged-0.4.3.min.js',
+            [],
+            // Patched copy (see the note at the top of the file), so bust caches when it changes.
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'libs/paged-0.4.3.min.js')
+        );
         wp_enqueue_script(
             'avpvh-print-website-pro-pdf',
             AVPVH_PRWB_ASSETS_URL . 'scripts/pmb-pro-pdf.js',
-            array('jquery', 'avpvh-print-website-pro-page'),
+            array('jquery', 'avpvh-print-website-pro-page', 'avpvh-print-website-pagedjs'),
             filemtime(AVPVH_PRWB_ASSETS_DIR . 'scripts/pmb-pro-pdf.js')
         );
         wp_enqueue_script('avpvh-print-website-general');
@@ -57,6 +65,13 @@ class PdfGenerator extends HtmlBaseGenerator
                 null
             );
         }
+        // Fills the gaps between the designs' Prince CSS and Paged.js. Loads after the design's stylesheet.
+        wp_enqueue_style(
+            'avpvh-print-website-pagedjs',
+            AVPVH_PRWB_STYLES_URL . 'pmb-pagedjs.css',
+            file_exists($style_file) ? ['avpvh-print-website-design'] : ['avpvh-print-website-pro-pdf'],
+            filemtime(AVPVH_PRWB_STYLES_DIR . 'pmb-pagedjs.css')
+        );
         if (file_exists($script_file)) {
             wp_enqueue_script(
                 'avpvh-print-website-design',
