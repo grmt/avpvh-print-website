@@ -37,13 +37,5 @@
         }
         ?></p>
     <p><?php esc_html_e('Are you sure the blog hasn\'t deactivated the REST API?', 'avpvh-print-website');?></p>
-    <p><?php
-        printf(
-                // translators: 1: opening link tag, 2: closing link tag
-            esc_html__('If you are still having problems, please report it to the %1$sAV-PvH Print Website%2$s support forum.','avpvh-print-website'),
-            '<a href="https://wordpress.org/support/plugin/print-my-blog">',
-            '</a>'
-        );
-        ?></p>
 </div>
 </body>

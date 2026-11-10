@@ -75,14 +75,11 @@ use Avpvh\PrintWebsite\entities\DesignTemplate;
                             <?php }?>
                             <?php if($design->getPmbMeta('author_name')){
                                 $author_name = $design->getPmbMeta('author_name');
-                                $author_url = $design->getPmbMeta('author_url');
                                 ?>
                                 <tr>
                                     <th><?php esc_html_e('By', 'avpvh-print-website');?></th>
                                     <td>
-                                        <a href="<?php echo esc_attr($author_url);?>" target="_blank">
-                                            <?php echo
-                                            $author_name;?></a>
+                                        <?php echo esc_html($author_name);?>
                                     </td>
                                 </tr>
                                 <?php
@@ -124,9 +121,11 @@ use Avpvh\PrintWebsite\entities\DesignTemplate;
                                     </ul>
                                 </td>
                             </tr>
+                            <?php if ($design->getDesignTemplate()->getDocs()) { ?>
                             <tr>
                                 <th colspan="2"><span class="dashicons dashicons-admin-site-alt3"></span><a target="_blank" href="<?php echo esc_url($design->getDesignTemplate()->getDocs());?>"><?php printf(esc_html__('Read %s Documentation Online', 'avpvh-print-website'), $design->getDesignTemplate()->getTitle());?></a></th>
                             </tr>
+                            <?php } ?>
                         </table>
                     </div>
                     <div class="pmb-details-description">

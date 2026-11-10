@@ -36,11 +36,7 @@ avpvh_prwb_render_template(
                     <div class="pmb-project-choices-text"><h2 class="pmb-inline-header pmb-snug-header"><span class="dashicons dashicons-search"></span><?php _e('Available Content', 'avpvh-print-website');?>
                         <?php
                         echo avpvh_prwb_hover_help(
-                                sprintf(
-                                __('Select content from your website, then move it into your project. %1$sRead more%2$s.', 'avpvh-print-website'),
-                                '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/" target="_blank">',
-                                '</a>'
-                            )
+                                __('Select content from your website, then move it into your project.', 'avpvh-print-website')
                         );
                         ?></h2>
                             <span id="pmb-use-ctrl-key" class="pmb-comment pmb-use-ctrl-key"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select multiple items', 'avpvh-print-website');?></span></div>
@@ -201,11 +197,7 @@ avpvh_prwb_render_template(
                            ?>
                             <h2><?php esc_html_e('Front Matter', 'avpvh-print-website');?> <?php
                                 echo avpvh_prwb_hover_help(
-                                    sprintf(
-                                        __('Preliminary content like a title page, copyright page and introduction. %1$sRead more%2$s', 'avpvh-print-website'),
-                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/#front-matter" target="_blank">',
-                                        '</a>'
-                                    ),
+                                    __('Preliminary content like a title page, copyright page and introduction.', 'avpvh-print-website'),
                                     'dashicons-info'
                                 );
                             ?></h2>
@@ -235,10 +227,8 @@ avpvh_prwb_render_template(
                             }
                             echo avpvh_prwb_hover_help(
                                     sprintf(
-                                            __('The main contents of your document or book, like chapters or articles. %1$s %2$sRead more%3$s', 'avpvh-print-website'),
-                                        implode(', ', $division_descriptions),
-                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/#main-matter" target="_blank">',
-                                        '</a>'
+                                            __('The main contents of your document or book, like chapters or articles. %1$s', 'avpvh-print-website'),
+                                        implode(', ', $division_descriptions)
                                     )
                             )
                             ?>
@@ -256,12 +246,8 @@ avpvh_prwb_render_template(
                             <h2><?php esc_html_e('Back Matter', 'avpvh-print-website');?>
                             <?php
                                 echo avpvh_prwb_hover_help(
-                                    sprintf(
-                                            __('Supplemental content like "About the author", glossary, and "Further reading". %1$sRead more.%2$s', 'avpvh-print-website'),
-                                        '<a href="https://printmy.blog/user-guide/getting-started/6-choose-project-content/#back-matter" target="_blank">',
-                                        '</a>'
-                                    )
-                            );
+                                    __('Supplemental content like "About the author", glossary, and "Further reading".', 'avpvh-print-website')
+                                );
                             ?></h2>
                             <div id="pmb-project-back-matter" class="pmb-draggable-area pmb-project-content-chosen list-group pmb-sortable pmb-sortable-base pmb-sortable-root" data-max-nesting="0">
 			                    <?php

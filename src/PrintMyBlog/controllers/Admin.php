@@ -71,9 +71,7 @@ class Admin extends BaseController
     const SLUG_SUBACTION_PROJECT_GENERATE = 'generate';
     const SLUG_SUBACTION_PROJECT_DUPLICATE = 'duplicate';
     const SLUG_SUBACTION_PROJECT_CLEAR_CACHE = 'clear_cache';
-    const SLUG_ACTION_REVIEW = 'review';
     const SLUG_ACTION_EDIT_DESIGN = 'customize_design';
-    const REVIEW_OPTION_NAME = 'avpvh_prwb_review';
     const SLUG_ACTION_UNINSTALL = 'uninstall';
 
     /**
@@ -452,8 +450,6 @@ class Admin extends BaseController
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if (isset($_GET['welcome'])) {
             include AVPVH_PRWB_TEMPLATES_DIR . 'welcome.php';
-        } elseif (isset($_GET['upgrade_to_3'])) {
-            include AVPVH_PRWB_TEMPLATES_DIR . 'upgrade_to_3.php';
         } else {
             $print_options = new PrintOptions();
             $displayer = new FormInputs();
@@ -511,7 +507,7 @@ class Admin extends BaseController
         );
         // Nonce overkill for just checking which page they're on.
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
-        if (isset($_GET['welcome']) || isset($_GET['upgrade_to_3'])) {
+        if (isset($_GET['welcome'])) {
             wp_enqueue_style(
                 'avpvh-print-website-welcome',
                 AVPVH_PRWB_ASSETS_URL . 'styles/welcome.css',
@@ -944,16 +940,6 @@ class Admin extends BaseController
             [
                 'project' => $this->project,
                 'generations' => $generations,
-                'review_url' => wp_nonce_url(
-                    add_query_arg(
-                        [
-                            'action' => self::SLUG_ACTION_REVIEW,
-                        ],
-                        admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
-                    ),
-                    self::SLUG_ACTION_REVIEW
-                ),
-                'suggest_review' => ! get_option(self::REVIEW_OPTION_NAME, false),
             ]
         );
     }
@@ -1790,15 +1776,6 @@ class Admin extends BaseController
                     deactivate_plugins(AVPVH_PRWB_BASENAME, true);
                 }
                 wp_safe_redirect(admin_url('plugins.php'));
-            } elseif ($action === self::SLUG_ACTION_REVIEW) {
-                check_admin_referer(self::SLUG_ACTION_REVIEW);
-                update_option(self::REVIEW_OPTION_NAME, true);
-                // We're redicting to hard-coded URL. It's ok.
-                // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
-                wp_redirect(
-                    'https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post'
-                );
-                exit;
             } elseif ($action === self::SLUG_ACTION_EDIT_PROJECT) {
                 $subsection = Array2::setOr($_GET, 'subaction', null);
                 if ($subsection === self::SLUG_SUBACTION_PROJECT_DUPLICATE) {

@@ -86,24 +86,7 @@ class Activation extends BaseActivation
      */
     public function detectActivation()
     {
-        // get the activation indicator before its value is updated by RequestType
-        $activation_indicator = get_option('avpvh_prwb_activation', null);
-
-        // on a brand new install (or deactivate and activate another version), activation indicator will be true
-        // on an upgrade, activation indicator will be false
-        // so if previous version isnt set, and its not an activation it must be an upgrade
         parent::detectActivation();
-        if ($activation_indicator === '' && $this->version_history->previousVersion() === null) {
-                wp_safe_redirect(
-                    add_query_arg(
-                        array(
-                            'upgrade_to_3' => 1,
-                        ),
-                        admin_url(AVPVH_PRWB_ADMIN_PAGE_PATH)
-                    )
-                );
-                exit;
-        }
         // Keep redirecting users to the welcome page on new installs and reactivations.
         if (
             in_array(

@@ -44,32 +44,6 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 </a>
             </span>
         </div>
-        <?php if(is_user_logged_in()){?>
-            <div class="pmb-help pmb-top">
-            <span class="pmb-help-ask"><?php printf(
-                // translators: 1: a bunch of HTML for emoji buttons
-                    __('What do you think? %1$s', 'avpvh-print-website'),
-                    '<a id="pmb-help-love" href="javascript:avpvh_prwb_help_show(\'pmb-help-happy-text\');" title="'
-                    . __('Love it (shows feedback options)', 'avpvh-print-website')
-                    . '">😃</a> <a id="pmb-help-sad" href="javascript:avpvh_prwb_help_show(\'pmb-help-sad-text\');" title="'
-                    . __('Don’t like something (shows feedback options)', 'avpvh-print-website')
-                    . '")>☹️</a>'
-                ); ?>
-            </span>
-                <span class="pmb-help-happy-text" style="display:none"><?php printf(
-                    // translators: 1: opening link tag, 2: closing link tag
-                        __('Nice! %1$sPlease leave a review%2$s.', 'avpvh-print-website'),
-                        '<a href="https://wordpress.org/support/plugin/print-my-blog/reviews/" target="_blank" title="' . __('Plugin Reviews (opens in new tab)', 'avpvh-print-website') . '">',
-                        '</a>'
-                    ); ?></span>
-                <span class="pmb-help-sad-text" style="display:none"><?php printf(
-                    // translators: 1: opening link tag, 2: closing link tag.
-                        __('That’s disappointing. %1$sPlease tell us how to improve.%2$s', 'avpvh-print-website'),
-                        '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank" title="' . __('Plugin support forum (opens in new tab)', 'avpvh-print-website') . '">',
-                        '</a>'
-                    ); ?></span>
-            </div>
-        <?php }?>
         <div class="pmb-waiting-area">
             <h1 id='pmb-in-progress-h1' class="pmb-waiting-h1"><?php _e('Initializing', 'avpvh-print-website'); ?></h1>
         </div>
@@ -86,17 +60,8 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     <p><?php esc_html_e('Use your browser to print to PDF.', 'avpvh-print-website'); ?></p>
                     <?php
                 }
-                if(is_user_logged_in()) {
-                    ?>
-                    <a
-                            target="_blank"
-                            href="https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20quick%20print%3F"
-                            title="<?php esc_html_e('opens in new tab', 'avpvh-print-website'); ?>"
-                    >
-                        <?php esc_html_e('How?', 'avpvh-print-website'); ?>
-                    </a>
-                    <?php
-                } else {
+                // Browser-specific "how to save as PDF" hints.
+                {
                     if ($avpvh_prwb_browser === 'firefox') {
                         ?>
                         <details class="pmb-details">
@@ -294,8 +259,8 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     // translators: 1: date, 2: opening link tag, 3: closing link tag
                         esc_html__('Printed on %1$s using %2$sAV-PvH Print Website%3$s', 'avpvh-print-website'),
                         date_i18n(get_option('date_format')),
-                        '<a href="https://wordpress.org/plugins/print-my-blog/">',
-                        '</a>'
+                        '',
+                        ''
                     );
                 } elseif ($avpvh_prwb_show_date_printed) {
                     // translators: 1: date
@@ -306,8 +271,8 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 } elseif ($avpvh_prwb_show_credit) {
                     printf(
                         esc_html__('Printed using %1$sAV-PvH Print Website%2$s', 'avpvh-print-website'),
-                        '<a href="https://wordpress.org/plugins/print-my-blog/">',
-                        '</a>'
+                        '',
+                        ''
                     );
                 }
                 do_action('avpvh_prwb_print_page_after_printed_on', $avpvh_prwb_show_date_printed, $avpvh_prwb_show_credit);

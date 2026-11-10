@@ -27,7 +27,6 @@ class DefaultDesigns
                     'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -62,7 +61,6 @@ class DefaultDesigns
                     'description' => avpvh_prwb_get_contents($design_template->getDir() . 'descriptions/edit.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -112,7 +110,6 @@ class DefaultDesigns
                     'description' => avpvh_prwb_get_contents($design_template->getDir() . 'descriptions/classic.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -147,7 +144,6 @@ class DefaultDesigns
                     'description' => avpvh_prwb_get_contents($design_template->getDir() . 'descriptions/economical.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -200,7 +196,6 @@ class DefaultDesigns
                     'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -233,7 +228,6 @@ class DefaultDesigns
                     'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -272,7 +266,6 @@ class DefaultDesigns
                     'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -323,7 +316,6 @@ class DefaultDesigns
                     'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
@@ -375,7 +367,6 @@ class DefaultDesigns
                     'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [

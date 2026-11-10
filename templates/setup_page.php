@@ -48,8 +48,7 @@ avpvh_prwb_render_template('partials/free_header.php');
 					    ),
 					    'pdf' => array(
 						    'label' => esc_html__('Digital PDF', 'avpvh-print-website'),
-						    'help_text' => esc_html__('Make a PDF file, intended for reading from a computer or other device, using your browser or a browser extension.', 'avpvh-print-website'),
-						    'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20create%20a%20pdf%20using%20print%20my%20blog%3F'
+						    'help_text' => esc_html__('Make a PDF file, intended for reading from a computer or other device, using your browser or a browser extension.', 'avpvh-print-website')
 					    ),
 					    'epub' => array(
 						    'label' => esc_html__('eBook (ePub)', 'avpvh-print-website'),
@@ -61,9 +60,7 @@ avpvh_prwb_render_template('partials/free_header.php');
 					    ),
 					    'html' => array(
 						    'label' => esc_html__('HTML', 'avpvh-print-website'),
-						    'help_text' => esc_html__('Easily copy-and-paste into another program like Microsoft Word or Google Docs. Note: this is not recommended for customizing printouts, as other programs usually format the content poorly. Instead, use AV-PvH Print Website’s CSS classes to remove or add content from printouts.', 'avpvh-print-website'),
-						    'link' => 'https://wordpress.org/plugins/print-my-blog/#how%20do%20i%20remove%20post%20content%20from%20the%20printout%3F'
-
+						    'help_text' => esc_html__('Easily copy-and-paste into another program like Microsoft Word or Google Docs. Note: this is not recommended for customizing printouts, as other programs usually format the content poorly. Instead, use AV-PvH Print Website’s CSS classes to remove or add content from printouts.', 'avpvh-print-website')
 					    ),
 				    );
 				    foreach($formats as $key => $details){

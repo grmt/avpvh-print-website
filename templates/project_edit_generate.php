@@ -4,8 +4,6 @@
  * @var $project \Avpvh\PrintWebsite\orm\entities\Project
  * @var $steps_to_urls array
  * @var $current_step string
- * @var $review_url string
- * @var $suggest_review boolean
  */
 
 use Avpvh\PrintWebsite\controllers\Admin;

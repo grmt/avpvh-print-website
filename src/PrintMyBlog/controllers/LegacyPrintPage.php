@@ -380,15 +380,7 @@ class LegacyPrintPage extends BaseController
                     ),
                     'no_response' => esc_html__('No response from WP REST API.', 'avpvh-print-website'),
                     'error' => esc_html__('Sorry, There was a Problem 😢', 'avpvh-print-website'),
-                    'troubleshooting' => sprintf(
-                        //phpcs:disable Generic.Files.LineLength.TooLong
-                        // translators:1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag.
-                        esc_html__('%1$sRead our FAQs%2$s, then feel free to ask for help in %3$sthe support forum.%2$s', 'avpvh-print-website'),
-                        '<a href="https://wordpress.org/plugins/print-my-blog/#%0Athe%20print%20page%20says%20%E2%80%9Cthere%20seems%20to%20be%20an%20error%20initializing%E2%80%A6%E2%80%9D%2C%20or%20is%20stuck%20on%20%E2%80%9Cloading%20content%E2%80%9D%2C%20or%20i%20can%E2%80%99t%20filter%20by%20categories%20or%20terms%20from%20the%20print%20setup%20page%0A" target="_blank">',
-                        //phpcs:enable
-                        '</a>',
-                        '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank">'
-                    ),
+                    'troubleshooting' => '',
                     'comments' => esc_html__('Comments', 'avpvh-print-website'),
                     'no_comments' => esc_html__('No Comments', 'avpvh-print-website'),
                     // Legacy code, just leave the old sub-optimal translated text.

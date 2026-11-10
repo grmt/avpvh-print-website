@@ -39,12 +39,11 @@
 <h2><?php esc_html_e('Special Instructions', 'avpvh-print-website'); ?></h2>
 <p><?php esc_html_e('Note that in order to improve page layout, all images and figures snap to the nearest page edge.', 'avpvh-print-website'); ?></p>
 <p><?php esc_html_e('"Full width" images take up all columns and snap to the nearest page edge.','avpvh-print-website'); ?></p>
-<p><?php esc_html_e('"Wide width" images take up 2 columns and snap to the nearest page edge.','avpvh-print-website'); ?> <?php avpvh_prwb_pro_print_service_only_e(__('Only works with PMB’s Pro PDF Service.', 'avpvh-print-website')); ?></p>
+<p><?php esc_html_e('"Wide width" images take up 2 columns and snap to the nearest page edge.','avpvh-print-website'); ?></p>
 <p><?php
     printf(
-        esc_html__('%1$sAdd the CSS class "%2$s"%3$s to any images you don\'t want to snap like this.', 'avpvh-print-website'),
-        '<a href="https://printmy.blog/user-guide/design-layout-reference/print-my-blogs-css-classes/#pmb-dont-snap" target="_blank">',
-        'pmb-dont-snap',
-        '</a>'
+        // translators: %s: CSS class name
+        esc_html__('Add the CSS class "%s" to any images you don\'t want to snap like this.', 'avpvh-print-website'),
+        'pmb-dont-snap'
     );
 ?></p>
