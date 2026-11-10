@@ -1,19 +1,19 @@
 <?php
 /**
- * This function is only included when rendering Print My Blog
+ * This function is only included when rendering AV-PvH Print Website
  */
 
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\entities\Project;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\entities\Project;
 
 /**
  * Returns the post's anchor ID.
  * @param WP_Post|null $post
  * @return bool|false|string|WP_Error
  */
-function pmb_get_the_post_anchor($post = null)
+function avpvh_prwb_get_the_post_anchor($post = null)
 {
-    return pmb_convert_url_to_anchor(get_the_permalink($post));
+    return avpvh_prwb_convert_url_to_anchor(get_the_permalink($post));
 }
 
 /**
@@ -21,18 +21,18 @@ function pmb_get_the_post_anchor($post = null)
  *
  * @return string|string[]|void
  */
-function pmb_get_domain()
+function avpvh_prwb_get_domain()
 {
     return str_replace('http://','', site_url('', 'http'));
 }
 
 /**
- * Echoes the anchor ID for the post. Does not escape it (use pmb_permalink_as_attr
+ * Echoes the anchor ID for the post. Does not escape it (use avpvh_prwb_permalink_as_attr
  */
-function pmb_the_post_anchor()
+function avpvh_prwb_the_post_anchor()
 {
-    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped by pmb_convert_url_to_anchor
-    echo pmb_convert_url_to_anchor(pmb_get_the_post_anchor());
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped by avpvh_prwb_convert_url_to_anchor
+    echo avpvh_prwb_convert_url_to_anchor(avpvh_prwb_get_the_post_anchor());
 }
 
 /**
@@ -44,7 +44,7 @@ function pmb_the_post_anchor()
  * @param string $url
  * @return string|void
  */
-function pmb_convert_url_to_anchor($url)
+function avpvh_prwb_convert_url_to_anchor($url)
 {
     return str_replace(
         [
@@ -53,7 +53,7 @@ function pmb_convert_url_to_anchor($url)
             'http://www.',
             'https://',
             'http://',
-            pmb_get_domain(),
+            avpvh_prwb_get_domain(),
         ],
         [
             '-',
@@ -70,36 +70,36 @@ function pmb_convert_url_to_anchor($url)
 /**
  * @param string $relative_filepath filepath relative to the current design's templates directory
  * @param array $context_variables an array to extract into variables when rendering the template. Keys become variable names, values become their values.
- * @global Design $pmb_design
- * @global Project $pmb_project
- * @global \PrintMyBlog\entities\ProjectGeneration $pmb_project_generation
+ * @global Design $avpvh_prwb_design
+ * @global Project $avpvh_prwb_project
+ * @global \Avpvh\PrintWebsite\entities\ProjectGeneration $avpvh_prwb_project_generation
  */
-function pmb_include_design_template($relative_filepath, $context_variables = [])
+function avpvh_prwb_include_design_template($relative_filepath, $context_variables = [])
 {
     /**
-     * @var $pmb_design Design
+     * @var $avpvh_prwb_design Design
      */
-    global $pmb_project, $pmb_design, $pmb_project_generation;
+    global $avpvh_prwb_project, $avpvh_prwb_design, $avpvh_prwb_project_generation;
     extract($context_variables);
-    require $pmb_design->getDesignTemplate()->getTemplatePathToDivision($relative_filepath);
+    require $avpvh_prwb_design->getDesignTemplate()->getTemplatePathToDivision($relative_filepath);
 }
 
 /**
  * Add this to the HTML div that wraps a section and its subsections.
  * @param string $class
  */
-function pmb_section_wrapper_class($class = '')
+function avpvh_prwb_section_wrapper_class($class = '')
 {
     global $post;
-    $section = $post->pmb_section;
-    $pmb_classes = '';
-    if ($section instanceof \PrintMyBlog\orm\entities\ProjectSection) {
-        $pmb_classes = 'pmb-' . pmb_map_section_to_division($section) . '-wrapper pmb-section-wrapper';
+    $section = $post->avpvh_prwb_section;
+    $avpvh_prwb_classes = '';
+    if ($section instanceof \Avpvh\PrintWebsite\orm\entities\ProjectSection) {
+        $avpvh_prwb_classes = 'pmb-' . avpvh_prwb_map_section_to_division($section) . '-wrapper pmb-section-wrapper';
         if ($section->getSectionOrder() === 1) {
-            $pmb_classes .= ' pmb-first-section-wrapper';
+            $avpvh_prwb_classes .= ' pmb-first-section-wrapper';
         }
     }
-    echo 'class="' . esc_attr($pmb_classes . ' ' . $class) . '"';
+    echo 'class="' . esc_attr($avpvh_prwb_classes . ' ' . $class) . '"';
 }
 
 /**
@@ -107,25 +107,25 @@ function pmb_section_wrapper_class($class = '')
  * @param string $class
  * @return void echoes
  */
-function pmb_section_class($class = '')
+function avpvh_prwb_section_class($class = '')
 {
     global $post;
-    $section = $post->pmb_section;
-    $pmb_classes = '';
-    if ($section instanceof \PrintMyBlog\orm\entities\ProjectSection) {
-        $pmb_classes = ' pmb-section pmb-' . pmb_map_section_to_division($section) . ' pmb-height-' . $section->getHeight() . ' pmb-depth-' . $section->getDepth();
+    $section = $post->avpvh_prwb_section;
+    $avpvh_prwb_classes = '';
+    if ($section instanceof \Avpvh\PrintWebsite\orm\entities\ProjectSection) {
+        $avpvh_prwb_classes = ' pmb-section pmb-' . avpvh_prwb_map_section_to_division($section) . ' pmb-height-' . $section->getHeight() . ' pmb-depth-' . $section->getDepth();
         if ((int)$section->getSectionOrder() === 1) {
-            $pmb_classes .= ' pmb-first-section';
+            $avpvh_prwb_classes .= ' pmb-first-section';
         }
     }
-    post_class($pmb_classes . ' ' . $class);
+    post_class($avpvh_prwb_classes . ' ' . $class);
     echo 'data-height="' . esc_attr($section->getHeight()) . '" data-depth="' . esc_attr($section->getDepth()) . '"';
 }
 
 /**
  * Echoes the ID attribute and value for a PMB section wrapper tag.
  */
-function pmb_section_wrapper_id()
+function avpvh_prwb_section_wrapper_id()
 {
     global $post;
     echo 'id="' . esc_attr($post->post_name) . '-wrapper"';
@@ -134,36 +134,36 @@ function pmb_section_wrapper_id()
 /**
  * Echoes out the ID attribute to use on the section.
  */
-function pmb_section_id(){
-	echo 'id="' . esc_attr(pmb_get_the_post_anchor()) . '"';
+function avpvh_prwb_section_id(){
+	echo 'id="' . esc_attr(avpvh_prwb_get_the_post_anchor()) . '"';
 }
 
 /**
  * Returns the current post's permalink as an attribute
  * @return string|void
- * @deprecated use esc_attr(pmb_get_the_post_anchor())
+ * @deprecated use esc_attr(avpvh_prwb_get_the_post_anchor())
  */
-function pmb_permalink_as_attr(){
-    return esc_attr(pmb_get_the_post_anchor());
+function avpvh_prwb_permalink_as_attr(){
+    return esc_attr(avpvh_prwb_get_the_post_anchor());
 }
 
 /**
  * Echoes out the section's title and makes sure to add the CSS class PMB expects (especially important for finding the table of contents.)
  */
-function pmb_the_title()
+function avpvh_prwb_the_title()
 {
-    echo '<h1 class="pmb-title">' . esc_html(pmb_get_title()) . '</h1>';
+    echo '<h1 class="pmb-title">' . esc_html(avpvh_prwb_get_title()) . '</h1>';
 }
 
 /**
  * Gets the current post project's title.
  * @return string
  */
-function pmb_get_title()
+function avpvh_prwb_get_title()
 {
     $post = get_post();
     if ($post instanceof WP_Post) {
-        $title_from_meta = get_post_meta($post->ID, 'pmb_title', true);
+        $title_from_meta = get_post_meta($post->ID, 'avpvh_prwb_title', true);
         if ($title_from_meta) {
             $title = $title_from_meta;
         } else {
@@ -181,10 +181,10 @@ function pmb_get_title()
  * @param mixed $default
  * @return bool
  */
-function pmb_design_uses($post_content_thing, $default)
+function avpvh_prwb_design_uses($post_content_thing, $default)
 {
-    global $pmb_design;
-    $post_content = $pmb_design->getSetting('post_content');
+    global $avpvh_prwb_design;
+    $post_content = $avpvh_prwb_design->getSetting('post_content');
     if (! $post_content) {
         return $default;
     }
@@ -199,7 +199,7 @@ function pmb_design_uses($post_content_thing, $default)
  *
  * @return string
  */
-function pmb_section_template_selector($selected_template, Project $project)
+function avpvh_prwb_section_template_selector($selected_template, Project $project)
 {
     $options = $project->getSectionTemplateOptions();
     $html = '<select class="pmb-template">';
@@ -217,7 +217,7 @@ function pmb_section_template_selector($selected_template, Project $project)
  * @param string $extra_attrs
  * @return string HTML for the post type's icon
  */
-function pmb_post_type_icon_html(WP_Post_Type $post_type, $extra_css_classes = '', $extra_attrs = '')
+function avpvh_prwb_post_type_icon_html(WP_Post_Type $post_type, $extra_css_classes = '', $extra_attrs = '')
 {
     $icon = $post_type->menu_icon;
     if (empty($icon)) {
@@ -242,7 +242,7 @@ function pmb_post_type_icon_html(WP_Post_Type $post_type, $extra_css_classes = '
 /**
  * Copy of WP's deprecated the_meta() function: echoes out the post's meta keys and values.
  */
-function pmb_the_meta() {
+function avpvh_prwb_the_meta() {
     $keys = get_post_custom_keys();
     if ( $keys ) {
         $li_html = '';

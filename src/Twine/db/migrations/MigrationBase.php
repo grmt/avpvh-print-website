@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\db\migrations;
+namespace Avpvh\PrintWebsite\Twine\db\migrations;
 
 /**
  * Class MigrationBase
- * @package Twine\db\migrations
+ * @package Avpvh\PrintWebsite\Twine\db\migrations
  */
 abstract class MigrationBase
 {

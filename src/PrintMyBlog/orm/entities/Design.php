@@ -1,19 +1,19 @@
 <?php
 
-namespace PrintMyBlog\orm\entities;
+namespace Avpvh\PrintWebsite\orm\entities;
 
 use Exception;
-use PrintMyBlog\entities\DesignTemplate;
-use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
-use PrintMyBlog\services\DesignTemplateRegistry;
-use Twine\forms\base\FormSection;
-use Twine\forms\inputs\FormInputBase;
-use Twine\orm\entities\PostWrapper;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
+use Avpvh\PrintWebsite\exceptions\DesignTemplateDoesNotExist;
+use Avpvh\PrintWebsite\services\DesignTemplateRegistry;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\orm\entities\PostWrapper;
 
 /**
  * Class ProjectDesign
  * Describes a design, an instance of the design template
- * @package PrintMyBlog\domain
+ * @package Avpvh\PrintWebsite\domain
  */
 class Design extends PostWrapper
 {

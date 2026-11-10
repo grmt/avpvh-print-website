@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\strategies\display\ButtonDisplay;
-use Twine\forms\strategies\normalization\TextNormalization;
-use Twine\forms\strategies\validation\PlaintextValidation;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\ButtonDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\TextNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\PlaintextValidation;
 
 /**
  * Button_Input
@@ -28,7 +28,7 @@ class ButtonInput extends FormInputBase
     public function __construct($options = array())
     {
         if (empty($options['button_content'])) {
-            $options['button_content'] = esc_html__('Button', 'print-my-blog');
+            $options['button_content'] = esc_html__('Button', 'avpvh-print-website');
         }
         $this->setDisplayStrategy(new ButtonDisplay());
         $this->setNormalizationStrategy(new TextNormalization());

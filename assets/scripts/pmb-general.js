@@ -1,11 +1,11 @@
 jQuery(document).ready(function(){
-    jQuery('.pmb_spin_on_click').on('click', function() {
-        pmb_doing_button(jQuery(this));
+    jQuery('.avpvh_prwb_spin_on_click').on('click', function() {
+        avpvh_prwb_doing_button(jQuery(this));
     });
-    pmb_setup_hover_helps();
+    avpvh_prwb_setup_hover_helps();
 });
 
-function pmb_setup_hover_helps(){
+function avpvh_prwb_setup_hover_helps(){
     jQuery('.pmb-hover').hover(function() {
         var that = jQuery(this);
         if(typeof(that.attr('data-help')) !== 'undefined'){
@@ -39,19 +39,19 @@ function pmb_setup_hover_helps(){
  *
  * @param jqelement
  */
-function pmb_doing_button(jqelement){
+function avpvh_prwb_doing_button(jqelement){
     var current_html = jqelement.html();
     jqelement.append('<div class="pmb-spinner-container"><div class="pmb-spinner"></div></div>')
     jqelement.addClass('pmb-disabled');
 }
 
-function pmb_stop_doing_button(jqelement){
+function avpvh_prwb_stop_doing_button(jqelement){
     jqelement.children('.pmb-spinner-container').remove();
     jqelement.removeClass('pmb-disabled');
 }
 
 // converters for passing to jQuery ajax requests.
-var pmb_jquery_ajax_converters = {
+var avpvh_prwb_jquery_ajax_converters = {
     'text json': function(result) {
         let new_result = result;
         // Sometimes other plugins echo out junk before the start of the real JSON response.

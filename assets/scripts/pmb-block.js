@@ -2,8 +2,8 @@ var el = wp.element.createElement,
     registerBlockType = wp.blocks.registerBlockType,
     ServerSideRender = wp.components.ServerSideRender;
 
-registerBlockType( 'printmyblog/setupform', {
-    title: 'Print My Blog',
+registerBlockType( 'avpvh-print-website/setupform', {
+    title: 'AV-PvH Print Website',
 
     icon: 'universal-access-alt',
 
@@ -12,7 +12,7 @@ registerBlockType( 'printmyblog/setupform', {
     edit: function(props) {
         return (
             el(ServerSideRender, {
-                block: "printmyblog/setupform",
+                block: "avpvh-print-website/setupform",
                 attributes: props.attributes
             })
         );

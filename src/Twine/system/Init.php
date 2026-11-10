@@ -1,12 +1,12 @@
 <?php
 
-namespace Twine\system;
+namespace Avpvh\PrintWebsite\Twine\system;
 
-use PrintMyBlog\compatibility\DetectAndActivate;
+use Avpvh\PrintWebsite\compatibility\DetectAndActivate;
 
 /**
  * Class Init
- * @package Twine\system
+ * @package Avpvh\PrintWebsite\Twine\system
  */
 abstract class Init
 {
@@ -64,7 +64,7 @@ abstract class Init
     abstract protected function includes();
 
     /**
-     * Makes use of your context's 'Twine\system\RequestType' and 'Twine\system\VersionHistory'
+     * Makes use of your context's 'Avpvh\PrintWebsite\Twine\system\RequestType' and 'Avpvh\PrintWebsite\Twine\system\VersionHistory'
      * to figure out the type of request and record the version history
      */
     protected function initRequest()
@@ -72,13 +72,13 @@ abstract class Init
         /**
          * @var $request_type RequestType
          */
-        $request_type = $this->context->reuse('Twine\system\RequestType');
+        $request_type = $this->context->reuse('Avpvh\PrintWebsite\Twine\system\RequestType');
         $request_type->getRequestType();
 
         /**
          * @var $version_history VersionHistory
          */
-        $version_history = $this->context->reuse('Twine\system\VersionHistory');
+        $version_history = $this->context->reuse('Avpvh\PrintWebsite\Twine\system\VersionHistory');
         $version_history->maybeRecordVersionChange();
     }
 

@@ -1,35 +1,35 @@
 /**
  * Functions that does a bunch of standard wrap-up function calls done by pretty well all designs.
  */
-function pmb_standard_print_page_wrapup(){
-    pmb_remove_unsupported_content();
-    pmb_fix_protocols();
-    pmb_add_header_classes();
-    pmb_fix_wp_videos();
-    pmb_reveal_dynamic_content();
-    pmb_check_project_size('#pmb-print-page-warnings');
+function avpvh_prwb_standard_print_page_wrapup(){
+    avpvh_prwb_remove_unsupported_content();
+    avpvh_prwb_fix_protocols();
+    avpvh_prwb_add_header_classes();
+    avpvh_prwb_fix_wp_videos();
+    avpvh_prwb_reveal_dynamic_content();
+    avpvh_prwb_check_project_size('#pmb-print-page-warnings');
 }
 /**
  * Checks if the project is really big, in which case suggests either reducing splitting it up or reducing image quality
  * @var string warning_element_selector jQuery selector indicating where to place the warning if there is one.
  */
-function pmb_check_project_size(warning_element_selector){
+function avpvh_prwb_check_project_size(warning_element_selector){
     //check for really, really big printouts
     var many_articles = jQuery('article').length > 200;
     // don't warn about many images if they've already reduced their quality
     var many_images = jQuery('img').length > 200 &&
-        (typeof pmb_design_options == 'object' &&
-            typeof pmb_design_options.image_quality === 'string' &&
-            ['', 'uploaded'].includes(pmb_design_options.image_quality)
+        (typeof avpvh_prwb_design_options == 'object' &&
+            typeof avpvh_prwb_design_options.image_quality === 'string' &&
+            ['', 'uploaded'].includes(avpvh_prwb_design_options.image_quality)
         );
 
     var warning_text = false;
     switch(true){
         case many_articles:
-            warning_text = pmb_pro.translations.many_articles;
+            warning_text = avpvh_prwb_pro.translations.many_articles;
             break;
         case many_images:
-            warning_text = pmb_pro.translations.many_images;
+            warning_text = avpvh_prwb_pro.translations.many_images;
             break;
     }
     if(warning_text){
@@ -43,7 +43,7 @@ function pmb_check_project_size(warning_element_selector){
  * Looks at each of the types of tags provided, then replaces their external resources with a proxied-local one.
  * Useful when the conversion technology (eg html-to-epub) can't access external resources.
  * Treats resources from whitelisted_domains as if they were local.
- * Triggers document.pmb_external_resouces_loaded when finished.
+ * Triggers document.avpvh_prwb_external_resouces_loaded when finished.
  * eg
  * ```
  * var erc = new PmbExternalResourceCacher();
@@ -53,8 +53,8 @@ function pmb_check_project_size(warning_element_selector){
  * @param array whitelisted_external_domains
  */
 function PmbExternalResourceCacher() {
-    this.domains_to_not_map = pmb_pro.domains_to_not_map;
-    this.external_resource_mapping = pmb_pro.external_resouce_mapping;
+    this.domains_to_not_map = avpvh_prwb_pro.domains_to_not_map;
+    this.external_resource_mapping = avpvh_prwb_pro.external_resouce_mapping;
     this.external_resources_to_cache = [];
     this.resources_pending_caching_count = 0;
 
@@ -151,7 +151,7 @@ function PmbExternalResourceCacher() {
     }
 
     this.done_swapping_external_resources = function(){
-        jQuery(document).trigger('pmb_external_resouces_loaded');
+        jQuery(document).trigger('avpvh_prwb_external_resouces_loaded');
     }
 
     /**
@@ -202,10 +202,10 @@ function PmbExternalResourceCacher() {
         this.resources_pending_caching_count++;
         var that = this;
         jQuery.post(
-            pmb_pro.ajaxurl,
+            avpvh_prwb_pro.ajaxurl,
             {
-                '_pmb_nonce': pmb_pro.pmb_nonce,
-                'action': 'pmb_fetch_external_resource',
+                '_avpvh_prwb_nonce': avpvh_prwb_pro.avpvh_prwb_nonce,
+                'action': 'avpvh_prwb_fetch_external_resource',
                 'resource_url': url,
             },
             function(data, textStatus){
@@ -234,10 +234,10 @@ function PmbExternalResourceCacher() {
 
 /**
  * All designs and formats should do these things as soon as the page is loaded.
- * Stuff that might need to wait for other plugins' JS to run should listen for the document.pmb_doc_conversion_requested event.
+ * Stuff that might need to wait for other plugins' JS to run should listen for the document.avpvh_prwb_doc_conversion_requested event.
  */
 jQuery(document).ready(function(){
-    pmb_prevent_lazy_loading();
+    avpvh_prwb_prevent_lazy_loading();
     // Don't just hide screen-only content, remove it entirely so there's no chance of it messing up the document.
     jQuery('.pmb-screen-only').remove();
 });
@@ -245,26 +245,26 @@ jQuery(document).ready(function(){
 /**
  * It turns out we can't rely on the order in which document.ready and window.load are triggered (usually document.ready
  * is first, but it turns out to be random if images are lazy-loaded).
- * So code that wants to wait for them to both complete can instead listen for document.pmb_document_done_and_window_loaded.
- * Code that wants to run on either of them that runs first can run on pmb_document_done_or_window_loaded
+ * So code that wants to wait for them to both complete can instead listen for document.avpvh_prwb_document_done_and_window_loaded.
+ * Code that wants to run on either of them that runs first can run on avpvh_prwb_document_done_or_window_loaded
  */
-var pmb_window_load_fired = false;
-var pmb_done_document_ready_tasks = false;
+var avpvh_prwb_window_load_fired = false;
+var avpvh_prwb_done_document_ready_tasks = false;
 
 jQuery(document).ready(function(){
-    pmb_done_document_ready_tasks = true;
-    if( pmb_window_load_fired){
-        jQuery(document).trigger('pmb_document_ready_and_window_loaded');
+    avpvh_prwb_done_document_ready_tasks = true;
+    if( avpvh_prwb_window_load_fired){
+        jQuery(document).trigger('avpvh_prwb_document_ready_and_window_loaded');
     } else {
-        jQuery(document).trigger('pmb_document_ready_or_window_loaded');
+        jQuery(document).trigger('avpvh_prwb_document_ready_or_window_loaded');
     }
 });
 
 jQuery(window).on("load", function() {
-    pmb_window_load_fired = true;
-    if( pmb_done_document_ready_tasks){
-        jQuery(document).trigger('pmb_document_ready_and_window_loaded');
+    avpvh_prwb_window_load_fired = true;
+    if( avpvh_prwb_done_document_ready_tasks){
+        jQuery(document).trigger('avpvh_prwb_document_ready_and_window_loaded');
     } else {
-        jQuery(document).trigger('pmb_document_ready_or_window_loaded');
+        jQuery(document).trigger('avpvh_prwb_document_ready_or_window_loaded');
     }
 });

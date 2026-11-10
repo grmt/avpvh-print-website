@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\helpers\InputOption;
-use Twine\forms\strategies\display\SelectDisplay;
-use Twine\forms\strategies\validation\EnumValidation;
+use Avpvh\PrintWebsite\Twine\forms\helpers\InputOption;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\SelectDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\EnumValidation;
 
 /**
  * Class SelectInput

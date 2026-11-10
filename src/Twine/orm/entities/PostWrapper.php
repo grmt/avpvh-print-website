@@ -1,18 +1,18 @@
 <?php
 
-namespace Twine\orm\entities;
+namespace Avpvh\PrintWebsite\Twine\orm\entities;
 
-use PrintMyBlog\system\CustomPostTypes;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
 use WP_Post;
 
 /**
  * Class PostWrapper
- * @package Twine\orm\entities
+ * @package Avpvh\PrintWebsite\Twine\orm\entities
  */
 class PostWrapper
 {
 
-    const META_PREFIX = '_pmb_';
+    const META_PREFIX = '_avpvh_prwb_';
     /**
      * @var WP_Post
      */
@@ -54,7 +54,7 @@ class PostWrapper
     }
 
     /**
-     * Get postmetas and prepend pmb_ to the provided meta name.
+     * Get postmetas and prepend avpvh_prwb_ to the provided meta name.
      * @param string $meta_name
      * @return mixed
      */
@@ -117,7 +117,7 @@ class PostWrapper
     }
 
     /**
-     * Saves the meta and adds pmb_ to the meta key.
+     * Saves the meta and adds avpvh_prwb_ to the meta key.
      * @param string $meta_name
      * @param mixed $new_value
      *
@@ -129,7 +129,7 @@ class PostWrapper
     }
 
     /**
-     * Adds a new meta row, prepends pmb_ to the meta key.
+     * Adds a new meta row, prepends avpvh_prwb_ to the meta key.
      * @param string $meta_name
      * @param mixed $new_value
      *
@@ -157,7 +157,7 @@ class PostWrapper
     }
 
     /**
-     * Deletes meta, prepends pmb_ to the meta key.
+     * Deletes meta, prepends avpvh_prwb_ to the meta key.
      * @param string $meta_name
      * @param mixed $value
      * @return bool
@@ -194,12 +194,12 @@ class PostWrapper
         return $this->duplicatePost(
             [
                 // translators: 1 post title
-                'post_title' => sprintf(__('%s (print material)', 'print-my-blog'), $this->getWpPost()->post_title),
+                'post_title' => sprintf(__('%s (print material)', 'avpvh-print-website'), $this->getWpPost()->post_title),
                 'post_type' => CustomPostTypes::CONTENT,
                 'post_status' => 'private',
             ],
             [
-                '_pmb_original_post' => $this->getWpPost()->ID,
+                '_avpvh_prwb_original_post' => $this->getWpPost()->ID,
             ]
         );
     }
@@ -227,7 +227,7 @@ class PostWrapper
                 'post_password'  => $post->post_password,
                 'post_status'    => $post->post_status,
                 // translators: 1: the name of the original post being duplicated
-                'post_title'     => sprintf(__('%s (copy)', 'print-my-blog'), $post->post_title),
+                'post_title'     => sprintf(__('%s (copy)', 'avpvh-print-website'), $post->post_title),
                 'post_type'      => $post->post_type,
                 'to_ping'        => $post->to_ping,
                 'menu_order'     => $post->menu_order,

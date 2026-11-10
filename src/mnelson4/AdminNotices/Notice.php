@@ -10,7 +10,7 @@
  * @link      https://github.com/mnelson4/admin-notices
  */
 
-namespace mnelson4\AdminNotices;
+namespace Avpvh\PrintWebsite\mnelson4\AdminNotices;
 
 /**
  * The Admin_Notice class, responsible for creating admin notices.
@@ -50,11 +50,11 @@ class Notice
     private $title;
 
     /**
-     * An instance of the \mnelson4\AdminNotices\Dismiss object.
+     * An instance of the \Avpvh\PrintWebsite\mnelson4\AdminNotices\Dismiss object.
      *
      * @access public
      * @since 1.0
-     * @var \mnelson4\AdminNotices\Dismiss
+     * @var \Avpvh\PrintWebsite\mnelson4\AdminNotices\Dismiss
      */
     public $dismiss;
 

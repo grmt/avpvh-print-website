@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
-use Twine\forms\inputs\ButtonInput;
-use Twine\forms\strategies\normalization\NormalizationBase;
-use Twine\forms\strategies\normalization\NormalizationStrategyBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\ButtonInput;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\NormalizationBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\NormalizationStrategyBase;
 
 /**
  * Class ButtonDisplay

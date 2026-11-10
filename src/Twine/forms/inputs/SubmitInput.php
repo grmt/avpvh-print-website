@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\strategies\display\SubmitInputDisplay;
-use Twine\forms\strategies\normalization\TextNormalization;
-use Twine\forms\strategies\validation\PlaintextValidation;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\SubmitInputDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\TextNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\PlaintextValidation;
 
 /**
  * SubmitInput
@@ -24,7 +24,7 @@ class SubmitInput extends FormInputBase
     public function __construct($options = array())
     {
         if (empty($options['default'])) {
-            $options['default'] = esc_html__('Submit', 'print-my-blog');
+            $options['default'] = esc_html__('Submit', 'avpvh-print-website');
         }
         $this->setDisplayStrategy(new SubmitInputDisplay());
         $this->setNormalizationStrategy(new TextNormalization());

@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
 use EventEspresso\core\services\validators\URLValidator;
 use InvalidArgumentException;
-use Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 
 /**
  * Class UrlValidation

@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
 use Google\Site_Kit\Core\Util\Input;
-use Twine\forms\helpers\InputOption;
+use Avpvh\PrintWebsite\Twine\forms\helpers\InputOption;
 
 /**
  * Class FontInput
- * @package Twine\forms\inputs
+ * @package Avpvh\PrintWebsite\Twine\forms\inputs
  */
 class FontInput extends SelectInput
 {
@@ -19,28 +19,28 @@ class FontInput extends SelectInput
     {
         if(isset($args['format']) && strtolower($args['format']) === 'epub'){
             $options = [
-                '' => new InputOption(__('Default', 'print-my-blog')),
-                'roboto' => new InputOption(__('Roboto', 'print-my-blog')),
-                'Arial' => new InputOption(__('Arial', 'print-my-blog')),
-                'Baskerville' => new InputOption(__('Baskerville', 'print-my-blog')),
-                'bookerly' => new InputOption(__('Bookerly', 'print-my-blog')),
-                'georgia' => new InputOption(__('Georgia', 'print-my-blog')),
-                'helvetica' => new InputOption(__('Helvetica', 'print-my-blog')),
-                'lucida console' => new InputOption(__('Lucida Console', 'print-my-blog')),
-                'palatino linotype' => new InputOption(__('Palatino Linotype', 'print-my-blog')),
-                'verdana' => new InputOption(__('Verdana', 'print-my-blog')),
+                '' => new InputOption(__('Default', 'avpvh-print-website')),
+                'roboto' => new InputOption(__('Roboto', 'avpvh-print-website')),
+                'Arial' => new InputOption(__('Arial', 'avpvh-print-website')),
+                'Baskerville' => new InputOption(__('Baskerville', 'avpvh-print-website')),
+                'bookerly' => new InputOption(__('Bookerly', 'avpvh-print-website')),
+                'georgia' => new InputOption(__('Georgia', 'avpvh-print-website')),
+                'helvetica' => new InputOption(__('Helvetica', 'avpvh-print-website')),
+                'lucida console' => new InputOption(__('Lucida Console', 'avpvh-print-website')),
+                'palatino linotype' => new InputOption(__('Palatino Linotype', 'avpvh-print-website')),
+                'verdana' => new InputOption(__('Verdana', 'avpvh-print-website')),
             ];
         } else {
             $options = [
-                'arial' => new InputOption(__('Arial', 'print-my-blog')),
-                'courier new' => new InputOption(__('Courier New', 'print-my-blog')),
-                'georgia' => new InputOption(__('Georgia', 'print-my-blog')),
-                'impact' => new InputOption(__('Impact', 'print-my-blog')),
-                'lucida console' => new InputOption(__('Lucida Console', 'print-my-blog')),
-                'palatino linotype' => new InputOption(__('Palatino Linotype', 'print-my-blog')),
-                'tahoma' => new InputOption(__('Tahoma', 'print-my-blog')),
-                'times new roman' => new InputOption(__('Times New Roman', 'print-my-blog')),
-                'verdana' => new InputOption(__('Verdana', 'print-my-blog')),
+                'arial' => new InputOption(__('Arial', 'avpvh-print-website')),
+                'courier new' => new InputOption(__('Courier New', 'avpvh-print-website')),
+                'georgia' => new InputOption(__('Georgia', 'avpvh-print-website')),
+                'impact' => new InputOption(__('Impact', 'avpvh-print-website')),
+                'lucida console' => new InputOption(__('Lucida Console', 'avpvh-print-website')),
+                'palatino linotype' => new InputOption(__('Palatino Linotype', 'avpvh-print-website')),
+                'tahoma' => new InputOption(__('Tahoma', 'avpvh-print-website')),
+                'times new roman' => new InputOption(__('Times New Roman', 'avpvh-print-website')),
+                'verdana' => new InputOption(__('Verdana', 'avpvh-print-website')),
             ];
         }
 

@@ -10,7 +10,7 @@
  * @link      https://github.com/mnelson4/admin-notices
  */
 
-namespace mnelson4\AdminNotices;
+namespace Avpvh\PrintWebsite\mnelson4\AdminNotices;
 
 /**
  * The Admin_Notice class, responsible for creating admin notices.
@@ -60,9 +60,9 @@ class Notices
         if($show){
             wp_enqueue_script(
                 'wptrt-dismiss',
-                MNELSON4_JS_URL . 'dismiss-notice.js',
+                AVPVH_PRWB_MNELSON4_JS_URL . 'dismiss-notice.js',
                 ['jquery','common'],
-                filemtime(MNELSON4_JS_DIR . 'dismiss-notice.js'),
+                filemtime(AVPVH_PRWB_MNELSON4_JS_DIR . 'dismiss-notice.js'),
                 true
             );
         }

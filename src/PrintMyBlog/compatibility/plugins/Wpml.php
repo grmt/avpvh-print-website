@@ -1,32 +1,32 @@
 <?php
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
-use PrintMyBlog\entities\ProjectGeneration;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\orm\entities\ProjectSection;
-use PrintMyBlog\orm\managers\DesignManager;
-use PrintMyBlog\orm\managers\ProjectManager;
-use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
-use PrintMyBlog\system\CustomPostTypes;
+use Avpvh\PrintWebsite\entities\ProjectGeneration;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\orm\entities\ProjectSection;
+use Avpvh\PrintWebsite\orm\managers\DesignManager;
+use Avpvh\PrintWebsite\orm\managers\ProjectManager;
+use Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
 use SitePress;
-use Twine\forms\base\FormSection;
-use Twine\forms\base\FormSectionHtml;
-use Twine\forms\helpers\InputOption;
-use Twine\forms\inputs\SelectInput;
-use Twine\forms\inputs\SelectRevealInput;
-use Twine\helpers\Array2;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionHtml;
+use Avpvh\PrintWebsite\Twine\forms\helpers\InputOption;
+use Avpvh\PrintWebsite\Twine\forms\inputs\SelectInput;
+use Avpvh\PrintWebsite\Twine\forms\inputs\SelectRevealInput;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 use WP_Post;
 use WP_Query;
 use wpml_get_active_languages;
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 use WPML_Post_Status_Display;
 
 /**
  * Class Wpml
- * @package PrintMyBlog\compatibility\plugins
+ * @package Avpvh\PrintWebsite\compatibility\plugins
  */
 class Wpml extends CompatibilityBase
 {
@@ -61,43 +61,43 @@ class Wpml extends CompatibilityBase
     public function setHooks()
     {
         // when activating make sure we create the needed translations of PMB default content
-        add_action('PrintMyBlog\system\Activation->install done', [$this, 'fixPmbContentTranslations']);
+        add_action('Avpvh\PrintWebsite\system\Activation->install done', [$this, 'fixPmbContentTranslations']);
         // add a filter for language on the content editing page
-        add_action('pmb__project_edit_content__filters_top', [$this, 'addLanguageFilter'], 1);
+        add_action('avpvh_prwb__project_edit_content__filters_top', [$this, 'addLanguageFilter'], 1);
 
         // change the WP_Query to only include the selected language on Ajax requests
-        add_filter('\PrintMyBlog\controllers\Ajax->handlePostSearch $query_params', [$this, 'setupWpQueryWithWpml']);
+        add_filter('\Avpvh\PrintWebsite\controllers\Ajax->handlePostSearch $query_params', [$this, 'setupWpQueryWithWpml']);
 
         // change the print page's language according to the project
         add_filter(
-            '\PrintMyBlog\controllers\Admin::enqueueScripts pmb_ajax',
+            '\Avpvh\PrintWebsite\controllers\Admin::enqueueScripts avpvh_prwb_ajax',
             [$this, 'changeUrlToProjectLanguage'],
             10,
             2
         );
         add_filter(
-            '\PrintMyBlog\controllers\Admin::enqueueScripts site_url',
+            '\Avpvh\PrintWebsite\controllers\Admin::enqueueScripts site_url',
             [$this, 'changeUrlToProjectLanguage'],
             10,
             2
         );
 
         // add translation options directly to project editing page
-        add_action('pmb_content_items__project-item-title end', [$this, 'showTranslationsOnProjectItems'], 10, 6);
+        add_action('avpvh_prwb_content_items__project-item-title end', [$this, 'showTranslationsOnProjectItems'], 10, 6);
 
         // translate posts when generating a project
-        add_filter('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', [$this, 'sortTranslatedPosts'], 10, 2);
+        add_filter('\Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', [$this, 'sortTranslatedPosts'], 10, 2);
         add_action('project_edit_generate__under_header', [$this, 'addTranslationOptions'], 10, 2);
-        add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start', [$this, 'setTranslatedProject']);
-        add_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this, 'unsetTranslatedProject']);
-        add_action('wp_ajax_pmb_update_project_lang', [$this, 'handleAjaxUpdateProjectLanguage']);
+        add_action('\Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start', [$this, 'setTranslatedProject']);
+        add_action('\Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean', [$this, 'unsetTranslatedProject']);
+        add_action('wp_ajax_avpvh_prwb_update_project_lang', [$this, 'handleAjaxUpdateProjectLanguage']);
 
         // all projects are in the site's default language and then translated from the "generate" page
         add_action('admin_enqueue_scripts', [$this, 'enqueueWpmlCompatAssets']);
 
         // when designs and project metadata are saved, make those changes to their translations too
-        add_action('PrintMyBlog\controllers\Admin->saveProjectCustomizeDesign done', [$this, 'updateTranslatedDesignsToo'], 10, 4);
-        add_action('PrintMyBlog\controllers\Admin->saveProjectMetadata done', [$this, 'updateTranslatedProjectsToo'], 10, 3);
+        add_action('Avpvh\PrintWebsite\controllers\Admin->saveProjectCustomizeDesign done', [$this, 'updateTranslatedDesignsToo'], 10, 4);
+        add_action('Avpvh\PrintWebsite\controllers\Admin->saveProjectMetadata done', [$this, 'updateTranslatedProjectsToo'], 10, 3);
 
         // When a new project is created, it's created with the language last set in the WPML topbar--but we want it to always be the
         // default language. So fix that after each time
@@ -128,11 +128,11 @@ class Wpml extends CompatibilityBase
     public function enqueueWpmlCompatAssets($hook)
     {
         // PMB project pages are all treated as if they're in the site's primary language
-        if ($hook === 'toplevel_page_print-my-blog-projects') {
+        if ($hook === 'toplevel_page_avpvh-print-website-projects') {
             global $sitepress;
             $sitepress->switch_lang(wpml_get_default_language());
             wp_add_inline_style(
-                'pmb_common',
+                'avpvh-print-website-common',
                 '/* Hide WPML language switcher on PMB project pages as it doesn\'t make sense there. All projects are in the main languager then translated*/
             #wp-admin-bar-WPML_ALS{
                 display:none;
@@ -164,7 +164,7 @@ class Wpml extends CompatibilityBase
         // or its a project or design that is not for the primary language (their original entry must always be in the primary language)
         // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-        $pmb_stuff_to_fix = $wpdb->get_results(
+        $avpvh_prwb_stuff_to_fix = $wpdb->get_results(
             $wpdb->prepare(
                 "SELECT * FROM {$wpdb->posts} posts
             LEFT JOIN {$wpdb->prefix}icl_translations translations ON translations.element_type=CONCAT('post_', posts.post_type) AND posts.ID=translations.element_id
@@ -186,7 +186,7 @@ class Wpml extends CompatibilityBase
             ARRAY_A
         );
         // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-        foreach ($pmb_stuff_to_fix as $post_needing_update) {
+        foreach ($avpvh_prwb_stuff_to_fix as $post_needing_update) {
             $sitepress->set_element_language_details(
                 $post_needing_update['ID'],
                 'post_' . $post_needing_update['post_type'],
@@ -299,7 +299,7 @@ class Wpml extends CompatibilityBase
         add_filter('posts_request', [$this, 'postsRequest']);
 
         // and remember to re-add WPML's filters where we're done
-        add_filter('\PrintMyBlog\controllers\Ajax->handlePostSearch $posts', [$this, 'doneWpQuery']);
+        add_filter('\Avpvh\PrintWebsite\controllers\Ajax->handlePostSearch $posts', [$this, 'doneWpQuery']);
         return $wp_query;
     }
 
@@ -408,11 +408,11 @@ class Wpml extends CompatibilityBase
      */
     public function setTranslatedProject()
     {
-        global $pmb_project, $pmb_wpml_original_project, $pmb_design, $pmb_wpml_original_design;
-        $pmb_wpml_original_project = $pmb_project;
-        $pmb_wpml_original_design = $pmb_design;
-        $pmb_project = $this->project_manager->getById(wpml_object_id_filter($pmb_project->getWpPost()->ID, 'post', true));
-        $pmb_design = $this->design_manager->getById(wpml_object_id_filter($pmb_design->getWpPost()->ID, 'post', true));
+        global $avpvh_prwb_project, $avpvh_prwb_wpml_original_project, $avpvh_prwb_design, $avpvh_prwb_wpml_original_design;
+        $avpvh_prwb_wpml_original_project = $avpvh_prwb_project;
+        $avpvh_prwb_wpml_original_design = $avpvh_prwb_design;
+        $avpvh_prwb_project = $this->project_manager->getById(wpml_object_id_filter($avpvh_prwb_project->getWpPost()->ID, 'post', true));
+        $avpvh_prwb_design = $this->design_manager->getById(wpml_object_id_filter($avpvh_prwb_design->getWpPost()->ID, 'post', true));
     }
 
     /**
@@ -420,9 +420,9 @@ class Wpml extends CompatibilityBase
      */
     public function unsetTranslatedProject()
     {
-        global $pmb_project, $pmb_wpml_original_project, $pmb_design, $pmb_wpml_original_design;
-        $pmb_project = $pmb_wpml_original_project;
-        $pmb_design = $pmb_wpml_original_design;
+        global $avpvh_prwb_project, $avpvh_prwb_wpml_original_project, $avpvh_prwb_design, $avpvh_prwb_wpml_original_design;
+        $avpvh_prwb_project = $avpvh_prwb_wpml_original_project;
+        $avpvh_prwb_design = $avpvh_prwb_wpml_original_design;
     }
 
     /**
@@ -465,7 +465,7 @@ class Wpml extends CompatibilityBase
                 $design_translations_html .= $html_helper->div(
                     sprintf(
                     // translators: %s: design name
-                        __('Translate %s Design', 'print-my-blog'),
+                        __('Translate %s Design', 'avpvh-print-website'),
                         esc_html($design->getWpPost()->post_title)
                     )
                     . $post_status_display->get_status_html($design->getWpPost()->ID, $language_code)
@@ -478,12 +478,12 @@ class Wpml extends CompatibilityBase
                             $html_helper->h2(
                                 sprintf(
                                 // translators: %s: language name.
-                                    __('%s Translations', 'print-my-blog'),
+                                    __('%s Translations', 'avpvh-print-website'),
                                     $language_data['display_name']
                                 )
                             )
                             . $html_helper->div(
-                                __('Translate Project Metadata', 'print-my-blog')
+                                __('Translate Project Metadata', 'avpvh-print-website')
                                 . $post_status_display->get_status_html($project->getWpPost()->ID, $language_code)
                             )
                             . $design_translations_html
@@ -513,17 +513,17 @@ class Wpml extends CompatibilityBase
                 'subsections' => $form_sections,
                 'enqueue_scripts_callback' => function () {
                     wp_add_inline_script(
-                        'twine_form_section_validation',
+                        'avpvh-print-website-twine-form-section-validation',
                         "
                         // when the language is changed, change the parameter for generating the project.
                         jQuery(document).ready(function(){
                             jQuery('#pmb-language-chooser-choose-language').change(function(event){
                                 var new_lang = jQuery('#pmb-language-chooser-choose-language').val();
-                                pmb_generate.generate_ajax_data.lang = new_lang;
+                                avpvh_prwb_generate.generate_ajax_data.lang = new_lang;
                                 var data = {
-                                    'action':'pmb_update_project_lang',
-                                    '_nonce': pmb_generate.generate_ajax_data._nonce,
-                                    'project_id':pmb_generate.generate_ajax_data.ID,
+                                    'action':'avpvh_prwb_update_project_lang',
+                                    '_nonce': avpvh_prwb_generate.generate_ajax_data._nonce,
+                                    'project_id':avpvh_prwb_generate.generate_ajax_data.ID,
                                     'new_lang': new_lang
                                 };
                                 jQuery.ajax({
@@ -535,10 +535,10 @@ class Wpml extends CompatibilityBase
                                         if (typeof (response) === 'object' && 
                                             typeof(response.data) === 'object' && 
                                             typeof (response.data.site_url) === 'string' && 
-                                            typeof (response.data.pmb_ajax) === 'string') {
+                                            typeof (response.data.avpvh_prwb_ajax) === 'string') {
                                             
-                                            pmb_generate.site_url = response.data.site_url;
-                                            pmb_generate.pmb_ajax = response.data.pmb_ajax;                                        
+                                            avpvh_prwb_generate.site_url = response.data.site_url;
+                                            avpvh_prwb_generate.avpvh_prwb_ajax = response.data.avpvh_prwb_ajax;                                        
                                         }
                                     }
                                 });
@@ -565,7 +565,7 @@ class Wpml extends CompatibilityBase
         if (! $project_id) {
             wp_send_json_error('oups no project id');
         }
-        if (! current_user_can('edit_pmb_project', $project_id)) {
+        if (! current_user_can('edit_avpvh_prwb_project', $project_id)) {
             wp_send_json_error('Oups you don\'t have permission to edit a project');
         }
         $project = $this->project_manager->getById($project_id);
@@ -577,7 +577,7 @@ class Wpml extends CompatibilityBase
             [
                 'lang' => $language_code,
                 'site_url' => $this->changeUrlToProjectLanguage(site_url(), $project),
-                'pmb_ajax' => $this->changeUrlToProjectLanguage(pmb_ajax_url(), $project),
+                'avpvh_prwb_ajax' => $this->changeUrlToProjectLanguage(avpvh_prwb_ajax_url(), $project),
             ]
         );
         exit;
@@ -613,7 +613,7 @@ class Wpml extends CompatibilityBase
                     echo esc_attr(
                         sprintf(
                         // translators: 1: post title, 2: language
-                            __('"%1$s" is fully translated into %2$s', 'print-my-blog'),
+                            __('"%1$s" is fully translated into %2$s', 'avpvh-print-website'),
                             $title,
                             $language_data['display_name']
                         )

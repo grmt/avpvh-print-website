@@ -1,24 +1,24 @@
 <?php
 
-namespace Twine\orm\managers;
+namespace Avpvh\PrintWebsite\Twine\orm\managers;
 
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\system\Context;
-use Twine\orm\entities\PostWrapper;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\Twine\orm\entities\PostWrapper;
 use WP_Post;
 use WP_Query;
 
 /**
  * Class PostWrapperManager
- * @package Twine\orm\managers
+ * @package Avpvh\PrintWebsite\Twine\orm\managers
  */
 class PostWrapperManager
 {
     /**
      * @var string sub-classes of this should use their own subclass of PostWrapper
      */
-    protected $class_to_instantiate = 'Twine\orm\entities\PostWrapper';
+    protected $class_to_instantiate = 'Avpvh\PrintWebsite\Twine\orm\entities\PostWrapper';
 
     /**
      * @var string singular slug

@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\strategies\display\NumberInputDisplay;
-use Twine\forms\strategies\normalization\IntNormalization;
-use Twine\forms\strategies\validation\IntValidation;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\NumberInputDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\IntNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\IntValidation;
 
 /**
  * Class Integer_Input

@@ -1,10 +1,10 @@
-<div <?php pmb_section_wrapper_class(); ?> <?php pmb_section_wrapper_id(); ?>>
+<div <?php avpvh_prwb_section_wrapper_class(); ?> <?php avpvh_prwb_section_wrapper_id(); ?>>
 
-    <article <?php pmb_section_class(); ?> <?php pmb_section_id(); ?>>
+    <article <?php avpvh_prwb_section_class(); ?> <?php avpvh_prwb_section_id(); ?>>
 
         <header class="entry-header has-text-align-center">
             <?php
-            if (pmb_design_uses('featured_image', true) && has_post_thumbnail()) {
+            if (avpvh_prwb_design_uses('featured_image', true) && has_post_thumbnail()) {
             ?>
             <figure class="post-thumbnail pmb-wide">
                 <?php the_post_thumbnail('full', ['class' => 'alignnone pmb-featured-image','loading' => 'eager']); ?>
@@ -17,10 +17,10 @@
             }
             ?>
             <div class="entry-header-inner section-inner medium">
-                <?php pmb_the_title(); ?>
+                <?php avpvh_prwb_the_title(); ?>
             </div><!-- .entry-header-inner -->
         </header><!-- .entry-header -->
 
-        <?php pmb_include_design_template('partials/content'); ?>
+        <?php avpvh_prwb_include_design_template('partials/content'); ?>
     </article>
 <?php // div automatically closed

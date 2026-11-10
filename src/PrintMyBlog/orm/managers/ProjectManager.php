@@ -1,26 +1,26 @@
 <?php
 
-namespace PrintMyBlog\orm\managers;
+namespace Avpvh\PrintWebsite\orm\managers;
 
-use PrintMyBlog\db\TableManager;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\system\Context;
-use Twine\orm\managers\PostWrapperManager;
+use Avpvh\PrintWebsite\db\TableManager;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager;
 use WP_Post;
 
 /**
  * Class ProjectManager
- * @package PrintMyBlog\orm\managers
+ * @package Avpvh\PrintWebsite\orm\managers
  */
 class ProjectManager extends PostWrapperManager
 {
     /**
      * @var string
      */
-    protected $class_to_instantiate = 'PrintMyBlog\orm\entities\Project';
+    protected $class_to_instantiate = 'Avpvh\PrintWebsite\orm\entities\Project';
 
     /**
      * @var string
      */
-    protected $cap_slug = 'pmb_project';
+    protected $cap_slug = 'avpvh_prwb_project';
 }

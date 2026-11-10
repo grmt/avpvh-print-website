@@ -1,12 +1,12 @@
 <?php
 
-namespace PrintMyBlog\exceptions;
+namespace Avpvh\PrintWebsite\exceptions;
 
 use Exception;
 
 /**
  * Class DesignTemplateDoesNotExist
- * @package PrintMyBlog\exceptions
+ * @package Avpvh\PrintWebsite\exceptions
  */
 class DesignTemplateDoesNotExist extends Exception
 {
@@ -19,7 +19,7 @@ class DesignTemplateDoesNotExist extends Exception
         parent::__construct(
             sprintf(
                 // translators: %s: slug
-                __('The design with slug "%s" should exist but doesn\'t. Check the plugin that added that design is still active (and if it required a subscription, that the subscription is still up-to-date). For now, please choose a different design.', 'print-my-blog'),
+                __('The design with slug "%s" should exist but doesn\'t. Check the plugin that added that design is still active (and if it required a subscription, that the subscription is still up-to-date). For now, please choose a different design.', 'avpvh-print-website'),
                 $design_slug
             )
         );

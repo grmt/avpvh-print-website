@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use Twine\forms\helpers\ImproperUsageException;
-use Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 
 /**
  * Class RequiredValidation
@@ -25,7 +25,7 @@ class RequiredValidation extends ValidationBase
     public function __construct($validation_error_message = null)
     {
         if (! $validation_error_message) {
-            $validation_error_message = __('This field is required.', 'print-my-blog');
+            $validation_error_message = __('This field is required.', 'avpvh-print-website');
         }
         parent::__construct($validation_error_message);
     }

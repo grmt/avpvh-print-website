@@ -10,7 +10,7 @@
             $comments_number = get_comments_number();
             if ('1' === $comments_number) {
                 /* translators: %s: Post title. */
-                printf(_x('One Reply to &ldquo;%s&rdquo;', 'comments title', 'print-my-blog'), get_the_title());
+                printf(_x('One Reply to &ldquo;%s&rdquo;', 'comments title', 'avpvh-print-website'), get_the_title());
             } else {
                 printf(
                 /* translators: 1: Number of comments, 2: Post title. */
@@ -19,7 +19,7 @@
                         '%1$s Replies to &ldquo;%2$s&rdquo;',
                         $comments_number,
                         'comments title',
-                        'print-my-blog'
+                        'avpvh-print-website'
                     ),
                     number_format_i18n($comments_number),
                     get_the_title()

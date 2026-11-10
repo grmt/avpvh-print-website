@@ -1,8 +1,8 @@
 <?php
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 
 /**
  * Class EasyFootnotes
@@ -10,7 +10,7 @@ use Twine\compatibility\CompatibilityBase;
  * For the plugin located at https://wordpress.org/plugins/wp-vr-view/
  * 360 VR images obviously dont work when reading, so replace them with just the preview image or some text.
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         2.1.4
  *
@@ -71,7 +71,7 @@ class WpVrView extends CompatibilityBase
         // ==================================================================
         // MODIFIED FROM ORIGINAL because original just used plugin_dir_url(__FILE__) from WP VR View's main file
         $iframe_url = plugin_dir_url(
-            dirname(dirname(PMB_MAIN_FILE))
+            dirname(dirname(AVPVH_PRWB_MAIN_FILE))
             . '/wp-vr-view/wp-vrview.php'
         )
             . 'asset/index.html?'
@@ -91,7 +91,7 @@ class WpVrView extends CompatibilityBase
                 . '" src="'
                 . esc_url($a['pimg']) . '">';
         } else {
-            $html .= '<p>' . __('360 Image Available', 'print-my-blog') . '</p>';
+            $html .= '<p>' . __('360 Image Available', 'avpvh-print-website') . '</p>';
         }
 
         $html .= '</a></p></div>';
@@ -99,4 +99,4 @@ class WpVrView extends CompatibilityBase
     }
 }
 // End of file EasyFootnotes.php
-// Location: PrintMyBlog\compatibility\plugins/EasyFootnotes.php
+// Location: Avpvh\PrintWebsite\compatibility\plugins/EasyFootnotes.php

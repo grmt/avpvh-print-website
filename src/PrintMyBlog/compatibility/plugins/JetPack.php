@@ -1,14 +1,14 @@
 <?php
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
-use Twine\compatibility\CompatibilityBase;
-use Twine\forms\base\FormSection;
-use Twine\forms\inputs\SelectInput;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\inputs\SelectInput;
 
 /**
  * Class JetPack
- * @package PrintMyBlog\compatibility\plugins
+ * @package Avpvh\PrintWebsite\compatibility\plugins
  */
 class JetPack extends CompatibilityBase
 {
@@ -18,7 +18,7 @@ class JetPack extends CompatibilityBase
     public function setHooks()
     {
         add_filter(
-            'PrintMyBlog\domain\DefaultDesignTemplates->getGenericDesignForm',
+            'Avpvh\PrintWebsite\domain\DefaultDesignTemplates->getGenericDesignForm',
             [$this, 'removeScaledResizeOption']
         );
     }

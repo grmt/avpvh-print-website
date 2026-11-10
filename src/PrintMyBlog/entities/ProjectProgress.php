@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\entities;
+namespace Avpvh\PrintWebsite\entities;
 
-use PrintMyBlog\controllers\Admin;
-use PrintMyBlog\orm\entities\Project;
+use Avpvh\PrintWebsite\controllers\Admin;
+use Avpvh\PrintWebsite\orm\entities\Project;
 
 /**
  * Class ProjectProgress
- * @package PrintMyBlog\entities
+ * @package Avpvh\PrintWebsite\entities
  * For logic relating to a project's progress.
  */
 class ProjectProgress
@@ -85,24 +85,24 @@ class ProjectProgress
     {
         if ($this->steps === null) {
             $steps = [
-                self::SETUP_STEP => __('Setup', 'print-my-blog'),
+                self::SETUP_STEP => __('Setup', 'avpvh-print-website'),
             ];
             $formats_in_use = $this->project->getFormatsSelected();
             foreach ($formats_in_use as $format) {
                 $steps[self::CHOOSE_DESIGN_STEP_PREFIX . $format->slug()] = sprintf(
                     // translators: %s design title
-                    __('Choose %s Design', 'print-my-blog'),
+                    __('Choose %s Design', 'avpvh-print-website'),
                     $format->title()
                 );
                 $steps[self::CUSTOMIZE_DESIGN_STEP_PREFIX . $format->slug()] = sprintf(
                     // translators: %s design title
-                    __('Customize %s Design', 'print-my-blog'),
+                    __('Customize %s Design', 'avpvh-print-website'),
                     $format->title()
                 );
             }
-            $steps[self::EDIT_CONTENT_STEP] = __('Edit Content', 'print-my-blog');
-            $steps[self::EDIT_METADATA_STEP] = __('Edit Metadata', 'print-my-blog');
-            $steps[self::GENERATE_STEP] = __('Generate Print Page', 'print-my-blog');
+            $steps[self::EDIT_CONTENT_STEP] = __('Edit Content', 'avpvh-print-website');
+            $steps[self::EDIT_METADATA_STEP] = __('Edit Metadata', 'avpvh-print-website');
+            $steps[self::GENERATE_STEP] = __('Generate Print Page', 'avpvh-print-website');
             $this->steps = $steps;
         }
         return $this->steps;
@@ -202,7 +202,7 @@ class ProjectProgress
             $args = $this->mapStepToSubactionArgs($step);
             $mappings[$step] = add_query_arg(
                 array_merge($base_url_args, $args),
-                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
             );
         }
         return $mappings;

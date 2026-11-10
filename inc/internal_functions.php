@@ -1,67 +1,23 @@
 <?php
 /**
- * Functions used internally by Print My Blog that other devs probably won't need.
+ * Functions used internally by AV-PvH Print Website that other devs probably won't need.
  */
 
-use PrintMyBlog\controllers\Admin;
-use PrintMyBlog\controllers\Frontend;
-use PrintMyBlog\entities\DesignTemplate;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\orm\entities\ProjectSection;
-use PrintMyBlog\system\Context;
-use PrintMyBlog\system\CustomPostTypes;
+use Avpvh\PrintWebsite\controllers\Admin;
+use Avpvh\PrintWebsite\controllers\Frontend;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\orm\entities\ProjectSection;
+use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
 
 /**
  * Whether PMB is allowed to make requests to external services.
  * @return bool
  */
-function pmb_external_requests_enabled()
+function avpvh_prwb_external_requests_enabled()
 {
-    return ! defined('PMB_DISABLE_EXTERNAL_REQUESTS') || ! PMB_DISABLE_EXTERNAL_REQUESTS;
-}
-
-function pmb_is_premium()
-{
-    return false;
-}
-
-function pmb_is_free_plan()
-{
-    return true;
-}
-
-function pmb_has_required_plan($plan = '')
-{
-    return false;
-}
-
-function pmb_upgrade_url()
-{
-    return admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
-}
-
-function pmb_is_registered_install()
-{
-    return false;
-}
-
-function pmb_is_anonymous_install()
-{
-    return false;
-}
-
-function pmb_connect_again()
-{
-}
-
-function pmb_license()
-{
-    return null;
-}
-
-function pmb_site_registration()
-{
-    return null;
+    return ! defined('AVPVH_PRWB_DISABLE_EXTERNAL_REQUESTS') || ! AVPVH_PRWB_DISABLE_EXTERNAL_REQUESTS;
 }
 
 /**
@@ -69,7 +25,7 @@ function pmb_site_registration()
  * @param string $explanation
  * @return string
  */
-function pmb_hover_help($explanation = '')
+function avpvh_prwb_hover_help($explanation = '')
 {
     return '<span data-help="' . esc_attr($explanation) . '" class="dashicons dashicons-info pmb-hover"></span>';
 }
@@ -81,7 +37,7 @@ function pmb_hover_help($explanation = '')
  * @param string $url not escaped
  * @return string HTML
  */
-function pmb_hover_tip($explanation = '', $extra_css_classes = '', $url = '')
+function avpvh_prwb_hover_tip($explanation = '', $extra_css_classes = '', $url = '')
 {
     $html = '';
     if ($url) {
@@ -98,7 +54,7 @@ function pmb_hover_tip($explanation = '', $extra_css_classes = '', $url = '')
  * Returns a string that says this feature only works with Pro Print Service (not supported by browsers).
  * @return string
  */
-function pmb_pro_print_service_only($explanation = '')
+function avpvh_prwb_pro_print_service_only($explanation = '')
 {
     return '';
 }
@@ -107,17 +63,17 @@ function pmb_pro_print_service_only($explanation = '')
  * Echoes out that this feature only works with pro print service (not supported by browsers)
  * @param string $explanation
  */
-function pmb_pro_print_service_only_e($explanation = '')
+function avpvh_prwb_pro_print_service_only_e($explanation = '')
 {
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- outputting HTML
-    echo pmb_pro_print_service_only($explanation);
+    echo avpvh_prwb_pro_print_service_only($explanation);
 }
 
 /**
- * Returns a string that says this feature works best with Print My Blog Pro.
+ * Returns a string that says this feature works best with AV-PvH Print Website Pro.
  * @return string
  */
-function pmb_pro_print_service_best($explanation = '')
+function avpvh_prwb_pro_print_service_best($explanation = '')
 {
     return '';
 }
@@ -126,20 +82,20 @@ function pmb_pro_print_service_best($explanation = '')
  * Echoes out this feature works best with pro print service.
  * @param string $explanation
  */
-function pmb_pro_print_service_best_e($explanation = '')
+function avpvh_prwb_pro_print_service_best_e($explanation = '')
 {
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- outputting HTML
-    echo pmb_pro_print_service_best($explanation);
+    echo avpvh_prwb_pro_print_service_best($explanation);
 }
 
 /**
  * Echoes out that there's a better feature in Pro Print
  * @param string $explanation
  */
-function pmb_pro_better_e($explanation = '')
+function avpvh_prwb_pro_better_e($explanation = '')
 {
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- outputting HTML
-    echo pmb_pro_better($explanation);
+    echo avpvh_prwb_pro_better($explanation);
 }
 
 /**
@@ -147,7 +103,7 @@ function pmb_pro_better_e($explanation = '')
  * @param string $explanation
  * @return string
  */
-function pmb_pro_better($explanation = '')
+function avpvh_prwb_pro_better($explanation = '')
 {
     return '';
 }
@@ -155,11 +111,11 @@ function pmb_pro_better($explanation = '')
 
 /**
  * Maps
- * @param \PrintMyBlog\orm\entities\ProjectSection $section
+ * @param \Avpvh\PrintWebsite\orm\entities\ProjectSection $section
  *
  * @return string
  */
-function pmb_map_section_to_division(ProjectSection $section)
+function avpvh_prwb_map_section_to_division(ProjectSection $section)
 {
     if ($section->getPlacement() === DesignTemplate::IMPLIED_DIVISION_FRONT_MATTER) {
         return 'front_matter_article';
@@ -168,8 +124,8 @@ function pmb_map_section_to_division(ProjectSection $section)
         return 'back_matter_article';
     }
     return apply_filters(
-        'pmb_map_section_to_division',
-        pmb_map_section_height_to_division($section->getHeight()),
+        'avpvh_prwb_map_section_to_division',
+        avpvh_prwb_map_section_height_to_division($section->getHeight()),
         $section
     );
 }
@@ -178,7 +134,7 @@ function pmb_map_section_to_division(ProjectSection $section)
  * @param int $height
  * @return string
  */
-function pmb_map_section_height_to_division($height)
+function avpvh_prwb_map_section_height_to_division($height)
 {
     switch ($height) {
         case 1:
@@ -202,10 +158,10 @@ function pmb_map_section_height_to_division($height)
  * @param string $template_name
  * @param array $context
  */
-function pmb_render_template($template_name, $context = [])
+function avpvh_prwb_render_template($template_name, $context = [])
 {
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- outputting HTML
-    echo pmb_get_contents(PMB_TEMPLATES_DIR . $template_name, $context);
+    echo avpvh_prwb_get_contents(AVPVH_PRWB_TEMPLATES_DIR . $template_name, $context);
 }
 
 /**
@@ -213,7 +169,7 @@ function pmb_render_template($template_name, $context = [])
  * @param $filename
  * @param array $context
  */
-function pmb_get_contents($filename, $context = [])
+function avpvh_prwb_get_contents($filename, $context = [])
 {
     // phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- we're making them available while rendering the template file.
     extract($context);
@@ -223,12 +179,12 @@ function pmb_get_contents($filename, $context = [])
 }
 
 /**
- * @param \PrintMyBlog\orm\entities\Design $design
+ * @param \Avpvh\PrintWebsite\orm\entities\Design $design
  */
-function pmb_design_preview(\PrintMyBlog\orm\entities\Design $design)
+function avpvh_prwb_design_preview(\Avpvh\PrintWebsite\orm\entities\Design $design)
 {
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- outputting HTML
-    pmb_render_template(
+    avpvh_prwb_render_template(
         'partials/design_preview.php',
         [
             'design' => $design,
@@ -242,9 +198,9 @@ function pmb_design_preview(\PrintMyBlog\orm\entities\Design $design)
  * @param Project $project
  * @param int $max_nesting
  */
-function pmb_content_item($posty_row, Project $project, $max_nesting = null)
+function avpvh_prwb_content_item($posty_row, Project $project, $max_nesting = null)
 {
-    if ($posty_row instanceof \PrintMyBlog\orm\entities\ProjectSection) {
+    if ($posty_row instanceof \Avpvh\PrintWebsite\orm\entities\ProjectSection) {
         $id = $posty_row->getPostId();
         $title = $posty_row->getPostTitle();
         $post_type = get_post_type_object(get_post_type($posty_row->getPostId()));
@@ -269,7 +225,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
                 'action' => Admin::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL,
                 'ID' => $id,
             ],
-            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
         ),
         Admin::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL
     );
@@ -285,7 +241,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
         <div class="pmb-project-item-header" title="<?php
         echo esc_attr(
             sprintf(
-                __('Drag the %s "%s" into your project', 'print-my-blog'),
+                __('Drag the %s "%s" into your project', 'avpvh-print-website'),
                 $post_type->labels->singular_name,
                 $title
             )
@@ -295,10 +251,10 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
             <div class="pmb-grabbable pmb-project-item-title">
                 <?php
                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- function returns HTML and prepares it.
-                echo pmb_post_type_icon_html($post_type);
+                echo avpvh_prwb_post_type_icon_html($post_type);
                 ?>
                 <span class="pmb-project-item-title-text"><?php echo esc_html($title); ?></span>
-                <?php do_action('pmb_content_items__project-item-title end', $id, $title, $post_type, $template, $subs, $depth); ?>
+                <?php do_action('avpvh_prwb_content_items__project-item-title end', $id, $title, $post_type, $template, $subs, $depth); ?>
             </div>
 
             <div class="pmb-project-item-options">
@@ -313,7 +269,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
                                     echo esc_attr(
                                         sprintf(
                                         // translators: %s: post title.
-                                            __('View "%s"', 'print-my-blog'),
+                                            __('View "%s"', 'avpvh-print-website'),
                                             $title
                                         )
                                     );
@@ -327,47 +283,40 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
                                 echo esc_attr(
                                     sprintf(
                                         // translators: %s: post title.
-                                        __('Edit "%s"', 'print-my-blog'),
+                                        __('Edit "%s"', 'avpvh-print-website'),
                                         $title
                                     )
                                 );
                                 ?>"
                                 target="_blank"><span
                                     class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a><?php
-                        if (pmb_has_required_plan('founding_members')) {
-                            $label = '';
-                            if ($post_type->name !== CustomPostTypes::CONTENT) {
-                                $print_material = null;
-                                $print_materials = Context::instance()->reuse('Twine\orm\managers\PostWrapperManager')->getByPostMeta('_pmb_original_post', (string)$id, 1);
-                                if ($print_materials) {
-                                    $print_material = reset($print_materials);
-                                }
-                                if ($print_material) {
-                                    // translators: 1: post title
-                                    $label = sprintf(__('Replace "%s" with the existing Print Material for customizing.', 'print-my-blog'), $print_material->getWpPost()->post_title);
-                                } else {
-                                    $label = sprintf(__('Replace "%s" with a New Print Material for customizing', 'print-my-blog'), $title);
-                                }
+                        $label = '';
+                        if ($post_type->name !== CustomPostTypes::CONTENT) {
+                            $print_material = null;
+                            $print_materials = Context::instance()->reuse('Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager')->getByPostMeta('_avpvh_prwb_original_post', (string)$id, 1);
+                            if ($print_materials) {
+                                $print_material = reset($print_materials);
                             }
-                            if ($label) {
-                                ?><a
-                                title="<?php
-                                echo esc_attr($label);
-                                ?>"
-                                data-id="<?php echo esc_attr($id); ?>" class="pmb-duplicate-post-button" tabindex="0"><span class="dashicons dashicons-update pmb-icon pmb-clickable"></span></a><?php
+                            if ($print_material) {
+                                // translators: 1: post title
+                                $label = sprintf(__('Replace "%s" with the existing Print Material for customizing.', 'avpvh-print-website'), $print_material->getWpPost()->post_title);
+                            } else {
+                                $label = sprintf(__('Replace "%s" with a New Print Material for customizing', 'avpvh-print-website'), $title);
                             }
-                        } else {
-                            if ($post_type->name !== CustomPostTypes::CONTENT) {
-                                ?><span tabindex="0" class="dashicons dashicons-update pmb-icon pmb-disabled-icon" title="<?php esc_attr_e('Upgrade to Professional License for one-click copying to Print Materials for customization.', 'print-my-blog'); ?>"></span>
-                                <?php
-                            }
+                        }
+                        if ($label) {
+                            ?><a
+                            title="<?php
+                            echo esc_attr($label);
+                            ?>"
+                            data-id="<?php echo esc_attr($id); ?>" class="pmb-duplicate-post-button" tabindex="0"><span class="dashicons dashicons-update pmb-icon pmb-clickable"></span></a><?php
                         }
                         ?><a
                                 title="<?php
                                 echo esc_attr(
                                     sprintf(
                                             // translators: %s: post title
-                                        __('Add "%s" to project', 'print-my-blog'),
+                                        __('Add "%s" to project', 'avpvh-print-website'),
                                         esc_html($title)
                                     )
                                 );
@@ -378,7 +327,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
                                 echo esc_attr(
                                     sprintf(
                                             // translators: %s: post title
-                                        __('Remove "%s"', 'print-my-blog'),
+                                        __('Remove "%s"', 'avpvh-print-website'),
                                         $title
                                     )
                                 );
@@ -388,7 +337,7 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
                     </div>
                     <span class="pmb-project-item-template-container"><?php
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- that's meant to output HTML.
-                        echo pmb_section_template_selector($template, $project); ?></span>
+                        echo avpvh_prwb_section_template_selector($template, $project); ?></span>
                 </div>
             </div>
         </div>
@@ -396,9 +345,9 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
         <div class="pmb-nested-sortable pmb-draggable-area <?php echo $depth < $max_nesting ? 'pmb-sortable' : 'pmb-sortable-inactive'; ?> pmb-subs">
             <?php
             foreach ($subs as $sub) {
-                pmb_content_item($sub, $project, $max_nesting);
+                avpvh_prwb_content_item($sub, $project, $max_nesting);
             }
-            pmb_drag_here();
+            avpvh_prwb_drag_here();
             ?>
         </div>
 
@@ -409,13 +358,13 @@ function pmb_content_item($posty_row, Project $project, $max_nesting = null)
 /**
  * Echoes HTML to show that project items can be dragged to this area.
  */
-function pmb_drag_here()
+function avpvh_prwb_drag_here()
 {
     ?>
     <div class="pmb-no-sort pmb-drag-here no-drag">
         <div class="pmb-drag-here-inner">
             <a class="pmb-add-material" href="#ui-id-1">
-                <?php esc_html_e('Drag or click here', 'print-my-blog'); ?> <span class="pmb-add-section dashicons
+                <?php esc_html_e('Drag or click here', 'avpvh-print-website'); ?> <span class="pmb-add-section dashicons
                 dashicons-plus-alt"></span>
             </a>
         </div>
@@ -428,16 +377,16 @@ function pmb_drag_here()
  * for the frontend, which most plugins think it's a frontend request).
  * @return string
  */
-function pmb_ajax_url(){
+function avpvh_prwb_ajax_url(){
     return add_query_arg(
         [
-            Frontend::PMB_AJAX_INDICATOR => 1,
+            Frontend::AVPVH_PRWB_AJAX_INDICATOR => 1,
         ],
         site_url('/')
     );
 }
 
-function pmb_get_filename($url, $remove_extension = false){
+function avpvh_prwb_get_filename($url, $remove_extension = false){
     $filename_and_extension = basename($url);
     if($remove_extension){
         $filename_and_extension = substr($filename_and_extension, 0, strpos($filename_and_extension, '.'));
@@ -445,19 +394,3 @@ function pmb_get_filename($url, $remove_extension = false){
     return $filename_and_extension;
 }
 
-/**
- * Returns whether or not to use PMB Central for generate requests. (We like to use DocRaptor's server on free sites
- * to keep the load down on printmy.blog; but for paying customers we like to monitor their API requests for quality assurance.)
- * @return int
- */
-function pmb_use_pmb_central(){
-    $use_pmb_central = 0;
-    if (! pmb_external_requests_enabled()) {
-        return $use_pmb_central;
-    }
-    if (pmb_has_required_plan('business') || (defined('PMB_USE_CENTRAL') && PMB_USE_CENTRAL)) {
-        $use_pmb_central = 1;
-    }
-
-    return $use_pmb_central;
-}

@@ -1,45 +1,45 @@
 <?php //phpcs:disable Files.SideEffects.FoundWithSymbols -- it's normal for plugin main files to be loose with that requirement.
 
 /**
- * @package PrintMyBlog
+ * @package AvpvhPrintWebsite
  *
  * @wordpress-plugin
- * Plugin Name: Print My Blog
- * Plugin URI: https://printmy.blog
+ * Plugin Name: AV-PvH Print Website
+ * Plugin URI: https://github.com/grmt/avpvh-print-website
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
- * Author: Michael Nelson
- * Author URI: https://printmy.blog
- * Version: 3.27.18.2
+ * Author: grmt, based on Print My Blog by Michael Nelson
+ * Author URI: https://github.com/grmt/avpvh-print-website
+ * Version: 4.0.0
  * Requires at least: 7.1
  * Requires PHP: 8.4
- * Text Domain: print-my-blog
- * Update URI: https://github.com/grmt/printmyblog
+ * Text Domain: avpvh-print-website
+ * Update URI: https://github.com/grmt/avpvh-print-website
  */
 
 
-if (! defined('PMB_MIN_PHP_VER_REQUIRED')) {
-    define('PMB_MIN_PHP_VER_REQUIRED', '8.4.0');
+if (! defined('AVPVH_PRWB_MIN_PHP_VER_REQUIRED')) {
+    define('AVPVH_PRWB_MIN_PHP_VER_REQUIRED', '8.4.0');
 }
-if (! defined('PMB_MIN_WP_VER_REQUIRED')) {
-    define('PMB_MIN_WP_VER_REQUIRED', '7.1');
+if (! defined('AVPVH_PRWB_MIN_WP_VER_REQUIRED')) {
+    define('AVPVH_PRWB_MIN_WP_VER_REQUIRED', '7.1');
 }
 global $wp_version;
 // make sure another version of PMB isn't installed
-if (defined('PMB_VERSION')) {
+if (defined('AVPVH_PRWB_VERSION')) {
     /**
      * Function that says another version of PMB is already active.
      *
      * @return void
      */
-    function pmb_already_active()
+    function avpvh_prwb_already_active()
     {
 ?>
         <div class="error">
             <p>
                 <?php
                 esc_html_e(
-                    'We’re sorry, but you have another version of Print My Blog active. Only one can be active at a time. Please deactivate one.',
-                    'print-my-blog'
+                    'We’re sorry, but you have another version of AV-PvH Print Website active. Only one can be active at a time. Please deactivate one.',
+                    'avpvh-print-website'
                 );
                 ?>
             </p>
@@ -47,16 +47,16 @@ if (defined('PMB_VERSION')) {
     <?php
     }
 
-    add_action('admin_notices', 'pmb_already_active', 1, 0);
+    add_action('admin_notices', 'avpvh_prwb_already_active', 1, 0);
 
     // then make sure the minimum version of PHP is being used
-} elseif (version_compare(PHP_VERSION, PMB_MIN_PHP_VER_REQUIRED, '<')) {
+} elseif (version_compare(PHP_VERSION, AVPVH_PRWB_MIN_PHP_VER_REQUIRED, '<')) {
     /**
      * Function that says PHP version isn't high enough to run PMB.
      *
      * @return void
      */
-    function pmb_minimum_php_version_error()
+    function avpvh_prwb_minimum_php_version_error()
     {
     ?>
         <div class="error">
@@ -65,10 +65,10 @@ if (defined('PMB_VERSION')) {
                 printf(
                     // translators: 1: version number, 2: version number, 3: HTML line break, 4: website address
                     esc_html__(
-                        'We’re sorry, but Print My Blog requires PHP version %1$s or greater in order to operate. You are currently running version %2$s.%3$sIn order to update your version of PHP, you will need to contact your current hosting provider.%3$sFor information on stable PHP versions, please go to %4$s.',
-                        'print-my-blog'
+                        'We’re sorry, but AV-PvH Print Website requires PHP version %1$s or greater in order to operate. You are currently running version %2$s.%3$sIn order to update your version of PHP, you will need to contact your current hosting provider.%3$sFor information on stable PHP versions, please go to %4$s.',
+                        'avpvh-print-website'
                     ),
-                    esc_html(PMB_MIN_PHP_VER_REQUIRED),
+                    esc_html(AVPVH_PRWB_MIN_PHP_VER_REQUIRED),
                     PHP_VERSION,
                     '<br/>',
                     '<a href="http://php.net/downloads.php">http://php.net/downloads.php</a>'
@@ -79,7 +79,7 @@ if (defined('PMB_VERSION')) {
     <?php
     }
 
-    add_action('admin_notices', 'pmb_minimum_php_version_error', 1, 0);
+    add_action('admin_notices', 'avpvh_prwb_minimum_php_version_error', 1, 0);
 } elseif (
     version_compare(
         // first account for wp_version being pre-release
@@ -87,7 +87,7 @@ if (defined('PMB_VERSION')) {
         strpos($wp_version, '-') > 0 ?
             substr($wp_version, 0, strpos($wp_version, '-')) :
             $wp_version,
-        PMB_MIN_WP_VER_REQUIRED,
+        AVPVH_PRWB_MIN_WP_VER_REQUIRED,
         '<'
     )
 ) {
@@ -96,7 +96,7 @@ if (defined('PMB_VERSION')) {
      *
      * @return void
      */
-    function pmb_minimum_wp_version_error()
+    function avpvh_prwb_minimum_wp_version_error()
     {
         global $wp_version;
     ?>
@@ -106,10 +106,10 @@ if (defined('PMB_VERSION')) {
                 printf(
                     // translators: 1: version number, 2: version number, 3: HTML line break, 4: URL
                     esc_html__(
-                        'We’re sorry, but Print My Blog requires WordPress %1$s. You are using %2$s.%3$sFor information on how to update, please see %4$s.',
-                        'print-my-blog'
+                        'We’re sorry, but AV-PvH Print Website requires WordPress %1$s. You are using %2$s.%3$sFor information on how to update, please see %4$s.',
+                        'avpvh-print-website'
                     ),
-                    esc_html(PMB_MIN_WP_VER_REQUIRED),
+                    esc_html(AVPVH_PRWB_MIN_WP_VER_REQUIRED),
                     esc_html($wp_version),
                     '<br/>',
                     '<a href="https://wordpress.org/support/article/updating-wordpress/">https://wordpress.org/support/article/updating-wordpress/</a>'
@@ -120,33 +120,30 @@ if (defined('PMB_VERSION')) {
 <?php
     }
 
-    add_action('admin_notices', 'pmb_minimum_wp_version_error', 1, 0);
+    add_action('admin_notices', 'avpvh_prwb_minimum_wp_version_error', 1, 0);
 } else {
     // it's all good! start bootstraping PMB.
-    define('PMB_VERSION', '3.27.18.2');
-    define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
-    define('PMB_MAIN_FILE', __FILE__);
-    define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
-    define('PMB_NO_THEME_DIR', PMB_TEMPLATES_DIR . 'no_theme/');
-    define('PMB_VENDOR_DIR', PMB_DIR . 'vendor/');
-    define('PMB_ADMIN_CAP', 'read_private_posts');
-    define('PMB_BASENAME', plugin_basename(PMB_MAIN_FILE));
-    define('PMB_DIRNAME', dirname(PMB_BASENAME));
-    define('PMB_ADMIN_PAGE_SLUG', 'print-my-blog-now');
-    define('PMB_ADMIN_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PAGE_SLUG);
-    define('PMB_ADMIN_PROJECTS_PAGE_SLUG', 'print-my-blog-projects');
-    define('PMB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_PROJECTS_PAGE_SLUG);
-    define('PMB_ADMIN_SETTINGS_PAGE_SLUG', 'print-my-blog-settings');
-    define('PMB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_SETTINGS_PAGE_SLUG);
-    define('PMB_ADMIN_HELP_PAGE_SLUG', 'print-my-blog-help');
-    define('PMB_ADMIN_DESIGNS_PAGE_SLUG', 'print-my-blog-designs');
-    define('PMB_ADMIN_DESIGNS_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_DESIGNS_PAGE_SLUG);
-    define('PMB_ADMIN_HELP_PAGE_PATH', '/admin.php?page=' . PMB_ADMIN_HELP_PAGE_SLUG);
-    define('PMB_DESIGNS_DIR', PMB_DIR . 'designs/');
-    define('TWINE_MAIN_FILE', PMB_MAIN_FILE);
-    define('PMB_SUPPORT_EMAIL', 'please@printmy.blog');
-    if (! defined('PMB_DISABLE_EXTERNAL_REQUESTS')) {
-        define('PMB_DISABLE_EXTERNAL_REQUESTS', true);
+    define('AVPVH_PRWB_VERSION', '4.0.0');
+    define('AVPVH_PRWB_DIR', wp_normalize_path(__DIR__) . '/');
+    define('AVPVH_PRWB_MAIN_FILE', __FILE__);
+    define('AVPVH_PRWB_TEMPLATES_DIR', AVPVH_PRWB_DIR . 'templates/');
+    define('AVPVH_PRWB_NO_THEME_DIR', AVPVH_PRWB_TEMPLATES_DIR . 'no_theme/');
+    define('AVPVH_PRWB_VENDOR_DIR', AVPVH_PRWB_DIR . 'vendor/');
+    define('AVPVH_PRWB_ADMIN_CAP', 'read_private_posts');
+    define('AVPVH_PRWB_BASENAME', plugin_basename(AVPVH_PRWB_MAIN_FILE));
+    define('AVPVH_PRWB_DIRNAME', dirname(AVPVH_PRWB_BASENAME));
+    define('AVPVH_PRWB_ADMIN_PAGE_SLUG', 'avpvh-print-website-now');
+    define('AVPVH_PRWB_ADMIN_PAGE_PATH', '/admin.php?page=' . AVPVH_PRWB_ADMIN_PAGE_SLUG);
+    define('AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG', 'avpvh-print-website-projects');
+    define('AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG);
+    define('AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG', 'avpvh-print-website-settings');
+    define('AVPVH_PRWB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG);
+    define('AVPVH_PRWB_ADMIN_DESIGNS_PAGE_SLUG', 'avpvh-print-website-designs');
+    define('AVPVH_PRWB_ADMIN_DESIGNS_PAGE_PATH', '/admin.php?page=' . AVPVH_PRWB_ADMIN_DESIGNS_PAGE_SLUG);
+    define('AVPVH_PRWB_DESIGNS_DIR', AVPVH_PRWB_DIR . 'designs/');
+    define('AVPVH_PRWB_TWINE_MAIN_FILE', AVPVH_PRWB_MAIN_FILE);
+    if (! defined('AVPVH_PRWB_DISABLE_EXTERNAL_REQUESTS')) {
+        define('AVPVH_PRWB_DISABLE_EXTERNAL_REQUESTS', true);
     }
 
     /* WPML support */
@@ -158,13 +155,13 @@ if (defined('PMB_VERSION')) {
      * Adds a wp-option to indicate that PMB has been activated via the WP admin plugins page.
      * This can be used to do initial plugin installation or redirect the user to the setup page.
      */
-    function pmb_plugin_activation()
+    function avpvh_prwb_plugin_activation()
     {
-        update_option('pmb_activation', true, false);
+        update_option('avpvh_prwb_activation', true, false);
     }
 
-    register_activation_hook(PMB_MAIN_FILE, 'pmb_plugin_activation');
-    define('PMB_PRINTPAGE_SLUG', 'print-my-blog');
+    register_activation_hook(AVPVH_PRWB_MAIN_FILE, 'avpvh_prwb_plugin_activation');
+    define('AVPVH_PRWB_PRINTPAGE_SLUG', 'avpvh-print-website');
     require_once 'bootstrap.php';
 
     // Disable the active theme if generating a PDF.
@@ -172,13 +169,13 @@ if (defined('PMB_VERSION')) {
     // phpcs:disable WordPress.Security.NonceVerification.Recommended -- we're just looking, not processing or saving etc.
     if ((
             defined('DOING_AJAX') ||
-            isset($_REQUEST[PrintMyBlog\controllers\Frontend::PMB_AJAX_INDICATOR])
+            isset($_REQUEST[Avpvh\PrintWebsite\controllers\Frontend::AVPVH_PRWB_AJAX_INDICATOR])
         ) &&
         isset($_REQUEST['action'], $_REQUEST['format']) &&
-        $_REQUEST['action'] === PrintMyBlog\controllers\Frontend::PMB_PROJECT_STATUS_ACTION
+        $_REQUEST['action'] === Avpvh\PrintWebsite\controllers\Frontend::AVPVH_PRWB_PROJECT_STATUS_ACTION
     ) {
         $use_theme = true;
-        if (isset($_REQUEST[PrintMyBlog\controllers\Frontend::PMB_USE_THEME]) && $_REQUEST[PrintMyBlog\controllers\Frontend::PMB_USE_THEME] === '0') {
+        if (isset($_REQUEST[Avpvh\PrintWebsite\controllers\Frontend::AVPVH_PRWB_USE_THEME]) && $_REQUEST[Avpvh\PrintWebsite\controllers\Frontend::AVPVH_PRWB_USE_THEME] === '0') {
             $use_theme = false;
         }
 
@@ -200,14 +197,14 @@ if (defined('PMB_VERSION')) {
         add_filter(
             'template_directory',
             function () {
-                return PMB_NO_THEME_DIR;
+                return AVPVH_PRWB_NO_THEME_DIR;
             },
             100
         );
         add_filter(
             'stylesheet_directory',
             function () {
-                return PMB_NO_THEME_DIR;
+                return AVPVH_PRWB_NO_THEME_DIR;
             },
             100
         );

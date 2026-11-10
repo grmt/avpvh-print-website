@@ -1,7 +1,7 @@
 <?php
 /**
-* @var $pmb_project \PrintMyBlog\orm\entities\Project
- * @var $pmb_design \PrintMyBlog\orm\entities\Design
+* @var $avpvh_prwb_project \Avpvh\PrintWebsite\orm\entities\Project
+ * @var $avpvh_prwb_design \Avpvh\PrintWebsite\orm\entities\Design
  */
 ?>
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
     </style>
 
 
-    <title><?php echo $pmb_project->getPublishedTitle();?></title>
+    <title><?php echo $avpvh_prwb_project->getPublishedTitle();?></title>
 	<?php
 	// @todo: we should instead render this after we've fetched all the posts and found all the scripts they depend on
 	wp_head();

@@ -1,19 +1,19 @@
 <?php
 
-namespace PrintMyBlog\controllers;
+namespace Avpvh\PrintWebsite\controllers;
 
-use mnelson4\rest_api_detector\RestApiDetector;
-use mnelson4\rest_api_detector\RestApiDetectorError;
-use PrintMyBlog\domain\PrintOptions;
+use Avpvh\PrintWebsite\mnelson4\rest_api_detector\RestApiDetector;
+use Avpvh\PrintWebsite\mnelson4\rest_api_detector\RestApiDetectorError;
+use Avpvh\PrintWebsite\domain\PrintOptions;
 use stdClass;
-use Twine\controllers\BaseController;
+use Avpvh\PrintWebsite\Twine\controllers\BaseController;
 
 /**
  * Class PmbPrintPage
  *
  * Sets up the print page.
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         $VID:$
  *
@@ -36,7 +36,7 @@ class LegacyPrintPage extends BaseController
             /**
             After Elementor at priority 12,
             Enfold theme at the ridiculous priority 20,000...
-            Someday, perhaps we should have a regular page dedicated to Print My Blog.
+            Someday, perhaps we should have a regular page dedicated to AV-PvH Print Website.
             If you're reading this code and agree, feel free to work on a pull request!
             */
             20001
@@ -61,34 +61,34 @@ class LegacyPrintPage extends BaseController
     {
         // Allow linking directly to a print page without using a form.
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
-        if (isset($_GET[PMB_PRINTPAGE_SLUG]) && $_GET[PMB_PRINTPAGE_SLUG] === '1') {
+        if (isset($_GET[AVPVH_PRWB_PRINTPAGE_SLUG]) && $_GET[AVPVH_PRWB_PRINTPAGE_SLUG] === '1') {
             try {
                 $site_info = new RestApiDetector($this->getFromRequest('site', ''));
             } catch (RestApiDetectorError $exception) {
-                global $pmb_wp_error;
-                $pmb_wp_error = $exception->wp_error();
-                return PMB_TEMPLATES_DIR . 'print_page_error.php';
+                global $avpvh_prwb_wp_error;
+                $avpvh_prwb_wp_error = $exception->wp_error();
+                return AVPVH_PRWB_TEMPLATES_DIR . 'print_page_error.php';
             }
             // phpcs:disable WordPress.WhiteSpace.PrecisionAlignment.Found
-            global $pmb_site_name,
-                   $pmb_site_description,
-                   $pmb_site_url,
-                   $pmb_download_file_name,
-                   $pmb_show_site_title,
-                   $pmb_show_site_tagline,
-                   $pmb_show_site_url,
-                   $pmb_show_filters,
-                   $pmb_show_date_printed,
-                   $pmb_show_credit,
-                   $pmb_after_date,
-                   $pmb_before_date,
-                   $pmb_post_type,
-                   $pmb_taxonomy_filters,
-                   $pmb_format,
-                   $pmb_browser,
-                   $pmb_author;
+            global $avpvh_prwb_site_name,
+                   $avpvh_prwb_site_description,
+                   $avpvh_prwb_site_url,
+                   $avpvh_prwb_download_file_name,
+                   $avpvh_prwb_show_site_title,
+                   $avpvh_prwb_show_site_tagline,
+                   $avpvh_prwb_show_site_url,
+                   $avpvh_prwb_show_filters,
+                   $avpvh_prwb_show_date_printed,
+                   $avpvh_prwb_show_credit,
+                   $avpvh_prwb_after_date,
+                   $avpvh_prwb_before_date,
+                   $avpvh_prwb_post_type,
+                   $avpvh_prwb_taxonomy_filters,
+                   $avpvh_prwb_format,
+                   $avpvh_prwb_browser,
+                   $avpvh_prwb_author;
             // phpcs:enable WordPress.WhiteSpace.PrecisionAlignment.Found
-            $pmb_site_url = str_replace(
+            $avpvh_prwb_site_url = str_replace(
                 array(
                     'https://',
                     'http://',
@@ -96,24 +96,24 @@ class LegacyPrintPage extends BaseController
                 '',
                 $site_info->getSite()
             );
-            $pmb_site_name = $site_info->getName();
+            $avpvh_prwb_site_name = $site_info->getName();
             // If there's no name for the site, use the URL. dotEpub has an error if there is no title for the eBooks.
-            if (! $pmb_site_name) {
-                $pmb_site_name = $pmb_site_url;
+            if (! $avpvh_prwb_site_name) {
+                $avpvh_prwb_site_name = $avpvh_prwb_site_url;
             }
-            $pmb_site_description = $site_info->getDescription();
+            $avpvh_prwb_site_description = $site_info->getDescription();
 
-            $pmb_show_site_title = $this->getFromRequest('show_site_title', false);
-            $pmb_show_site_tagline = $this->getFromRequest('show_site_tagline', false);
-            $pmb_show_site_url = $this->getFromRequest('show_site_url', false);
-            $pmb_show_filters = $this->getFromRequest('show_filters', false);
-            $pmb_show_date_printed = $this->getFromRequest('show_date_printed', false);
-            $pmb_show_credit = $this->getFromRequest('show_credit', false);
+            $avpvh_prwb_show_site_title = $this->getFromRequest('show_site_title', false);
+            $avpvh_prwb_show_site_tagline = $this->getFromRequest('show_site_tagline', false);
+            $avpvh_prwb_show_site_url = $this->getFromRequest('show_site_url', false);
+            $avpvh_prwb_show_filters = $this->getFromRequest('show_filters', false);
+            $avpvh_prwb_show_date_printed = $this->getFromRequest('show_date_printed', false);
+            $avpvh_prwb_show_credit = $this->getFromRequest('show_credit', false);
             $user_id_to_filter_by = $this->getFromRequest('pmb-author', null);
             if ($user_id_to_filter_by) {
-                $pmb_author = get_userdata($user_id_to_filter_by);
+                $avpvh_prwb_author = get_userdata($user_id_to_filter_by);
             } else {
-                $pmb_author = null;
+                $avpvh_prwb_author = null;
             }
             if ($site_info->isLocal()) {
                 $this->proxy_for = '';
@@ -127,8 +127,8 @@ class LegacyPrintPage extends BaseController
                 array($this, 'enqueueScripts'),
                 100
             );
-            $pmb_after_date = $this->getDateString('after');
-            $pmb_before_date = $this->getDateString('before');
+            $avpvh_prwb_after_date = $this->getDateString('after');
+            $avpvh_prwb_before_date = $this->getDateString('before');
 
             // Figure out what post type was selected.
             $post_types_using_query_var = get_post_types(
@@ -139,9 +139,9 @@ class LegacyPrintPage extends BaseController
             );
             if (is_array($post_types_using_query_var)) {
                 $post_type_info = reset($post_types_using_query_var);
-                $pmb_post_type = $post_type_info->label;
+                $avpvh_prwb_post_type = $post_type_info->label;
             } else {
-                $pmb_post_type = esc_html__('Unknown post type', 'print-my-blog');
+                $avpvh_prwb_post_type = esc_html__('Unknown post type', 'avpvh-print-website');
             }
 
             // Figure out what taxonomies were selected (if any) and their terms.
@@ -171,18 +171,18 @@ class LegacyPrintPage extends BaseController
                     foreach ($term_objects as $term_object) {
                         $term_names[] = $term_object->name;
                     }
-                    $pmb_taxonomy_filters[] = array(
+                    $avpvh_prwb_taxonomy_filters[] = array(
                         'taxonomy' => $taxonomy_object,
                         'terms' => $term_names,
                     );
                 }
             } else {
-                $pmb_taxonomy_filters = array();
+                $avpvh_prwb_taxonomy_filters = array();
             }
-            $pmb_format = $this->getFromRequest('pmb_f', $this->getFromRequest('format', 'print'));
-            $pmb_download_file_name = $this->getDownloadFileName($pmb_site_name, $pmb_format);
-            $pmb_browser = $this->getBrowser();
-            return PMB_TEMPLATES_DIR . 'print_page.php';
+            $avpvh_prwb_format = $this->getFromRequest('avpvh_prwb_f', $this->getFromRequest('format', 'print'));
+            $avpvh_prwb_download_file_name = $this->getDownloadFileName($avpvh_prwb_site_name, $avpvh_prwb_format);
+            $avpvh_prwb_browser = $this->getBrowser();
+            return AVPVH_PRWB_TEMPLATES_DIR . 'print_page.php';
         }
         return $template;
         // phpcs:enable WordPress.Security.NonceVerification.Recommended
@@ -252,29 +252,29 @@ class LegacyPrintPage extends BaseController
      */
     public function enqueueScripts()
     {
-        do_action('PrintMyBlog\controllers\PmbPrintPage->enqueueScripts');
+        do_action('Avpvh\PrintWebsite\controllers\PmbPrintPage->enqueueScripts');
         $format = $this->getFromRequest('format', 'print');
         wp_enqueue_script(
-            'pmb_print_page',
-            PMB_ASSETS_URL . 'scripts/print-page.js',
-            array('jquery', 'wp-api', 'pmb-beautifier-functions'),
-            filemtime(PMB_ASSETS_DIR . 'scripts/print-page.js')
+            'avpvh-print-website-print-page',
+            AVPVH_PRWB_ASSETS_URL . 'scripts/print-page.js',
+            array('jquery', 'wp-api', 'avpvh-print-website-beautifier-functions'),
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'scripts/print-page.js')
         );
         wp_enqueue_style(
-            'pmb_print_page',
-            PMB_ASSETS_URL . 'styles/print-page.css',
-            array('pmb_print_common'),
-            filemtime(PMB_ASSETS_DIR . 'styles/print-page.css')
+            'avpvh-print-website-print-page',
+            AVPVH_PRWB_ASSETS_URL . 'styles/print-page.css',
+            array('avpvh-print-website-print-common'),
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/print-page.css')
         );
         // Enqueue tiled gallery too. It's par of Jetpack so it's common, and if we're printing a WordPress.com blog
         // it's very likely to be used.
         wp_enqueue_style(
             'tiled-gallery',
-            PMB_ASSETS_URL . 'styles/tiled-gallery.css',
+            AVPVH_PRWB_ASSETS_URL . 'styles/tiled-gallery.css',
             array(),
-            filemtime(PMB_ASSETS_DIR . 'styles/tiled-gallery.css')
+            filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/tiled-gallery.css')
         );
-        wp_enqueue_style('pmb-plugin-compatibility');
+        wp_enqueue_style('avpvh-print-website-plugin-compatibility');
         if ($format === 'epub') {
             $this->enqueueLocalEpubScripts();
         } elseif ($format === 'word') {
@@ -351,57 +351,49 @@ class LegacyPrintPage extends BaseController
 
         $init_error_message = esc_html__(
             'There seems to be an error initializing. Please verify you are using an up-to-date web browser.',
-            'print-my-blog'
+            'avpvh-print-website'
         );
         if (is_user_logged_in()) {
             $init_error_message .= "\n"
                 . esc_html__(
                 //phpcs:disable Generic.Files.LineLength.TooLong
-                    'Also check the WP REST API isn’t disabled by a security plugin. Feel free to contact Print My Blog support.',
+                    'Also check the WP REST API isn’t disabled by a security plugin. Feel free to contact AV-PvH Print Website support.',
                     //phpcs:enable
-                    'print-my-blog'
+                    'avpvh-print-website'
                 );
         }
         wp_localize_script(
-            'pmb_print_page',
-            'pmb_print_data',
+            'avpvh-print-website-print-page',
+            'avpvh_prwb_print_data',
             array(
                 'i18n' => array(
-                    'loading_content' => esc_html__('Loading Content', 'print-my-blog'),
-                    'loading_comments' => esc_html__('Loading Comments', 'print-my-blog'),
-                    'organizing_posts' => esc_html__('Ordering Posts', 'print-my-blog'),
-                    'organizing_comments' => esc_html__('Ordering Comments', 'print-my-blog'),
-                    'rendering_posts' => esc_html__('Placing Content on Page', 'print-my-blog'),
-                    'wrapping_up' => esc_html__('Optimizing for Print', 'print-my-blog'),
-                    'ready' => esc_html__('Print-Page Ready', 'print-my-blog'),
+                    'loading_content' => esc_html__('Loading Content', 'avpvh-print-website'),
+                    'loading_comments' => esc_html__('Loading Comments', 'avpvh-print-website'),
+                    'organizing_posts' => esc_html__('Ordering Posts', 'avpvh-print-website'),
+                    'organizing_comments' => esc_html__('Ordering Comments', 'avpvh-print-website'),
+                    'rendering_posts' => esc_html__('Placing Content on Page', 'avpvh-print-website'),
+                    'wrapping_up' => esc_html__('Optimizing for Print', 'avpvh-print-website'),
+                    'ready' => esc_html__('Print-Page Ready', 'avpvh-print-website'),
                     'error_fetching_posts' => esc_html__(
                         'There was an error fetching posts. It was: ',
-                        'print-my-blog'
+                        'avpvh-print-website'
                     ),
-                    'no_response' => esc_html__('No response from WP REST API.', 'print-my-blog'),
-                    'error' => esc_html__('Sorry, There was a Problem 😢', 'print-my-blog'),
-                    'troubleshooting' => sprintf(
-                        //phpcs:disable Generic.Files.LineLength.TooLong
-                        // translators:1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag.
-                        esc_html__('%1$sRead our FAQs%2$s, then feel free to ask for help in %3$sthe support forum.%2$s', 'print-my-blog'),
-                        '<a href="https://wordpress.org/plugins/print-my-blog/#%0Athe%20print%20page%20says%20%E2%80%9Cthere%20seems%20to%20be%20an%20error%20initializing%E2%80%A6%E2%80%9D%2C%20or%20is%20stuck%20on%20%E2%80%9Cloading%20content%E2%80%9D%2C%20or%20i%20can%E2%80%99t%20filter%20by%20categories%20or%20terms%20from%20the%20print%20setup%20page%0A" target="_blank">',
-                        //phpcs:enable
-                        '</a>',
-                        '<a href="https://wordpress.org/support/plugin/print-my-blog/" target="_blank">'
-                    ),
-                    'comments' => esc_html__('Comments', 'print-my-blog'),
-                    'no_comments' => esc_html__('No Comments', 'print-my-blog'),
+                    'no_response' => esc_html__('No response from WP REST API.', 'avpvh-print-website'),
+                    'error' => esc_html__('Sorry, There was a Problem 😢', 'avpvh-print-website'),
+                    'troubleshooting' => '',
+                    'comments' => esc_html__('Comments', 'avpvh-print-website'),
+                    'no_comments' => esc_html__('No Comments', 'avpvh-print-website'),
                     // Legacy code, just leave the old sub-optimal translated text.
                     // phpcs:ignore WordPress.WP.I18n.NoHtmlWrappedStrings
-                    'says' => __('<span class="screen-reader-text says">says:</span>', 'print-my-blog'),
-                    'id' => esc_html__('ID:', 'print-my-blog'),
-                    'by' => esc_html__('By', 'print-my-blog'),
-                    'protected' => esc_html__('Protected:', 'print-my-blog'),
-                    'private' => esc_html__('Private:', 'print-my-blog'),
+                    'says' => __('<span class="screen-reader-text says">says:</span>', 'avpvh-print-website'),
+                    'id' => esc_html__('ID:', 'avpvh-print-website'),
+                    'by' => esc_html__('By', 'avpvh-print-website'),
+                    'protected' => esc_html__('Protected:', 'avpvh-print-website'),
+                    'private' => esc_html__('Private:', 'avpvh-print-website'),
                     'init_error' => $init_error_message,
-                    'copied' => esc_html__('Copied! Ready to paste.', 'print-my-blog'),
+                    'copied' => esc_html__('Copied! Ready to paste.', 'avpvh-print-website'),
                     //phpcs:ignore Generic.Files.LineLength.TooLong
-                    'copy_error' => esc_html__('There was an error copying. You can still select all the text manually and copy it.', 'print-my-blog'),
+                    'copy_error' => esc_html__('There was an error copying. You can still select all the text manually and copy it.', 'avpvh-print-website'),
                 ),
                 'data' => $data,
             )
@@ -432,27 +424,27 @@ class LegacyPrintPage extends BaseController
      */
     protected function enqueueLocalEpubScripts()
     {
-        wp_enqueue_script('pmb_general');
+        wp_enqueue_script('avpvh-print-website-general');
         wp_register_script(
             'epub-gen-memory',
-            PMB_SCRIPTS_URL . 'libs/epub-gen-memory__premium_only.min.js',
+            AVPVH_PRWB_SCRIPTS_URL . 'libs/epub-gen-memory__premium_only.min.js',
             [],
-            filemtime(PMB_SCRIPTS_DIR . 'libs/epub-gen-memory__premium_only.min.js')
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'libs/epub-gen-memory__premium_only.min.js')
         );
         wp_register_script(
-            'pmb-filesaver',
-            PMB_SCRIPTS_URL . 'libs/filesaver__premium_only.min.js',
+            'avpvh-print-website-filesaver',
+            AVPVH_PRWB_SCRIPTS_URL . 'libs/filesaver__premium_only.min.js',
             [],
-            filemtime(PMB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js')
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js')
         );
         wp_enqueue_script(
-            'pmb-epub',
-            PMB_SCRIPTS_URL . 'epub-generator.js',
-            ['epub-gen-memory', 'jquery', 'pmb-beautifier-functions', 'pmb-filesaver', 'pmb_general'],
-            filemtime(PMB_SCRIPTS_DIR . 'epub-generator.js')
+            'avpvh-print-website-epub',
+            AVPVH_PRWB_SCRIPTS_URL . 'epub-generator.js',
+            ['epub-gen-memory', 'jquery', 'avpvh-print-website-beautifier-functions', 'avpvh-print-website-filesaver', 'avpvh-print-website-general'],
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'epub-generator.js')
         );
-        wp_localize_script('pmb-epub', 'pmb_pro', $this->getLocalDocumentGeneratorData('epub'));
-        wp_localize_script('pmb-epub', 'pmb_design_options', [
+        wp_localize_script('avpvh-print-website-epub', 'avpvh_prwb_pro', $this->getLocalDocumentGeneratorData('epub'));
+        wp_localize_script('avpvh-print-website-epub', 'avpvh_prwb_design_options', [
             'image_size' => $this->getImageRelativeSize(),
             'fonts_to_embed' => [],
         ]);
@@ -463,27 +455,27 @@ class LegacyPrintPage extends BaseController
      */
     protected function enqueueLocalWordScripts()
     {
-        wp_enqueue_script('pmb_general');
+        wp_enqueue_script('avpvh-print-website-general');
         wp_register_script(
-            'pmb-filesaver',
-            PMB_SCRIPTS_URL . 'libs/filesaver__premium_only.min.js',
+            'avpvh-print-website-filesaver',
+            AVPVH_PRWB_SCRIPTS_URL . 'libs/filesaver__premium_only.min.js',
             [],
-            filemtime(PMB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js')
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js')
         );
         wp_enqueue_style(
-            'pmb-word',
-            PMB_STYLES_URL . 'pmb-word.css',
+            'avpvh-print-website-word',
+            AVPVH_PRWB_STYLES_URL . 'pmb-word.css',
             [],
-            filemtime(PMB_STYLES_DIR . 'pmb-word.css')
+            filemtime(AVPVH_PRWB_STYLES_DIR . 'pmb-word.css')
         );
         wp_enqueue_script(
-            'pmb-word',
-            PMB_SCRIPTS_URL . 'pmb-word__premium_only.js',
-            ['jquery', 'pmb-filesaver', 'pmb_general'],
-            filemtime(PMB_SCRIPTS_DIR . 'pmb-word__premium_only.js')
+            'avpvh-print-website-word',
+            AVPVH_PRWB_SCRIPTS_URL . 'pmb-word__premium_only.js',
+            ['jquery', 'avpvh-print-website-filesaver', 'avpvh-print-website-general'],
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-word__premium_only.js')
         );
-        wp_localize_script('pmb-word', 'pmb_pro', $this->getLocalDocumentGeneratorData('word'));
-        wp_localize_script('pmb-word', 'pmb_design_options', [
+        wp_localize_script('avpvh-print-website-word', 'avpvh_prwb_pro', $this->getLocalDocumentGeneratorData('word'));
+        wp_localize_script('avpvh-print-website-word', 'avpvh_prwb_design_options', [
             'image_size' => $this->getImageRelativeSize(),
         ]);
     }
@@ -501,10 +493,10 @@ class LegacyPrintPage extends BaseController
             'css' => $this->getQuickPrintGeneratorCss($format),
             'version' => '3',
             'translations' => [
-                'many_articles' => __('Your document is very big and you might have errors downloading the file. If so, try printing fewer posts at a time.', 'print-my-blog'),
-                'many_images' => __('Your document has lots of images and you might have errors downloading the file. If so, try reducing image size or printing fewer posts at a time.', 'print-my-blog'),
+                'many_articles' => __('Your document is very big and you might have errors downloading the file. If so, try printing fewer posts at a time.', 'avpvh-print-website'),
+                'many_images' => __('Your document has lots of images and you might have errors downloading the file. If so, try reducing image size or printing fewer posts at a time.', 'avpvh-print-website'),
             ],
-            'domain' => pmb_get_domain(),
+            'domain' => avpvh_prwb_get_domain(),
             'site_url' => site_url(),
         ];
     }
@@ -515,14 +507,14 @@ class LegacyPrintPage extends BaseController
      */
     protected function getQuickPrintGeneratorCss($format)
     {
-        $css = pmb_get_contents(PMB_ASSETS_DIR . 'styles/pmb-print-page-common.css')
-            . pmb_get_contents(PMB_ASSETS_DIR . 'styles/print-page.css')
-            . pmb_get_contents(PMB_ASSETS_DIR . 'styles/plugin-compatibility.css');
-        if ($format === 'epub' && file_exists(PMB_STYLES_DIR . 'pmb-epub.css')) {
-            $css .= pmb_get_contents(PMB_STYLES_DIR . 'pmb-epub.css');
+        $css = avpvh_prwb_get_contents(AVPVH_PRWB_ASSETS_DIR . 'styles/pmb-print-page-common.css')
+            . avpvh_prwb_get_contents(AVPVH_PRWB_ASSETS_DIR . 'styles/print-page.css')
+            . avpvh_prwb_get_contents(AVPVH_PRWB_ASSETS_DIR . 'styles/plugin-compatibility.css');
+        if ($format === 'epub' && file_exists(AVPVH_PRWB_STYLES_DIR . 'pmb-epub.css')) {
+            $css .= avpvh_prwb_get_contents(AVPVH_PRWB_STYLES_DIR . 'pmb-epub.css');
         }
-        if ($format === 'word' && file_exists(PMB_STYLES_DIR . 'pmb-word.css')) {
-            $css .= pmb_get_contents(PMB_STYLES_DIR . 'pmb-word.css');
+        if ($format === 'word' && file_exists(AVPVH_PRWB_STYLES_DIR . 'pmb-word.css')) {
+            $css .= avpvh_prwb_get_contents(AVPVH_PRWB_STYLES_DIR . 'pmb-word.css');
         }
         return $css;
     }
@@ -583,21 +575,21 @@ class LegacyPrintPage extends BaseController
     protected function loadThemeCompatibilityIfItExists($slug)
     {
         $theme_slug_path = 'styles/theme-compatibility/' . $slug . '.css';
-        if (file_exists(PMB_ASSETS_DIR . $theme_slug_path)) {
+        if (file_exists(AVPVH_PRWB_ASSETS_DIR . $theme_slug_path)) {
             wp_enqueue_style(
-                'pmb_print_page_theme_compatibility',
-                PMB_ASSETS_URL . $theme_slug_path,
+                'avpvh-print-website-print-page-theme-compatibility',
+                AVPVH_PRWB_ASSETS_URL . $theme_slug_path,
                 array(),
-                filemtime(PMB_ASSETS_DIR . $theme_slug_path)
+                filemtime(AVPVH_PRWB_ASSETS_DIR . $theme_slug_path)
             );
         }
         $script_slug_path = 'scripts/theme-compatibility/' . $slug . '.js';
-        if (file_exists(PMB_ASSETS_DIR . $script_slug_path)) {
+        if (file_exists(AVPVH_PRWB_ASSETS_DIR . $script_slug_path)) {
             wp_enqueue_script(
-                'pmb_print_page_script_compatibility',
-                PMB_ASSETS_URL . $script_slug_path,
-                array('pmb_print_page'),
-                filemtime(PMB_ASSETS_DIR . $script_slug_path)
+                'avpvh-print-website-print-page-script-compatibility',
+                AVPVH_PRWB_ASSETS_URL . $script_slug_path,
+                array('avpvh-print-website-print-page'),
+                filemtime(AVPVH_PRWB_ASSETS_DIR . $script_slug_path)
             );
         }
     }
@@ -616,9 +608,9 @@ class LegacyPrintPage extends BaseController
             column-count: $columns;
         }
         ";
-        // If it's a multi-column design, remove the margins around "pmb_image"s. They offset the image so that even
+        // If it's a multi-column design, remove the margins around "avpvh_prwb_image"s. They offset the image so that even
         // if it takes up the full column width, it's now offset and so spills over onto the other column.
-        // Removing the margins fixes that. And because "pmb_image"s take up the width, they don't prevent
+        // Removing the margins fixes that. And because "avpvh_prwb_image"s take up the width, they don't prevent
         // the image contained inside them from being centered anyhow. So this seems to be win-win.
         if ($columns > 1) {
             $css .= '
@@ -669,10 +661,10 @@ class LegacyPrintPage extends BaseController
         }
         // Let's make margin smaller or bigger too, if the text was resized.
         wp_add_inline_style(
-            'pmb_print_page',
+            'avpvh-print-website-print-page',
             $css
         );
     }
 }
 // End of file PmbPrintPage.php
-// Location: PrintMyBlog\controllers/PmbPrintPage.php
+// Location: Avpvh\PrintWebsite\controllers/PmbPrintPage.php

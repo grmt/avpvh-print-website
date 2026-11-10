@@ -1,12 +1,12 @@
 <?php
 
-namespace PrintMyBlog\controllers\helpers;
+namespace Avpvh\PrintWebsite\controllers\helpers;
 
-use PrintMyBlog\controllers\Admin;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\orm\managers\ProjectManager;
-use PrintMyBlog\system\Context;
-use PrintMyBlog\system\CustomPostTypes;
+use Avpvh\PrintWebsite\controllers\Admin;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\orm\managers\ProjectManager;
+use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
 use WP_List_Table;
 use WP_Post;
 use WP_Query;
@@ -18,7 +18,7 @@ use WP_Query;
  *
  * Description
  *
- * @package        Print My Blog
+ * @package        AV-PvH Print Website
  * @author         Mike Nelson
  * @since          $VID:$
  *
@@ -108,9 +108,9 @@ class ProjectsListTable extends WP_List_Table
     {
         $columns = [
             'cb' => '<input type="checkbox" />',
-            'title' => __('Title', 'print-my-blog'),
-            'format' => __('Format', 'print-my-blog'),
-            'date' => __('Date', 'print-my-blog'),
+            'title' => __('Title', 'avpvh-print-website'),
+            'format' => __('Format', 'avpvh-print-website'),
+            'date' => __('Date', 'avpvh-print-website'),
         ];
         return $columns;
     }
@@ -162,7 +162,7 @@ class ProjectsListTable extends WP_List_Table
     public function column_title(Project $project)
     {
         $post = $project->getWpPost();
-        $title = $post->post_title ? $post->post_title : __('Untitled', 'print-my-blog');
+        $title = $post->post_title ? $post->post_title : __('Untitled', 'avpvh-print-website');
         $steps = $project->getProgress()->getSteps();
         $progress = $project->getProgress()->getStepProgress();
         $next_step = $project->getProgress()->getNextStep();
@@ -206,9 +206,7 @@ class ProjectsListTable extends WP_List_Table
         ?>
 <span class="pmb-dont-break-phrase">| &nbsp; 
         <?php
-        // only show duplicate feature for Professional and Business licenses
-        if (pmb_has_required_plan('founding_members')) {
-            ?>
+        ?>
     <a class="pmb-duplicate" href="
             <?php
             echo esc_url(
@@ -219,22 +217,13 @@ class ProjectsListTable extends WP_List_Table
                             'subaction' => Admin::SLUG_SUBACTION_PROJECT_DUPLICATE,
                             'ID' => $post->ID,
                         ],
-                        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                        admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
                     ),
                     Admin::SLUG_ACTION_EDIT_PROJECT
                 )
             );
             ?>
-                                        "><?php esc_html_e('Duplicate', 'print-my-blog'); ?></a>
-                                        <?php
-        } else {
-            esc_html_e('Duplicate', 'print-my-blog');
-            echo '&nbsp;';
-            // We want to show HTML here.
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo pmb_hover_tip(__('Feature included in Professional and Business licenses', 'print-my-blog'));
-        }
-        ?>
+                                        "><?php esc_html_e('Duplicate', 'avpvh-print-website'); ?></a>
         </span>
         <?php
     }
@@ -257,9 +246,9 @@ class ProjectsListTable extends WP_List_Table
      */
     public function column_date(Project $project)
     {
-        return __('Started', 'print-my-blog') . '<br>' . sprintf(
+        return __('Started', 'avpvh-print-website') . '<br>' . sprintf(
         // translators: 1: Post date, 2: Post time.
-            __('%1$s at %2$s', 'print-my-blog'),
+            __('%1$s at %2$s', 'avpvh-print-website'),
             /* translators: Post date format. See https://www.php.net/date */
             get_the_time(__('Y/m/d'), $project->getWpPost()),
             /* translators: Post time format. See https://www.php.net/date */
@@ -272,7 +261,7 @@ class ProjectsListTable extends WP_List_Table
      */
     public function no_items()
     {
-        esc_html_e('Click "Add New Project" 👆 To Make Your First Project!', 'print-my-blog');
+        esc_html_e('Click "Add New Project" 👆 To Make Your First Project!', 'avpvh-print-website');
     }
 
     /**
@@ -291,7 +280,7 @@ class ProjectsListTable extends WP_List_Table
     {
         if ($this->project_manager === null) {
             $this->project_manager = Context::instance()->reuse(
-                'PrintMyBlog\orm\managers\ProjectManager'
+                'Avpvh\PrintWebsite\orm\managers\ProjectManager'
             );
         }
         return $this->project_manager;

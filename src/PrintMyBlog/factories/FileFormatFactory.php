@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\factories;
+namespace Avpvh\PrintWebsite\factories;
 
-use PrintMyBlog\entities\FileFormat;
-use PrintMyBlog\system\Context;
+use Avpvh\PrintWebsite\entities\FileFormat;
+use Avpvh\PrintWebsite\system\Context;
 
 /**
  * Class FileFormatFactory
- * @package PrintMyBlog\factories
+ * @package Avpvh\PrintWebsite\factories
  */
 class FileFormatFactory
 {
@@ -18,7 +18,7 @@ class FileFormatFactory
     public function create($args)
     {
         return Context::instance()->useNew(
-            'PrintMyBlog\entities\FileFormat',
+            'Avpvh\PrintWebsite\entities\FileFormat',
             [$args]
         );
     }

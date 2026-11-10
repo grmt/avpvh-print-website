@@ -1,23 +1,23 @@
 <?php
 
-namespace PrintMyBlog\system;
+namespace Avpvh\PrintWebsite\system;
 
-use PrintMyBlog\db\migrations\MigrationManager;
-use PrintMyBlog\db\TableManager;
-use PrintMyBlog\domain\DefaultProjectContents;
-use PrintMyBlog\services\DesignRegistry;
-use Twine\system\RequestType;
-use Twine\system\Activation as BaseActivation;
-use Twine\system\VersionHistory;
+use Avpvh\PrintWebsite\db\migrations\MigrationManager;
+use Avpvh\PrintWebsite\db\TableManager;
+use Avpvh\PrintWebsite\domain\DefaultProjectContents;
+use Avpvh\PrintWebsite\services\DesignRegistry;
+use Avpvh\PrintWebsite\Twine\system\RequestType;
+use Avpvh\PrintWebsite\Twine\system\Activation as BaseActivation;
+use Avpvh\PrintWebsite\Twine\system\VersionHistory;
 
 /**
  * Class Activation
  *
- * Handles installing Print My Blog, redirecting, and upgrades.
+ * Handles installing AV-PvH Print Website, redirecting, and upgrades.
  *
- * Managed by \PrintMyBlog\system\Context.
+ * Managed by \Avpvh\PrintWebsite\system\Context.
  *
- * @package        Print My Blog
+ * @package        AV-PvH Print Website
  * @author         Mike Nelson
  * @since          $VID:$
  *
@@ -86,42 +86,7 @@ class Activation extends BaseActivation
      */
     public function detectActivation()
     {
-        // get the activation indicator before its value is updated by RequestType
-        $activation_indicator = get_option('pmb_activation', null);
-
-        // on a brand new install (or deactivate and activate another version), activation indicator will be true
-        // on an upgrade, activation indicator will be false
-        // so if previous version isnt set, and its not an activation it must be an upgrade
         parent::detectActivation();
-        // If someone upgrades to premium, ask for their license key immediately
-        if (
-            pmb_is_premium() &&
-            in_array(
-                $this->request_type->getRequestType(),
-                [RequestType::REQUEST_TYPE_UPDATE, RequestType::REQUEST_TYPE_REACTIVATION],
-                true
-            ) &&
-            pmb_is_anonymous_install() &&
-            pmb_is_registered_install()
-        ) {
-            // although freemius rechecks on each reactivation, don't recheck on each update
-            $rechecked = get_option('pmb_rechecked_on_upgrade', false);
-            if (! $rechecked) {
-                pmb_connect_again();
-                update_option('pmb_rechecked_on_upgrade', true);
-            }
-        }
-        if ($activation_indicator === '' && $this->version_history->previousVersion() === null) {
-                wp_safe_redirect(
-                    add_query_arg(
-                        array(
-                            'upgrade_to_3' => 1,
-                        ),
-                        admin_url(PMB_ADMIN_PAGE_PATH)
-                    )
-                );
-                exit;
-        }
         // Keep redirecting users to the welcome page on new installs and reactivations.
         if (
             in_array(
@@ -147,7 +112,7 @@ class Activation extends BaseActivation
         $this->capabilities->grantCapabilities();
         $this->design_registry->createRegisteredDesigns();
         $this->project_contents->addDefaultContents();
-        do_action('PrintMyBlog\system\Activation->install done', $this);
+        do_action('Avpvh\PrintWebsite\system\Activation->install done', $this);
     }
 
     /**
@@ -169,7 +134,7 @@ class Activation extends BaseActivation
                 array(
                     'welcome' => 1,
                 ),
-                admin_url(PMB_ADMIN_PAGE_PATH)
+                admin_url(AVPVH_PRWB_ADMIN_PAGE_PATH)
             ),
             303 // "See Other". Use this instead of 302 because browsers sometimes cache 302s meaning
             // when folks activate a different plugin, the browser might redirect them to the PMB activation page again

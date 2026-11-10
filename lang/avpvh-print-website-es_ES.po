@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Print My Blog\n"
+"Project-Id-Version: AV-PvH Print Website\n"
 "POT-Creation-Date: 2025-08-24 10:28-0700\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -26,12 +26,12 @@ msgstr "Propósito"
 
 #: designs/epub/classic/description.php:2
 msgid ""
-"Similar to Print My Blog Quick Print and dotEpub, but supporting Pro "
+"Similar to AV-PvH Print Website Quick Print and dotEpub, but supporting Pro "
 "features. Great for printing your WordPress content as an eBook for reading "
 "from a tablet or phone, or uploading to eBook marketplaces like Amazon or "
 "Apple Book Store."
 msgstr ""
-"Muy similar a Print My Blog  gratis, pero compatible con las características "
+"Muy similar a AV-PvH Print Website  gratis, pero compatible con las características "
 "Pro. Ideal para imprimir su contenido de WordPress."
 
 #: designs/epub/classic/description.php:3
@@ -108,7 +108,7 @@ msgstr ""
 #: designs/word/classic/description.php:21
 msgid ""
 "The default title page can include: Project Title, Subtitle, Site URL, Date "
-"Printed, Credit to Print My Blog"
+"Printed, Credit to AV-PvH Print Website"
 msgstr ""
 "La página de título predeterminada puede incluir: Título del proyecto, "
 "Subtítulos, URL del sitio, Fecha impresa, Crédito para imprimir mi blog"
@@ -198,8 +198,8 @@ msgstr "Por %s"
 
 #: designs/epub/classic/templates/footer.php:4
 #: designs/word/classic/templates/footer.php:4
-msgid "Powered by WordPress & Print My Blog"
-msgstr "Desarrollado por WordPress e Print My Blog"
+msgid "Powered by WordPress & AV-PvH Print Website"
+msgstr "Desarrollado por WordPress e AV-PvH Print Website"
 
 #. translators: %s: Post title.
 #: designs/epub/classic/templates/partials/comments.php:13
@@ -299,11 +299,11 @@ msgstr ""
 
 #: designs/pdf/digital/classic/description.php:2
 msgid ""
-"Very similar to Print My Blog Quick Print, but supporting Pro features. "
+"Very similar to AV-PvH Print Website Quick Print, but supporting Pro features. "
 "Great for making a PDF for an easy-to-read digital backup of your favorite "
 "website content."
 msgstr ""
-"Muy similar a Print My Blog impresión rápida, pero compatible con las "
+"Muy similar a AV-PvH Print Website impresión rápida, pero compatible con las "
 "características Pro. Ideal para hacer un PDF para una copia de seguridad "
 "digital fácil de leer de su contenido favorito del sitio web."
 
@@ -509,7 +509,7 @@ msgstr ""
 
 #: designs/pdf/print/classic/descriptions/classic.php:2
 msgid ""
-"Very similar to Print My Blog Quick Print, but supporting Pro features. "
+"Very similar to AV-PvH Print Website Quick Print, but supporting Pro features. "
 "Great for printing your WordPress content."
 msgstr ""
 "Muy similar a Imprimir mi blog gratis, pero compatible con las "
@@ -767,13 +767,13 @@ msgstr "Edición %s"
 
 #: designs/word/classic/description.php:2
 msgid ""
-"Similar to Print My Blog Quick Print's other \"Classic\" designs, except "
+"Similar to AV-PvH Print Website Quick Print's other \"Classic\" designs, except "
 "optimized for reading by Microsoft Word. Useful when you need to deliver "
 "your content as a Microsoft Word Document (like to an editor), or for using "
 "as an intermediate format for delivery to other applications (like for "
 "importing into Adobe InDesign)."
 msgstr ""
-"Similar a los otros diseños \"clásicos\" de Print My Blog Quick Print, "
+"Similar a los otros diseños \"clásicos\" de AV-PvH Print Website Quick Print, "
 "excepto optimizado para la lectura por Microsoft Word. Útil cuando necesite "
 "entregar su contenido como un documento de Microsoft Word (como a un editor) "
 "o para usarlo como formato intermedio para su entrega a otras aplicaciones "
@@ -832,7 +832,7 @@ msgid "display"
 msgstr ""
 
 #: inc/design_functions.php:170
-msgid "Powered by Print My Blog Pro & WordPress"
+msgid "Powered by AV-PvH Print Website Pro & WordPress"
 msgstr "Imprima mi blog ahora gratis"
 
 #: inc/internal_functions.php:55
@@ -913,7 +913,7 @@ msgstr "%s:"
 
 #: printmyblog.php:40
 msgid ""
-"We’re sorry, but you have another version of Print My Blog active. Only one "
+"We’re sorry, but you have another version of AV-PvH Print Website active. Only one "
 "can be active at a time. Please deactivate one."
 msgstr ""
 "Lo sentimos, pero tienes otra versión de Imprimir mi blog activa. Sólo uno "
@@ -922,7 +922,7 @@ msgstr ""
 #: printmyblog.php:67
 #, php-format
 msgid ""
-"We’re sorry, but Print My Blog requires PHP version %1$s or greater in order "
+"We’re sorry, but AV-PvH Print Website requires PHP version %1$s or greater in order "
 "to operate. You are currently running version %2$s.%3$sIn order to update "
 "your version of PHP, you will need to contact your current hosting provider."
 "%3$sFor information on stable PHP versions, please go to %4$s."
@@ -936,7 +936,7 @@ msgstr ""
 #: printmyblog.php:108
 #, php-format
 msgid ""
-"We’re sorry, but Print My Blog requires WordPress %1$s. You are using %2$s."
+"We’re sorry, but AV-PvH Print Website requires WordPress %1$s. You are using %2$s."
 "%3$sFor information on how to update, please see %4$s."
 msgstr ""
 "Lo sentimos, pero Imprimir mi blog requiere %1$s de WordPress. Estás usando "
@@ -987,7 +987,7 @@ msgstr "\"%1$s\" está completamente traducido en %2$s"
 #: src/PrintMyBlog/controllers/Admin.php:243
 #: src/PrintMyBlog/controllers/Admin.php:244
 #: templates/partials/breadcrumb.php:10 templates/welcome.php:6
-msgid "Print My Blog"
+msgid "AV-PvH Print Website"
 msgstr "Imprimir mi blog"
 
 #: src/PrintMyBlog/controllers/Admin.php:256
@@ -997,7 +997,7 @@ msgid "Pro Print"
 msgstr "Pro impresión"
 
 #: src/PrintMyBlog/controllers/Admin.php:266
-msgid "Print My Blog – Quick Print"
+msgid "AV-PvH Print Website – Quick Print"
 msgstr "Imprimir mi blog – Impresión rápida"
 
 #: src/PrintMyBlog/controllers/Admin.php:267
@@ -1005,7 +1005,7 @@ msgid "Quick Print"
 msgstr "Impresión rápida"
 
 #: src/PrintMyBlog/controllers/Admin.php:274
-msgid "Print My Blog Designs"
+msgid "AV-PvH Print Website Designs"
 msgstr "Imprimir la configuración de mi blog"
 
 #: src/PrintMyBlog/controllers/Admin.php:275
@@ -1014,7 +1014,7 @@ msgid "Designs"
 msgstr "Diseños"
 
 #: src/PrintMyBlog/controllers/Admin.php:282
-msgid "Print My Blog Settings"
+msgid "AV-PvH Print Website Settings"
 msgstr "Imprimir la configuración de mi blog"
 
 #: src/PrintMyBlog/controllers/Admin.php:283
@@ -1022,7 +1022,7 @@ msgid "Settings"
 msgstr "Ajustes"
 
 #: src/PrintMyBlog/controllers/Admin.php:290 templates/help.php:10
-msgid "Help Me Print My Blog"
+msgid "Help Me AV-PvH Print Website"
 msgstr "Ayúdame a imprimir mi blog"
 
 #: src/PrintMyBlog/controllers/Admin.php:291
@@ -1059,7 +1059,7 @@ msgid "Print Formats"
 msgstr "Formatos de impresión"
 
 #: src/PrintMyBlog/controllers/Admin.php:489
-msgid "Email Print My Blog Support"
+msgid "Email AV-PvH Print Website Support"
 msgstr "Impresión por correo electrónico Mi blog soporte"
 
 #: src/PrintMyBlog/controllers/Admin.php:549
@@ -1112,10 +1112,10 @@ msgstr "Esta información de depuración también se enviará."
 #: src/PrintMyBlog/controllers/Admin.php:618
 msgid ""
 "This is mostly system information, list of active plugins, active theme, and "
-"some Print My Blog Pro info like your most recent projects."
+"some AV-PvH Print Website Pro info like your most recent projects."
 msgstr ""
 "Esta es principalmente información del sistema, lista de plugins activos, "
-"tema activo, y alguna información de Print My Blog Pro como sus proyectos "
+"tema activo, y alguna información de AV-PvH Print Website Pro como sus proyectos "
 "más recientes."
 
 #: src/PrintMyBlog/controllers/Admin.php:637
@@ -1184,7 +1184,7 @@ msgstr ""
 #: src/PrintMyBlog/controllers/Frontend.php:302
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:126
 msgid ""
-"There was an error preparing your content. Please visit the Print My Blog "
+"There was an error preparing your content. Please visit the AV-PvH Print Website "
 "Help page."
 msgstr ""
 "Se ha producido un error al preparar el contenido. Visite la página de ayuda "
@@ -1195,7 +1195,7 @@ msgstr ""
 #: src/PrintMyBlog/services/generators/PdfGenerator.php:127
 msgid ""
 "Your project could not be accessed in order to generate the file. Maybe your "
-"website is not public? Please visit the Print My Blog Help page."
+"website is not public? Please visit the AV-PvH Print Website Help page."
 msgstr ""
 "No se pudo acceder a su proyecto para generar el archivo. ¿Tal vez su sitio "
 "web no es público? Visite la página de ayuda imprimir mi blog."
@@ -1211,9 +1211,9 @@ msgstr ""
 #: src/PrintMyBlog/controllers/Admin.php:1205
 #: src/PrintMyBlog/controllers/Admin.php:2054
 #, php-format
-msgid "There was an error communicating with Print My Blog Central. It was %s"
+msgid "There was an error communicating with AV-PvH Print Website Central. It was %s"
 msgstr ""
-"Se ha producido un error al comunicarme con Print My Blog Central. Fue %s"
+"Se ha producido un error al comunicarme con AV-PvH Print Website Central. Fue %s"
 
 #: src/PrintMyBlog/controllers/Admin.php:1287
 #, php-format
@@ -1343,7 +1343,7 @@ msgstr "Material de impresión"
 #. translators: %s: post title
 #: src/PrintMyBlog/controllers/Admin.php:2247
 #, php-format
-msgid "Copy \"%s\" to New Print Material for a Print My Blog project"
+msgid "Copy \"%s\" to New Print Material for a AV-PvH Print Website project"
 msgstr ""
 "Copiar \"%s\" en Nuevo material impreso para un proyecto imprimir mi blog"
 
@@ -1394,7 +1394,7 @@ msgstr "No hay categorías disponibles."
 #: src/PrintMyBlog/controllers/Frontend.php:226
 msgid ""
 "Invalid Post ID. The link you used to get here may be old. If it's new, "
-"please contact Print My Blog support."
+"please contact AV-PvH Print Website support."
 msgstr ""
 "ID de publicación no válido. El enlace que solía obtener aquí puede ser "
 "antiguo. Si es nuevo, ponte en contacto con el soporte técnico de Print My "
@@ -1415,7 +1415,7 @@ msgstr ""
 #: src/PrintMyBlog/controllers/LegacyPrintPage.php:351
 msgid ""
 "Also check the WP REST API isn’t disabled by a security plugin. Feel free to "
-"contact Print My Blog support."
+"contact AV-PvH Print Website support."
 msgstr ""
 "Compruebe también que la API de REST de WP no está deshabilitada por un "
 "complemento de seguridad. No dude en ponerse en contacto con el soporte de "
@@ -1675,7 +1675,7 @@ msgid "Organization Name"
 msgstr "Nombre de la organización"
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:243
-msgid "Shown in the title page. Eg \"Institute of Print My Blog\""
+msgid "Shown in the title page. Eg \"Institute of AV-PvH Print Website\""
 msgstr ""
 "Se muestra en la página de título. Por ejemplo, \"Instituto de Impresión Mi "
 "Blog\""
@@ -2293,11 +2293,11 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1074
 msgid ""
-"Instructs the Pro PDF Service to add \"Powered by Print My Blog Pro & "
+"Instructs the Pro PDF Service to add \"Powered by AV-PvH Print Website Pro & "
 "WordPress\" to your project. Does not appear when printing using your "
 "browser."
 msgstr ""
-"Indica al Servicio de Impresión Pro que agregue \"Powered by Print My Blog "
+"Indica al Servicio de Impresión Pro que agregue \"Powered by AV-PvH Print Website "
 "Pro &WordPress\" en el pie de página de la primera página. No aparece al "
 "imprimir con el navegador."
 
@@ -2432,7 +2432,7 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/DefaultDesignTemplates.php:1181
 msgid ""
-"To reduce whitespace around images, galleries, and tables, Print My Blog can "
+"To reduce whitespace around images, galleries, and tables, AV-PvH Print Website can "
 "adjust the placement of your content, or resize it according to the space on "
 "the page."
 msgstr ""
@@ -2558,10 +2558,10 @@ msgstr ""
 #: src/PrintMyBlog/domain/DefaultDesigns.php:26
 msgid ""
 "A simple but flexible design intended mainly for reading from screens, "
-"inspired by Print My Blog Quick Print."
+"inspired by AV-PvH Print Website Quick Print."
 msgstr ""
 "Un diseño sencillo pero flexible destinado principalmente a la lectura desde "
-"pantallas, inspirado en Print My Blog Free."
+"pantallas, inspirado en AV-PvH Print Website Free."
 
 #: src/PrintMyBlog/domain/DefaultDesigns.php:35
 msgid "Title page, with working hyperlinks."
@@ -2598,7 +2598,7 @@ msgid ""
 "Blog Quick Print"
 msgstr ""
 "Un diseño sencillo pero flexible destinado a la impresión, inspirado en "
-"Print My Blog Free"
+"AV-PvH Print Website Free"
 
 #: src/PrintMyBlog/domain/DefaultDesigns.php:120
 msgid "Title page, showing removed hyperlinks."
@@ -2824,7 +2824,7 @@ msgid ""
 msgstr ""
 "Pro Print es la mejor manera de hacer documentos de calidad profesional. "
 "Podrás imprimirlos de forma gratuita con tu navegador o actualizar para usar "
-"las funciones completas de Print My Blog Pro. %1$s Consulte comparación "
+"las funciones completas de AV-PvH Print Website Pro. %1$s Consulte comparación "
 "completa de características. %2$s"
 
 #. translators: 1: html tag, 2: html tag
@@ -2844,10 +2844,10 @@ msgstr ""
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:74
 msgid ""
-"The \"Classic\" design is the most similar Print My Blog’s Quick Print, so "
+"The \"Classic\" design is the most similar AV-PvH Print Website’s Quick Print, so "
 "it’s a good default choice."
 msgstr ""
-"El diseño \"Clásico\" es la impresión rápida más similar de Print My Blog, "
+"El diseño \"Clásico\" es la impresión rápida más similar de AV-PvH Print Website, "
 "por lo que es una buena opción predeterminada."
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:75
@@ -2984,12 +2984,12 @@ msgstr ""
 "pro%2$s y %4$sla ayuda%2$s."
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:143
-msgid "Posts just for Print My Blog"
+msgid "Posts just for AV-PvH Print Website"
 msgstr "Publicaciones sólo para Imprimir mi blog"
 
 #: src/PrintMyBlog/domain/DefaultPersistentNotices.php:144
 msgid ""
-"Print My Blog \"Print Materials\" are like private posts. They aren’t "
+"AV-PvH Print Website \"Print Materials\" are like private posts. They aren’t "
 "visible to site visitors, but you can use them in your Pro Print Projects."
 msgstr ""
 "Imprimir mi blog \"Materiales de impresión\" son como publicaciones "
@@ -3073,13 +3073,13 @@ msgstr ""
 "Por ejemplo, categorías seleccionadas, taxonomías y intervalo de fechas."
 
 #: src/PrintMyBlog/domain/PrintOptions.php:46
-msgid "Credit Print My Blog Plugin"
+msgid "Credit AV-PvH Print Website Plugin"
 msgstr "Crédito Imprimir mi blog Plugin"
 
 #. translators: 1: heart emoji
 #: src/PrintMyBlog/domain/PrintOptions.php:50
 #, php-format
-msgid "Show some love and tell your readers about Print My Blog %1$s"
+msgid "Show some love and tell your readers about AV-PvH Print Website %1$s"
 msgstr ""
 "Mostrar un poco de amor y contar a sus lectores acerca de Imprimir mi blog "
 "%1$s"
@@ -3365,12 +3365,12 @@ msgid "Projects"
 msgstr "Proyectos"
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:47
-msgid "Projects for printing with Print My Blog"
-msgstr "Proyectos para imprimir con Print My Blog"
+msgid "Projects for printing with AV-PvH Print Website"
+msgstr "Proyectos para imprimir con AV-PvH Print Website"
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:65
-msgid "Designs for printing with Print My Blog"
-msgstr "Diseños para imprimir con Print My Blog"
+msgid "Designs for printing with AV-PvH Print Website"
+msgstr "Diseños para imprimir con AV-PvH Print Website"
 
 #: src/PrintMyBlog/system/CustomPostTypes.php:80
 msgctxt "Post type general name"
@@ -3538,11 +3538,11 @@ msgstr "%1$s : %2$s"
 
 #: src/Twine/forms/base/FormSectionBase.php:12
 msgid ""
-"In order to use Twine forms, you need to define TWINE_MAIN_FILE to be the "
+"In order to use Twine forms, you need to define AVPVH_PRWB_TWINE_MAIN_FILE to be the "
 "main file of your plugin, then put Twine folder inside wp-content/plugins/"
 "yourplugin/src/Twine"
 msgstr ""
-"Para utilizar los formularios Twine, debe definir TWINE_MAIN_FILE para ser "
+"Para utilizar los formularios Twine, debe definir AVPVH_PRWB_TWINE_MAIN_FILE para ser "
 "el archivo principal de su plugin, a continuación, poner la carpeta Twine "
 "dentro de wp-content / plugins / yourplugin / src / Twine"
 
@@ -3852,11 +3852,11 @@ msgstr "Pro Print ― Proyectos"
 
 #: templates/designs.php:10
 msgid ""
-"Designs in Print My Blog are like Themes in WordPress: their settings affect "
+"Designs in AV-PvH Print Website are like Themes in WordPress: their settings affect "
 "how the projects are displayed. Edit them below or change which ones are "
 "used by default."
 msgstr ""
-"Los diseños en Print My Blog son como los temas en WordPress: su "
+"Los diseños en AV-PvH Print Website son como los temas en WordPress: su "
 "configuración afecta la forma en que se muestran los proyectos. Edítelos a "
 "continuación o cambie cuáles se usan de forma predeterminada."
 
@@ -3942,7 +3942,7 @@ msgstr "Volver"
 #: templates/partials/pro_print_page_epub_window.php:16
 #: templates/partials/pro_print_page_window.php:25
 #: templates/partials/pro_print_page_word_window.php:16
-msgid "Print My Blog — Pro Print"
+msgid "AV-PvH Print Website — Pro Print"
 msgstr "Imprimir mi blog — Pro Print"
 
 #: templates/partials/pro_print_page_epub_window.php:20
@@ -4287,13 +4287,13 @@ msgstr "%s."
 #. translators: 1: date, 2: opening link tag, 3: closing link tag
 #: templates/print_page.php:297
 #, php-format
-msgid "Printed on %1$s using %2$sPrint My Blog%3$s"
-msgstr "Impreso en %1$s usando %2$sPrint My Blog%3$s"
+msgid "Printed on %1$s using %2$sAV-PvH Print Website%3$s"
+msgstr "Impreso en %1$s usando %2$sAV-PvH Print Website%3$s"
 
 #: templates/print_page.php:310
 #, php-format
-msgid "Printed using %1$sPrint My Blog%2$s"
-msgstr "Impreso con %1$sPrint My Blog%2$s"
+msgid "Printed using %1$sAV-PvH Print Website%2$s"
+msgstr "Impreso con %1$sAV-PvH Print Website%2$s"
 
 #: templates/print_page_error.php:27
 msgid "Sorry, we could not print the WordPress Blog."
@@ -4333,7 +4333,7 @@ msgid ""
 "Blog%2$s support forum."
 msgstr ""
 "Si sigue teniendo problemas, por favor denúncialo al foro de soporte técnico "
-"%1$sPrint My Blog%2$s."
+"%1$sAV-PvH Print Website%2$s."
 
 #: templates/project_design_choose.php:19
 #, php-format
@@ -4655,7 +4655,7 @@ msgid "Add New Project"
 msgstr "Añadir nuevo proyecto"
 
 #: templates/settings_page.php:14
-msgid "Print My Blog - Settings"
+msgid "AV-PvH Print Website - Settings"
 msgstr "Imprimir mi blog - Configuración"
 
 #: templates/settings_page.php:16
@@ -4743,7 +4743,7 @@ msgid "Reset to Defaults"
 msgstr "Reestablecer los Valores por Defecto"
 
 #: templates/setup_page.php:12
-msgid "Print My Blog - Quick Print"
+msgid "AV-PvH Print Website - Quick Print"
 msgstr "Imprimir mi blog - Impresión rápida"
 
 #: templates/setup_page.php:13
@@ -4800,7 +4800,7 @@ msgstr "HTML"
 msgid ""
 "Easily copy-and-paste into another program like Microsoft Word or Google "
 "Docs. Note: this is not recommended for customizing printouts, as other "
-"programs usually format the content poorly. Instead, use Print My Blog’s CSS "
+"programs usually format the content poorly. Instead, use AV-PvH Print Website’s CSS "
 "classes to remove or add content from printouts."
 msgstr ""
 "Copie y pegue fácilmente en otro programa como Microsoft Word o Google Docs. "
@@ -4904,7 +4904,7 @@ msgid "It’s finally here..."
 msgstr "Por fin está aquí..."
 
 #: templates/upgrade_to_3.php:3
-msgid "Print My Blog – Pro Print!"
+msgid "AV-PvH Print Website – Pro Print!"
 msgstr "Imprimir mi blog — Pro Print"
 
 #: templates/upgrade_to_3.php:4
@@ -4995,7 +4995,7 @@ msgstr "Diseños prefabricados, reutilizables y personalizables"
 
 #: templates/upgrade_to_3.php:31
 msgid ""
-"Print My Blog's Designs are like WordPress Themes: each has its own look and "
+"AV-PvH Print Website's Designs are like WordPress Themes: each has its own look and "
 "customization options. Reuse the same design across projects. Or even create "
 "your own design using HTML, CSS, and Javascript"
 msgstr ""
@@ -5050,8 +5050,8 @@ msgid "Please %1$slet me know%2$s if you have any questions!"
 msgstr "Por favor, %1$s déjame saber%2$s si tienes alguna pregunta!"
 
 #: templates/upgrade_to_3.php:89
-msgid "Best wishes, Mike Nelson, Print My Blog Developer"
-msgstr "Mis mejores deseos, Mike Nelson, Print My Blog Developer"
+msgid "Best wishes, Mike Nelson, AV-PvH Print Website Developer"
+msgstr "Mis mejores deseos, Mike Nelson, AV-PvH Print Website Developer"
 
 #: templates/welcome.php:3
 #, php-format
@@ -5059,15 +5059,15 @@ msgid "Welcome to %s!"
 msgstr "Bienvenido a %s!"
 
 #: templates/welcome.php:5
-msgid "Print My Blog Pro"
-msgstr "Print My Blog Pro"
+msgid "AV-PvH Print Website Pro"
+msgstr "AV-PvH Print Website Pro"
 
 #: templates/welcome.php:8
 msgid "What would you like to do?"
 msgstr "¿Qué te gustaría hacer?"
 
 #: templates/welcome.php:12
-msgid "Print My Blog Now for Free"
+msgid "AV-PvH Print Website Now for Free"
 msgstr "Imprima mi blog ahora gratis"
 
 #: templates/welcome.php:16
@@ -5087,7 +5087,7 @@ msgid "Print Thousands of Pages from your Web Browser"
 msgstr "Imprima miles de páginas desde su navegador web"
 
 #: templates/welcome.php:29
-msgid "Let Visitors Print My Blog for Free"
+msgid "Let Visitors AV-PvH Print Website for Free"
 msgstr "Deje que los visitantes impriman mi blog de forma gratuita"
 
 #: templates/welcome.php:32
@@ -5163,13 +5163,13 @@ msgstr "Michael Nelson"
 #~ "Nota: Si deja esta opción sin marcar, se abrirá la página de vista previa "
 #~ "en la ventana activa."
 
-#~ msgid "Print My Blog news"
+#~ msgid "AV-PvH Print Website news"
 #~ msgstr "Imprima mis noticias de blog"
 
-#~ msgid "Dismiss all Print My Blog news"
-#~ msgstr "Desestima todas las noticias de Print My Blog"
+#~ msgid "Dismiss all AV-PvH Print Website news"
+#~ msgstr "Desestima todas las noticias de AV-PvH Print Website"
 
-#~ msgid "Are you sure you want to dismiss all Print My Blog news forever?"
+#~ msgid "Are you sure you want to dismiss all AV-PvH Print Website news forever?"
 #~ msgstr ""
 #~ "¿Estás seguro de que quieres descartar todas las noticias de Print My "
 #~ "Blog para siempre?"
@@ -5337,7 +5337,7 @@ msgstr "Michael Nelson"
 #~ msgid "Author(s)"
 #~ msgstr "Autor(es)"
 
-#~ msgid "Credit Print My Blog"
+#~ msgid "Credit AV-PvH Print Website"
 #~ msgstr "Impresión de crédito Mi blog"
 
 #, php-format

@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use Twine\forms\strategies\FormInputStrategyBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\FormInputStrategyBase;
 
 /**
  * Class ValidationBase
@@ -28,7 +28,7 @@ abstract class ValidationBase extends FormInputStrategyBase
     public function __construct($validation_error_message = null)
     {
         $this->validation_error_message = $validation_error_message === null
-            ? __('Input invalid', 'print-my-blog')
+            ? __('Input invalid', 'avpvh-print-website')
             : $validation_error_message;
         parent::__construct();
     }

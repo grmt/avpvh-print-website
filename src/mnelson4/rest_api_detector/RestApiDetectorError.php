@@ -1,6 +1,6 @@
 <?php
 
-namespace mnelson4\rest_api_detector;
+namespace Avpvh\PrintWebsite\mnelson4\rest_api_detector;
 
 use Exception;
 use WP_Error;
@@ -10,7 +10,7 @@ use WP_Error;
  *
  * An error while trying to detect REST API information about a site.
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  *
  */

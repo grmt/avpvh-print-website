@@ -1,26 +1,25 @@
 <?php
 
-namespace PrintMyBlog\controllers;
+namespace Avpvh\PrintWebsite\controllers;
 
 use Exception;
-use PrintMyBlog\domain\FrontendPrintSettings;
-use PrintMyBlog\domain\PrintNowSettings;
-use PrintMyBlog\entities\ProjectProgress;
-use PrintMyBlog\orm\managers\ProjectManager;
-use PrintMyBlog\services\FileFormatRegistry;
-use PrintMyBlog\services\PmbCentral;
-use PrintMyBlog\system\Context;
-use Twine\controllers\BaseController;
-use Twine\helpers\Array2;
+use Avpvh\PrintWebsite\domain\FrontendPrintSettings;
+use Avpvh\PrintWebsite\domain\PrintNowSettings;
+use Avpvh\PrintWebsite\entities\ProjectProgress;
+use Avpvh\PrintWebsite\orm\managers\ProjectManager;
+use Avpvh\PrintWebsite\services\FileFormatRegistry;
+use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\Twine\controllers\BaseController;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
 use WP_Post;
-use PrintMyBlog\domain\DefaultFileFormats;
+use Avpvh\PrintWebsite\domain\DefaultFileFormats;
 
 /**
  * Class PmbFrontend
  *
  * Sets up generic frontend logic.
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         $VID:$
  *
@@ -30,33 +29,33 @@ class Frontend extends BaseController
     /**
      * Request variable indicating a request like AJAX.
      */
-    const PMB_AJAX_INDICATOR = 'pmb_ajax';
+    const AVPVH_PRWB_AJAX_INDICATOR = 'avpvh_prwb_ajax';
 
     /**
      * Request variable indicating a request to generate a project.
      */
-    const PMB_LOADING_PAGE_INDICATOR = 'pmb_loading';
+    const AVPVH_PRWB_LOADING_PAGE_INDICATOR = 'avpvh_prwb_loading';
 
     /**
      * Request variable indicating which post to generate for the loading page.
      */
-    const PMB_QUERYARG_POST = 'pmb_p';
+    const AVPVH_PRWB_QUERYARG_POST = 'avpvh_prwb_p';
 
     /**
      * Request variable indicating which format to generate for the loading page.
      */
-    const PMB_QUERYARG_FORMAT = 'pmb_f';
+    const AVPVH_PRWB_QUERYARG_FORMAT = 'avpvh_prwb_f';
 
     /**
      * Action indicating we should generate a project or check its status.
      */
-    const PMB_PROJECT_STATUS_ACTION = 'pmb_project_status';
+    const AVPVH_PRWB_PROJECT_STATUS_ACTION = 'avpvh_prwb_project_status';
 
     /**
      * Querystring variable name to indicate whether to use or disable the WP theme on the next request
      * (used because we have to decide very early, before most of PMB is initialized)
      */
-    const PMB_USE_THEME = 'pmb_use_theme';
+    const AVPVH_PRWB_USE_THEME = 'avpvh_prwb_use_theme';
 
     /**
      * @var ProjectManager
@@ -68,13 +67,9 @@ class Frontend extends BaseController
      */
     protected $format_registry;
 
-    /**
-     * @var PmbCentral
-     */
-    protected $pmb_central;
 
     /**
-     * @var \Twine\orm\entities\PostWrapper|null
+     * @var \Avpvh\PrintWebsite\Twine\orm\entities\PostWrapper|null
      */
     protected $project;
 
@@ -82,16 +77,13 @@ class Frontend extends BaseController
      * Context injects these dependencies.
      * @param ProjectManager $project_manager
      * @param FileFormatRegistry $format_registry
-     * @param PmbCentral $pmb_central
      */
     public function inject(
         ProjectManager $project_manager,
-        FileFormatRegistry $format_registry,
-        PmbCentral $pmb_central
+        FileFormatRegistry $format_registry
     ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
-        $this->pmb_central = $pmb_central;
     }
 
     /**
@@ -107,7 +99,7 @@ class Frontend extends BaseController
              * automatically added.
              */
             apply_filters(
-                'PrintMyBlog\controllers\PmbFrontend->setHooks $priority',
+                'Avpvh\PrintWebsite\controllers\PmbFrontend->setHooks $priority',
                 10
             )
         );
@@ -124,7 +116,7 @@ class Frontend extends BaseController
             /**
             After Elementor at priority 12,
             Enfold theme at the ridiculous priority 20,000...
-            Someday, perhaps we should have a regular page dedicated to Print My Blog.
+            Someday, perhaps we should have a regular page dedicated to AV-PvH Print Website.
             If you're reading this code and agree, feel free to work on a pull request!
              */
             20001
@@ -141,23 +133,23 @@ class Frontend extends BaseController
         if (! $post instanceof WP_Post || ! in_array($post->post_type, ['post', 'page'], true)) {
             return $content;
         }
-        $pmb_print_settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');
+        $avpvh_prwb_print_settings = Context::instance()->reuse('Avpvh\PrintWebsite\domain\FrontendPrintSettings');
 
-        $postmeta_override = get_post_meta($post->ID, 'pmb_buttons', true);
-        $active_post_types = $pmb_print_settings->activePostTypes();
+        $postmeta_override = get_post_meta($post->ID, 'avpvh_prwb_buttons', true);
+        $active_post_types = $avpvh_prwb_print_settings->activePostTypes();
         if (
             /**
-             * Lets you override if Print My Blog adds print buttons or not.
+             * Lets you override if AV-PvH Print Website adds print buttons or not.
              *
              * @param bool $show whether to show print buttons on this post/page or not
              * @param WP_Post $post
-             * @param FrontendPrintSettings $pmb_print_settings
+             * @param FrontendPrintSettings $avpvh_prwb_print_settings
              * @param string $active_post_types 'show' to always show buttons on this post, 'hide' to hide on this post,
              *                                  'default', null, or false to use the default settings.
              * default settings.
              */
             apply_filters(
-                'PrintMyBlog\controllers\PmbFrontend->addPrintButtons $show_buttons',
+                'Avpvh\PrintWebsite\controllers\PmbFrontend->addPrintButtons $show_buttons',
                 (
                 isset($active_post_types[$post->post_type])
                 && $active_post_types[$post->post_type]
@@ -167,14 +159,14 @@ class Frontend extends BaseController
                 )
                 || $postmeta_override === 'show',
                 $post,
-                $pmb_print_settings,
+                $avpvh_prwb_print_settings,
                 $postmeta_override
             )
         ) {
-            $html = Context::instance()->reuse('PrintMyBlog\domain\PrintButtons')->getHtmlForPrintButtons($post);
+            $html = Context::instance()->reuse('Avpvh\PrintWebsite\domain\PrintButtons')->getHtmlForPrintButtons($post);
             $add_to_top = apply_filters(
-                '\PrintMyBlog\controllers\PmbFrontend->addPrintButton $add_to_top',
-                $pmb_print_settings->showButtonsAbove(),
+                '\Avpvh\PrintWebsite\controllers\PmbFrontend->addPrintButton $add_to_top',
+                $avpvh_prwb_print_settings->showButtonsAbove(),
                 $post
             );
             if ($add_to_top) {
@@ -195,7 +187,7 @@ class Frontend extends BaseController
     {
 
         // check for loading page
-        if (isset($_REQUEST[self::PMB_LOADING_PAGE_INDICATOR])){
+        if (isset($_REQUEST[self::AVPVH_PRWB_LOADING_PAGE_INDICATOR])){
             return $this->loadingPage();
         }
 
@@ -204,7 +196,7 @@ class Frontend extends BaseController
 
     public function templateRedirect(){
         // check for PMB ajax
-        if (isset($_REQUEST[self::PMB_AJAX_INDICATOR], $_REQUEST['action']) && $_REQUEST['action'] === self::PMB_PROJECT_STATUS_ACTION) {
+        if (isset($_REQUEST[self::AVPVH_PRWB_AJAX_INDICATOR], $_REQUEST['action']) && $_REQUEST['action'] === self::AVPVH_PRWB_PROJECT_STATUS_ACTION) {
             return $this->pmbAjax();
         }
     }
@@ -214,14 +206,14 @@ class Frontend extends BaseController
      * @throws Exception
      */
     protected function loadingPage(){
-        if (! check_admin_referer(Frontend::PMB_LOADING_PAGE_INDICATOR)) {
+        if (! check_admin_referer(Frontend::AVPVH_PRWB_LOADING_PAGE_INDICATOR)) {
             wp_die('The request has expired. Please refresh the previous page and try again.');
         }
-        global $pmb_format;
-        $pmb_format = Array2::setOr($_REQUEST, self::PMB_QUERYARG_FORMAT, DefaultFileFormats::DIGITAL_PDF);
-        $post_id = Array2::setOr($_REQUEST, self::PMB_QUERYARG_POST, 0);
+        global $avpvh_prwb_format;
+        $avpvh_prwb_format = Array2::setOr($_REQUEST, self::AVPVH_PRWB_QUERYARG_FORMAT, DefaultFileFormats::DIGITAL_PDF);
+        $post_id = Array2::setOr($_REQUEST, self::AVPVH_PRWB_QUERYARG_POST, 0);
         if( ! $post_id){
-            throw new Exception(__('Invalid Post ID. The link you used to get here may be old. If it\'s new, please contact Print My Blog support.', 'print-my-blog'));
+            throw new Exception(__('Invalid Post ID. The link you used to get here may be old. If it\'s new, please contact AV-PvH Print Website support.', 'avpvh-print-website'));
         }
         $this->project = $this->project_manager->getById($post_id);
         add_action(
@@ -229,75 +221,47 @@ class Frontend extends BaseController
             array($this, 'loadingPageEnqueueScripts'),
             100
         );
-        return PMB_TEMPLATES_DIR . 'loading.php';
+        return AVPVH_PRWB_TEMPLATES_DIR . 'loading.php';
     }
 
     public function loadingPageEnqueueScripts(){
         wp_enqueue_script(
-            'pmb_loading',
-            PMB_SCRIPTS_URL . 'pmb-loading.js',
-            array('jquery', 'pmb_general'),
-            filemtime(PMB_SCRIPTS_DIR . 'pmb-loading.js')
+            'avpvh-print-website-loading',
+            AVPVH_PRWB_SCRIPTS_URL . 'pmb-loading.js',
+            array('jquery', 'avpvh-print-website-general'),
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-loading.js')
         );
         wp_enqueue_style(
-            'pmb_print_page',
-            PMB_STYLES_URL . 'pmb-loading.css',
-            array('pmb_print_common'),
-            filemtime(PMB_STYLES_DIR . 'pmb-loading.css')
+            'avpvh-print-website-print-page',
+            AVPVH_PRWB_STYLES_URL . 'pmb-loading.css',
+            array('avpvh-print-website-print-common'),
+            filemtime(AVPVH_PRWB_STYLES_DIR . 'pmb-loading.css')
         );
 
-        $format = Array2::setOr($_REQUEST, 'pmb_f',DefaultFileFormats::DIGITAL_PDF);
+        $format = Array2::setOr($_REQUEST, 'avpvh_prwb_f',DefaultFileFormats::DIGITAL_PDF);
         $design = $this->project->getDesignFor($format);
         $use_theme = $design->getPmbMeta('use_theme');
         wp_localize_script(
-            'pmb_loading',
-            'pmb_loading',
+            'avpvh-print-website-loading',
+            'avpvh-print-website-loading',
             [
-                'external_requests_enabled' => pmb_external_requests_enabled(),
+                'external_requests_enabled' => avpvh_prwb_external_requests_enabled(),
                 'generate_ajax_data' => apply_filters(
-                    '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
+                    '\Avpvh\PrintWebsite\controllers\Admin->enqueueScripts generate generate_ajax_data',
                     [
-                        'action' => Frontend::PMB_PROJECT_STATUS_ACTION,
+                        'action' => Frontend::AVPVH_PRWB_PROJECT_STATUS_ACTION,
                         'ID' => $this->project->getWpPost()->ID,
                         '_nonce' => wp_create_nonce('pmb-loading'),
                         'format' => $format,
-                        self::PMB_USE_THEME =>$use_theme ? '1' : '0',
+                        self::AVPVH_PRWB_USE_THEME =>$use_theme ? '1' : '0',
                     ]
                 ),
-                'pmb_ajax' => pmb_ajax_url(),
+                'avpvh_prwb_ajax' => avpvh_prwb_ajax_url(),
                 'site_url' => site_url(),
-                'use_pmb_central_for_previews' => pmb_use_pmb_central(),
-                'license_data' => [
-                    'endpoint' => $this->pmb_central->getCentralUrl(),
-                    'license_id' => '',
-                    'install_id' => '',
-                    'authorization_header' => '',
-                ],
 
-                'doc_attrs' => apply_filters(
-                    '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
-                    [
-                        'test' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
-                        'type' => 'pdf',
-                        'javascript' => true, // Javascript by DocRaptor
-                        'name' => $this->project->getPublishedTitle(),
-                        'ignore_console_messages' => true,
-                        'ignore_resource_errors' => true,
-                        'pipeline' => '10.1',
-                        'prince_options' => [
-                            'base_url' => site_url(),
-                            'media' => 'print',                                       // use screen
-                            'http_timeout' => 60,
-                            'http_insecure' => true,
-                            // styles
-                            // instead of print styles
-                            // javascript: true, // use Prince's JS, which is more error tolerant
-                        ],
-                    ]
-                ),
                 'translations' => [
-                    'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
-                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog'),
+                    'error_generating' => __('There was an error preparing your content.', 'avpvh-print-website'),
+                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
                 ],
             ]
         );
@@ -320,8 +284,8 @@ class Frontend extends BaseController
             );
             return;
         }
-        // Only show errors if PMB_DEBUG is on.
-        if (defined('PMB_DEBUG') ? PMB_DEBUG : false) {
+        // Only show errors if AVPVH_PRWB_DEBUG is on.
+        if (defined('AVPVH_PRWB_DEBUG') ? AVPVH_PRWB_DEBUG : false) {
             // We want to see errors, so make sure they're set to display.
             // phpcs:disable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
             error_reporting(E_ALL);

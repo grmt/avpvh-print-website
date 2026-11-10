@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies;
 
-use Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
 
 /**
  * Base class for all strategies which operate on form inputs. Generally, they

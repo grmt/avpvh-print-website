@@ -1,11 +1,11 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\strategies\display\DisplayBase;
-use Twine\forms\strategies\display\TextAreaDisplay;
-use Twine\forms\strategies\normalization\TextNormalization;
-use Twine\forms\strategies\validation\PlaintextValidation;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\DisplayBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\TextAreaDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\TextNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\PlaintextValidation;
 
 /**
  * Text_Area
@@ -82,8 +82,8 @@ class TextAreaInput extends FormInputBase
         if (
             ! $this->hasValidationStrategy(
                 array(
-                    'Twine\forms\strategies\validation\FullHtmlValidation',
-                    'Twine\forms\strategies\validation\SimpleHtmlValidation',
+                    'Avpvh\PrintWebsite\Twine\forms\strategies\validation\FullHtmlValidation',
+                    'Avpvh\PrintWebsite\Twine\forms\strategies\validation\SimpleHtmlValidation',
                 )
             )
         ) {

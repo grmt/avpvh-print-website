@@ -1,12 +1,12 @@
 <?php
 
-namespace Twine\helpers;
+namespace Avpvh\PrintWebsite\Twine\helpers;
 
 use DateTime;
 
 /**
  * Class DateTimeHelper
- * @package Twine\helpers
+ * @package Avpvh\PrintWebsite\Twine\helpers
  */
 class DateTimeHelper
 {

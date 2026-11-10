@@ -1,10 +1,10 @@
 <?php
 
-namespace PrintMyBlog\domain;
+namespace Avpvh\PrintWebsite\domain;
 
 /**
  * Class DefaultSectionTemplates
- * @package PrintMyBlog\domain
+ * @package Avpvh\PrintWebsite\domain
  */
 class DefaultSectionTemplates
 {
@@ -13,7 +13,7 @@ class DefaultSectionTemplates
      */
     public function registerDefaultSectionTemplates()
     {
-        pmb_register_section_template(
+        avpvh_prwb_register_section_template(
             'single_column',
             [
                 'mayer',
@@ -21,12 +21,12 @@ class DefaultSectionTemplates
             ],
             function () {
                 return [
-                    'title' => __('Single Column', 'print-my-blog'),
+                    'title' => __('Single Column', 'avpvh-print-website'),
                     'fallback' => '',
                 ];
             }
         );
-        pmb_register_section_template(
+        avpvh_prwb_register_section_template(
             'just_content',
             [
                 'classic_digital',
@@ -39,12 +39,12 @@ class DefaultSectionTemplates
             ],
             function () {
                 return [
-                    'title' => __('Fullpage Content', 'print-my-blog'),
+                    'title' => __('Fullpage Content', 'avpvh-print-website'),
                     'fallback' => 'article',
                 ];
             }
         );
-        pmb_register_section_template(
+        avpvh_prwb_register_section_template(
             'center_content',
             [
                 'classic_digital',
@@ -54,13 +54,13 @@ class DefaultSectionTemplates
             ],
             function () {
                 return [
-                    'title' => __('Centered Content', 'print-my-blog'),
+                    'title' => __('Centered Content', 'avpvh-print-website'),
                     'fallback' => 'just_content',
                 ];
             }
         );
 
-        pmb_register_section_template(
+        avpvh_prwb_register_section_template(
             'just_content_in_columns',
             [
                 'mayer',
@@ -68,19 +68,19 @@ class DefaultSectionTemplates
             ],
             function () {
                 return [
-                    'title' => __('Full Column Content', 'print-my-blog'),
+                    'title' => __('Full Column Content', 'avpvh-print-website'),
                     'fallback' => 'just_content',
                 ];
             }
         );
-        pmb_register_section_template(
+        avpvh_prwb_register_section_template(
             'important_article',
             [
                 'haller',
             ],
             function () {
                 return [
-                    'title' => __('Important', 'print-my-blog'),
+                    'title' => __('Important', 'avpvh-print-website'),
                     'fallback' => '',
                 ];
             }

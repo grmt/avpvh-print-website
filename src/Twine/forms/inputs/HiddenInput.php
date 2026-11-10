@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\strategies\display\HiddenDisplay;
-use Twine\forms\strategies\normalization\NormalizationBase;
-use Twine\forms\strategies\normalization\TextNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\HiddenDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\NormalizationBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\TextNormalization;
 
 /**
  * HiddenInput

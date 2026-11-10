@@ -1,17 +1,17 @@
 <?php
 /**
- * @var $pmb_project \PrintMyBlog\orm\entities\Project
- * @var $pmb_design \PrintMyBlog\orm\entities\Design
+ * @var $avpvh_prwb_project \Avpvh\PrintWebsite\orm\entities\Project
+ * @var $avpvh_prwb_design \Avpvh\PrintWebsite\orm\entities\Design
  *
  */
 ?>
 <div class="pmb-haller-frontpage-header">
 <div class="pmb-haller-frontpage-above-header">
-    <span class="pmb-haller-frontpage-date"><?php $pmb_project->echoSetting('date');?></span>
-    <span class="pmb-haller-frontpage-issue"><?php printf(__('Issue %s', 'print-my-blog'), $pmb_project->getSetting('issue'));?></span>
+    <span class="pmb-haller-frontpage-date"><?php $avpvh_prwb_project->echoSetting('date');?></span>
+    <span class="pmb-haller-frontpage-issue"><?php printf(__('Issue %s', 'avpvh-print-website'), $avpvh_prwb_project->getSetting('issue'));?></span>
 </div>
 <div class="pmb-haller-frontpage-main">
-    <?php $left_side = $pmb_project->getSetting('frontpage_left_side');
+    <?php $left_side = $avpvh_prwb_project->getSetting('frontpage_left_side');
     if($left_side){
         ?>
         <div class="pmb-haller-frontpage-main-sidebar pmb-haller-frontpage-area left">
@@ -22,25 +22,25 @@
     ?>
     <div class="pmb-haller-frontpage-main-title-area pmb-haller-frontpage-area">
         <?php
-            $image_url = $pmb_design->getSetting('publication_logo');
+            $image_url = $avpvh_prwb_design->getSetting('publication_logo');
             if( $image_url ){
                 ?>
                 <img src ="<?php echo esc_url($image_url);?>">
                 <?php
             } else {
             ?>
-                <h1 class="pmb-haller-frontpage-main-title project-title"><?php echo $pmb_design->getSetting('publication_title'); ?></h1>
+                <h1 class="pmb-haller-frontpage-main-title project-title"><?php echo $avpvh_prwb_design->getSetting('publication_title'); ?></h1>
             <?php
             }
-        if ($pmb_design->getSetting('publication_subtitle')){
+        if ($avpvh_prwb_design->getSetting('publication_subtitle')){
             ?>
-            <h2 class="pmb-haller-frontpage-main-subtitle"><?php echo $pmb_design->getSetting('publication_subtitle');?></h2>
+            <h2 class="pmb-haller-frontpage-main-subtitle"><?php echo $avpvh_prwb_design->getSetting('publication_subtitle');?></h2>
             <?php
         }
         ?>
 
     </div>
-    <?php $right_side = $pmb_project->getSetting('frontpage_right_side');
+    <?php $right_side = $avpvh_prwb_project->getSetting('frontpage_right_side');
     if($right_side){
         ?>
         <div class="pmb-haller-frontpage-main-sidebar pmb-haller-frontpage-area right">
@@ -51,5 +51,5 @@
     ?>
 </div>
 <div class="pmb-haller-frontpage-preamble">
-<span class="pmb-haller-frontpage-preamble-text"><?php echo $pmb_design->getSetting('cover_preamble');?></span>
+<span class="pmb-haller-frontpage-preamble-text"><?php echo $avpvh_prwb_design->getSetting('cover_preamble');?></span>
 </div>

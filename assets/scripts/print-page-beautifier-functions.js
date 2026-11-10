@@ -1,7 +1,7 @@
 /**
  * Removes content Prince XML and DocRaptor don't know how to handle properly, no "noscript" tags.
  */
-function pmb_remove_unsupported_content(){
+function avpvh_prwb_remove_unsupported_content(){
     // remove "noscripts" because we actually executed Javascript in the browser, then turn JS off for DocRaptor
     // (but Javascript was executed, so no need to do noscript tags)
     jQuery('noscript').remove();
@@ -25,7 +25,7 @@ function pmb_remove_unsupported_content(){
  * Fix common issues with folks using protocols that don't work (often these don't work on their website either,
  * or have warnings, but we'll cut them some slack and fix them here.)
  */
-function pmb_fix_protocols(){
+function avpvh_prwb_fix_protocols(){
     // remove all the broken images and links etc
     jQuery('[src^="file:"]').remove();
     jQuery('[href^="file:"]').contents().unwrap();
@@ -56,7 +56,7 @@ function pmb_fix_protocols(){
     });
 }
 
-function pmb_dont_float(){
+function avpvh_prwb_dont_float(){
     jQuery('.alignright').removeClass('alignright');
     jQuery('.alignleft').removeClass('alignleft');
 }
@@ -64,14 +64,14 @@ function pmb_dont_float(){
 /**
  * Forces all the images with no alignment to instead be aligned in the center.
  */
-function pmb_default_align_center(){
+function avpvh_prwb_default_align_center(){
     // take care of classic images that had align none on them.
     jQuery('img.alignnone,figure.alignnone').removeClass('alignnone').addClass('aligncenter');
     // take care of Gutenberg images
     jQuery('figure:not(.alignleft,.alignright,.aligncenter,.alignwide,.alignfull)').addClass('aligncenter');
 }
 
-function pmb_add_header_classes(){
+function avpvh_prwb_add_header_classes(){
     jQuery('.pmb-posts h1').addClass('pmb-header');
     jQuery('.pmb-posts h2').addClass('pmb-header');
     jQuery('.pmb-posts h3').addClass('pmb-header');
@@ -79,11 +79,11 @@ function pmb_add_header_classes(){
     jQuery('.pmb-posts h5').addClass('pmb-header');
 }
 
-function pmb_remove_hyperlinks(){
+function avpvh_prwb_remove_hyperlinks(){
     jQuery('.pmb-posts a').contents().unwrap();
 }
 
-function pmb_fix_wp_videos(){
+function avpvh_prwb_fix_wp_videos(){
     // Remove inline styles that dynamically set height and width on WP Videos.
     // They use some Javascript that doesn't get enqueued, so better to let the browser decide their dimensions.
     jQuery('div.wp-video').css({'width': '','min-width':'', 'height': '', 'min-height': ''});
@@ -94,14 +94,14 @@ function pmb_fix_wp_videos(){
  * @param string format either "pretty" or "simple". Pretty works best in PDFs, "simple" works better in ePub and Word
  * @param boolean add_qr_codes whether to add QR codes or not. Defaults to adding them.
  */
-function pmb_convert_youtube_videos_to_images(format, add_qr_codes) {
+function avpvh_prwb_convert_youtube_videos_to_images(format, add_qr_codes) {
     var video_converter = new PmbVideo(format, add_qr_codes);
     video_converter.convert();
 };
 
 /**
  * Converts videos into screenshots-with-links. Probably easier to just call the wrapper
- * pmb_convert_youtube_videos_to_images().
+ * avpvh_prwb_convert_youtube_videos_to_images().
  * @param string format "pretty" or "simple". Pretty works best where CSS assets/styles/pmb-print-page-common-pdf.css is loaded.
  *  If we can't be sure that's loaded, "simple" is better.
  *  @param boolean|string add_qr_codes whether to add QR codes or not (accepts the string "1" as if it were `true`)
@@ -119,7 +119,7 @@ function PmbVideo(format, add_qr_codes){
     this._triggeredDoneProcessingVideos = false;
     /**
      * If there are no open HTTP requests for video data
-     * and we're done searching for videos, triggers "pmb_done_processing_videos" on the document.
+     * and we're done searching for videos, triggers "avpvh_prwb_done_processing_videos" on the document.
      * @returns null
      * @private
      */
@@ -149,7 +149,7 @@ function PmbVideo(format, add_qr_codes){
 
     /**
      * Main function that converts videos into screenshots etc.
-     * Fires "pmb_done_processing_videos" on document when finished.
+     * Fires "avpvh_prwb_done_processing_videos" on document when finished.
      */
     this.convert = function(){
         var that = this;
@@ -162,7 +162,7 @@ function PmbVideo(format, add_qr_codes){
     }
 
     /**
-     * If done processing videos, maybe add QR codes, then trigger "pmb_done_processing_videos"
+     * If done processing videos, maybe add QR codes, then trigger "avpvh_prwb_done_processing_videos"
      * @private
      */
     this._doneProcessingVideos = function(){
@@ -183,11 +183,11 @@ function PmbVideo(format, add_qr_codes){
     }
 
     /**
-     * Just triggers "pmb_done_processing_videos" when videos are totally done.
+     * Just triggers "avpvh_prwb_done_processing_videos" when videos are totally done.
      * @private
      */
     this._notifydoneProcessingVideos = function(){
-        jQuery(document).trigger('pmb_done_processing_videos');
+        jQuery(document).trigger('avpvh_prwb_done_processing_videos');
     }
 
     /**
@@ -330,7 +330,7 @@ function PmbVideo(format, add_qr_codes){
             html += '<b>' + video_url + '</b><br>';
         }
         if(! typeof(video_screenshot_src) === 'string' ||  video_screenshot_src.length == 0){
-            video_screenshot_src = pmb.play_button_gif;
+            video_screenshot_src = avpvh_prwb.play_button_gif;
         }
         html += '<img src="' + video_screenshot_src + '" style="max-height:500px; max-width:100vw; display:block; margin-left:auto; margin-right:auto;">';
         html += '</a></div>';
@@ -354,7 +354,7 @@ function PmbVideo(format, add_qr_codes){
     };
 }
 
-function pmb_resize_images(desired_max_height) {
+function avpvh_prwb_resize_images(desired_max_height) {
     // Images that take up the entire page width are usually too big, so we usually want to shrink images and center them.
     // Plus, we want to avoid page breaks inside them. But tiny emojis shouldn't be shrunk, nor do we need to worry about
     // page breaks inside them. Images that are part of a gallery, or are pretty small and inline, also shouldn't be shrunk.
@@ -410,7 +410,7 @@ function pmb_resize_images(desired_max_height) {
         figures_containing_a_big_image.css({
             'width':'auto'
         });
-        pmb_force_resize_image = function (index, element) {
+        avpvh_prwb_force_resize_image = function (index, element) {
             var obj = jQuery(element);
             // Modify the CSS here. We could have written CSS rules but the selector worked slightly differently
             // in CSS compared to jQuery.
@@ -422,8 +422,8 @@ function pmb_resize_images(desired_max_height) {
             });
         };
         big_images_without_figures.wrap('<div class="pmb-image"></div>');
-        big_images_without_figures.each(pmb_force_resize_image);
-        big_images_in_figures.each(pmb_force_resize_image);
+        big_images_without_figures.each(avpvh_prwb_force_resize_image);
+        big_images_in_figures.each(avpvh_prwb_force_resize_image);
         // wp_block_galleries.each(function(){
         //     var obj = jQuery(this);
         //     // Galleries can't be resized by height (they just cut off
@@ -447,7 +447,7 @@ function pmb_resize_images(desired_max_height) {
  * For that, we mainly need to add the CSS class "pmb-dynamic-resize" onto blocks.
  * @param min_image_size
  */
-function pmb_mark_for_dynamic_resize(min_image_size){
+function avpvh_prwb_mark_for_dynamic_resize(min_image_size){
     // don't add the CSS class a second time, of course
     jQuery('img').each(function(index, element){
         // Don't try to resize trickier items like columns or YouTube videos
@@ -473,7 +473,7 @@ function pmb_mark_for_dynamic_resize(min_image_size){
                 element_to_add_css_class_to.addClass('pmb-dynamic-resize');
             }
         }
-        pmb_set_image_dimension_attributes(element);
+        avpvh_prwb_set_image_dimension_attributes(element);
     });
 
     // wrap the images again in order for flexbox layout to fill the space properly.
@@ -488,7 +488,7 @@ function pmb_mark_for_dynamic_resize(min_image_size){
  * @param funciton callback_when_done
  * @param funciton callback_on_error
  */
-function pmb_set_image_dimension_attributes(element, callback_when_done, callback_on_error){
+function avpvh_prwb_set_image_dimension_attributes(element, callback_when_done, callback_on_error){
     if (element.hasAttribute('height') && element.hasAttribute('width')) {
         if(typeof(callback_when_done) === 'function'){
             callback_when_done();
@@ -535,7 +535,7 @@ function pmb_set_image_dimension_attributes(element, callback_when_done, callbac
  * 'uploaded' (meaning the actual original, fullsized file), '' (to not change at all), or some other string of form '?x?'
  * @param string domain eg "www.mysite.com", so we can identify external images which usually shouldn't be resized. An exception is wp.com JetPack images.
  */
-function pmb_change_image_quality(desired_image_quality, domain){
+function avpvh_prwb_change_image_quality(desired_image_quality, domain){
     // If it's '' (empty string), then treat it as the previous default behaviour, which was to leave the images alone
     if(desired_image_quality === '' || ! desired_image_quality || desired_image_quality === '150'){
         return;
@@ -556,12 +556,12 @@ function pmb_change_image_quality(desired_image_quality, domain){
         switch(desired_image_quality){
             case 'scaled':
                 // Find the biggest size listed on "srcset" and use that
-                var size_and_srcs = _pmb_parse_srcset(element.attributes['srcset'].value, false);
+                var size_and_srcs = _avpvh_prwb_parse_srcset(element.attributes['srcset'].value, false);
                 src_to_use = size_and_srcs[0]['src'];
                 break;
             default:
                 // Find a thumbnail as big than the one requested (if we can't find it, use the next biggest that's available.)
-                var size_and_srcs = _pmb_parse_srcset(element.attributes['srcset'].value);
+                var size_and_srcs = _avpvh_prwb_parse_srcset(element.attributes['srcset'].value);
                 for(var i=0; i<size_and_srcs.length; i++){
                     if(parseInt(desired_image_quality, 10) > parseInt(size_and_srcs[i]['size'],10)){
                         size_and_srcs.shift();
@@ -603,7 +603,7 @@ function pmb_change_image_quality(desired_image_quality, domain){
  * @returns [{}] in each object, there are keys "size" and "src", both strings.
  * @private
  */
-function _pmb_parse_srcset(srcset, ascending = true){
+function _avpvh_prwb_parse_srcset(srcset, ascending = true){
     var srcs_and_sizes = srcset.split(', ');
     var size_and_srcs = [];
     srcs_and_sizes.forEach(function(item){
@@ -623,7 +623,7 @@ function _pmb_parse_srcset(srcset, ascending = true){
 /**
  * Tries to disable as much lazy-loading as possible. This should generally be called on document ready.
  */
-function pmb_prevent_lazy_loading(){
+function avpvh_prwb_prevent_lazy_loading(){
     // Load Avada's lazy images (they took out images' "src" attribute and put it into "data-orig-src". Put it back.)
     jQuery('img[data-orig-src]').each(function(index,element){
         var jqelement = jQuery(this);
@@ -644,13 +644,13 @@ function pmb_prevent_lazy_loading(){
 
 /**
  * Actually, this does lazy loaded-images from other plugins too.
- * @deprecated use pmb_prevent_lazy_loading
+ * @deprecated use avpvh_prwb_prevent_lazy_loading
  */
-function pmb_load_avada_lazy_images(){
-    pmb_prevent_lazy_loading();
+function avpvh_prwb_load_avada_lazy_images(){
+    avpvh_prwb_prevent_lazy_loading();
 }
 
-function pmb_reveal_dynamic_content(){
+function avpvh_prwb_reveal_dynamic_content(){
     // Expand all Arconix accordion parts (see https://wordpress.org/plugins/arconix-shortcodes/)
     jQuery('.arconix-accordion-content').css('display','block');
 
@@ -686,12 +686,12 @@ function pmb_reveal_dynamic_content(){
  * @param jQuery jquery_a_selection
  * @private
  */
-function _pmb_get_href_from_a(jquery_a_selection){
+function _avpvh_prwb_get_href_from_a(jquery_a_selection){
     var href = jquery_a_selection.attr('href');
     // if it's an anchor link, leave it alone.
     if(typeof(URL) === 'function' && href[0] !== '#'){
         try{
-            href = new URL(href, pmb_pro.site_url).href;
+            href = new URL(href, avpvh_prwb_pro.site_url).href;
         }catch(error){
             // leave it alone. It's an invalid URL, we can't fix that any more
         }
@@ -705,11 +705,11 @@ function _pmb_get_href_from_a(jquery_a_selection){
  * (if any exists), and the selector you can pass to jQuery to get the section element linked-to.
  * @param function internal_hyperlink_callback
  * @param function external_hyperlink_callback
- * @global string pmb_pro.site_url
- * @global string pmb_pro.domain
+ * @global string avpvh_prwb_pro.site_url
+ * @global string avpvh_prwb_pro.domain
  * @private
  */
-function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink_callback){
+function _avpvh_prwb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink_callback){
     jQuery('.pmb-section a[href]:not(.pmb-leave-link)').each(function(index){
         var a = jQuery(this);
         // ignore invisible hyperlinks
@@ -719,7 +719,7 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
         var url = null;
 
         // Get the absolute URL.
-        var absolute_url = _pmb_get_href_from_a(a);
+        var absolute_url = _avpvh_prwb_get_href_from_a(a);
 
         // Get the relative URL (to the current URL).
         var article_relative_slug = a.parents('article').attr('id');
@@ -728,7 +728,7 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
             .replace('http://www.', '')
             .replace('https://', '')
             .replace('http://', '')
-            .replace(pmb_pro.domain, '')
+            .replace(avpvh_prwb_pro.domain, '')
             .replace(article_relative_slug,'') // if it's link to its own post, remove all that (e.g. so we can detect anchor links easier)
             .replace('%', '-');
         // See if it's really an anchor URL.
@@ -757,7 +757,7 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
         }
 
         // It's NOT an anchor link. But it might be the URL of a real post, which we'll want to convert into an anchor link.
-        var selector = '#' + _pmb_convert_url_into_selector(relative_url);
+        var selector = '#' + _avpvh_prwb_convert_url_into_selector(relative_url);
         var url = '#' + relative_url;
 
         try{
@@ -768,7 +768,7 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
             }
             // The URL doesn't correspond to any articles in this project.
             // Treat it as external.
-            selector = _pmb_convert_url_into_selector(url);
+            selector = _avpvh_prwb_convert_url_into_selector(url);
             url = absolute_url;
             external_hyperlink_callback(a, url, selector);
             return;
@@ -785,14 +785,14 @@ function _pmb_for_each_hyperlink(internal_hyperlink_callback, external_hyperlink
  * @returns {*}
  * @private
  */
-function _pmb_convert_url_into_selector(url){
+function _avpvh_prwb_convert_url_into_selector(url){
     return url.replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
 }
 
 /**
  * Changes external stylesheets to inline ones so a generated file is more independent (with regards to CSS anyway)
  */
-function pmb_inline_css(){
+function avpvh_prwb_inline_css(){
     // don't inline dashicons, as it uses relative links to images
     jQuery('link[rel="stylesheet"][id!="dashicons-css"]').each(function(index,element){
         var jqe = jQuery(element);

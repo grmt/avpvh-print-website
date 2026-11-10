@@ -1,9 +1,9 @@
 /**
  * Called when download button clicked and all the design's processing is complete.
  */
-function pmb_prepare_and_export_doc(){
-    pmb_replace_links_for_word();
-    pmb_inline_css();
+function avpvh_prwb_prepare_and_export_doc(){
+    avpvh_prwb_replace_links_for_word();
+    avpvh_prwb_inline_css();
     jQuery('body :hidden:not(script, style, link)').remove();
     // word doesn't know how to handle figcaptions (it shows them inline) so replace with paragraphs
     jQuery('figcaption').replaceWith(function () {
@@ -11,18 +11,18 @@ function pmb_prepare_and_export_doc(){
     });
     var dataurl_converter = new PmbImgToDataUrls(
         function () {
-            pmb_stop_doing_button(jQuery('#download_link'));
-            pmb_limit_img_widths(pmb_design_options.image_size);
-            pmb_export_as_doc();
+            avpvh_prwb_stop_doing_button(jQuery('#download_link'));
+            avpvh_prwb_limit_img_widths(avpvh_prwb_design_options.image_size);
+            avpvh_prwb_export_as_doc();
         }
     );
     dataurl_converter.convert();
 }
 
 /**
- * Should really just be called by pmb_prepare_and_export_doc.
+ * Should really just be called by avpvh_prwb_prepare_and_export_doc.
  */
-function pmb_export_as_doc(){
+function avpvh_prwb_export_as_doc(){
     var print_page_head_jq = jQuery('head');
     print_page_head_jq.find('script').remove();
     var word_doc_head = "<html xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o='urn:schemas-microsoft-com:office:office' "+
@@ -61,21 +61,21 @@ function pmb_export_as_doc(){
  * On all nested content, make their h1s into h2s so Word's table of contents shows them indented (and repeat
  * for h2s, h3s, h4s, etc.). Do more for content that has lower depths.
  */
-function pmb_fix_headings_for_word_toc(){
+function avpvh_prwb_fix_headings_for_word_toc(){
     jQuery('.pmb-depth-1').each(function(index, element){
-            pmb_decrease_headings_by(jQuery(element),1);
+            avpvh_prwb_decrease_headings_by(jQuery(element),1);
         }
     );
     jQuery('.pmb-depth-2').each(function(index, element){
-            pmb_decrease_headings_by(jQuery(element),2);
+            avpvh_prwb_decrease_headings_by(jQuery(element),2);
         }
     );
     jQuery('.pmb-depth-3').each(function(index, element){
-            pmb_decrease_headings_by(jQuery(element),3);
+            avpvh_prwb_decrease_headings_by(jQuery(element),3);
         }
     );
     jQuery('.pmb-depth-4').each(function(index, element){
-            pmb_decrease_headings_by(jQuery(element),4);
+            avpvh_prwb_decrease_headings_by(jQuery(element),4);
         }
     );
 }
@@ -87,7 +87,7 @@ function pmb_fix_headings_for_word_toc(){
  * @param jquery_selection e.g. jQuery('.pmb-depth-1')
  * @param number int|string
  */
-function pmb_decrease_headings_by(jquery_selection, number){
+function avpvh_prwb_decrease_headings_by(jquery_selection, number){
     if(typeof(number) === 'string'){
         number = parseInt(number);
     }
@@ -122,7 +122,7 @@ jQuery.fn.changeElementType = function(newType) {
 /**
  * Word ignores CSS (from my testing) but does respect the height and width attributes. Limit them to the page's width
  */
-function pmb_limit_img_widths(max_image_height){
+function avpvh_prwb_limit_img_widths(max_image_height){
     if(typeof(max_image_height) === 'undefined'){
         max_image_height = 1000;
     }
@@ -160,10 +160,10 @@ function pmb_limit_img_widths(max_image_height){
 /**
  * v1: just converts internal hyperlinks to anchor links
  */
-function pmb_replace_links_for_word(external_link_policy, internal_link_policy)
+function avpvh_prwb_replace_links_for_word(external_link_policy, internal_link_policy)
 {
-    // epub-generator.js's pmb_replace_internal_links_with_epub_file_links has similar logic
-    _pmb_for_each_hyperlink(
+    // epub-generator.js's avpvh_prwb_replace_internal_links_with_epub_file_links has similar logic
+    _avpvh_prwb_for_each_hyperlink(
         // internal hyperlinks
         function(a, id_url){
             switch(internal_link_policy){
@@ -234,7 +234,7 @@ function PmbImgToDataUrls(finished_callback) {
         var element = this.pending.pop();
         var original_height = element.offsetHeight;
         var original_width = element.offsetWidth;
-        pmb_set_image_dimension_attributes(
+        avpvh_prwb_set_image_dimension_attributes(
             element,
             function(){
                 that.canvas.setAttribute('height', element.naturalHeight);
@@ -269,47 +269,47 @@ function PmbImgToDataUrls(finished_callback) {
     }
 }
 /**
- * Callbacks that listen for document.pmb_doc_conversion_requested should set them to TRUE immediately, otherwise
+ * Callbacks that listen for document.avpvh_prwb_doc_conversion_requested should set them to TRUE immediately, otherwise
  * we'll assume no callback was set and so we'll just proceed with converting the file.
  * @type {boolean}
  */
-var pmb_doc_conversion_request_handled = false;
+var avpvh_prwb_doc_conversion_request_handled = false;
 /**
  * Keeps track of if we've finished preparing the entire print page. (So we don't process stuff over and over again if the print button
  * gets pressed again.)
  * @type boolean
  */
-var pmb_pro_page_rendered = false;
+var avpvh_prwb_pro_page_rendered = false;
 jQuery(document).on('ready', function() {
     var download_button = jQuery('#download_link');
     setTimeout(
         function(){
-            pmb_stop_doing_button(download_button);
+            avpvh_prwb_stop_doing_button(download_button);
         },
         2000
     );
     download_button.click(function () {
-        if(pmb_pro_page_rendered){
-            pmb_export_as_doc();
+        if(avpvh_prwb_pro_page_rendered){
+            avpvh_prwb_export_as_doc();
         } else {
-            pmb_doing_button(download_button);
+            avpvh_prwb_doing_button(download_button);
 
-            jQuery(document).on('pmb_doc_conversion_ready', function () {
-                pmb_prepare_and_export_doc();
+            jQuery(document).on('avpvh_prwb_doc_conversion_ready', function () {
+                avpvh_prwb_prepare_and_export_doc();
             });
-            jQuery(document).trigger('pmb_doc_conversion_requested');
-            // trigger document.pmb_wrap_up for legacy code.
-            jQuery(document).trigger('pmb_wrap_up');
-            // as a backup, in case the design didn't listen for document.pmb_doc_conversion_requested just go ahead and execute it.
+            jQuery(document).trigger('avpvh_prwb_doc_conversion_requested');
+            // trigger document.avpvh_prwb_wrap_up for legacy code.
+            jQuery(document).trigger('avpvh_prwb_wrap_up');
+            // as a backup, in case the design didn't listen for document.avpvh_prwb_doc_conversion_requested just go ahead and execute it.
             setTimeout(
                 function () {
-                    if (!pmb_doc_conversion_request_handled) {
-                        pmb_export_as_doc();
+                    if (!avpvh_prwb_doc_conversion_request_handled) {
+                        avpvh_prwb_export_as_doc();
                     }
                 },
                 3000
             );
-            pmb_pro_page_rendered = true;
+            avpvh_prwb_pro_page_rendered = true;
         }
     });
 });

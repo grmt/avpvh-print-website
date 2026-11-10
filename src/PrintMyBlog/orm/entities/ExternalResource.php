@@ -1,12 +1,12 @@
 <?php
 
-namespace PrintMyBlog\orm\entities;
+namespace Avpvh\PrintWebsite\orm\entities;
 
 use stdClass;
 
 /**
  * Class ExternalResource
- * @package PrintMyBlog\orm\entities
+ * @package Avpvh\PrintWebsite\orm\entities
  */
 class ExternalResource
 {

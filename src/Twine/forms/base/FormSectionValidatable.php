@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\base;
+namespace Avpvh\PrintWebsite\Twine\forms\base;
 
 use Exception;
-use Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 
 /**
  * FormSectionValidatable

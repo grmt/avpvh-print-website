@@ -1,5 +1,5 @@
 <?php
-use \PrintMyBlog\orm\entities\Project
+use \Avpvh\PrintWebsite\orm\entities\Project
 /**
  * @var Project|true $project
  * @var string|null $project_url
@@ -7,12 +7,12 @@ use \PrintMyBlog\orm\entities\Project
 ?>
 <div class="pmb-top-bar">
 	<h1 class="pmb-breadcrumb">
-		<span><?php esc_html_e('Print My Blog', 'print-my-blog');?></span>
+		<span><?php esc_html_e('AV-PvH Print Website', 'avpvh-print-website');?></span>
 		<?php
 		if($project){
-			$projects_url = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
+			$projects_url = admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH);
 			?>
-			<span><a href="<?php echo esc_attr($projects_url);?>"><?php esc_html_e('Pro Print', 'print-my-blog');?></a></span>
+			<span><a href="<?php echo esc_attr($projects_url);?>"><?php esc_html_e('Pro Print', 'avpvh-print-website');?></a></span>
 			<?php
 		}
 		if($project instanceof Project){

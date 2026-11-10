@@ -1,18 +1,18 @@
 <?php
 
-namespace PrintMyBlog\orm\managers;
+namespace Avpvh\PrintWebsite\orm\managers;
 
-use PrintMyBlog\db\TableManager;
-use PrintMyBlog\entities\DesignTemplate;
-use PrintMyBlog\orm\entities\ProjectSection;
+use Avpvh\PrintWebsite\db\TableManager;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
+use Avpvh\PrintWebsite\orm\entities\ProjectSection;
 use stdClass;
-use Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
 
 // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery -- this class is all about direct DB queries on a custom table.
 
 /**
  * Class ProjectSectionManager
- * @package PrintMyBlog\orm\managers
+ * @package Avpvh\PrintWebsite\orm\managers
  */
 class ProjectSectionManager
 {

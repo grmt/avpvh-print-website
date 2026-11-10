@@ -1,22 +1,22 @@
 <?php
 /**
- * @var $form \Twine\forms\base\FormSection
+ * @var $form \Avpvh\PrintWebsite\Twine\forms\base\FormSection
  * @var $form_url string
- * @var $design \PrintMyBlog\orm\entities\Design
+ * @var $design \Avpvh\PrintWebsite\orm\entities\Design
  * @var $steps_to_urls array
  * @var $current_step string
- * @var $project \PrintMyBlog\orm\entities\Project
+ * @var $project \Avpvh\PrintWebsite\orm\entities\Project
  */
 // outputs the form for the design
 
 // save button, and textbox to make into a new design
 
-pmb_render_template(
+avpvh_prwb_render_template(
     'partials/project_header.php',
     [
         'project' => $project,
         'page_title' => sprintf(
-            __('Customize %s Design: %s', 'print-my-blog'),
+            __('Customize %s Design: %s', 'avpvh-print-website'),
             $design->getDesignTemplate()->getFormat()->coloredTitleAndIcon(),
             $design->getWpPost()->post_title
         ),
@@ -24,7 +24,7 @@ pmb_render_template(
         'steps_to_urls' => $steps_to_urls
     ]
 );
-pmb_render_template(
+avpvh_prwb_render_template(
     'partials/customize_design.php',
     [
         'design'=> $design,
@@ -32,4 +32,4 @@ pmb_render_template(
         'form_url' => $form_url
     ]
 );
-pmb_render_template('partials/project_footer.php');
+avpvh_prwb_render_template('partials/project_footer.php');

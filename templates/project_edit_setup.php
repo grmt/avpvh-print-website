@@ -1,16 +1,16 @@
 <?php
-use PrintMyBlog\controllers\Admin;
+use Avpvh\PrintWebsite\controllers\Admin;
 /**
- * @var $form \Twine\forms\base\FormSection
+ * @var $form \Avpvh\PrintWebsite\Twine\forms\base\FormSection
  * @var $steps_to_urls array
  * @var $current_step string
- * @var $project \PrintMyBlog\orm\entities\Project|null
+ * @var $project \Avpvh\PrintWebsite\orm\entities\Project|null
  */
-pmb_render_template(
+avpvh_prwb_render_template(
         'partials/project_header.php',
         [
                 'project' => $project,
-                'page_title' => __('Edit Project', 'print-my-blog'),
+                'page_title' => __('Edit Project', 'avpvh-print-website'),
                 'current_step' => $current_step,
                 'steps_to_urls' => $steps_to_urls
         ]
@@ -19,6 +19,6 @@ pmb_render_template(
     <form id="pmb-project-form" method="POST" action="">
         <?php wp_nonce_field( 'pmb-project-edit' );?>
         <?php echo $form->getHtmlAndJs();?>
-        <input type="submit" class="button button-primary" value="<?php esc_html_e('Submit & Proceed', 'print-my-blog');?>">
+        <input type="submit" class="button button-primary" value="<?php esc_html_e('Submit & Proceed', 'avpvh-print-website');?>">
     </form>
-<?php pmb_render_template('partials/project_footer.php');
+<?php avpvh_prwb_render_template('partials/project_footer.php');

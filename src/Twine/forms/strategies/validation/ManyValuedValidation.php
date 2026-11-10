@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
 
 /**
  * Class ManyValuedValidation

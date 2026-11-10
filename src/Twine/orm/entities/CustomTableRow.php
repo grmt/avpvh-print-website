@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\orm\entities;
+namespace Avpvh\PrintWebsite\Twine\orm\entities;
 
 /**
  * Class CustomTableRow
- * @package Twine\orm\entities
+ * @package Avpvh\PrintWebsite\Twine\orm\entities
  */
 abstract class CustomTableRow
 {

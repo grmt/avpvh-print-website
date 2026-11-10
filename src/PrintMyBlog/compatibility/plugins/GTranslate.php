@@ -1,22 +1,22 @@
 <?php
 
 
-namespace PrintMyBlog\compatibility\plugins;
+namespace Avpvh\PrintWebsite\compatibility\plugins;
 
 
-use Twine\compatibility\CompatibilityBase;
+use Avpvh\PrintWebsite\Twine\compatibility\CompatibilityBase;
 
 /**
  * Class GTranslate for plugin https://wordpress.org/plugins/gtranslate/
  * Adds a GTranslate dropdown
- * @package PrintMyBlog\compatibility\plugins
+ * @package Avpvh\PrintWebsite\compatibility\plugins
  */
 class GTranslate extends CompatibilityBase
 {
     public function setHooks()
     {
-        add_action('pmb_print_page_ready_instructions_start', [$this,'addGtranslateDropdown']);
-        add_action('pmb_pro_print_page_window_end', [$this,'addGtranslateDropdown']);
+        add_action('avpvh_prwb_print_page_ready_instructions_start', [$this,'addGtranslateDropdown']);
+        add_action('avpvh_prwb_pro_print_page_window_end', [$this,'addGtranslateDropdown']);
         //add_action('wp_enqueue_scripts', [$this,'enqueueScripts']);
     }
 
@@ -46,7 +46,7 @@ class GTranslate extends CompatibilityBase
                 }
             }
         }
-        jQuery(document).on("pmb_doc_conversion_ready", function(){
+        jQuery(document).on("avpvh_prwb_doc_conversion_ready", function(){
             jQuery(".gtranslate_wrapper").remove();
         });        
 ',

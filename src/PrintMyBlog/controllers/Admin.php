@@ -1,52 +1,46 @@
 <?php
 
-namespace PrintMyBlog\controllers;
+namespace Avpvh\PrintWebsite\controllers;
 
 use Dompdf\Renderer\Text;
 use Exception;
-use PrintMyBlog\controllers\helpers\ProjectsListTable;
-use PrintMyBlog\db\PostFetcher;
-use PrintMyBlog\db\TableManager;
-use PrintMyBlog\domain\DefaultFileFormats;
-use PrintMyBlog\domain\FrontendPrintSettings;
-use PrintMyBlog\domain\PrintOptions;
-use PrintMyBlog\entities\DesignTemplate;
-use PrintMyBlog\entities\FileFormat;
-use PrintMyBlog\entities\ProjectGeneration;
-use PrintMyBlog\entities\ProjectProgress;
-use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\orm\managers\DesignManager;
-use PrintMyBlog\orm\managers\ProjectManager;
-use PrintMyBlog\orm\managers\ProjectSectionManager;
-use PrintMyBlog\services\config\Config;
-use PrintMyBlog\services\DebugInfo;
-use PrintMyBlog\services\ExternalResourceCache;
-use PrintMyBlog\services\FileFormatRegistry;
-use PrintMyBlog\services\PmbCentral;
-use PrintMyBlog\services\SvgDoer;
-use PrintMyBlog\system\Context;
-use PrintMyBlog\system\CustomPostTypes;
-use Twine\entities\notifications\OneTimeNotification;
-use Twine\forms\base\FormSection;
-use Twine\forms\base\FormSectionBase;
-use Twine\forms\base\FormSectionHtml;
-use Twine\forms\helpers\InputOption;
-use Twine\forms\inputs\CheckboxMultiInput;
-use Twine\forms\inputs\HiddenInput;
-use Twine\forms\inputs\RadioButtonInput;
-use Twine\forms\inputs\SelectInput;
-use Twine\forms\inputs\TextAreaInput;
-use Twine\forms\inputs\TextInput;
-use Twine\forms\inputs\YesNoInput;
-use Twine\helpers\Array2;
-use Twine\orm\managers\PostWrapperManager;
-use Twine\services\display\FormInputs;
-use Twine\controllers\BaseController;
-use Twine\services\filesystem\Folder;
-use Twine\services\notifications\OneTimeNotificationManager;
-use WP_Error;
+use Avpvh\PrintWebsite\controllers\helpers\ProjectsListTable;
+use Avpvh\PrintWebsite\db\PostFetcher;
+use Avpvh\PrintWebsite\db\TableManager;
+use Avpvh\PrintWebsite\domain\DefaultFileFormats;
+use Avpvh\PrintWebsite\domain\FrontendPrintSettings;
+use Avpvh\PrintWebsite\domain\PrintOptions;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
+use Avpvh\PrintWebsite\entities\FileFormat;
+use Avpvh\PrintWebsite\entities\ProjectGeneration;
+use Avpvh\PrintWebsite\entities\ProjectProgress;
+use Avpvh\PrintWebsite\exceptions\DesignTemplateDoesNotExist;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\orm\managers\DesignManager;
+use Avpvh\PrintWebsite\orm\managers\ProjectManager;
+use Avpvh\PrintWebsite\orm\managers\ProjectSectionManager;
+use Avpvh\PrintWebsite\services\config\Config;
+use Avpvh\PrintWebsite\services\DebugInfo;
+use Avpvh\PrintWebsite\services\ExternalResourceCache;
+use Avpvh\PrintWebsite\services\FileFormatRegistry;
+use Avpvh\PrintWebsite\services\SvgDoer;
+use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
+use Avpvh\PrintWebsite\Twine\entities\notifications\OneTimeNotification;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionBase;
+use Avpvh\PrintWebsite\Twine\forms\helpers\InputOption;
+use Avpvh\PrintWebsite\Twine\forms\inputs\CheckboxMultiInput;
+use Avpvh\PrintWebsite\Twine\forms\inputs\RadioButtonInput;
+use Avpvh\PrintWebsite\Twine\forms\inputs\SelectInput;
+use Avpvh\PrintWebsite\Twine\forms\inputs\TextInput;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager;
+use Avpvh\PrintWebsite\Twine\services\display\FormInputs;
+use Avpvh\PrintWebsite\Twine\controllers\BaseController;
+use Avpvh\PrintWebsite\Twine\services\filesystem\Folder;
+use Avpvh\PrintWebsite\Twine\services\notifications\OneTimeNotificationManager;
 use WP_Post;
 use WP_Post_Type;
 use WP_Query;
@@ -59,7 +53,7 @@ use const http\Client\Curl\PROXY_HTTP;
  * Hooks needed to add our stuff to the admin.
  * Mostly it's just a few admin pages.
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         1.0.0
  *
@@ -77,9 +71,7 @@ class Admin extends BaseController
     const SLUG_SUBACTION_PROJECT_GENERATE = 'generate';
     const SLUG_SUBACTION_PROJECT_DUPLICATE = 'duplicate';
     const SLUG_SUBACTION_PROJECT_CLEAR_CACHE = 'clear_cache';
-    const SLUG_ACTION_REVIEW = 'review';
     const SLUG_ACTION_EDIT_DESIGN = 'customize_design';
-    const REVIEW_OPTION_NAME = 'pmb_review';
     const SLUG_ACTION_UNINSTALL = 'uninstall';
 
     /**
@@ -131,19 +123,10 @@ class Admin extends BaseController
      */
     protected $notification_manager;
     /**
-     * Somewhere to put the WP_Error emitted by wp_mail in an action (but not returned)
-     * @var WP_Error
-     */
-    protected $wp_error;
-    /**
      * @var DebugInfo
      */
     protected $debug_info;
 
-    /**
-     * @var PmbCentral
-     */
-    protected $pmb_central;
 
     /**
      * The project referenced on this request, if any.
@@ -174,7 +157,6 @@ class Admin extends BaseController
      * @param SvgDoer $svg_doer
      * @param OneTimeNotificationManager $notification_manager
      * @param DebugInfo $debug_info
-     * @param PmbCentral $pmb_central
      * @param PostWrapperManager $post_manager
      * @param ExternalResourceCache $external_resource_cache
      * @param Config $config
@@ -189,7 +171,6 @@ class Admin extends BaseController
         SvgDoer $svg_doer,
         OneTimeNotificationManager $notification_manager,
         DebugInfo $debug_info,
-        PmbCentral $pmb_central,
         PostWrapperManager $post_manager,
         ExternalResourceCache $external_resource_cache,
         Config $config
@@ -203,7 +184,6 @@ class Admin extends BaseController
         $this->svg_doer = $svg_doer;
         $this->notification_manager = $notification_manager;
         $this->debug_info = $debug_info;
-        $this->pmb_central = $pmb_central;
         $this->post_manager = $post_manager;
         $this->external_resource_cache = $external_resource_cache;
         $this->config = $config;
@@ -216,7 +196,7 @@ class Admin extends BaseController
     public function setHooks()
     {
         add_action('admin_menu', array($this, 'addToMenu'));
-        add_filter('plugin_action_links_' . PMB_BASENAME, array($this, 'pluginPageLinks'));
+        add_filter('plugin_action_links_' . AVPVH_PRWB_BASENAME, array($this, 'pluginPageLinks'));
         add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
 
 
@@ -227,7 +207,6 @@ class Admin extends BaseController
 
         $this->makePrintContentsSaySaved();
         $this->notification_manager->showOneTimeNotifications();
-        $this->maybeRefreshCreditCache();
         $this->earlyResponseHandling();
     }
 
@@ -238,58 +217,50 @@ class Admin extends BaseController
     public function addToMenu()
     {
         add_menu_page(
-            esc_html__('Print My Blog', 'print-my-blog'),
-            esc_html__('Print My Blog', 'print-my-blog'),
-            PMB_ADMIN_CAP,
-            PMB_ADMIN_PROJECTS_PAGE_SLUG,
+            esc_html__('AV-PvH Print Website', 'avpvh-print-website'),
+            esc_html__('AV-PvH Print Website', 'avpvh-print-website'),
+            AVPVH_PRWB_ADMIN_CAP,
+            AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
             array(
                 $this,
                 'renderProjects',
             ),
-            $this->svg_doer->getSvgDataAsColor(PMB_DIR . 'assets/images/menu-icon.svg', 'white')
+            $this->svg_doer->getSvgDataAsColor(AVPVH_PRWB_DIR . 'assets/images/menu-icon.svg', 'white')
         );
 
         $projects_page = add_submenu_page(
-            PMB_ADMIN_PROJECTS_PAGE_SLUG,
-            esc_html__('Pro Print', 'print-my-blog'),
-            esc_html__('Pro Print', 'print-my-blog'),
-            PMB_ADMIN_CAP,
-            PMB_ADMIN_PROJECTS_PAGE_SLUG,
+            AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
+            esc_html__('Pro Print', 'avpvh-print-website'),
+            esc_html__('Pro Print', 'avpvh-print-website'),
+            AVPVH_PRWB_ADMIN_CAP,
+            AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
             array($this, 'renderProjects')
         );
         add_action('load-' . $projects_page, [$this, 'addHelpTab']);
         $this->hackSubmenuContentIntoRightSpot();
         add_submenu_page(
-            PMB_ADMIN_PROJECTS_PAGE_SLUG,
-            esc_html__('Print My Blog – Quick Print', 'print-my-blog'),
-            esc_html__('Quick Print', 'print-my-blog'),
-            PMB_ADMIN_CAP,
-            PMB_ADMIN_PAGE_SLUG,
+            AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
+            esc_html__('AV-PvH Print Website – Quick Print', 'avpvh-print-website'),
+            esc_html__('Quick Print', 'avpvh-print-website'),
+            AVPVH_PRWB_ADMIN_CAP,
+            AVPVH_PRWB_ADMIN_PAGE_SLUG,
             array($this, 'renderAdminPage')
         );
         add_submenu_page(
-            PMB_ADMIN_PROJECTS_PAGE_SLUG,
-            esc_html__('Print My Blog Designs', 'print-my-blog'),
-            esc_html__('Designs', 'print-my-blog'),
+            AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
+            esc_html__('AV-PvH Print Website Designs', 'avpvh-print-website'),
+            esc_html__('Designs', 'avpvh-print-website'),
             'manage_options',
-            PMB_ADMIN_DESIGNS_PAGE_SLUG,
+            AVPVH_PRWB_ADMIN_DESIGNS_PAGE_SLUG,
             array($this, 'editDesigns')
         );
         add_submenu_page(
-            PMB_ADMIN_PROJECTS_PAGE_SLUG,
-            esc_html__('Print My Blog Settings', 'print-my-blog'),
-            esc_html__('Settings', 'print-my-blog'),
+            AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
+            esc_html__('AV-PvH Print Website Settings', 'avpvh-print-website'),
+            esc_html__('Settings', 'avpvh-print-website'),
             'manage_options',
-            PMB_ADMIN_SETTINGS_PAGE_SLUG,
+            AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG,
             array($this, 'editSettingsPage')
-        );
-        add_submenu_page(
-            PMB_ADMIN_PROJECTS_PAGE_SLUG,
-            __('Help Me Print My Blog', 'print-my-blog'),
-            __('Help', 'print-my-blog'),
-            PMB_ADMIN_CAP,
-            PMB_ADMIN_HELP_PAGE_SLUG,
-            [$this, 'helpPage']
         );
     }
 
@@ -303,7 +274,7 @@ class Admin extends BaseController
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if (
             isset($_GET['page'], $_GET['action'], $_GET['subaction'])
-            && $_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG
+            && $_GET['page'] === AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG
             && $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT
             && $_GET['subaction'] === self::SLUG_SUBACTION_PROJECT_CONTENT
         ) {
@@ -311,28 +282,28 @@ class Admin extends BaseController
             $screen->add_help_tab(
                 array(
                     'id' => 'my_help_tab',
-                    'title' => __('Keyboard Accessibility', 'print-my-blog'),
-                    'content' => pmb_get_contents(PMB_TEMPLATES_DIR . 'project_edit_content_help_tab.php'),
+                    'title' => __('Keyboard Accessibility', 'avpvh-print-website'),
+                    'content' => avpvh_prwb_get_contents(AVPVH_PRWB_TEMPLATES_DIR . 'project_edit_content_help_tab.php'),
                 )
             );
         }
     }
 
     /**
-     * Hacks WP menu so the links to the PMB contents CPT appear underneath the Print My Blog top-level menu.
+     * Hacks WP menu so the links to the PMB contents CPT appear underneath the AV-PvH Print Website top-level menu.
      */
     protected function hackSubmenuContentIntoRightSpot()
     {
         global $submenu;
 
-        if (array_key_exists(PMB_ADMIN_PROJECTS_PAGE_SLUG, $submenu)) {
-            foreach ($submenu[PMB_ADMIN_PROJECTS_PAGE_SLUG] as $key => $value) {
-                $k = array_search('edit.php?post_type=pmb_content', $value, true);
+        if (array_key_exists(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG, $submenu)) {
+            foreach ($submenu[AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG] as $key => $value) {
+                $k = array_search('edit.php?post_type=avpvh_prwb_content', $value, true);
                 if ($k) {
-                    unset($submenu[PMB_ADMIN_PROJECTS_PAGE_SLUG][$key]);
+                    unset($submenu[AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG][$key]);
                     // Sorry, this is the only way to rearrange menu items how I want them.
                     // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-                    $submenu[PMB_ADMIN_PROJECTS_PAGE_SLUG][] = $value;
+                    $submenu[AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG][] = $value;
                 }
             }
         }
@@ -340,37 +311,37 @@ class Admin extends BaseController
 
     public function saveSettingsPage()
     {
-        $settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');
+        $settings = Context::instance()->reuse('Avpvh\PrintWebsite\domain\FrontendPrintSettings');
         $settings_form = $this->getNewSettingsForm();
         check_admin_referer('pmb-settings');
         $settings_form->receiveFormSubmission($_POST);
         if ($settings_form->isValid()) {
             // Ok save those settings!
             if (isset($_POST['pmb-reset'])) {
-                $settings = Context::instance()->useNew('PrintMyBlog\domain\FrontendPrintSettings', [null, false]);
+                $settings = Context::instance()->useNew('Avpvh\PrintWebsite\domain\FrontendPrintSettings', [null, false]);
                 $this->config->resetSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME);
                 $this->config->resetSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME);
             } else {
-                $settings->setShowButtons(isset($_POST['pmb_show_buttons']));
-                $settings->setShowButtonsPages(isset($_POST['pmb_show_buttons_pages']));
-                $settings->setPlaceAbove(Array2::setOr($_POST, 'pmb_place_above', 1));
-                $settings->setOpenNewTab(isset($_POST['pmb_open_new_tab']));
+                $settings->setShowButtons(isset($_POST['avpvh_prwb_show_buttons']));
+                $settings->setShowButtonsPages(isset($_POST['avpvh_prwb_show_buttons_pages']));
+                $settings->setPlaceAbove(Array2::setOr($_POST, 'avpvh_prwb_place_above', 1));
+                $settings->setOpenNewTab(isset($_POST['avpvh_prwb_open_new_tab']));
                 foreach ($settings->formatSlugs() as $slug) {
-                    if (isset($_POST['pmb_format'][$slug])) {
+                    if (isset($_POST['avpvh_prwb_format'][$slug])) {
                         $active = true;
                     } else {
                         $active = false;
                     }
                     $settings->setFormatActive($slug, $active);
-                    if (isset($_POST['pmb_frontend_labels'][$slug])) {
+                    if (isset($_POST['avpvh_prwb_frontend_labels'][$slug])) {
                         // Sanitization happens inside FrontendPrintSettings::setFormatFrontendLabel()
                         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-                        $settings->setFormatFrontendLabel($slug, wp_unslash($_POST['pmb_frontend_labels'][$slug]));
+                        $settings->setFormatFrontendLabel($slug, wp_unslash($_POST['avpvh_prwb_frontend_labels'][$slug]));
                     }
-                    if (isset($_POST['pmb_print_options'][$slug])) {
+                    if (isset($_POST['avpvh_prwb_print_options'][$slug])) {
                         // Sanitization happens inside FrontendPrintSettings::setPrintOptions(), which is pretty involved.
                         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-                        $settings->setPrintOptions($slug, wp_unslash($_POST['pmb_print_options'][$slug]));
+                        $settings->setPrintOptions($slug, wp_unslash($_POST['avpvh_prwb_print_options'][$slug]));
                     }
                 }
                 $this->config->setSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME, $settings_form->getInputValue('post_types'));
@@ -381,7 +352,7 @@ class Admin extends BaseController
 
             $this->config->save();
 
-            wp_safe_redirect(admin_url(PMB_ADMIN_SETTINGS_PAGE_PATH));
+            wp_safe_redirect(admin_url(AVPVH_PRWB_ADMIN_SETTINGS_PAGE_PATH));
             exit;
         }
     }
@@ -400,13 +371,13 @@ class Admin extends BaseController
                     'posts_per_page' => '1',
                 )
             );
-            $text = esc_html__('Settings Saved!', 'print-my-blog');
+            $text = esc_html__('Settings Saved!', 'avpvh-print-website');
             if ($posts) {
                 $a_post = reset($posts);
                 $permalink = get_permalink($a_post);
                 $text .= ' ' . sprintf(
                     // translators: 1: opening anchor tag, 2: closing anchor tag
-                    esc_html__('You should see the changes on your %1$slatest post%2$s.', 'print-my-blog'),
+                    esc_html__('You should see the changes on your %1$slatest post%2$s.', 'avpvh-print-website'),
                     '<a href="' . $permalink . '" target="_blank">',
                     '</a>'
                 );
@@ -418,8 +389,8 @@ class Admin extends BaseController
         $print_options = new PrintOptions();
         $displayer = new FormInputs();
         $settings_form = $this->getNewSettingsForm();
-        $settings = Context::instance()->reuse('PrintMyBlog\domain\FrontendPrintSettings');
-        include PMB_TEMPLATES_DIR . 'settings_page.php';
+        $settings = Context::instance()->reuse('Avpvh\PrintWebsite\domain\FrontendPrintSettings');
+        include AVPVH_PRWB_TEMPLATES_DIR . 'settings_page.php';
     }
 
     protected function getNewSettingsForm()
@@ -434,7 +405,7 @@ class Admin extends BaseController
         $subsections['post_types'] = new CheckboxMultiInput(
             $post_type_options,
             [
-                'html_label_text' => __('Show print buttons on:', 'print-my-blog'),
+                'html_label_text' => __('Show print buttons on:', 'avpvh-print-website'),
                 'default' => $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_POST_TYPES_SETTING_NAME)
             ]
         );
@@ -452,12 +423,12 @@ class Admin extends BaseController
         $note_about_missing_formats = '';
         if ($unsupported_formats) {
             $unsupported_formats_string = implode(', ', $unsupported_formats);
-            $note_about_missing_formats = sprintf(__('Note: the following formats are not available in this build: %s', 'print-my-blog'), $unsupported_formats_string);
+            $note_about_missing_formats = sprintf(__('Note: the following formats are not available in this build: %s', 'avpvh-print-website'), $unsupported_formats_string);
         }
         $subsections['formats'] = new CheckboxMultiInput(
             $format_options,
             [
-                'html_label_text' => __('Print Formats', 'print-my-blog'),
+                'html_label_text' => __('Print Formats', 'avpvh-print-website'),
                 'html_help_text' => $note_about_missing_formats,
                 'default' => $this->config->getSetting(Config::ADMIN_PRINT_BUTTONS_FORMATS_SETTING_NAME)
             ]
@@ -470,197 +441,6 @@ class Admin extends BaseController
     }
 
     /**
-     * For sending help info to the dev.
-     */
-    public function helpPage()
-    {
-
-        if ($this->invalid_form instanceof FormSection) {
-            $form = $this->invalid_form;
-            $form_url = '';
-            $method = 'GET';
-            $button_text = '';
-        } else {
-            $form = $this->getEmailHelpForm();
-            $form_url = admin_url(PMB_ADMIN_HELP_PAGE_PATH);
-            $method = 'POST';
-            $button_text = esc_html__('Email Print My Blog Support', 'print-my-blog');
-        }
-        pmb_render_template(
-            'help.php',
-            [
-                'form' => $form,
-                'form_url' => $form_url,
-                'form_method' => $method,
-                'button_text' => $button_text,
-            ]
-        );
-    }
-
-    /**
-     * @throws \Twine\forms\helpers\ImproperUsageException
-     */
-    public function sendHelp()
-    {
-        global $current_user;
-        $form = $this->getEmailHelpForm();
-        // Nonces verified by form class.
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $form->receiveFormSubmission($_REQUEST);
-        if (! $form->isValid()) {
-            $this->invalid_form = $form;
-            return;
-        }
-        // don't translate these strings. They're sent to the dev who speaks English.
-        add_action(
-            'wp_mail_failed',
-            [$this, 'sendHelpError'],
-            10
-        );
-
-        $headers = array(
-            'Reply-To: ' . $current_user->display_name . ' <' . $current_user->user_email . '>',
-        );
-        $subject = sprintf('Help for %s', site_url());
-        $message = sprintf(
-            'Name:%1$s
-            <br>
-            Message:%2$s
-            <br>
-            Consent:%3$s,
-            Data:%4$s',
-            $form->getInputValue('name'),
-            $form->getInputValue('reason'),
-            $form->getInputValue('consent') ? 'yes' : 'no',
-            $form->getInputValue('debug_info')
-        );
-        $success = wp_mail(
-            'please@printmy.blog',
-            $subject,
-            $message,
-            $headers
-        );
-
-        if ($success) {
-            $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_SUCCESS,
-                __('Email successfully sent. Expect a reply in the next 1-2 business days.', 'print-my-blog')
-            );
-        } else {
-            $error = $this->wp_error;
-            $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_ERROR,
-                sprintf(
-                    // translators: 1: error message, 2: email address, 3: subject of email, 4: content of email.
-                    __('There was an error sending an email from your website (it was "%1$s"). Please manually send an email to %2$s, with the subject "%3$s", with the content:', 'print-my-blog'),
-                    $error->get_error_message(),
-                    PMB_SUPPORT_EMAIL,
-                    $subject
-                )
-                    . '<pre>' . $message . '</pre>'
-            );
-        }
-        wp_safe_redirect(
-            admin_url(PMB_ADMIN_HELP_PAGE_PATH)
-        );
-    }
-
-    /**
-     * Callback for recording error when sending email.
-     * @param WP_Error $error
-     */
-    public function sendHelpError(WP_Error $error)
-    {
-        $this->wp_error = $error;
-    }
-
-    /**
-     * @return FormSection
-     * @throws \Twine\forms\helpers\ImproperUsageException
-     */
-    protected function getEmailHelpForm()
-    {
-        global $current_user;
-
-        // reminder: Twine forms default to always add and check nonces.
-        return new FormSection(
-            [
-                'subsections' => [
-                    'reason' => new TextAreaInput(
-                        [
-                            'html_label_text' => __('Please explain what you did, what you expected, and what went wrong', 'print-my-blog'),
-                            'required' => true,
-                            'html_help_text' => __('Including links to screenshots is appreciated', 'print-my-blog'),
-                        ]
-                    ),
-                    'name' => new TextInput(
-                        [
-                            'html_label_text' => __('Your Name', 'print-my-blog'),
-                            'default' => $current_user->user_firstname
-                                ? $current_user->user_firstname . ' ' . $current_user->user_lastname
-                                : $current_user->display_name,
-                        ]
-                    ),
-                    'consent' => new YesNoInput(
-                        [
-                            'html_label_text' => __('Are you ok with us viewing your most recent generated documents?', 'print-my-blog'),
-                            'default' => true,
-                            'html_help_text' => __('Viewing your most recent generated documents saves a lot of time figuring out what is going wrong. We won’t share your content with anyone else.', 'print-my-blog'),
-                        ]
-                    ),
-                    'debug_info' => new TextAreaInput(
-                        [
-                            'html_label_text' => __('This debug info will also be sent.', 'print-my-blog'),
-                            'disabled' => true,
-                            'default' => $this->debug_info->getDebugInfoString(),
-                            'html_help_text' => __('This is mostly system information, list of active plugins, active theme, and some Print My Blog Pro info like your most recent projects.', 'print-my-blog'),
-                        ]
-                    ),
-                ],
-            ]
-        );
-    }
-
-    /**
-     * Now-unused method for getting a form to submit info to GitHub. Might add it back some day.
-     * @return FormSection
-     * @throws \Twine\forms\helpers\ImproperUsageException
-     */
-    protected function getGithubHelpForm()
-    {
-        return new FormSection(
-            [
-                'subsections' => [
-                    'explanatory_text' => new FormSectionHtml(
-                        '<h2>' . __('Support for your plan is offered on GitHub', 'print-my-blog') . '</h2>' .
-                            '<p>' . __('GitHub is a public forum to share your issues with the developer and other users.', 'print-my-blog') . '</p>' .
-                            '<p>' . sprintf(
-                                // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag.
-                                __('You will need to first %1$screate a GitHub account%2$s. If you prefer to use email support please %3$spurchase a license that offers email support.%2$s', 'print-my-blog'),
-                                '<a target="_blank" href="https://github.com/signup">',
-                                '</a>',
-                                '<a href="' . esc_url(pmb_upgrade_url()) . '">'
-                            )
-                            . '</p>'
-                    ),
-                    'body' => new HiddenInput(
-                        [
-                            'default' => '** Please describe what you were doing, what you expected to happen, and what the problem was. **
-                                 
-
-```
-' . substr($this->debug_info->getDebugInfoString(false), 0, 5000) . '
-```',
-                            'html_name' => 'body',
-                        ]
-                    ),
-                ],
-            ]
-        );
-    }
-
-
-    /**
      * Shows the setup page.
      * @since 1.0.0
      */
@@ -669,13 +449,11 @@ class Admin extends BaseController
         // Nonce overkill on these pages, no form is being submitted.
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if (isset($_GET['welcome'])) {
-            include PMB_TEMPLATES_DIR . 'welcome.php';
-        } elseif (isset($_GET['upgrade_to_3'])) {
-            include PMB_TEMPLATES_DIR . 'upgrade_to_3.php';
+            include AVPVH_PRWB_TEMPLATES_DIR . 'welcome.php';
         } else {
             $print_options = new PrintOptions();
             $displayer = new FormInputs();
-            include PMB_TEMPLATES_DIR . 'setup_page.php';
+            include AVPVH_PRWB_TEMPLATES_DIR . 'setup_page.php';
         }
         // phpcs:enable WordPress.Security.NonceVerification.Recommended
     }
@@ -696,12 +474,12 @@ class Admin extends BaseController
                             [
                                 'action' => self::SLUG_ACTION_UNINSTALL,
                             ],
-                            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                            admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
                         ),
                         self::SLUG_ACTION_UNINSTALL
                     )
                     . '" id="pmb-uninstall" class="pmb-uninstall">'
-                    . esc_html__('Delete All Data', 'print-my-blog')
+                    . esc_html__('Delete All Data', 'avpvh-print-website')
                     . '</a>',
             ]
         );
@@ -715,51 +493,49 @@ class Admin extends BaseController
      */
     public function enqueueScripts($hook)
     {
-        wp_enqueue_script('pmb_general');
+        wp_enqueue_script('avpvh-print-website-general');
         wp_enqueue_style(
-            'pmb_admin',
-            PMB_STYLES_URL . 'pmb-admin.css',
+            'avpvh-print-website-admin',
+            AVPVH_PRWB_STYLES_URL . 'pmb-admin.css',
             [],
-            filemtime(PMB_STYLES_DIR . 'pmb-admin.css')
+            filemtime(AVPVH_PRWB_STYLES_DIR . 'pmb-admin.css')
         );
-        if (pmb_has_required_plan('hobbyist')) {
-            // Paid users don't need to be reminded what's pro and what's not
-            wp_add_inline_style(
-                'pmb_admin',
-                '.pmb-pro-only, .pmb-pro-best{display:none;}'
-            );
-        }
+        // Everything is available, so there is nothing to mark as "pro".
+        wp_add_inline_style(
+            'avpvh-print-website-admin',
+            '.pmb-pro-only, .pmb-pro-best{display:none;}'
+        );
         // Nonce overkill for just checking which page they're on.
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
-        if (isset($_GET['welcome']) || isset($_GET['upgrade_to_3'])) {
+        if (isset($_GET['welcome'])) {
             wp_enqueue_style(
-                'pmb_welcome',
-                PMB_ASSETS_URL . 'styles/welcome.css',
+                'avpvh-print-website-welcome',
+                AVPVH_PRWB_ASSETS_URL . 'styles/welcome.css',
                 array(),
-                filemtime(PMB_ASSETS_DIR . 'styles/welcome.css')
+                filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/welcome.css')
             );
             // don't let admin notices ruin the welcoming moment
             remove_all_actions('admin_notices');
-        } elseif (isset($_GET['page']) && $_GET['page'] === PMB_ADMIN_PAGE_SLUG) {
-            wp_enqueue_script('pmb-setup-page');
-            wp_enqueue_style('pmb-setup-page');
-        } elseif (isset($_GET['page']) && $_GET['page'] === PMB_ADMIN_DESIGNS_PAGE_SLUG) {
+        } elseif (isset($_GET['page']) && $_GET['page'] === AVPVH_PRWB_ADMIN_PAGE_SLUG) {
+            wp_enqueue_script('avpvh-print-website-setup-page');
+            wp_enqueue_style('avpvh-print-website-setup-page');
+        } elseif (isset($_GET['page']) && $_GET['page'] === AVPVH_PRWB_ADMIN_DESIGNS_PAGE_SLUG) {
             wp_enqueue_script(
-                'pmb-choose-design',       // handle
-                PMB_SCRIPTS_URL . 'pmb-design-choose.js',       // source
-                array('pmb-modal'),
-                filemtime(PMB_SCRIPTS_DIR . 'pmb-design-choose.js')
+                'avpvh-print-website-choose-design',       // handle
+                AVPVH_PRWB_SCRIPTS_URL . 'pmb-design-choose.js',       // source
+                array('avpvh-print-website-modal'),
+                filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-design-choose.js')
             );
             // A style available in WP
             wp_enqueue_style('wp-jquery-ui-dialog');
             wp_enqueue_style(
-                'pmb-choose-design',
-                PMB_STYLES_URL . 'design-choose.css',
+                'avpvh-print-website-choose-design',
+                AVPVH_PRWB_STYLES_URL . 'design-choose.css',
                 [],
-                filemtime(PMB_STYLES_DIR . 'design-choose.css')
+                filemtime(AVPVH_PRWB_STYLES_DIR . 'design-choose.css')
             );
         } elseif (
-            isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects'
+            isset($_GET['page']) && $_GET['page'] === 'avpvh-print-website-projects'
         ) {
             if (
                 isset($_GET['action'])
@@ -769,115 +545,87 @@ class Admin extends BaseController
                     case self::SLUG_SUBACTION_PROJECT_CONTENT:
                         wp_register_script(
                             'sortablejs',
-                            PMB_SCRIPTS_URL . 'libs/Sortable.min.js',
+                            AVPVH_PRWB_SCRIPTS_URL . 'libs/Sortable.min.js',
                             array(),
                             '1.10.2'
                         );
 
                         wp_enqueue_script(
-                            'pmb_project_edit_content',
-                            PMB_SCRIPTS_URL . 'project-edit-content.js',
-                            array('sortablejs', 'jquery-ui-datepicker', 'jquery-ui-dialog', 'pmb-select2', 'wp-api', 'jquery-debounce'),
-                            filemtime(PMB_SCRIPTS_DIR . 'project-edit-content.js')
+                            'avpvh-print-website-project-edit-content',
+                            AVPVH_PRWB_SCRIPTS_URL . 'project-edit-content.js',
+                            array('sortablejs', 'jquery-ui-datepicker', 'jquery-ui-dialog', 'avpvh-print-website-select2', 'wp-api', 'jquery-debounce'),
+                            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'project-edit-content.js')
                         );
                         wp_enqueue_style('jquery-ui');
-                        wp_enqueue_style('pmb-select2');
+                        wp_enqueue_style('avpvh-print-website-select2');
                         wp_localize_script(
-                            'pmb_project_edit_content',
-                            'pmb_project_edit_content_data',
+                            'avpvh-print-website-project-edit-content',
+                            'avpvh_prwb_project_edit_content_data',
                             [
                                 'levels' => $this->project->getLevelsAllowed(),
                                 'default_rest_url' => function_exists('rest_url') ? rest_url('/wp/v2') : '',
                                 'translations' => [
-                                    'cant_add' => __('Please select items to add to the project', 'print-my-blog'),
-                                    'cant_remove' => __('Please select items to remove', 'print-my-blog'),
-                                    'cant_move' => __('Please select items to move', 'print-my-blog'),
-                                    'insert_error' => __('Error inserting. Please use the PMB help page to get help', 'print-my-blog'),
-                                    'duplicate_error' => __('Error creating new print material. Please use the PMB help page to get help.', 'print-my-blog'),
-                                    'empty_content_warning' => __('Your project\'s Body is empty. You may have forgetten to drag items from "Available Content" (on the left) into the "Chosen Project Content"\'s Body (on the right). Are you sure you want to leave your project\'s Body empty?', 'print-my-blog'),
+                                    'cant_add' => __('Please select items to add to the project', 'avpvh-print-website'),
+                                    'cant_remove' => __('Please select items to remove', 'avpvh-print-website'),
+                                    'cant_move' => __('Please select items to move', 'avpvh-print-website'),
+                                    'insert_error' => __('Error inserting.', 'avpvh-print-website'),
+                                    'duplicate_error' => __('Error creating new print material.', 'avpvh-print-website'),
+                                    'empty_content_warning' => __('Your project\'s Body is empty. You may have forgetten to drag items from "Available Content" (on the left) into the "Chosen Project Content"\'s Body (on the right). Are you sure you want to leave your project\'s Body empty?', 'avpvh-print-website'),
                                 ],
                             ]
                         );
                         break;
                     case self::SLUG_SUBACTION_PROJECT_CHANGE_DESIGN:
                         wp_enqueue_script(
-                            'pmb-choose-design',       // handle
-                            PMB_SCRIPTS_URL . 'pmb-design-choose.js',       // source
-                            array('pmb-modal'),
-                            filemtime(PMB_SCRIPTS_DIR . 'pmb-design-choose.js')
+                            'avpvh-print-website-choose-design',       // handle
+                            AVPVH_PRWB_SCRIPTS_URL . 'pmb-design-choose.js',       // source
+                            array('avpvh-print-website-modal'),
+                            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-design-choose.js')
                         );
                         // A style available in WP
                         wp_enqueue_style('wp-jquery-ui-dialog');
                         wp_enqueue_style(
-                            'pmb-choose-design',
-                            PMB_STYLES_URL . 'design-choose.css',
+                            'avpvh-print-website-choose-design',
+                            AVPVH_PRWB_STYLES_URL . 'design-choose.css',
                             [],
-                            filemtime(PMB_STYLES_DIR . 'design-choose.css')
+                            filemtime(AVPVH_PRWB_STYLES_DIR . 'design-choose.css')
                         );
                         break;
                     case self::SLUG_SUBACTION_PROJECT_GENERATE:
                         wp_enqueue_script(
-                            'pmb-generate',
-                            PMB_SCRIPTS_URL . 'pmb-generate.js',
-                            ['pmb-modal', 'docraptor'],
-                            filemtime(PMB_SCRIPTS_DIR . 'pmb-generate.js')
+                            'avpvh-print-website-generate',
+                            AVPVH_PRWB_SCRIPTS_URL . 'pmb-generate.js',
+                            ['avpvh-print-website-modal'],
+                            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-generate.js')
                         );
                         wp_enqueue_style(
-                            'pmb-generate',
-                            PMB_STYLES_URL . 'pmb-generate.css',
+                            'avpvh-print-website-generate',
+                            AVPVH_PRWB_STYLES_URL . 'pmb-generate.css',
                             [
                                 'wp-jquery-ui-dialog',
                             ],
-                            filemtime(PMB_STYLES_DIR . 'pmb-generate.css')
+                            filemtime(AVPVH_PRWB_STYLES_DIR . 'pmb-generate.css')
                         );
                         wp_localize_script(
-                            'pmb-generate',
-                            'pmb_generate',
+                            'avpvh-print-website-generate',
+                            'avpvh_prwb_generate',
                             [
-                                'external_requests_enabled' => pmb_external_requests_enabled(),
+                                'external_requests_enabled' => avpvh_prwb_external_requests_enabled(),
                                 'generate_ajax_data' => apply_filters(
-                                    '\PrintMyBlog\controllers\Admin->enqueueScripts generate generate_ajax_data',
+                                    '\Avpvh\PrintWebsite\controllers\Admin->enqueueScripts generate generate_ajax_data',
                                     [
-                                        'action' => Frontend::PMB_PROJECT_STATUS_ACTION,
+                                        'action' => Frontend::AVPVH_PRWB_PROJECT_STATUS_ACTION,
                                         'ID' => $this->project->getWpPost()->ID,
                                         '_nonce' => wp_create_nonce('pmb-loading'),
                                     ],
                                     $this->project
                                 ),
-                                'pmb_ajax' => apply_filters('\PrintMyBlog\controllers\Admin::enqueueScripts pmb_ajax', pmb_ajax_url(), $this->project),
-                                'site_url' => apply_filters('\PrintMyBlog\controllers\Admin::enqueueScripts site_url', site_url(), $this->project),
-                                'use_pmb_central_for_previews' => pmb_use_pmb_central(),
-                                'license_data' => [
-                                    'endpoint' => $this->pmb_central->getCentralUrl(),
-                                    'license_id' => '',
-                                    'install_id' => '',
-                                    'authorization_header' => '',
-                                ],
+                                'avpvh_prwb_ajax' => apply_filters('\Avpvh\PrintWebsite\controllers\Admin::enqueueScripts avpvh_prwb_ajax', avpvh_prwb_ajax_url(), $this->project),
+                                'site_url' => apply_filters('\Avpvh\PrintWebsite\controllers\Admin::enqueueScripts site_url', site_url(), $this->project),
 
-                                'doc_attrs' => apply_filters(
-                                    '\PrintMyBlog\controllers\Admin::enqueueScripts doc_attrs',
-                                    [
-                                        'test' => defined('PMB_TEST_LIVE') && PMB_TEST_LIVE ? true : false,
-                                        'type' => 'pdf',
-                                        'javascript' => true, // Javascript by DocRaptor
-                                        'name' => $this->project->getPublishedTitle(),
-                                        'ignore_console_messages' => true,
-                                        'ignore_resource_errors' => true,
-                                        'pipeline' => '10.1',
-                                        'prince_options' => [
-                                            'base_url' => site_url(),
-                                            'media' => 'print',                                       // use screen
-                                            'http_timeout' => 60,
-                                            'http_insecure' => true,
-                                            // styles
-                                            // instead of print styles
-                                            // javascript: true, // use Prince's JS, which is more error tolerant
-                                        ],
-                                    ]
-                                ),
                                 'translations' => [
-                                    'error_generating' => __('There was an error preparing your content. Please visit the Print My Blog Help page.', 'print-my-blog'),
-                                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the Print My Blog Help page.', 'print-my-blog'),
+                                    'error_generating' => __('There was an error preparing your content.', 'avpvh-print-website'),
+                                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
                                 ],
                             ]
                         );
@@ -886,35 +634,35 @@ class Admin extends BaseController
 
                 // everybody uses the style, right?
                 wp_enqueue_style(
-                    'pmb_project_edit',
-                    PMB_STYLES_URL . 'project-edit.css',
+                    'avpvh-print-website-project-edit',
+                    AVPVH_PRWB_STYLES_URL . 'project-edit.css',
                     array(),
-                    filemtime(PMB_STYLES_DIR . 'project-edit.css')
+                    filemtime(AVPVH_PRWB_STYLES_DIR . 'project-edit.css')
                 );
             } else {
                 // projects list table
                 wp_enqueue_script(
-                    'pmb-projects-list',       // handle
-                    PMB_SCRIPTS_URL . 'pmb-projects-list.js',       // source
+                    'avpvh-print-website-projects-list',       // handle
+                    AVPVH_PRWB_SCRIPTS_URL . 'pmb-projects-list.js',       // source
                     array('jquery'),
-                    filemtime(PMB_SCRIPTS_DIR . 'pmb-projects-list.js')
+                    filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-projects-list.js')
                 );
                 wp_localize_script(
-                    'pmb-projects-list',
-                    'pmb_data',
+                    'avpvh-print-website-projects-list',
+                    'avpvh_prwb_data',
                     [
                         'translations' => [
-                            'confirm_duplicate' => __('Are you sure you want to duplicate this project?', 'print-my-blog'),
+                            'confirm_duplicate' => __('Are you sure you want to duplicate this project?', 'avpvh-print-website'),
                         ],
                     ]
                 );
             }
         } elseif ($hook === 'plugins.php') {
             wp_enqueue_script(
-                'pmb-plugins-page',
-                PMB_SCRIPTS_URL . 'pmb-plugins-page.js',
+                'avpvh-print-website-plugins-page',
+                AVPVH_PRWB_SCRIPTS_URL . 'pmb-plugins-page.js',
                 [],
-                filemtime(PMB_SCRIPTS_DIR . 'pmb-plugins-page.js')
+                filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-plugins-page.js')
             );
         }
         // phpcs:enable WordPress.Security.NonceVerification.Recommended
@@ -922,7 +670,7 @@ class Admin extends BaseController
 
     /**
      * Displays a page.
-     * @throws \Twine\forms\helpers\ImproperUsageException
+     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
      */
     public function renderProjects()
     {
@@ -976,9 +724,9 @@ class Admin extends BaseController
                 [
                     'action' => self::SLUG_ACTION_ADD_NEW,
                 ],
-                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
             );
-            include PMB_TEMPLATES_DIR . 'projects_list_table.php';
+            include AVPVH_PRWB_TEMPLATES_DIR . 'projects_list_table.php';
         }
         // phpcs:enable WordPress.Security.NonceVerification.Recommended
     }
@@ -1056,7 +804,7 @@ class Admin extends BaseController
                 'ID' => $this->project->getWpPost()->ID,
                 'format' => $format_slug,
             ],
-            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
         );
         $this->renderProjectTemplate(
             'project_design_customize.php',
@@ -1110,7 +858,7 @@ class Admin extends BaseController
                 'action' => self::SLUG_ACTION_EDIT_PROJECT,
                 'subaction' => self::SLUG_SUBACTION_PROJECT_CONTENT,
             ],
-            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
         );
         $user_query_args = [
             'number' => 100,
@@ -1141,7 +889,7 @@ class Admin extends BaseController
 
     /**
      * Page for editing a project's metadata.
-     * @throws \Twine\forms\helpers\ImproperUsageException
+     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
      */
     protected function editMetadata()
     {
@@ -1165,7 +913,7 @@ class Admin extends BaseController
                 'action' => self::SLUG_ACTION_EDIT_PROJECT,
                 'subaction' => self::SLUG_SUBACTION_PROJECT_META,
             ],
-            admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+            admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
         );
         $this->renderProjectTemplate(
             'project_edit_metadata.php',
@@ -1187,25 +935,11 @@ class Admin extends BaseController
             $design->getDesignTemplate();
         }
         $generations = $this->project->getAllGenerations();
-        $license_info = null;
-        $upgrade_url = pmb_upgrade_url();
         $this->renderProjectTemplate(
             'project_edit_generate.php',
             [
                 'project' => $this->project,
                 'generations' => $generations,
-                'license_info' => $license_info,
-                'upgrade_url' => $upgrade_url,
-                'review_url' => wp_nonce_url(
-                    add_query_arg(
-                        [
-                            'action' => self::SLUG_ACTION_REVIEW,
-                        ],
-                        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
-                    ),
-                    self::SLUG_ACTION_REVIEW
-                ),
-                'suggest_review' => ! get_option(self::REVIEW_OPTION_NAME, false),
             ]
         );
     }
@@ -1233,7 +967,7 @@ class Admin extends BaseController
             [
                 'ID' => $design->getWpPost()->ID,
             ],
-            admin_url(PMB_ADMIN_DESIGNS_PAGE_PATH)
+            admin_url(AVPVH_PRWB_ADMIN_DESIGNS_PAGE_PATH)
         );
         $this->renderProjectTemplate(
             'design_customize.php',
@@ -1260,16 +994,16 @@ class Admin extends BaseController
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
-                __('Design "%s" successfully saved.', 'print-my-blog'),
+                __('Design "%s" successfully saved.', 'avpvh-print-website'),
                 $design->getWpPost()->post_title
             )
         );
-        wp_safe_redirect(admin_url(PMB_ADMIN_DESIGNS_PAGE_PATH));
+        wp_safe_redirect(admin_url(AVPVH_PRWB_ADMIN_DESIGNS_PAGE_PATH));
     }
 
     protected function saveDesignsList()
     {
-        if (! check_admin_referer(PMB_ADMIN_PROJECTS_PAGE_SLUG)) {
+        if (! check_admin_referer(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG)) {
             wp_die('The request has expired. Please refresh the previous page and try again.');
         }
         // get the design
@@ -1279,7 +1013,7 @@ class Admin extends BaseController
             throw new Exception(
                 sprintf(
                     // translators: 1: design slug, 2: format slug
-                    __('An invalid design (%1$s) or format provided(%2$s)', 'print-my-blog'),
+                    __('An invalid design (%1$s) or format provided(%2$s)', 'avpvh-print-website'),
                     sanitize_key(Array2::setOr($_GET, 'design', '')),
                     sanitize_key(Array2::setOr($_GET, 'format', ''))
                 )
@@ -1292,7 +1026,7 @@ class Admin extends BaseController
                         'action' => 'customize',
                         'ID' => $design->getWpPost()->ID
                     ],
-                    admin_url(PMB_ADMIN_DESIGNS_PAGE_PATH)
+                    admin_url(AVPVH_PRWB_ADMIN_DESIGNS_PAGE_PATH)
                 )
             );
             exit;
@@ -1307,14 +1041,14 @@ class Admin extends BaseController
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
-                __('%1$s is now the default design the %2$s on all new projects.', 'print-my-blog'),
+                __('%1$s is now the default design the %2$s on all new projects.', 'avpvh-print-website'),
                 $design->getWpPost()->post_title,
                 $format->title()
             )
         );
         // redirect back to the edit page
         wp_safe_redirect(
-            admin_url(PMB_ADMIN_DESIGNS_PAGE_PATH)
+            admin_url(AVPVH_PRWB_ADMIN_DESIGNS_PAGE_PATH)
         );
         exit;
     }
@@ -1351,7 +1085,7 @@ class Admin extends BaseController
         }
 
 
-        echo pmb_render_template(
+        echo avpvh_prwb_render_template(
             'designs.php',
             [
                 'formats' => $formats,
@@ -1380,7 +1114,7 @@ class Admin extends BaseController
         }
         // Yes we're rendering an HTML file. Escaping happens in that file.
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo pmb_render_template($template_name, $args);
+        echo avpvh_prwb_render_template($template_name, $args);
     }
 
     /**
@@ -1399,7 +1133,7 @@ class Admin extends BaseController
             $args = $project->getProgress()->mapStepToSubactionArgs($step);
             $mappings[$step] = add_query_arg(
                 array_merge($base_url_args, $args),
-                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
             );
         }
         return $mappings;
@@ -1417,21 +1151,17 @@ class Admin extends BaseController
         if (! isset($_GET['page'])) {
             return;
         }
-        if ($_GET['page'] === PMB_ADMIN_HELP_PAGE_SLUG) {
-            $this->sendHelp();
-            exit;
-        }
-        if ($_GET['page'] === PMB_ADMIN_SETTINGS_PAGE_SLUG) {
+        if ($_GET['page'] === AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG) {
             $this->saveSettingsPage();
         }
-        if ($_GET['page'] === PMB_ADMIN_DESIGNS_PAGE_SLUG) {
+        if ($_GET['page'] === AVPVH_PRWB_ADMIN_DESIGNS_PAGE_SLUG) {
             if (isset($_GET['ID'])) {
                 $this->saveCustomizeDesign();
             } else {
                 $this->saveDesignsList();
             }
         }
-        if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
+        if ($_GET['page'] === AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG) {
             $action = isset($_REQUEST['action']) ? sanitize_key($_REQUEST['action']) : null;
             if ($action === self::SLUG_ACTION_ADD_NEW) {
                 $this->saveNewProject();
@@ -1461,7 +1191,7 @@ class Admin extends BaseController
                 }
             } elseif ($action === 'delete') {
                 $this->deleteProjects();
-                $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
+                $redirect = admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH);
                 wp_safe_redirect($redirect);
                 exit;
             }
@@ -1471,7 +1201,7 @@ class Admin extends BaseController
     /**
      *
      * @return FormSection
-     * @throws \Twine\forms\helpers\ImproperUsageException
+     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
      */
     protected function getSetupForm()
     {
@@ -1490,14 +1220,14 @@ class Admin extends BaseController
             $default_formats = array_keys($this->project->getFormatsSelected());
         }
         return apply_filters(
-            '\PrintMyBlog\controllers\Admin::getSetupForm',
+            '\Avpvh\PrintWebsite\controllers\Admin::getSetupForm',
             new FormSection(
                 [
                     'name' => 'pmb-project',
                     'subsections' => [
                         'title' => new TextInput(
                             [
-                                'html_label_text' => __('Project Title', 'print-my-blog'),
+                                'html_label_text' => __('Project Title', 'avpvh-print-website'),
                                 'required' => true,
                                 'default' => $this->project instanceof Project ? $this->project->getWpPost()->post_title : '',
                                 'other_html_attributes' => [
@@ -1508,7 +1238,7 @@ class Admin extends BaseController
                         'formats' => new CheckboxMultiInput(
                             $format_options,
                             [
-                                'html_label_text' => __('Format', 'print-my-blog'),
+                                'html_label_text' => __('Format', 'avpvh-print-website'),
                                 'required' => true,
                                 'default' => $default_formats,
                             ]
@@ -1522,7 +1252,7 @@ class Admin extends BaseController
 
     /**
      * Save's a new project after the setup step.
-     * @throws \Twine\forms\helpers\ImproperUsageException
+     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
      */
     protected function saveNewProject()
     {
@@ -1580,7 +1310,7 @@ class Admin extends BaseController
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
                 // translators: %s project name.
-                __('Successfully setup the project "%s".', 'print-my-blog'),
+                __('Successfully setup the project "%s".', 'avpvh-print-website'),
                 $this->project->getWpPost()->post_title
             )
         );
@@ -1595,14 +1325,14 @@ class Admin extends BaseController
                     OneTimeNotification::TYPE_INFO,
                     sprintf(
                         // translators: %s format name
-                        __('You need to choose and customize the design for your %s.', 'print-my-blog'),
+                        __('You need to choose and customize the design for your %s.', 'avpvh-print-website'),
                         $this->file_format_registry->getFormat($new_format)->title()
                     )
                 );
             }
         }
         $this->project->getProgress()->markStepComplete(ProjectProgress::SETUP_STEP);
-        do_action('\PrintMyBlog\controllers\Admin->saveNewProject', $this->project, $form);
+        do_action('\Avpvh\PrintWebsite\controllers\Admin->saveNewProject', $this->project, $form);
         $this->redirectToNextStep($this->project);
     }
 
@@ -1622,7 +1352,7 @@ class Admin extends BaseController
         wp_safe_redirect(
             add_query_arg(
                 $args,
-                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
             )
         );
         exit;
@@ -1641,7 +1371,7 @@ class Admin extends BaseController
         foreach ($this->project->getAllGenerations() as $project_generation) {
             $project_generation->addDirtyReason(
                 'content_update',
-                __('The content in your project has changed', 'print-my-blog')
+                __('The content in your project has changed', 'avpvh-print-website')
             );
         }
         $this->project->setProjectDepth(intval(Array2::setOr($_POST, 'pmb-project-depth', 0)));
@@ -1669,7 +1399,7 @@ class Admin extends BaseController
         $this->project->getProgress()->markStepComplete(ProjectProgress::EDIT_CONTENT_STEP);
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
-            __('Updated project content.', 'print-my-blog')
+            __('Updated project content.', 'avpvh-print-website')
         );
         $this->redirectToNextStep($this->project);
     }
@@ -1712,7 +1442,7 @@ class Admin extends BaseController
     }
 
     /**
-     * @throws \Twine\forms\helpers\ImproperUsageException
+     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
      */
     protected function saveProjectCustomizeDesign()
     {
@@ -1730,14 +1460,14 @@ class Admin extends BaseController
         $project_generation = $this->project->getGenerationFor(Array2::setOr($_GET, 'format', ''));
         $project_generation->addDirtyReason(
             'design_change',
-            __('You have customized this design', 'print-my-blog')
+            __('You have customized this design', 'avpvh-print-website')
         );
         $this->project->getProgress()->markCustomizeDesignStepComplete($design->getDesignTemplate()->getFormatSlug());
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
                 // translators: %s: design name
-                __('The design "%s" has been customized, and its changes will be reflected in all projects that use it.', 'print-my-blog'),
+                __('The design "%s" has been customized, and its changes will be reflected in all projects that use it.', 'avpvh-print-website'),
                 $design->getWpPost()->post_title
             )
         );
@@ -1748,7 +1478,7 @@ class Admin extends BaseController
          * @param Design $design
          * @param FormSection $design_form
          */
-        do_action('PrintMyBlog\controllers\Admin->saveProjectCustomizeDesign done', $this->project, $project_generation, $design, $design_form);
+        do_action('Avpvh\PrintWebsite\controllers\Admin->saveProjectCustomizeDesign done', $this->project, $project_generation, $design, $design_form);
         $this->redirectToNextStep($this->project);
     }
 
@@ -1757,7 +1487,7 @@ class Admin extends BaseController
      */
     protected function saveProjectChooseDesign()
     {
-        if (! check_admin_referer(PMB_ADMIN_PROJECTS_PAGE_SLUG)) {
+        if (! check_admin_referer(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG)) {
             wp_die('The request has expired. Please refresh the previous page and try again.');
         }
         $this->updateProjectModifiedDate();
@@ -1767,7 +1497,7 @@ class Admin extends BaseController
             throw new Exception(
                 sprintf(
                     // translators: 1: design slug, 2: format slug
-                    __('An invalid design (%1$s) or format provided(%2$s)', 'print-my-blog'),
+                    __('An invalid design (%1$s) or format provided(%2$s)', 'avpvh-print-website'),
                     sanitize_key(Array2::setOr($_GET, 'design', '')),
                     sanitize_key(Array2::setOr($_GET, 'format', ''))
                 )
@@ -1777,13 +1507,13 @@ class Admin extends BaseController
         $project_generation = $this->project->getGenerationFor($format);
         $project_generation->addDirtyReason(
             'design_change',
-            __('You changed the design', 'print-my-blog')
+            __('You changed the design', 'avpvh-print-website')
         );
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
                 // translators: 1: design name, 2: format name.
-                __('You chose the design "%1$s" for the %2$s of your project.', 'print-my-blog'),
+                __('You chose the design "%1$s" for the %2$s of your project.', 'avpvh-print-website'),
                 $design->getWpPost()->post_title,
                 $format->title()
             )
@@ -1805,7 +1535,7 @@ class Admin extends BaseController
      * Gets the project form, which is a combination of the project forms for all the designs in use.
      *
      * @return void
-     * @throws \Twine\forms\helpers\ImproperUsageException
+     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
      */
     protected function saveProjectMetadata()
     {
@@ -1824,13 +1554,13 @@ class Admin extends BaseController
         foreach ($project_generations as $generation) {
             $generation->addDirtyReason(
                 'metadata',
-                __('You changed projected metadata', 'print-my-blog')
+                __('You changed projected metadata', 'avpvh-print-website')
             );
         }
         $this->project->getProgress()->markStepComplete(ProjectProgress::EDIT_METADATA_STEP);
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
-            __('Project metadata updated.', 'print-my-blog')
+            __('Project metadata updated.', 'avpvh-print-website')
         );
         /**
          * Hook for doing more processing when project metadata is saved.
@@ -1838,7 +1568,7 @@ class Admin extends BaseController
          * @param ProjectGeneration[] $project_generations
          * @param FormSectionBase $form
          */
-        do_action('PrintMyBlog\controllers\Admin->saveProjectMetadata done', $this->project, $project_generations, $form);
+        do_action('Avpvh\PrintWebsite\controllers\Admin->saveProjectMetadata done', $this->project, $project_generations, $form);
         $this->redirectToNextStep($this->project);
     }
 
@@ -1849,7 +1579,7 @@ class Admin extends BaseController
      */
     protected function saveProjectGenerate()
     {
-        if (! check_admin_referer(PMB_ADMIN_PROJECTS_PAGE_SLUG)) {
+        if (! check_admin_referer(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG)) {
             wp_die('The request has expired. Please refresh the previous page and try again.');
         }
         $this->updateProjectModifiedDate();
@@ -1858,7 +1588,7 @@ class Admin extends BaseController
             throw new Exception(
                 sprintf(
                     // translators: %s: format slug
-                    __('There is no file format with the slug "%s"', 'print-my-blog'),
+                    __('There is no file format with the slug "%s"', 'avpvh-print-website'),
                     sanitize_key(Array2::setOr($_GET, 'format', ''))
                 )
             );
@@ -1869,7 +1599,7 @@ class Admin extends BaseController
         $this->project->getProgress()->markStepComplete(ProjectProgress::GENERATE_STEP);
         $url = add_query_arg(
             [
-                PMB_PRINTPAGE_SLUG => 3,
+                AVPVH_PRWB_PRINTPAGE_SLUG => 3,
                 'project' => $this->project->getWpPost()->ID,
                 'format' => $format->slug(),
             ],
@@ -1896,7 +1626,7 @@ class Admin extends BaseController
                 'gettext',
                 function ($translated, $text_domain, $original) {
                     if ($translated === 'Publish') {
-                        return __('Save', 'print-my-blog');
+                        return __('Save', 'avpvh-print-website');
                     }
                     return $translated;
                 },
@@ -1920,7 +1650,7 @@ class Admin extends BaseController
                 wp.i18n.setLocaleData({
                     'Publish': [
                         'Save',
-                        'print-my-blog'
+                        'avpvh-print-website'
                     ]
                 });
             </script>
@@ -1955,7 +1685,7 @@ class Admin extends BaseController
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
                 // translators: 1: the name of the new project.
-                __('Project successfully duplicated. It is titled "%1$s".', 'print-my-blog'),
+                __('Project successfully duplicated. It is titled "%1$s".', 'avpvh-print-website'),
                 $new_project->getWpPost()->post_title
             )
         );
@@ -2004,23 +1734,11 @@ class Admin extends BaseController
         global $wpdb;
         // Direct DB query way more efficient.
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-        $wpdb->query('DELETE FROM ' . $wpdb->options . ' WHERE option_name LIKE "pmb_%"');
+        $wpdb->query('DELETE FROM ' . $wpdb->options . ' WHERE option_name LIKE "avpvh_prwb_%"');
 
         $upload_dir_info = wp_upload_dir();
         $folder = new Folder($upload_dir_info['basedir'] . '/pmb');
         $folder->delete();
-    }
-
-    /**
-     * We avoid asking PMB central for the credits alloted to a license as much as possible. But on the account page
-     * we make sure to refresh it. This is the page the user arrives at after upgrading or making a purchase, so
-     * the cache often needs to be refreshed here.
-     */
-    public function maybeRefreshCreditCache()
-    {
-        if (isset($_GET['page']) && $_GET['page'] === 'print-my-blog-projects-account') {
-            return;
-        }
     }
 
     /**
@@ -2044,7 +1762,7 @@ class Admin extends BaseController
         if (! isset($_GET['page'])) {
             return;
         }
-        if ($_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG) {
+        if ($_GET['page'] === AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG) {
             $action = isset($_GET['action']) ? sanitize_key($_GET['action']) : null;
             if ($action === self::SLUG_ACTION_UNINSTALL) {
                 if (! check_admin_referer(self::SLUG_ACTION_UNINSTALL)) {
@@ -2055,23 +1773,14 @@ class Admin extends BaseController
                     if (! function_exists('deactivate_plugins')) {
                         require_once ABSPATH . 'wp-admin/includes/plugin.php';
                     }
-                    deactivate_plugins(PMB_BASENAME, true);
+                    deactivate_plugins(AVPVH_PRWB_BASENAME, true);
                 }
                 wp_safe_redirect(admin_url('plugins.php'));
-            } elseif ($action === self::SLUG_ACTION_REVIEW) {
-                check_admin_referer(self::SLUG_ACTION_REVIEW);
-                update_option(self::REVIEW_OPTION_NAME, true);
-                // We're redicting to hard-coded URL. It's ok.
-                // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
-                wp_redirect(
-                    'https://wordpress.org/support/plugin/print-my-blog/reviews/#new-post'
-                );
-                exit;
             } elseif ($action === self::SLUG_ACTION_EDIT_PROJECT) {
                 $subsection = Array2::setOr($_GET, 'subaction', null);
                 if ($subsection === self::SLUG_SUBACTION_PROJECT_DUPLICATE) {
                     $this->duplicate();
-                    $redirect = admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH);
+                    $redirect = admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH);
                     wp_safe_redirect($redirect);
                     exit;
                 }
@@ -2079,7 +1788,7 @@ class Admin extends BaseController
                     $this->clearCachedExternalResources();
                     $this->notification_manager->addTextNotificationForCurrentUser(
                         OneTimeNotification::TYPE_SUCCESS,
-                        __('Cached external resources and images were cleared.', 'print-my-blog')
+                        __('Cached external resources and images were cleared.', 'avpvh-print-website')
                     );
                     $redirect = add_query_arg(
                         [
@@ -2087,7 +1796,7 @@ class Admin extends BaseController
                             'subaction' => self::SLUG_SUBACTION_PROJECT_GENERATE,
                             'ID' => $this->project->getWpPost()->ID,
                         ],
-                        admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                        admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
                     );
                     wp_safe_redirect($redirect);
                     exit;
@@ -2108,13 +1817,13 @@ class Admin extends BaseController
             return;
         }
         if (
-            $_GET['page'] === PMB_ADMIN_PROJECTS_PAGE_SLUG &&
+            $_GET['page'] === AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG &&
             isset($_GET['action']) &&
             $_GET['action'] === self::SLUG_ACTION_EDIT_PROJECT
         ) {
             $project = $this->project_manager->getById(isset($_GET['ID']) ? (int)$_GET['ID'] : null);
             if (! $project) {
-                wp_safe_redirect(admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH));
+                wp_safe_redirect(admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH));
                 exit;
             }
             $this->project = $project;
@@ -2128,8 +1837,8 @@ class Admin extends BaseController
     public function postAdminRowActions($actions, $post)
     {
         if ($post instanceof WP_Post && current_user_can('publish_' . CustomPostTypes::CONTENTS) && is_array($actions)) {
-            $pmb_actions = $this->getPostActionButtonLinks(true);
-            foreach ($pmb_actions as $action) {
+            $avpvh_prwb_actions = $this->getPostActionButtonLinks(true);
+            foreach ($avpvh_prwb_actions as $action) {
                 $actions[] = '<a href="' . $action['url'] . '" title="' . $action['title'] . '">' . $action['text'] . '</a>';
             }
         }
@@ -2165,51 +1874,48 @@ class Admin extends BaseController
      * Gets info on the actions that can be taken on a post
      * @param bool $concise_text whether to use concise titles or slightly more verbose ones.
      * @return array of arrays with keys 'url', 'title' and 'text'
-     * @throws \Twine\services\config\SettingNotDefinedException
+     * @throws \Avpvh\PrintWebsite\Twine\services\config\SettingNotDefinedException
      */
     protected function getPostActionButtonLinks($concise_text = false)
     {
         global $post;
         $actions = [];
-        // only paying members get the duplicate buttons
-        if (pmb_has_required_plan('founding_members')) {
-            if ($post->post_type === CustomPostTypes::CONTENT) {
-                $original_id = get_post_meta($post->ID, '_pmb_original_post', true);
-                $post_type = get_post_type_object(get_post_type($original_id));
-                $type_label = '';
-                if ($post_type instanceof WP_Post_Type && isset($post_type->labels, $post_type->labels->singular_name)) {
-                    $type_label = $post_type->labels->singular_name;
-                }
-                if ($original_id) {
-                    $actions[] = [
-                        'url' => get_edit_post_link($original_id),
-                        // translators: 1 post type label, 2: post title
-                        'title' => sprintf(__('Go to the %1$s "%2$s" was copied from.', 'print-my-blog'), $type_label, $post->post_title),
-                        // translators: %s: type label.
-                        'text' => sprintf(esc_html__('Go to Original %s', 'print-my-blog'), $type_label)
-                    ];
-                }
+        if ($post->post_type === CustomPostTypes::CONTENT) {
+            $original_id = get_post_meta($post->ID, '_avpvh_prwb_original_post', true);
+            $post_type = get_post_type_object(get_post_type($original_id));
+            $type_label = '';
+            if ($post_type instanceof WP_Post_Type && isset($post_type->labels, $post_type->labels->singular_name)) {
+                $type_label = $post_type->labels->singular_name;
+            }
+            if ($original_id) {
+                $actions[] = [
+                    'url' => get_edit_post_link($original_id),
+                    // translators: 1 post type label, 2: post title
+                    'title' => sprintf(__('Go to the %1$s "%2$s" was copied from.', 'avpvh-print-website'), $type_label, $post->post_title),
+                    // translators: %s: type label.
+                    'text' => sprintf(esc_html__('Go to Original %s', 'avpvh-print-website'), $type_label)
+                ];
+            }
+        } else {
+            $print_material = null;
+            $print_materials = $this->post_manager->getByPostMeta('_avpvh_prwb_original_post', (string)$post->ID, 1);
+            if ($print_materials) {
+                $print_material = reset($print_materials);
+            }
+            if ($print_material) {
+                $actions[] = [
+                    'url' => get_edit_post_link($print_material->getWpPost()->ID),
+                    // translators: 1: post title
+                    'title' => sprintf(__('Go to Print Material "%s" was created from.', 'avpvh-print-website'), $print_material->getWpPost()->post_title),
+                    'text' => esc_html__('Go to Print Material', 'avpvh-print-website')
+                ];
             } else {
-                $print_material = null;
-                $print_materials = $this->post_manager->getByPostMeta('_pmb_original_post', (string)$post->ID, 1);
-                if ($print_materials) {
-                    $print_material = reset($print_materials);
-                }
-                if ($print_material) {
-                    $actions[] = [
-                        'url' => get_edit_post_link($print_material->getWpPost()->ID),
-                        // translators: 1: post title
-                        'title' => sprintf(__('Go to Print Material "%s" was created from.', 'print-my-blog'), $print_material->getWpPost()->post_title),
-                        'text' => esc_html__('Go to Print Material', 'print-my-blog')
-                    ];
-                } else {
-                    $actions[] = [
-                        'url' => $this->getDuplicatePostAsPrintMaterialUrl($post),
-                        // translators: %s: post title
-                        'title' => sprintf(__('Copy "%s" to New Print Material for a Print My Blog project', 'print-my-blog'), $post->post_title),
-                        'text' => esc_html__('Copy to Print Material', 'print-my-blog')
-                    ];
-                }
+                $actions[] = [
+                    'url' => $this->getDuplicatePostAsPrintMaterialUrl($post),
+                    // translators: %s: post title
+                    'title' => sprintf(__('Copy "%s" to New Print Material for a AV-PvH Print Website project', 'avpvh-print-website'), $post->post_title),
+                    'text' => esc_html__('Copy to Print Material', 'avpvh-print-website')
+                ];
             }
         }
         // add other print buttons
@@ -2221,8 +1927,8 @@ class Admin extends BaseController
                 if ($format->supported()) {
                     $actions[] = [
                         'url' => $this->getGeneratePostProjectUrl($post->ID, $format->slug()),
-                        'title' => sprintf(__('Generate %s', 'print-my-blog'), $format->title()),
-                        'text' => $concise_text ? $format->title() : sprintf(__('Generate %s', 'print-my-blog'), $format->title())
+                        'title' => sprintf(__('Generate %s', 'avpvh-print-website'), $format->title()),
+                        'text' => $concise_text ? $format->title() : sprintf(__('Generate %s', 'avpvh-print-website'), $format->title())
                     ];
                 }
             }
@@ -2245,7 +1951,7 @@ class Admin extends BaseController
                     'action' => self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL,
                     'ID' => $post->ID,
                 ],
-                admin_url(PMB_ADMIN_PROJECTS_PAGE_PATH)
+                admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH)
             ),
             self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL
         );
@@ -2267,7 +1973,7 @@ class Admin extends BaseController
             $css_attr = '';
         }
         $format = $this->file_format_registry->getFormat($format);
-        return '<a href="' . esc_url($this->getGeneratePostProjectUrl($post_id, $format->slug())) . '" ' . $css_attr . '>' . sprintf(__('Generate %s', 'print-my-blog'),  $format->title()) . '</a>';
+        return '<a href="' . esc_url($this->getGeneratePostProjectUrl($post_id, $format->slug())) . '" ' . $css_attr . '>' . sprintf(__('Generate %s', 'avpvh-print-website'),  $format->title()) . '</a>';
     }
 
     protected function getGeneratePostProjectUrl($post_id, $format)
@@ -2275,13 +1981,13 @@ class Admin extends BaseController
         return wp_nonce_url(
             add_query_arg(
                 [
-                    Frontend::PMB_LOADING_PAGE_INDICATOR => true,
-                    Frontend::PMB_QUERYARG_FORMAT => $format,
-                    Frontend::PMB_QUERYARG_POST => $post_id
+                    Frontend::AVPVH_PRWB_LOADING_PAGE_INDICATOR => true,
+                    Frontend::AVPVH_PRWB_QUERYARG_FORMAT => $format,
+                    Frontend::AVPVH_PRWB_QUERYARG_POST => $post_id
                 ],
                 site_url()
             ),
-            Frontend::PMB_LOADING_PAGE_INDICATOR
+            Frontend::AVPVH_PRWB_LOADING_PAGE_INDICATOR
         );
     }
 
@@ -2292,26 +1998,26 @@ class Admin extends BaseController
     {
         global $post;
         wp_enqueue_script(
-            'pmb_blockeditor',
-            PMB_SCRIPTS_URL . 'build/editor.js',
+            'avpvh-print-website-blockeditor',
+            AVPVH_PRWB_SCRIPTS_URL . 'build/editor.js',
             array('wp-components', 'wp-edit-post', 'wp-element', 'wp-i18n', 'wp-plugins'),
-            filemtime(PMB_SCRIPTS_DIR . 'build/editor.js')
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'build/editor.js')
         );
         wp_enqueue_style(
-            'pmb_blockeditor',
-            PMB_STYLES_URL . 'editor.css',
+            'avpvh-print-website-blockeditor',
+            AVPVH_PRWB_STYLES_URL . 'editor.css',
             [],
-            filemtime(PMB_STYLES_DIR . 'editor.css')
+            filemtime(AVPVH_PRWB_STYLES_DIR . 'editor.css')
         );
 
         $html = '';
-        $pmb_actions = $this->getPostActionButtonLinks();
-        foreach ($pmb_actions as $action) {
+        $avpvh_prwb_actions = $this->getPostActionButtonLinks();
+        foreach ($avpvh_prwb_actions as $action) {
             $html .= '<div class="pmb-gutenberg-button-row"><a class="button button-secondary" href="' . esc_url($action['url']) . '" title="' . esc_attr($action['title']) . '">' . $action['text'] . '</a>';
         }
         wp_localize_script(
-            'pmb_blockeditor',
-            'pmbBlockEditor',
+            'avpvh-print-website-blockeditor',
+            'avpvhPrwbBlockEditor',
             [
                 // add HTML entities because wp_localize_script calls html_entities_decode which messes up the
                 // quotes inside the title attributes on the HTML elements

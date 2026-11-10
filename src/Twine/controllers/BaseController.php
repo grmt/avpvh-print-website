@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\controllers;
+namespace Avpvh\PrintWebsite\Twine\controllers;
 
 /**
  * Class BaseController
@@ -41,4 +41,4 @@ abstract class BaseController
     }
 }
 // End of file BaseController.php
-// Location: Twine\controllers/BaseController.php
+// Location: Avpvh\PrintWebsite\Twine\controllers/BaseController.php

@@ -1,6 +1,6 @@
 {
-    "name": "mnelson4/printmyblog",
-    "description": "WordPress Plugin that simplifies printing your entire blog.",
+    "name": "grmt/avpvh-print-website",
+    "description": "AV-PvH Print Website: print, PDF and eBook versions of WordPress content. Based on Print My Blog by Michael Nelson.",
     "license": "GPL-2.0-or-later",
     "type": "wordpress-plugin",
     "require": {
@@ -17,17 +17,18 @@
         "platform-check": false,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
-        }
+        },
+        "autoloader-suffix": "AvpvhPrintWebsite"
     },
     "autoload": {
         "psr-4": {
-            "mnelson4\\": "src/mnelson4/",
-            "PrintMyBlog\\": "src/PrintMyBlog/",
-            "Twine\\": "src/Twine/"
+            "Avpvh\\PrintWebsite\\mnelson4\\": "src/mnelson4/",
+            "Avpvh\\PrintWebsite\\Twine\\": "src/Twine/",
+            "Avpvh\\PrintWebsite\\": "src/PrintMyBlog/"
         }
     },
     "scripts": {
-        "release": "git archive HEAD --format=zip --output ../printmyblog.zip && git tag",
+        "release": "git archive HEAD --format=zip --output ../avpvh-print-website.zip && git tag",
         "phpstan": "phpstan analyze --debug",
         "phpcs": "phpcs",
         "phpcbf": "phpcbf"

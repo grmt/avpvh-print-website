@@ -1,4 +1,4 @@
-function pmb_open_modal(content_selector, extra_args)
+function avpvh_prwb_open_modal(content_selector, extra_args)
 {
     var viewportWidth = jQuery(window).width();
     var viewportHeight = jQuery(window).height();

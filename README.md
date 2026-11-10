@@ -1,5 +1,5 @@
-# Print My Blog
-WordPress Plugin that simplifies printing your entire blog. Please see https://wordpress.org/plugins/print-my-blog/
+# AV-PvH Print Website
+WordPress plugin for print, PDF and eBook versions of the site's content. A fork of [Print My Blog](https://wordpress.org/plugins/print-my-blog/) by Michael Nelson, renamed in 4.0.0 (prefix `avpvh_prwb_`, namespace `Avpvh\PrintWebsite`). On first load it moves a site's Print My Blog data over, see `src/PrintMyBlog/system/LegacyMigration.php`.
 
 ## Note to Developers on Backward Compatibility
 
@@ -36,15 +36,15 @@ This repo now includes a simple browser-driven deploy flow for uploading the plu
    ```
 
 5. Save the password in VS Code SecretStorage:
-   `Print My Blog: Save WP Admin Password`
+   `AV-PvH Print Website: Save WP Admin Password`
 
 6. Deploy from the Command Palette:
-   `Print My Blog: Deploy`
+   `AV-PvH Print Website: Deploy`
 
 You can also still run the VS Code task directly:
-`Tasks: Run Task` -> `Print My Blog: Deploy Plugin`
+`Tasks: Run Task` -> `AV-PvH Print Website: Deploy Plugin`
 
-The `Print My Blog: Save WP Admin Password` command is contributed by the local extension in `vscode-secret-storage`, so install it first:
+The `AV-PvH Print Website: Save WP Admin Password` command is contributed by the local extension in `vscode-secret-storage`, so install it first:
 
 ```bash
 npm run install:vscode-secret-storage
@@ -73,7 +73,7 @@ The flow is:
 1. Copy `env.playwright` to `.env`
 2. Fill in `WP_BASE_URL` and `WP_ADMIN_USER`
 3. Leave `WP_ADMIN_PASSWORD` empty
-4. In VS Code, run `Print My Blog: Save WP Admin Password`
-5. Run `Print My Blog: Deploy`
+4. In VS Code, run `AV-PvH Print Website: Save WP Admin Password`
+5. Run `AV-PvH Print Website: Deploy`
 
-The deploy command runs the task `Print My Blog: Deploy Plugin`, which injects the saved password into the Playwright process at runtime.
+The deploy command runs the task `AV-PvH Print Website: Deploy Plugin`, which injects the saved password into the Playwright process at runtime.

@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\strategies\display\SingleCheckboxDisplay;
-use Twine\forms\strategies\normalization\BooleanNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\SingleCheckboxDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\BooleanNormalization;
 
 /**
  * Yes_No_Input

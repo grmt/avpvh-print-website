@@ -1,4 +1,4 @@
-# Print My Blog - Development Guidelines
+# AV-PvH Print Website - Development Guidelines
 
 ## Code Style
 - **PHP**: Follow WordPress Coding Standards. Use `composer phpcs` to check and `composer phpcbf` to auto-fix.

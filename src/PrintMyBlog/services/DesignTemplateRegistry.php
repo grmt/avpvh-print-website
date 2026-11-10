@@ -1,16 +1,16 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
 use Exception;
-use PrintMyBlog\entities\DesignTemplate;
-use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\system\Context;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
+use Avpvh\PrintWebsite\exceptions\DesignTemplateDoesNotExist;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\system\Context;
 
 /**
  * Class DesignTemplateRegistry
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class DesignTemplateRegistry
 {
@@ -46,7 +46,7 @@ class DesignTemplateRegistry
                 throw new DesignTemplateDoesNotExist($slug);
             }
             $this->design_templates[$slug] = Context::instance()->useNew(
-                'PrintMyBlog\entities\DesignTemplate',
+                'Avpvh\PrintWebsite\entities\DesignTemplate',
                 [
                     $slug,
                     call_user_func($this->design_template_callbacks[$slug]),

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Twine\services\config;
+namespace Avpvh\PrintWebsite\Twine\services\config;
 
 
 class SettingNotDefinedException extends \Exception
@@ -10,7 +10,7 @@ class SettingNotDefinedException extends \Exception
 
     public function __construct($setting_name){
         $this->setting_name = (string)$setting_name;
-        parent::__construct(sprintf('Setting "%s" not defined. Please contact Print My Blog support from the help page.', $setting_name));
+        parent::__construct(sprintf('Setting "%s" not defined. Please contact AV-PvH Print Website support from the help page.', $setting_name));
     }
 
     /**

@@ -35,5 +35,5 @@ jobs:
     needs: build
     uses: grmt/wp-plugin-ci/.github/workflows/plugin-checks.yml@main
     with:
-      slug: print-my-blog
+      slug: avpvh-print-website
       artifact: build-artifact

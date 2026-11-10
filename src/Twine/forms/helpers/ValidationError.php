@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\forms\helpers;
+namespace Avpvh\PrintWebsite\Twine\forms\helpers;
 
 use Exception;
-use Twine\forms\base\FormSectionValidatable;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionValidatable;
 
 /**
  * Class ValidationError
- * @package Twine\forms\helpers
+ * @package Avpvh\PrintWebsite\Twine\forms\helpers
  */
 class ValidationError extends Exception
 {

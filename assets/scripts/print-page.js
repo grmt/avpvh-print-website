@@ -1,27 +1,27 @@
 // begin loading posts
 
 // and append them to the page
-function PmbPrintPage(pmb_instance_vars, translations) {
-    this.header_selector = pmb_instance_vars.header_selector;
+function PmbPrintPage(avpvh_prwb_instance_vars, translations) {
+    this.header_selector = avpvh_prwb_instance_vars.header_selector;
     this.header = null;
-    this.status_span_selector = pmb_instance_vars.status_span_selector;
+    this.status_span_selector = avpvh_prwb_instance_vars.status_span_selector;
     this.status_span = null;
-    this.posts_count_span_selector = pmb_instance_vars.posts_count_span_selector;
+    this.posts_count_span_selector = avpvh_prwb_instance_vars.posts_count_span_selector;
     this.posts_count_span = null;
-    this.posts_div_selector = pmb_instance_vars.posts_div_selector;
+    this.posts_div_selector = avpvh_prwb_instance_vars.posts_div_selector;
     this.posts_div = null;
-    this.waiting_area_selector = pmb_instance_vars.waiting_area_selector;
+    this.waiting_area_selector = avpvh_prwb_instance_vars.waiting_area_selector;
     this.waiting_area = null;
-    this.print_ready_selector = pmb_instance_vars.print_ready_selector;
+    this.print_ready_selector = avpvh_prwb_instance_vars.print_ready_selector;
     this.print_ready = null;
-    this.loading_content_selector = pmb_instance_vars.loading_content_selector;
+    this.loading_content_selector = avpvh_prwb_instance_vars.loading_content_selector;
     this.loading_content = null;
-    this.proxy_for = pmb_instance_vars.proxy_for;
-    this.locale = pmb_instance_vars.locale;
-    this.image_size = pmb_instance_vars.image_size;
+    this.proxy_for = avpvh_prwb_instance_vars.proxy_for;
+    this.locale = avpvh_prwb_instance_vars.locale;
+    this.image_size = avpvh_prwb_instance_vars.image_size;
     this.translations = translations;
-    this.columns = pmb_instance_vars.columns;
-    this.post_type = pmb_instance_vars.post_type;
+    this.columns = avpvh_prwb_instance_vars.columns;
+    this.post_type = avpvh_prwb_instance_vars.post_type;
     this.total_posts = 0;
     this.posts = [];
     this.taxonomies = {};
@@ -29,33 +29,33 @@ function PmbPrintPage(pmb_instance_vars, translations) {
     this.comments = [];
     this.total_comments = 0;
     this.ordered_comments = [];
-    this.rendering_wait = pmb_instance_vars.rendering_wait;
-    this.include_inline_js = pmb_instance_vars.include_inline_js;
-    this.excludeExternalContent = pmb_instance_vars.exclude_external_content;
-    this.links = pmb_instance_vars.links;
-    this.showUrl = pmb_instance_vars.show_url;
-    this.showId = pmb_instance_vars.show_id;
-    this.showAuthor = pmb_instance_vars.show_author;
-    this.showTitle = pmb_instance_vars.show_title;
-    this.showFeaturedImage = pmb_instance_vars.show_featured_image;
-    this.showDate = pmb_instance_vars.show_date;
-    this.showCategories = pmb_instance_vars.show_categories;
-	this.showExcerpt = pmb_instance_vars.show_excerpt;
-    this.showContent = pmb_instance_vars.show_content;
-	this.showComments = pmb_instance_vars.show_comments;
-	this.showDivider = pmb_instance_vars.show_divider;
-	this.filters = pmb_instance_vars.filters;
-	this.foogallery = pmb_instance_vars.foogallery;
-	this.isUserLoggedIn = pmb_instance_vars.is_user_logged_in;
-	this.format = pmb_instance_vars.format;
-	this.statuses = pmb_instance_vars.statuses;
-	this.author = pmb_instance_vars.author;
-	this.post = pmb_instance_vars.post;
-	this.order = pmb_instance_vars.order;
+    this.rendering_wait = avpvh_prwb_instance_vars.rendering_wait;
+    this.include_inline_js = avpvh_prwb_instance_vars.include_inline_js;
+    this.excludeExternalContent = avpvh_prwb_instance_vars.exclude_external_content;
+    this.links = avpvh_prwb_instance_vars.links;
+    this.showUrl = avpvh_prwb_instance_vars.show_url;
+    this.showId = avpvh_prwb_instance_vars.show_id;
+    this.showAuthor = avpvh_prwb_instance_vars.show_author;
+    this.showTitle = avpvh_prwb_instance_vars.show_title;
+    this.showFeaturedImage = avpvh_prwb_instance_vars.show_featured_image;
+    this.showDate = avpvh_prwb_instance_vars.show_date;
+    this.showCategories = avpvh_prwb_instance_vars.show_categories;
+	this.showExcerpt = avpvh_prwb_instance_vars.show_excerpt;
+    this.showContent = avpvh_prwb_instance_vars.show_content;
+	this.showComments = avpvh_prwb_instance_vars.show_comments;
+	this.showDivider = avpvh_prwb_instance_vars.show_divider;
+	this.filters = avpvh_prwb_instance_vars.filters;
+	this.foogallery = avpvh_prwb_instance_vars.foogallery;
+	this.isUserLoggedIn = avpvh_prwb_instance_vars.is_user_logged_in;
+	this.format = avpvh_prwb_instance_vars.format;
+	this.statuses = avpvh_prwb_instance_vars.statuses;
+	this.author = avpvh_prwb_instance_vars.author;
+	this.post = avpvh_prwb_instance_vars.post;
+	this.order = avpvh_prwb_instance_vars.order;
 	this.working = false;
-	this.shortcodes = pmb_instance_vars.shortcodes;
+	this.shortcodes = avpvh_prwb_instance_vars.shortcodes;
 	this.can_view_sensitive_data = null;
-	this.lang = pmb_instance_vars.lang;
+	this.lang = avpvh_prwb_instance_vars.lang;
     /**
      * Initializes variables and begins fetching taxonomies, then gets started fetching posts/pages.
      * @function
@@ -479,37 +479,37 @@ function PmbPrintPage(pmb_instance_vars, translations) {
      */
     this.prettyUpPrintedPage = function()
     {
-        if (! this.excludeExternalContent && pmb.external_requests_enabled !== false) {
-            pmb_convert_youtube_videos_to_images();
+        if (! this.excludeExternalContent && avpvh_prwb.external_requests_enabled !== false) {
+            avpvh_prwb_convert_youtube_videos_to_images();
         }
 
         // Don't float things if we have more than one column. There's just not enough room for that
         if(this.columns > 1){
-            pmb_dont_float();
+            avpvh_prwb_dont_float();
         }
 
         if(this.format !== 'ebook') {
-            pmb_add_header_classes();
+            avpvh_prwb_add_header_classes();
 		}
 
         // Remove inline styles added on image captions. They force a width in pixels which stinks with multiple columns.
         if(this.links === 'remove'){
-            pmb_remove_hyperlinks();
+            avpvh_prwb_remove_hyperlinks();
         }
 
-        pmb_fix_wp_videos();
+        avpvh_prwb_fix_wp_videos();
 
         // unhide the contents.
         jQuery('.pmb-posts').toggle();
 
-        pmb_load_avada_lazy_images();
-        pmb_reveal_dynamic_content();
+        avpvh_prwb_load_avada_lazy_images();
+        avpvh_prwb_reveal_dynamic_content();
 
         // resize after images have had a moment to load
         setTimeout(() => {
                 // Resize images after unhiding because then we can know how big images actually are.
                 // btw the image size here was in inches, but we want it in pixels. There are about 100 pixels per inch.
-                pmb_resize_images(this.image_size * 100);
+                avpvh_prwb_resize_images(this.image_size * 100);
                 jQuery('.pmb-print-page-print-button').prop('disabled', false);
         },
             // wait time corresponds to the number of images; here we're guessing they will take a few milliseconds
@@ -530,7 +530,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             );
 
         }
-        jQuery(document).trigger('pmb_wrap_up');
+        jQuery(document).trigger('avpvh_prwb_wrap_up');
     };
 
     /**
@@ -691,7 +691,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
             return null;
         }
         try {
-            return new URL(url, pmb.site_url);
+            return new URL(url, avpvh_prwb.site_url);
         } catch (error) {
             return null;
         }
@@ -699,7 +699,7 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 
     this.isExternalUrl = function(url){
         var normalized_url = this.normalizeUrl(url);
-        var normalized_site_url = this.normalizeUrl(pmb.site_url);
+        var normalized_site_url = this.normalizeUrl(avpvh_prwb.site_url);
         if(normalized_url === null || normalized_site_url === null){
             return false;
         }
@@ -995,33 +995,33 @@ function PmbPrintPage(pmb_instance_vars, translations) {
 /**
  * Show instrutions on how to get a print preview.
  */
-function pmb_print_preview()
+function avpvh_prwb_print_preview()
 {
     jQuery('.pmb-waiting-message-fullpage').toggle();
 }
 
-function pmb_help_show(id){
+function avpvh_prwb_help_show(id){
     jQuery('.' + id).show();
     jQuery('.pmb-help-ask').hide();
 }
 
-function pmb_copy(){
-    pmb_print.copyPosts();
+function avpvh_prwb_copy(){
+    avpvh_prwb_print.copyPosts();
 
 }
 
-var pmb_print = null;
+var avpvh_prwb_print = null;
 var original_backbone_sync;
 jQuery(document).ready(function () {
-    pmb_print = new PmbPrintPage(
-		pmb_print_data.data,
-		pmb_print_data.i18n
+    avpvh_prwb_print = new PmbPrintPage(
+		avpvh_prwb_print_data.data,
+		avpvh_prwb_print_data.i18n
 	);
 	// I know I'll add babel.js someday. But for now, if there's an error initializing (probably because of a
     // Javascript syntax error, or the REST API isn't working) let the user know.
 	setTimeout(function(){
-        if(! pmb_print.working){
-			alert(pmb_print_data.i18n.init_error);
+        if(! avpvh_prwb_print.working){
+			alert(avpvh_prwb_print_data.i18n.init_error);
 		}
 	},
 	30000);
@@ -1030,7 +1030,7 @@ jQuery(document).ready(function () {
             function(){
 
 
-                pmb_print.initialize();
+                avpvh_prwb_print.initialize();
             },
             1000
         );

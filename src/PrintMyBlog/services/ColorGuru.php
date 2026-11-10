@@ -1,10 +1,10 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
 /**
  * Class ColorGuru
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class ColorGuru
 {

@@ -1,12 +1,12 @@
 <?php
 
-use PrintMyBlog\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\entities\Design;
 
 /**
- * @param \PrintMyBlog\orm\entities\Design $design
+ * @param \Avpvh\PrintWebsite\orm\entities\Design $design
  * @return string CSS to include in the style
  */
-function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
+function avpvh_prwb_design_styles(\Avpvh\PrintWebsite\orm\entities\Design $design)
 {
     $css = '/* PMB design styles for ' . $design->getWpPost()->post_title . '*/' . $design->getSetting('custom_css');
 
@@ -77,7 +77,7 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
     if ($header_font === 'custom_header_font') {
         $custom_header_font = $design->getSetting('custom_header_font_style');
         // get the name from the file's name.
-        $header_font = pmb_get_filename($custom_header_font, true);
+        $header_font = avpvh_prwb_get_filename($custom_header_font, true);
         $css .= '
         @font-face{
                 font-family: "' . $header_font . '";
@@ -90,7 +90,7 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
     $main_font = $design->getSetting('font_style');
     if ($main_font === 'custom_font') {
         $custom_font = $design->getSetting('custom_font_style');
-        $main_font = pmb_get_filename($custom_font, true);
+        $main_font = avpvh_prwb_get_filename($custom_font, true);
         $css .= '
         @font-face{
                 font-family: "' . $main_font . '";
@@ -159,15 +159,10 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
 
 
 
-    // instruct PMB print service to add "powered by" for free users and cheap plans
-    $show_powered_by = true;
-    if (pmb_has_required_plan('hobby')) {
-        $show_powered_by = false;
-    }
-    if ($design->getSetting('powered_by') || $show_powered_by) {
+    if ($design->getSetting('powered_by')) {
         $css .= "@page:first{
             @bottom{
-                content:'" . wp_strip_all_tags(__('Powered by Print My Blog Pro & WordPress', 'print-my-blog')) . "';
+                content:'" . wp_strip_all_tags(__('Powered by AV-PvH Print Website & WordPress', 'avpvh-print-website')) . "';
                 color:gray;
                 font-style:italic;
             }
@@ -182,13 +177,13 @@ function pmb_design_styles(\PrintMyBlog\orm\entities\Design $design)
  * @return array keys are setting names, values are their values, plus a few other odds-n-ends
  * @throws Exception
  */
-function pmb_design_settings(Design $design)
+function avpvh_prwb_design_settings(Design $design)
 {
     $settings = $design->getSettings();
-    $settings['domain'] = pmb_site_domain();
+    $settings['domain'] = avpvh_prwb_site_domain();
     unset($settings['custom_css'], $settings['use_theme']);
     return apply_filters(
-        'pmb_design_settings',
+        'avpvh_prwb_design_settings',
         $settings,
         $design
     );
@@ -199,7 +194,7 @@ function pmb_design_settings(Design $design)
  *
  * @return string
  */
-function pmb_site_domain()
+function avpvh_prwb_site_domain()
 {
     return str_replace(
         [

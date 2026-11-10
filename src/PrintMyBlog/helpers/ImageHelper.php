@@ -1,10 +1,10 @@
 <?php
 
-namespace PrintMyBlog\helpers;
+namespace Avpvh\PrintWebsite\helpers;
 
 /**
  * Class ImageHelper
- * @package PrintMyBlog\helpers
+ * @package Avpvh\PrintWebsite\helpers
  */
 class ImageHelper
 {

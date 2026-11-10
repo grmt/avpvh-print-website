@@ -1,17 +1,17 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
-use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\orm\managers\DesignManager;
-use PrintMyBlog\orm\managers\ProjectManager;
+use Avpvh\PrintWebsite\exceptions\DesignTemplateDoesNotExist;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\orm\managers\DesignManager;
+use Avpvh\PrintWebsite\orm\managers\ProjectManager;
 use WP_Debug_Data;
 
 /**
  * Class DebugInfo
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class DebugInfo
 {
@@ -111,8 +111,7 @@ class DebugInfo
 
 
         return [
-            'pmb' => PMB_VERSION,
-            'pmb_pro' => pmb_is_premium(),
+            'pmb' => AVPVH_PRWB_VERSION,
             'php' => $php_version,
             'wp' => $core_version,
             'site_url' => $site_url,
@@ -196,20 +195,20 @@ class DebugInfo
             $project_meta,
             array_flip(
                 [
-                    '_pmb_pmb_code',
+                    '_avpvh_prwb_avpvh_prwb_code',
                     '_wp_old_slug',
-                    '_pmb_format',
-                    '_pmb_progress_setup',
-                    '_pmb_levels_used',
+                    '_avpvh_prwb_format',
+                    '_avpvh_prwb_progress_setup',
+                    '_avpvh_prwb_levels_used',
                 ]
             )
         );
         $starters_to_ignore = [
-            '_pmb_progress_',
-            '_pmb_design_for',
-            '_pmb_dirty_',
-            '_pmb_last_section_',
-            '_pmb_generated_',
+            '_avpvh_prwb_progress_',
+            '_avpvh_prwb_design_for',
+            '_avpvh_prwb_dirty_',
+            '_avpvh_prwb_last_section_',
+            '_avpvh_prwb_generated_',
         ];
         $final_metas = [];
         foreach ($metas as $key => $value) {
@@ -253,14 +252,14 @@ class DebugInfo
                 $this->simpifyMetadata(get_post_meta($design->getWpPost()->ID)),
                 array_flip(
                     [
-                        '_pmb_format',
-                        '_pmb_design_template',
-                        '_pmb_preview_1_url',
-                        '_pmb_preview_1_desc',
-                        '_pmb_preview_2_url',
-                        '_pmb_preview_2_desc',
-                        '_pmb_author_name',
-                        '_pmb_author_url',
+                        '_avpvh_prwb_format',
+                        '_avpvh_prwb_design_template',
+                        '_avpvh_prwb_preview_1_url',
+                        '_avpvh_prwb_preview_1_desc',
+                        '_avpvh_prwb_preview_2_url',
+                        '_avpvh_prwb_preview_2_desc',
+                        '_avpvh_prwb_author_name',
+                        '_avpvh_prwb_author_url',
                     ]
                 )
             ),

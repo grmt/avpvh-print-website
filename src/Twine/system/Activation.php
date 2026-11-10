@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\system;
+namespace Avpvh\PrintWebsite\Twine\system;
 
 /**
  * Class Activation
  *
  * Description
  *
- * @package        Print My Blog
+ * @package        AV-PvH Print Website
  * @author         Mike Nelson
  * @since          $VID:$
  *

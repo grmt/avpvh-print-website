@@ -1,12 +1,12 @@
 <?php
 
-namespace Twine\forms\strategies\layout;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\layout;
 
-use Twine\forms\base\FormSectionBase;
-use Twine\forms\base\FormSection;
-use Twine\forms\inputs\FormInputBase;
-use Twine\forms\strategies\display\HiddenDisplay;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionBase;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\HiddenDisplay;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * Abstract parent class for all form layouts. Mostly just contains a reference to the form

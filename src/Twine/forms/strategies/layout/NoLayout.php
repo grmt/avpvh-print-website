@@ -1,14 +1,14 @@
 <?php
 
-namespace Twine\forms\strategies\layout;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\layout;
 
-use Twine\forms\base\FormSection;
-use Twine\forms\inputs\FormInputBase;
-use Twine\forms\inputs\FormInputWithOptionsBase;
-use Twine\forms\inputs\HiddenInput;
-use Twine\forms\inputs\SelectInput;
-use Twine\forms\inputs\SubmitInput;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputWithOptionsBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\HiddenInput;
+use Avpvh\PrintWebsite\Twine\forms\inputs\SelectInput;
+use Avpvh\PrintWebsite\Twine\forms\inputs\SubmitInput;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * Template Layout strategy class for the EE Forms System that applies no layout.

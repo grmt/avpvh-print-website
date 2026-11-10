@@ -1,11 +1,11 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
 use Exception;
-use Twine\forms\inputs\FormInputWithOptionsBase;
-use Twine\helpers\Array2;
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputWithOptionsBase;
+use Avpvh\PrintWebsite\Twine\helpers\Array2;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * SelectMultipleDisplay
@@ -31,7 +31,7 @@ class SelectMultipleDisplay extends SelectDisplay
             throw new Exception(
                 __(
                     'Cannot use Select Multiple Display Strategy with an input that doesn\'t have options',
-                    'print-my-blog'
+                    'avpvh-print-website'
                 )
             );
         }
@@ -53,7 +53,7 @@ class SelectMultipleDisplay extends SelectDisplay
         $html_generator->indent(1, 'select');
         if (Array2::isMultiDimensionalArray($this->input->options())) {
             throw new Exception(
-                __('Select multiple display strategy does not allow for nested arrays of options.', 'print-my-blog')
+                __('Select multiple display strategy does not allow for nested arrays of options.', 'avpvh-print-website')
             );
         } else {
             $html .= $this->displayOptions($this->input->options());

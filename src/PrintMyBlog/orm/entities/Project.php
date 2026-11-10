@@ -1,42 +1,42 @@
 <?php
 
-namespace PrintMyBlog\orm\entities;
+namespace Avpvh\PrintWebsite\orm\entities;
 
 use Exception;
-use PrintMyBlog\controllers\Admin;
-use PrintMyBlog\db\TableManager;
-use PrintMyBlog\domain\DefaultFileFormats;
-use PrintMyBlog\entities\FileFormat;
-use PrintMyBlog\entities\ProjectGeneration;
-use PrintMyBlog\entities\ProjectProgress;
-use PrintMyBlog\entities\SectionTemplate;
-use PrintMyBlog\exceptions\DesignTemplateDoesNotExist;
-use PrintMyBlog\factories\ProjectGenerationFactory;
-use PrintMyBlog\helpers\ArgMagician;
-use PrintMyBlog\orm\managers\DesignManager;
-use PrintMyBlog\orm\managers\ProjectSectionManager;
-use PrintMyBlog\services\config\Config;
-use PrintMyBlog\services\FileFormatRegistry;
-use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
-use PrintMyBlog\services\SectionTemplateRegistry;
-use PrintMyBlog\system\CustomPostTypes;
-use Twine\forms\base\FormSection;
-use Twine\forms\inputs\FormInputBase;
-use Twine\forms\inputs\TextAreaInput;
-use Twine\forms\inputs\TextInput;
-use Twine\orm\entities\PostWrapper;
+use Avpvh\PrintWebsite\controllers\Admin;
+use Avpvh\PrintWebsite\db\TableManager;
+use Avpvh\PrintWebsite\domain\DefaultFileFormats;
+use Avpvh\PrintWebsite\entities\FileFormat;
+use Avpvh\PrintWebsite\entities\ProjectGeneration;
+use Avpvh\PrintWebsite\entities\ProjectProgress;
+use Avpvh\PrintWebsite\entities\SectionTemplate;
+use Avpvh\PrintWebsite\exceptions\DesignTemplateDoesNotExist;
+use Avpvh\PrintWebsite\factories\ProjectGenerationFactory;
+use Avpvh\PrintWebsite\helpers\ArgMagician;
+use Avpvh\PrintWebsite\orm\managers\DesignManager;
+use Avpvh\PrintWebsite\orm\managers\ProjectSectionManager;
+use Avpvh\PrintWebsite\services\config\Config;
+use Avpvh\PrintWebsite\services\FileFormatRegistry;
+use Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase;
+use Avpvh\PrintWebsite\services\SectionTemplateRegistry;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\TextAreaInput;
+use Avpvh\PrintWebsite\Twine\forms\inputs\TextInput;
+use Avpvh\PrintWebsite\Twine\orm\entities\PostWrapper;
 use WP_Post;
 use WP_Query;
 
 /**
  * Class Project
- * @package PrintMyBlog\orm
+ * @package Avpvh\PrintWebsite\orm
  * Class that wraps a WP_Post, but also stores related info like parts, and has related methods.
  */
 class Project extends PostWrapper
 {
 
-    const POSTMETA_CODE = 'pmb_code';
+    const POSTMETA_CODE = 'avpvh_prwb_code';
     const POSTMETA_FORMAT = 'format';
     const POSTMETA_DESIGN = 'design_for_';
     const POSTMETA_PROJECT_DEPTH = 'levels_used';
@@ -132,7 +132,7 @@ class Project extends PostWrapper
                     $title,
                     $post->ID,
                     'publish',
-                    'pmb_project',
+                    'avpvh_prwb_project',
                     0
                 ),
             ]
@@ -516,11 +516,11 @@ class Project extends PostWrapper
             }
             $project_form = new FormSection(
                 [
-                    'name' => 'pmb_project',
+                    'name' => 'avpvh_prwb_project',
                     'subsections' => [
                         'post_title' => new TextInput(
                             [
-                                'html_label_text' => __('Project Title', 'print-my-blog'),
+                                'html_label_text' => __('Project Title', 'avpvh-print-website'),
                             ]
                         ),
                     ],
@@ -640,7 +640,7 @@ class Project extends PostWrapper
     }
 
     /**
-     * Returns the post's title. Used to prioritize a postmeta named "pmb_title" but that was confusing.
+     * Returns the post's title. Used to prioritize a postmeta named "avpvh_prwb_title" but that was confusing.
      * @return mixed|string
      */
     public function getPublishedTitle()
@@ -698,7 +698,7 @@ class Project extends PostWrapper
     public function getSectionTemplateOptions()
     {
         $all_templates = [
-            '' => __('Default Template', 'print-my-blog'),
+            '' => __('Default Template', 'avpvh-print-website'),
         ];
         foreach ($this->getCustomTemplates() as $template_slug => $section_template) {
             $title = $section_template->title();

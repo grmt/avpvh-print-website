@@ -1,9 +1,9 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
 use Exception;
-use Twine\forms\inputs\FormInputWithOptionsBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputWithOptionsBase;
 
 /**
  *
@@ -66,7 +66,7 @@ abstract class CompoundInputDisplay extends DisplayBase
             throw new Exception(
                 __(
                     'Can not use a Compound Input Display Strategy (eg checkbox or radio) with an input that doesn\'t have options',
-                    'print-my-blog'
+                    'avpvh-print-website'
                 )
             );
         }

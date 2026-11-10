@@ -1,30 +1,30 @@
 <?php
 
-namespace PrintMyBlog\entities;
+namespace Avpvh\PrintWebsite\entities;
 
 use DateTime;
-use PrintMyBlog\factories\ProjectFileGeneratorFactory;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\orm\entities\ProjectSection;
-use PrintMyBlog\orm\managers\ProjectSectionManager;
-use PrintMyBlog\services\generators\ProjectFileGeneratorBase;
+use Avpvh\PrintWebsite\factories\ProjectFileGeneratorFactory;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\orm\entities\ProjectSection;
+use Avpvh\PrintWebsite\orm\managers\ProjectSectionManager;
+use Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase;
 use WP_Post;
 
 /**
  * Class ProjectGeneration
  * Handles logic relating to creating a file for a project.
- * (Sure we could stuff all this into PrintMyBlog\orm\entities\Project, but all the methods would need to receive a
+ * (Sure we could stuff all this into Avpvh\PrintWebsite\orm\entities\Project, but all the methods would need to receive a
  * format parameter which makes it clear its best in a separate class.)
  *
- * @package PrintMyBlog\orm\entities
+ * @package Avpvh\PrintWebsite\orm\entities
  */
 class ProjectGeneration
 {
-    const POSTMETA_GENERATED = '_pmb_generated_';
-    const POSTMETA_DIRTY = '_pmb_dirty_';
-    const POSTMETA_LAST_DIVISION = '_pmb_last_section_type_';
-    const POSTMETA_LAST_SECTION_ID = '_pmb_last_section_';
-    const POSTMETA_ERROR = '_pmb_error_';
+    const POSTMETA_GENERATED = '_avpvh_prwb_generated_';
+    const POSTMETA_DIRTY = '_avpvh_prwb_dirty_';
+    const POSTMETA_LAST_DIVISION = '_avpvh_prwb_last_section_type_';
+    const POSTMETA_LAST_SECTION_ID = '_avpvh_prwb_last_section_';
+    const POSTMETA_ERROR = '_avpvh_prwb_error_';
     /**
      * @var Project
      */
@@ -180,7 +180,7 @@ class ProjectGeneration
             $start = $upload_dir_info['baseurl'];
         }
         return apply_filters(
-            '\PrintMyBlog\entities\ProjectGeneration::getGeneratedIntermediaryFileUrl return',
+            '\Avpvh\PrintWebsite\entities\ProjectGeneration::getGeneratedIntermediaryFileUrl return',
             $start . '/pmb/generated/' . $this->project->code() . '/' . $this->format->slug()
                 . '/' . rawurlencode($this->getFileName()) . '.html?uniqueness=' . current_time('timestamp'),
             $this

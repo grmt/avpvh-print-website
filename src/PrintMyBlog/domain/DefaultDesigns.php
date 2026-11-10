@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\domain;
+namespace Avpvh\PrintWebsite\domain;
 
-use PrintMyBlog\entities\DesignTemplate;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
 use WP_User;
 
 /**
  * Class DefaultDesigns
- * @package PrintMyBlog\domain
+ * @package Avpvh\PrintWebsite\domain
  */
 class DefaultDesigns
 {
@@ -17,26 +17,25 @@ class DefaultDesigns
     public function registerDefaultDesigns()
     {
 
-        pmb_register_design(
+        avpvh_prwb_register_design(
             'classic_digital',
             'classic_digital',
             function (DesignTemplate $design_template) {
                 return [
-                    'title' => __('Classic Digital PDF', 'print-my-blog'),
-                    'quick_description' => esc_html__('A simple but flexible design intended mainly for reading from screens, inspired by Print My Blog Quick Print.', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'title' => __('Classic Digital PDF', 'avpvh-print-website'),
+                    'quick_description' => esc_html__('A simple but flexible design intended mainly for reading from screens, inspired by AV-PvH Print Website Quick Print.', 'avpvh-print-website'),
+                    'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
-                            'desc' => __('Title page, with working hyperlinks.', 'print-my-blog'),
+                            'desc' => __('Title page, with working hyperlinks.', 'avpvh-print-website'),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
-                            'desc' => __('Main matter, showing hyperlinks and large images.', 'print-my-blog'),
+                            'desc' => __('Main matter, showing hyperlinks and large images.', 'avpvh-print-website'),
                         ],
                     ],
                     'design_defaults' => [
@@ -51,27 +50,26 @@ class DefaultDesigns
                 ];
             }
         );
-        pmb_register_design(
+        avpvh_prwb_register_design(
             'classic_print',
             'editorial_review',
             function (DesignTemplate $design_template) {
-                $preview_folder_url = PMB_ASSETS_URL . '/images/design_previews/pdf/print/edit/';
+                $preview_folder_url = AVPVH_PRWB_ASSETS_URL . '/images/design_previews/pdf/print/edit/';
                 return [
-                    'title' => __('Editorial Review', 'print-my-blog'),
-                    'quick_description' => __('Your writing in an easy-to-review format for editors.', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'descriptions/edit.php'),
+                    'title' => __('Editorial Review', 'avpvh-print-website'),
+                    'quick_description' => __('Your writing in an easy-to-review format for editors.', 'avpvh-print-website'),
+                    'description' => avpvh_prwb_get_contents($design_template->getDir() . 'descriptions/edit.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $preview_folder_url . '/preview1.jpg',
-                            'desc' => __('Title page, showing the double-spaced text.', 'print-my-blog'),
+                            'desc' => __('Title page, showing the double-spaced text.', 'avpvh-print-website'),
                         ],
                         [
                             'url' => $preview_folder_url . '/preview2.jpg',
-                            'desc' => __('Main matter, showing smaller images and double-spaced text.', 'print-my-blog'),
+                            'desc' => __('Main matter, showing smaller images and double-spaced text.', 'avpvh-print-website'),
                         ],
                     ],
                     'design_defaults' => [
@@ -102,26 +100,25 @@ class DefaultDesigns
                 ];
             }
         );
-        pmb_register_design(
+        avpvh_prwb_register_design(
             'classic_print',
             'classic_print',
             function (DesignTemplate $design_template) {
                 return [
-                    'title' => __('Classic Print PDF', 'print-my-blog'),
-                    'quick_description' => __('A simple but flexible design intended for printing, inspired by Print My Blog Quick Print', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'descriptions/classic.php'),
+                    'title' => __('Classic Print PDF', 'avpvh-print-website'),
+                    'quick_description' => __('A simple but flexible design intended for printing, inspired by AV-PvH Print Website Quick Print', 'avpvh-print-website'),
+                    'description' => avpvh_prwb_get_contents($design_template->getDir() . 'descriptions/classic.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
-                            'desc' => __('Title page, showing removed hyperlinks.', 'print-my-blog'),
+                            'desc' => __('Title page, showing removed hyperlinks.', 'avpvh-print-website'),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
-                            'desc' => __('Main matter, showing external hyperlinks automatically converted into footnotes. Page numbers are always on the bottom-outside corner, and each article’s title is shown at the top of right pages.', 'print-my-blog'),
+                            'desc' => __('Main matter, showing external hyperlinks automatically converted into footnotes. Page numbers are always on the bottom-outside corner, and each article’s title is shown at the top of right pages.', 'avpvh-print-website'),
                         ],
                     ],
                     'design_defaults' => [
@@ -136,29 +133,28 @@ class DefaultDesigns
                 ];
             }
         );
-        pmb_register_design(
+        avpvh_prwb_register_design(
             'classic_print',
             'economical_print',
             function (DesignTemplate $design_template) {
-                $preview_folder_url = PMB_ASSETS_URL . 'images/design_previews/pdf/print/economical/';
+                $preview_folder_url = AVPVH_PRWB_ASSETS_URL . 'images/design_previews/pdf/print/economical/';
                 return [
-                    'title' => __('Economical Print PDF', 'print-my-blog'),
-                    'quick_description' => __('Compact design meant to save paper but still deliver all the content.', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'descriptions/economical.php'),
+                    'title' => __('Economical Print PDF', 'avpvh-print-website'),
+                    'quick_description' => __('Compact design meant to save paper but still deliver all the content.', 'avpvh-print-website'),
+                    'description' => avpvh_prwb_get_contents($design_template->getDir() . 'descriptions/economical.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $preview_folder_url . 'preview1.jpg',
-                            'desc' => __('Title page, showing smaller text.', 'print-my-blog'),
+                            'desc' => __('Title page, showing smaller text.', 'avpvh-print-website'),
                         ],
                         [
                             'url' => $preview_folder_url . 'preview2.jpg',
                             'desc' => __(
                                 'Main matter, showing smaller text and images to reduce ink usage.',
-                                'print-my-blog'
+                                'avpvh-print-website'
                             ),
                         ],
                     ],
@@ -184,7 +180,7 @@ class DefaultDesigns
                 ];
             }
         );
-        pmb_register_design(
+        avpvh_prwb_register_design(
             'buurma',
             'buurma',
             function (DesignTemplate $design_template) {
@@ -195,21 +191,20 @@ class DefaultDesigns
                     $name = '';
                 }
                 return [
-                    'title' => __('Buurma Whitepaper', 'print-my-blog'),
-                    'quick_description' => __('Stylized and branded PDF designed mainly for reading from a device, great for organizations', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'title' => __('Buurma Whitepaper', 'avpvh-print-website'),
+                    'quick_description' => __('Stylized and branded PDF designed mainly for reading from a device, great for organizations', 'avpvh-print-website'),
+                    'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
-                            'desc' => __('Title page, showing a stylzed upper margin for a company name, background gradient and logo, among other things.', 'print-my-blog'),
+                            'desc' => __('Title page, showing a stylzed upper margin for a company name, background gradient and logo, among other things.', 'avpvh-print-website'),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
-                            'desc' => __('Main matter, showing working hyperlinks (which also each get an automatic footnote), and page number and logo in bottom-right corner.', 'print-my-blog'),
+                            'desc' => __('Main matter, showing working hyperlinks (which also each get an automatic footnote), and page number and logo in bottom-right corner.', 'avpvh-print-website'),
                         ],
 
                     ],
@@ -217,37 +212,36 @@ class DefaultDesigns
                     'project_defaults' => [
                         'title' => get_bloginfo('name'),
                         'byline' => $name,
-                        'issue' => __('Issue 01', 'print-my-blog'),
-                        'cover_preamble' => __('Text explaining the purpose of the paper and gives a brief summary of it, so folks know they’re reading the right thing.', 'print-my-blog'),
+                        'issue' => __('Issue 01', 'avpvh-print-website'),
+                        'cover_preamble' => __('Text explaining the purpose of the paper and gives a brief summary of it, so folks know they’re reading the right thing.', 'avpvh-print-website'),
                     ],
                 ];
             }
         );
-        pmb_register_design(
+        avpvh_prwb_register_design(
             'mayer',
             'mayer',
             function (DesignTemplate $design_template) {
                 return [
-                    'title' => __('Mayer Magazine', 'print-my-blog'),
-                    'quick_description' => __('Digital 2-column magazine inspired by the defunct Zinepal', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'title' => __('Mayer Magazine', 'avpvh-print-website'),
+                    'quick_description' => __('Digital 2-column magazine inspired by the defunct Zinepal', 'avpvh-print-website'),
+                    'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
                             'desc' => __(
                                 'Title page and table of contents both fit on the first page.',
-                                'print-my-blog'
+                                'avpvh-print-website'
                             ),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
                             'desc' => __(
                                 'Two column layout which compactly shows content and images.',
-                                'print-my-blog'
+                                'avpvh-print-website'
                             ),
                         ],
                     ],
@@ -262,31 +256,30 @@ class DefaultDesigns
             }
         );
 
-        pmb_register_design(
+        avpvh_prwb_register_design(
             'classic_epub',
             'classic_epub',
             function (DesignTemplate $design_template) {
                 return [
-                    'title' => __('Classic ePub', 'print-my-blog'),
-                    'quick_description' => __('Simple ePub for using when uploading as an eBook to Amazon and other epub marketplaces', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'title' => __('Classic ePub', 'avpvh-print-website'),
+                    'quick_description' => __('Simple ePub for using when uploading as an eBook to Amazon and other epub marketplaces', 'avpvh-print-website'),
+                    'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
                             'desc' => __(
                                 'Title page and table of contents both fit on the first page.',
-                                'print-my-blog'
+                                'avpvh-print-website'
                             ),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
                             'desc' => __(
                                 'Two column layout which compactly shows content and images.',
-                                'print-my-blog'
+                                'avpvh-print-website'
                             ),
                         ],
                     ],
@@ -313,31 +306,30 @@ class DefaultDesigns
                 ];
             }
         );
-        pmb_register_design(
+        avpvh_prwb_register_design(
             'classic_word',
             'classic_word',
             function (DesignTemplate $design_template) {
                 return [
-                    'title' => __('Classic Word', 'print-my-blog'),
-                    'quick_description' => __('Simple Microsoft Word document when that format is required.', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'title' => __('Classic Word', 'avpvh-print-website'),
+                    'quick_description' => __('Simple Microsoft Word document when that format is required.', 'avpvh-print-website'),
+                    'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
                             'desc' => __(
                                 'Title page and table of contents.',
-                                'print-my-blog'
+                                'avpvh-print-website'
                             ),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
                             'desc' => __(
                                 'Simple layout',
-                                'print-my-blog'
+                                'avpvh-print-website'
                             ),
                         ],
                     ],
@@ -365,31 +357,30 @@ class DefaultDesigns
             }
         );
 
-        pmb_register_design(
+        avpvh_prwb_register_design(
             'haller',
             'haller',
             function (DesignTemplate $design_template) {
                 return [
-                    'title' => __('Haller Tabloid', 'print-my-blog'),
-                    'quick_description' => __('Print-ready newspaper design', 'print-my-blog'),
-                    'description' => pmb_get_contents($design_template->getDir() . 'description.php'),
+                    'title' => __('Haller Tabloid', 'avpvh-print-website'),
+                    'quick_description' => __('Print-ready newspaper design', 'avpvh-print-website'),
+                    'description' => avpvh_prwb_get_contents($design_template->getDir() . 'description.php'),
                     'author' => [
                         'name' => 'Mike Nelson',
-                        'url' => 'https://printmy.blog',
                     ],
                     'previews' => [
                         [
                             'url' => $design_template->getUrl() . 'assets/preview1.jpg',
                             'desc' => __(
                                 'Title page and table of contents both fit on the first page.',
-                                'print-my-blog'
+                                'avpvh-print-website'
                             ),
                         ],
                         [
                             'url' => $design_template->getUrl() . 'assets/preview2.jpg',
                             'desc' => __(
                                 'Two column layout which compactly shows content and images.',
-                                'print-my-blog'
+                                'avpvh-print-website'
                             ),
                         ],
                     ],
@@ -405,6 +396,6 @@ class DefaultDesigns
         );
 
 
-        do_action('pmb_register_designs');
+        do_action('avpvh_prwb_register_designs');
     }
 }

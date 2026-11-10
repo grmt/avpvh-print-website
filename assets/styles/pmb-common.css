@@ -24,7 +24,7 @@
 .pmb-print-only{
     display:none !important;
 }
-/* ...but not when printing with Print My Blog...*/
+/* ...but not when printing with AV-PvH Print Website...*/
 .pmb-posts .pmb-print-only{
     display:block !important;
 }
@@ -32,7 +32,7 @@
 .block-editor .pmb-print-only{
     display:block !important;
 }
-/* And when they add the CSS class "pmb-screen-only", hide it while printing with Print My Blog */
+/* And when they add the CSS class "pmb-screen-only", hide it while printing with AV-PvH Print Website */
 .pmb-posts .pmb-screen-only{
     display:none !important;
 }

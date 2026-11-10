@@ -1,13 +1,13 @@
 <?php
 
-namespace Twine\services\display;
+namespace Avpvh\PrintWebsite\Twine\services\display;
 
 /**
  * Class FormInputs
  *
  * For getting HTML for form inputs
  *
- * @package     Print My Blog
+ * @package     AV-PvH Print Website
  * @author         Mike Nelson
  * @since         $VID:$
  *
@@ -175,4 +175,4 @@ class FormInputs
     }
 }
 // End of file FormInputs.php
-// Location: Twine\services\display/FormInputs.php
+// Location: Avpvh\PrintWebsite\Twine\services\display/FormInputs.php

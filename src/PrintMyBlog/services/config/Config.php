@@ -1,16 +1,16 @@
 <?php
 
-namespace PrintMyBlog\services\config;
+namespace Avpvh\PrintWebsite\services\config;
 
-use PrintMyBlog\entities\FileFormat;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\managers\DesignManager;
-use PrintMyBlog\services\FileFormatRegistry;
-use Twine\services\config\Config as TwineConfig;
+use Avpvh\PrintWebsite\entities\FileFormat;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\managers\DesignManager;
+use Avpvh\PrintWebsite\services\FileFormatRegistry;
+use Avpvh\PrintWebsite\Twine\services\config\Config as TwineConfig;
 
 /**
  * Class Config
- * @package PrintMyBlog\services\config
+ * @package Avpvh\PrintWebsite\services\config
  */
 class Config extends TwineConfig
 {
@@ -31,7 +31,7 @@ class Config extends TwineConfig
      */
     protected function optionName()
     {
-        return 'pmb_config';
+        return 'avpvh_prwb_config';
     }
 
     /**

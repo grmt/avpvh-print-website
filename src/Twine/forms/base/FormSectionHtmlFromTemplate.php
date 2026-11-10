@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\forms\base;
+namespace Avpvh\PrintWebsite\Twine\forms\base;
 
 /**
  * FormSectionHtml_From_Template

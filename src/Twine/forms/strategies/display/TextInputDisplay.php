@@ -1,6 +1,6 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
 /**
  * Class TextInputDisplay

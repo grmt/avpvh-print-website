@@ -1,11 +1,11 @@
 <?php
 
-namespace Twine\forms\strategies\validation;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use Twine\forms\helpers\ImproperUsageException;
-use Twine\forms\helpers\ValidationError;
-use Twine\forms\inputs\FormInputBase;
-use Twine\forms\strategies\display\SelectDisplay;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\SelectDisplay;
 
 /**
  * Class ConditionallyRequiredValidation
@@ -36,7 +36,7 @@ class ConditionallyRequiredValidation extends ValidationBase
     public function __construct($validation_error_message = null, $requirement_conditions = array())
     {
         if (! $validation_error_message) {
-            $validation_error_message = __('This field is required.', 'print-my-blog');
+            $validation_error_message = __('This field is required.', 'avpvh-print-website');
         }
         $this->setRequirementConditions($requirement_conditions);
         parent::__construct($validation_error_message);
@@ -126,7 +126,7 @@ class ConditionallyRequiredValidation extends ValidationBase
             throw new ImproperUsageException(
                 sprintf(
                     // translators: 1: name of input.
-                    __('Input requirement conditions must be an array. You provided %1$s', 'print-my-blog'),
+                    __('Input requirement conditions must be an array. You provided %1$s', 'avpvh-print-website'),
                     $this->input->name()
                 )
             );
@@ -135,7 +135,7 @@ class ConditionallyRequiredValidation extends ValidationBase
             throw new ImproperUsageException(
                 sprintf(
                     // translators: 1: name of input.
-                    __('Required Validation Strategy does not yet support multiple conditions. You should add it! The related input is %1$s', 'print-my-blog'),
+                    __('Required Validation Strategy does not yet support multiple conditions. You should add it! The related input is %1$s', 'avpvh-print-website'),
                     $this->input->name()
                 )
             );
@@ -146,7 +146,7 @@ class ConditionallyRequiredValidation extends ValidationBase
                 throw new ImproperUsageException(
                     sprintf(
                         // translators: 1: name of input, 2: path to input
-                        __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'print-my-blog'),
+                        __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'avpvh-print-website'),
                         $this->input->name(),
                         $input_path
                     )
@@ -158,7 +158,7 @@ class ConditionallyRequiredValidation extends ValidationBase
                 throw new ImproperUsageException(
                     sprintf(
                         // translators: 1: input name, 2: classname, 3: other input name
-                        __('Required Validation Strategy can only depend on another input which uses the SelectDisplay, but you specified a field "%1$s" that uses display strategy "%2$s". If you need others, please add support for it! The related input is %3$s', 'print-my-blog'),
+                        __('Required Validation Strategy can only depend on another input which uses the SelectDisplay, but you specified a field "%1$s" that uses display strategy "%2$s". If you need others, please add support for it! The related input is %3$s', 'avpvh-print-website'),
                         $input->name(),
                         get_class($input->getDisplayStrategy()),
                         $this->input->name()
@@ -190,7 +190,7 @@ class ConditionallyRequiredValidation extends ValidationBase
                 throw new ImproperUsageException(
                     sprintf(
                         // translators: 1: input name, 2: path to input
-                        __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'print-my-blog'),
+                        __('Error encountered while setting requirement condition for input %1$s. The path %2$s does not correspond to a valid input', 'avpvh-print-website'),
                         $this->input->name(),
                         $input_path
                     )
@@ -225,7 +225,7 @@ class ConditionallyRequiredValidation extends ValidationBase
                 throw new ImproperUsageException(
                     sprintf(
                         // translators: 1: input name
-                        __('Required Validation Strategy conditions array\'s value must be an array with two elements: an operator, and a value. It didn\'t. The related input is %1$s', 'print-my-blog'),
+                        __('Required Validation Strategy conditions array\'s value must be an array with two elements: an operator, and a value. It didn\'t. The related input is %1$s', 'avpvh-print-website'),
                         $this->input->name()
                     )
                 );
@@ -236,7 +236,7 @@ class ConditionallyRequiredValidation extends ValidationBase
             throw new ImproperUsageException(
                 sprintf(
                     // translators: 1: input name
-                    __('Required Validation Strategy conditions can currently only use the equals operator. If you need others, please add support for it! The related input is %1$s', 'print-my-blog'),
+                    __('Required Validation Strategy conditions can currently only use the equals operator. If you need others, please add support for it! The related input is %1$s', 'avpvh-print-website'),
                     $this->input->name()
                 )
             );

@@ -17,7 +17,7 @@ jQuery(function($) {
         var design_slug = event.currentTarget.getAttribute('data-design-slug');
         var choose_button_text = jQuery(event.currentTarget.parentElement).find('.pmb-design-id-container button.pmb-choose-design').text();
         var customize_button_text = jQuery(event.currentTarget.parentElement).find('.pmb-design-id-container button.pmb-customize-design').text();
-        pmb_open_modal(
+        avpvh_prwb_open_modal(
             '#pmb-design-details-' + design_slug,
             {
                 'buttons'       : [

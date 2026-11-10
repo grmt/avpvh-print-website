@@ -1,12 +1,12 @@
 <?php
 
-namespace PrintMyBlog\services\generators;
+namespace Avpvh\PrintWebsite\services\generators;
 
 use Exception;
 
 /**
  * Class WordGenerator
- * @package PrintMyBlog\services\generators
+ * @package Avpvh\PrintWebsite\services\generators
  */
 class WordGenerator extends HtmlBaseGenerator
 {
@@ -17,7 +17,7 @@ class WordGenerator extends HtmlBaseGenerator
     public function startGenerating()
     {
         add_filter(
-            '\PrintMyBlog\controllers\Shortcodes->tableOfContents',
+            '\Avpvh\PrintWebsite\controllers\Shortcodes->tableOfContents',
             [$this, 'wordToc']
         );
         parent::startGenerating();
@@ -31,8 +31,8 @@ class WordGenerator extends HtmlBaseGenerator
     public function addPrintWindowToPage()
     {
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo pmb_get_contents(
-            PMB_TEMPLATES_DIR . 'partials/pro_print_page_word_window.php',
+        echo avpvh_prwb_get_contents(
+            AVPVH_PRWB_TEMPLATES_DIR . 'partials/pro_print_page_word_window.php',
             [
                 'project' => $this->project,
                 'project_generation' => $this->project_generation,
@@ -46,40 +46,40 @@ class WordGenerator extends HtmlBaseGenerator
      */
     public function enqueueStylesAndScripts()
     {
-        wp_enqueue_script('pmb_pro_page');
-        wp_enqueue_style('pmb_pro_page');
+        wp_enqueue_script('avpvh-print-website-pro-page');
+        wp_enqueue_style('avpvh-print-website-pro-page');
 
         // https://github.com/koffsyrup/FileSaver.js#examples
         wp_register_script(
-            'pmb-filesaver',
-            PMB_SCRIPTS_URL . 'libs/filesaver__premium_only.min.js',
+            'avpvh-print-website-filesaver',
+            AVPVH_PRWB_SCRIPTS_URL . 'libs/filesaver__premium_only.min.js',
             [],
-            filemtime(PMB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js')
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'libs/filesaver__premium_only.min.js')
         );
 
         wp_enqueue_script(
-            'pmb-word',
-            PMB_SCRIPTS_URL . 'pmb-word__premium_only.js',
-            ['jquery', 'pmb-filesaver', 'pmb_general'],
-            filemtime(PMB_SCRIPTS_DIR . 'pmb-word__premium_only.js')
+            'avpvh-print-website-word',
+            AVPVH_PRWB_SCRIPTS_URL . 'pmb-word__premium_only.js',
+            ['jquery', 'avpvh-print-website-filesaver', 'avpvh-print-website-general'],
+            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-word__premium_only.js')
         );
-        $css = pmb_get_contents(
-            PMB_STYLES_DIR . '/pmb-word.css'
+        $css = avpvh_prwb_get_contents(
+            AVPVH_PRWB_STYLES_DIR . '/pmb-word.css'
         ) . $this->design->getSetting('custom_css');
 
         wp_enqueue_style(
-            'pmb-word',
-            PMB_STYLES_URL . 'pmb-word.css',
+            'avpvh-print-website-word',
+            AVPVH_PRWB_STYLES_URL . 'pmb-word.css',
             [],
-            filemtime(PMB_STYLES_DIR . 'pmb-word.css')
+            filemtime(AVPVH_PRWB_STYLES_DIR . 'pmb-word.css')
         );
 
         $style_file = $this->getDesignDir() . 'assets/style.css';
         if (file_exists($style_file)) {
             wp_enqueue_style(
-                'pmb-design',
+                'avpvh-print-website-design',
                 $this->getDesignAssetsUrl() . 'style.css',
-                ['pmb_print_common', 'pmb-plugin-compatibility'],
+                ['avpvh-print-website-print-common', 'avpvh-print-website-plugin-compatibility'],
                 filemtime($style_file),
                 null
             );
@@ -88,34 +88,34 @@ class WordGenerator extends HtmlBaseGenerator
         $script_file = $this->getDesignDir() . 'assets/script.js';
         if (file_exists($script_file)) {
             wp_enqueue_script(
-                'pmb-design',
+                'avpvh-print-website-design',
                 $this->getDesignAssetsUrl() . 'script.js',
-                ['jquery', 'pmb-beautifier-functions'],
+                ['jquery', 'avpvh-print-website-beautifier-functions'],
                 filemtime($script_file)
             );
         }
 
         add_filter(
-            'PrintMyBlog\services\ExternalResourceCache->domainsToNotMap()',
+            'Avpvh\PrintWebsite\services\ExternalResourceCache->domainsToNotMap()',
             [$this, 'cacheWpComToo']
         );
         wp_localize_script(
-            'pmb-word',
-            'pmb_pro',
+            'avpvh-print-website-word',
+            'avpvh_prwb_pro',
             [
                 'title' => $this->project->getPublishedTitle(),
                 'authors' => $this->getAuthors(),
                 'cover' => $this->project->getSetting('cover'),
                 'css' => $css,
-                'pmb_nonce' => wp_create_nonce('pmb_pro_page'),
+                'avpvh_prwb_nonce' => wp_create_nonce('avpvh_prwb_pro_page'),
                 'external_resouce_mapping' => $this->external_resource_cache->getMapping(),
                 'domains_to_not_map' => (array)$this->external_resource_cache->domainsToNotMap(),
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'translations' => [
-                    'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'print-my-blog'),
-                    'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'print-my-blog'),
+                    'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'avpvh-print-website'),
+                    'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'avpvh-print-website'),
                 ],
-                'domain' => pmb_get_domain(),
+                'domain' => avpvh_prwb_get_domain(),
                 'site_url' => site_url(),
             ]
         );
@@ -144,7 +144,7 @@ class WordGenerator extends HtmlBaseGenerator
 TOC \o \"1-3\" \u 
 <span style='mso-element:field-separator'></span> 
 <![endif]--> 
-<span style='mso-no-proof:yes'>" . __('Table of content - In Microsoft Word, please right-click and choose "Update field".', 'print-my-blog') . "</span> 
+<span style='mso-no-proof:yes'>" . __('Table of content - In Microsoft Word, please right-click and choose "Update field".', 'avpvh-print-website') . "</span> 
 <!--[if supportFields]> 
 <span style='mso-element:field-end'></span> 
 <![endif]--> 

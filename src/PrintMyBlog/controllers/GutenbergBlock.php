@@ -1,14 +1,14 @@
 <?php
 
-namespace PrintMyBlog\controllers;
+namespace Avpvh\PrintWebsite\controllers;
 
-use PrintMyBlog\domain\PrintOptions;
-use Twine\services\display\FormInputs;
-use Twine\controllers\BaseController;
+use Avpvh\PrintWebsite\domain\PrintOptions;
+use Avpvh\PrintWebsite\Twine\services\display\FormInputs;
+use Avpvh\PrintWebsite\Twine\controllers\BaseController;
 
 /**
  * Class GutenbergBlock
- * @package PrintMyBlog\controllers
+ * @package Avpvh\PrintWebsite\controllers
  */
 class GutenbergBlock extends BaseController
 {
@@ -30,17 +30,17 @@ class GutenbergBlock extends BaseController
     public function registerGutenbergBlock()
     {
         wp_register_script(
-            'pmb-block',
-            PMB_ASSETS_URL . 'scripts/pmb-block.js',
-            array('wp-blocks', 'wp-element', 'wp-components', 'pmb-setup-page'),
-            PMB_VERSION
+            'avpvh-print-website-block',
+            AVPVH_PRWB_ASSETS_URL . 'scripts/pmb-block.js',
+            array('wp-blocks', 'wp-element', 'wp-components', 'avpvh-print-website-setup-page'),
+            AVPVH_PRWB_VERSION
         );
         if (function_exists('register_block_type')) {
             register_block_type(
-                'printmyblog/setupform',
+                'avpvh-print-website/setupform',
                 array(
-                    'editor_script' => 'pmb-block',
-                    'style' => 'pmb-setup-page',
+                    'editor_script' => 'avpvh-print-website-block',
+                    'style' => 'avpvh-print-website-setup-page',
                     'render_callback' => [$this, 'block_dynamic_render_cb'],
                 )
             );
@@ -56,8 +56,8 @@ class GutenbergBlock extends BaseController
      */
     public function enqueueFrontendScript($content)
     {
-        if (function_exists('has_block') && has_block('printmyblog/setupform')) {
-            wp_enqueue_script('pmb-setup-page', '', '', PMB_VERSION, true);
+        if (function_exists('has_block') && has_block('avpvh-print-website/setupform')) {
+            wp_enqueue_script('avpvh-print-website-setup-page', '', '', AVPVH_PRWB_VERSION, true);
         }
         return $content;
     }
@@ -80,7 +80,7 @@ class GutenbergBlock extends BaseController
         ob_start();
         $print_options = new PrintOptions();
         $displayer = new FormInputs();
-        include PMB_TEMPLATES_DIR . 'setup_page.php';
+        include AVPVH_PRWB_TEMPLATES_DIR . 'setup_page.php';
         return ob_get_clean();
     }
 }

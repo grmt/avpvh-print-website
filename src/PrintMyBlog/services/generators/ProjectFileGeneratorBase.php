@@ -1,28 +1,27 @@
 <?php
 
-namespace PrintMyBlog\services\generators;
+namespace Avpvh\PrintWebsite\services\generators;
 
 use Automattic\WooCommerce\Vendor\League\Container\Argument\ClassName;
-use PrintMyBlog\compatibility\DetectAndActivate;
-use PrintMyBlog\db\PostFetcher;
-use PrintMyBlog\entities\DesignTemplate;
-use PrintMyBlog\orm\entities\Design;
-use PrintMyBlog\orm\entities\Project;
-use PrintMyBlog\entities\ProjectGeneration;
-use PrintMyBlog\orm\entities\ProjectSection;
-use PrintMyBlog\services\ExternalResourceCache;
-use PrintMyBlog\services\PmbCentral;
-use PrintMyBlog\services\SectionTemplateRegistry;
+use Avpvh\PrintWebsite\compatibility\DetectAndActivate;
+use Avpvh\PrintWebsite\db\PostFetcher;
+use Avpvh\PrintWebsite\entities\DesignTemplate;
+use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\orm\entities\Project;
+use Avpvh\PrintWebsite\entities\ProjectGeneration;
+use Avpvh\PrintWebsite\orm\entities\ProjectSection;
+use Avpvh\PrintWebsite\services\ExternalResourceCache;
+use Avpvh\PrintWebsite\services\SectionTemplateRegistry;
 use ReflectionObject;
 use stdClass;
-use Twine\services\filesystem\File;
+use Avpvh\PrintWebsite\Twine\services\filesystem\File;
 use WP_Post;
 use WP_Query;
 use WP_Screen;
 
 /**
  * Class ProjectFileGeneratorBase
- * @package PrintMyBlog\services\generators
+ * @package Avpvh\PrintWebsite\services\generators
  */
 abstract class ProjectFileGeneratorBase
 {
@@ -128,8 +127,8 @@ abstract class ProjectFileGeneratorBase
     }
 
     /**
-     * @global Project $pmb_project
-     * @global Design $pmb_design
+     * @global Project $avpvh_prwb_project
+     * @global Design $avpvh_prwb_design
      */
     protected function startGenerating()
     {
@@ -148,23 +147,23 @@ abstract class ProjectFileGeneratorBase
                 return '%s';
             }
         );
-        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
+        do_action('\Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase->startGenerating', $this);
         register_shutdown_function(array( $this, 'shutdown' ));
     }
 
     /**
      * Generates for the current post in global $wp_post. We call WP_Query::the_post() just before calling this.
      * @global WP_Post $wp_post
-     * @global Project $pmb_project
-     * @global Design $pmb_design
+     * @global Project $avpvh_prwb_project
+     * @global Design $avpvh_prwb_design
      * @return void
      */
     abstract protected function generateSection();
 
     /**
      * @global WP_Post $wp_post
-     * @global Project $pmb_project
-     * @global Design $pmb_design
+     * @global Project $avpvh_prwb_project
+     * @global Design $avpvh_prwb_design
      */
     abstract protected function finishGenerating();
 
@@ -175,13 +174,13 @@ abstract class ProjectFileGeneratorBase
      * @param ProjectSection[] $sections
      *
      * @return void but updates $query->posts by putting the posts in the order
-     * indicated by $project_parts, and also gives each post a new property "pmb_part" which is a ProjectSection
+     * indicated by $project_parts, and also gives each post a new property "avpvh_prwb_part" which is a ProjectSection
      */
     protected function sortPostsAndAttachSections(WP_Query $query, $sections)
     {
         $ordered_posts = [];
         $unordered_posts = $query->posts;
-        foreach (apply_filters('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', $sections, $this, $unordered_posts) as $section) {
+        foreach (apply_filters('\Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', $sections, $this, $unordered_posts) as $section) {
             $found = false;
             $post = null;
             foreach ($unordered_posts as $post) {
@@ -199,7 +198,7 @@ abstract class ProjectFileGeneratorBase
                 $post = clone $post;
             }
             if ($post) {
-                $post->pmb_section = $section;
+                $post->avpvh_prwb_section = $section;
                 $ordered_posts[] = $post;
             }
         }
@@ -278,15 +277,15 @@ abstract class ProjectFileGeneratorBase
 
     /**
      *
-     * @param WP_Post $post with an attached ProjectSection on the property pmb_section
+     * @param WP_Post $post with an attached ProjectSection on the property avpvh_prwb_section
      *
      * @return void
      */
     protected function maybeGenerateDivisionTransition(WP_Post $post)
     {
         $last_section = $this->project_generation->getLastSection();
-        $this->maybeGenerateDivisionEnd($last_section, $post->pmb_section);
-        $this->maybeGenerateDivisionStart($last_section, $post->pmb_section);
+        $this->maybeGenerateDivisionEnd($last_section, $post->avpvh_prwb_section);
+        $this->maybeGenerateDivisionStart($last_section, $post->avpvh_prwb_section);
     }
 
     /**
@@ -320,14 +319,14 @@ abstract class ProjectFileGeneratorBase
      */
     protected function getHtmlFrom($template_file, $context = [])
     {
-        global $post, $pmb_project, $pmb_design, $pmb_project_generation;
+        global $post, $avpvh_prwb_project, $avpvh_prwb_design, $avpvh_prwb_project_generation;
         // extract so all that context is available in the template file.
         // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
         extract($context);
-        $pmb_project = $this->project;
-        $pmb_design = $this->design;
-        $pmb_project_generation = $this->project_generation;
-        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start');
+        $avpvh_prwb_project = $this->project;
+        $avpvh_prwb_design = $this->design;
+        $avpvh_prwb_project_generation = $this->project_generation;
+        do_action('\Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase->getHtmlFrom before_ob_start');
         ob_start();
         include $template_file;
         // if Oxygen page builder is active, clear ALL buffers. It starts a buffer and then clears it in the footer
@@ -335,7 +334,7 @@ abstract class ProjectFileGeneratorBase
         // of the print page). Avoid all that by clearing its buffer immediately.
         if (
             apply_filters(
-                'PrintMyBlog\services\generators\ProjectFileGeneratorBase::getHtmlFrom clean_multiple_buffers',
+                'Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase::getHtmlFrom clean_multiple_buffers',
                 defined('CT_VERSION')
             )
         ) {
@@ -343,7 +342,7 @@ abstract class ProjectFileGeneratorBase
         } else {
             $str = ob_get_clean();
         }
-        do_action('\PrintMyBlog\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean');
+        do_action('\Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase->getHtmlFrom after_get_clean');
 
         return $str;
     }
@@ -363,7 +362,7 @@ abstract class ProjectFileGeneratorBase
     }
 
     /**
-     * @return \PrintMyBlog\orm\entities\Design|null
+     * @return \Avpvh\PrintWebsite\orm\entities\Design|null
      */
     protected function getDesign()
     {

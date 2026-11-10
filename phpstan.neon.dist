@@ -6,7 +6,7 @@ parameters:
     scanDirectories:
         - inc/
     scanFiles:
-        - printmyblog.php
+        - avpvh-print-website.php
     paths:
         - src/
         - inc/

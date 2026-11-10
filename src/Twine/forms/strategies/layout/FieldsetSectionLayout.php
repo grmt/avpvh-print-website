@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\strategies\layout;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\layout;
 
-use Twine\helpers\Html;
+use Avpvh\PrintWebsite\Twine\helpers\Html;
 
 /**
  * Class FieldsetSectionLayout

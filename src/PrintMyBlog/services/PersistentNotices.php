@@ -1,13 +1,13 @@
 <?php
 
-namespace PrintMyBlog\services;
+namespace Avpvh\PrintWebsite\services;
 
-use PrintMyBlog\domain\DefaultPersistentNotices;
-use mnelson4\AdminNotices\Notices;
+use Avpvh\PrintWebsite\domain\DefaultPersistentNotices;
+use Avpvh\PrintWebsite\mnelson4\AdminNotices\Notices;
 
 /**
  * Class PersistentNotices
- * @package PrintMyBlog\services
+ * @package Avpvh\PrintWebsite\services
  */
 class PersistentNotices
 {

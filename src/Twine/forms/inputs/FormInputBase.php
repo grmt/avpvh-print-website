@@ -1,17 +1,17 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\base\FormSection;
-use Twine\forms\base\FormSectionValidatable;
-use Twine\forms\helpers\ImproperUsageException;
-use Twine\forms\helpers\ValidationError;
-use Twine\forms\strategies\display\DisplayBase;
-use Twine\forms\strategies\normalization\NormalizationBase;
-use Twine\forms\strategies\normalization\NullNormalization;
-use Twine\forms\strategies\normalization\TextNormalization;
-use Twine\forms\strategies\validation\RequiredValidation;
-use Twine\forms\strategies\validation\ValidationBase;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionValidatable;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException;
+use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\DisplayBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\NormalizationBase;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\NullNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\TextNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\RequiredValidation;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\ValidationBase;
 
 /**
  * FormInputBase

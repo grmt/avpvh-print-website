@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\strategies\display\TextInputDisplay;
-use Twine\forms\strategies\normalization\TextNormalization;
-use Twine\forms\strategies\validation\EmailValidation;
+use Avpvh\PrintWebsite\Twine\forms\strategies\display\TextInputDisplay;
+use Avpvh\PrintWebsite\Twine\forms\strategies\normalization\TextNormalization;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\EmailValidation;
 
 /**
  * Email_Input

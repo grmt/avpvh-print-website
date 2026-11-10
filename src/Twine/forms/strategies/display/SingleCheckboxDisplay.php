@@ -1,10 +1,10 @@
 <?php
 
-namespace Twine\forms\strategies\display;
+namespace Avpvh\PrintWebsite\Twine\forms\strategies\display;
 
 /**
  * Class SingleCheckboxDisplay
- * @package Twine\forms\strategies\display
+ * @package Avpvh\PrintWebsite\Twine\forms\strategies\display
  */
 class SingleCheckboxDisplay extends DisplayBase
 {

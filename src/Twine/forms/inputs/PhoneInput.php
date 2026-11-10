@@ -1,8 +1,8 @@
 <?php
 
-namespace Twine\forms\inputs;
+namespace Avpvh\PrintWebsite\Twine\forms\inputs;
 
-use Twine\forms\strategies\validation\TextValidation;
+use Avpvh\PrintWebsite\Twine\forms\strategies\validation\TextValidation;
 
 /**
  *
@@ -25,7 +25,7 @@ class PhoneInput extends TextInput
     {
         $this->addValidationStrategy(
             new TextValidation(
-                __('Please enter a valid phone number. Eg 123-456-7890 or 1234567890', 'print-my-blog'),
+                __('Please enter a valid phone number. Eg 123-456-7890 or 1234567890', 'avpvh-print-website'),
                 '~^(([\d]{10})|(^[\d]{3}-[\d]{3}-[\d]{4}))$~'
             )
         );
