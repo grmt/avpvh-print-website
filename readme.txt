@@ -49,7 +49,7 @@ All three remove the site header, menus, sidebars and footer, and avoid page bre
 * choose image quality and size, fonts, page sizes and article templates
 * optionally apply the active theme's CSS
 
-PDFs are made by the browser: on the print page, use "Print with Browser" and choose "Save as PDF". Some design options (footnotes, page references, exact page margins) were made for the paid Prince-based service of the original plugin and are not supported by browsers.
+PDFs are made by the browser: on the print page, use "Print with Browser" and choose "Save as PDF". Before printing, [Paged.js](https://pagedjs.org) (MIT, included) lays the project out in pages using the designs' CSS, so page numbers, running headers, table of contents page numbers, "see page X" references and footnotes work, as they did with the original plugin's paid Prince service. Not supported: the Haller design's repeating headers and side notes, and moving images to the top or bottom of a page.
 
 = Translations =
 
@@ -244,6 +244,7 @@ options are the same as when printing out multiple posts simultaneously: you can
 == Changelog ==
 = 4.0.0 November 10, 2026 =
 * Removed the paid printmy.blog PDF service, the DocRaptor test PDFs, licence credits, the Help page (which mailed the upstream author), the review prompts and the sales notices. PDFs are made by the browser.
+* PDF print pages are laid out with Paged.js 0.4.3 before printing: page numbers, running headers, table of contents page numbers, page references and footnotes now work when saving as PDF from the browser.
 * All former Pro features are available: duplicating projects and copying posts to Print Materials.
 * Removed the links to printmy.blog and to Print My Blog on wordpress.org.
 * Renamed from Print My Blog to AV-PvH Print Website: plugin folder and main file `avpvh-print-website/avpvh-print-website.php`, text domain `avpvh-print-website`, PHP namespace `Avpvh\PrintWebsite`, prefix `avpvh_prwb_` / `AVPVH_PRWB_`.

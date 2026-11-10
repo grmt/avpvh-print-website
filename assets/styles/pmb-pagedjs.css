@@ -1,0 +1,48 @@
+/**
+ * Paged.js compatibility for the PDF designs.
+ *
+ * The designs were written for Prince, the renderer of the old paid PDF service. Paged.js reads the same
+ * CSS Paged Media rules (named pages, page margin boxes, counter(page), string-set, target-counter and
+ * float: footnote), but not a few Prince-only bits. This file fills those gaps. It loads after the design's
+ * stylesheet, and browsers without Paged.js ignore it like they ignore the rest of the @page rules.
+ */
+
+/* Prince calls the footnote area "@footnotes"; Paged.js expects "@footnote". */
+@page {
+    @footnote {
+        border-top: solid black thin;
+        padding-top: 8pt;
+    }
+}
+
+/* leader() is Prince-only and makes the whole declaration invalid, so the TOC lost its page numbers.
+   Keep the numbers and push them to the right edge instead of drawing dot leaders. */
+.pmb-toc-list .pmb-toc-item a {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+/* No pseudo-classes such as :not() in these selectors: Paged.js cuts a target-counter() selector off at the first
+   colon (meant for "::after") and then finds no link. */
+.pmb-toc-list .pmb-toc-item a::after {
+    content: target-counter(attr(href), page) !important;
+}
+.pmb-toc-list .pmb-toc-item.pmb-toc-front a::after {
+    content: target-counter(attr(href), page, lower-roman) !important;
+}
+
+
+/* Each section starts on a new page, and so does each front, main and back matter (a new named page). Prince
+   merges the two breaks at the start of a matter; Paged.js makes an empty page. Drop the section's own break there. */
+.pmb-front-matter > .pmb-section-wrapper:first-child,
+.pmb-main-matter > .pmb-section-wrapper:first-child,
+.pmb-back-matter > .pmb-section-wrapper:first-child {
+    break-before: auto !important;
+    page-break-before: auto !important;
+}
+
+/* Paged.js moves footnotes into the page's footnote area, outside .pmb-posts, so the design's
+   ".pmb-posts a.pmb-page-num::after" no longer matched and "See page %s" footnotes had no number. */
+a.pmb-page-num::after {
+    content: target-counter(attr(href), page);
+}
