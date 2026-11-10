@@ -97,7 +97,7 @@ class Context extends BaseContext
             ],
             'Avpvh\PrintWebsite\services\config\Config' => [
                 'Avpvh\PrintWebsite\services\FileFormatRegistry' => self::REUSE,
-                'PrintMyBLog\orm\managers\DesignManager' => self::REUSE,
+                'Avpvh\PrintWebsite\orm\managers\DesignManager' => self::REUSE,
             ],
             'Avpvh\PrintWebsite\entities\ProjectGeneration' => [
                 'Avpvh\PrintWebsite\orm\managers\ProjectSectionManager' => self::REUSE,
