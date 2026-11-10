@@ -13,3 +13,10 @@ package.json export-ignore
 package-lock.json export-ignore
 webpack.config.js export-ignore
 assets/scripts/src export-ignore
+# Dev-only, never shipped: CI, editor and deploy tooling. `git archive`
+# (CI's build, the release ZIP and scripts/package-plugin.sh) honours these.
+/.github export-ignore
+/.vscode export-ignore
+/vscode-secret-storage export-ignore
+/scripts export-ignore
+/env.playwright export-ignore

@@ -1,1 +1,1 @@
-</div>
+<?php // Closes the wrapper opened in project_header.php. ?></div>

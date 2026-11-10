@@ -1,13 +1,13 @@
 === Print My Blog - Print, PDF, & eBook Converter WordPress Plugin ===
 Contributors: mnelson4, ryanvdk, szepeviktor, printmybl0g
 Tags: print, PDF, backup, eBook, print button
-Requires at least: 4.6
-Tested up to: 7.0
+Requires at least: 7.1
+Tested up to: 7.1
 Requires PHP: 8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://printmy.blog/pricing/
-Stable tag: 3.27.18.1
+Stable tag: 3.27.18.2
 
 Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
 

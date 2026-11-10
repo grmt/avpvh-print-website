@@ -9,8 +9,8 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: Michael Nelson
  * Author URI: https://printmy.blog
- * Version: 3.27.18.1
- * Requires at least: 4.7
+ * Version: 3.27.18.2
+ * Requires at least: 7.1
  * Requires PHP: 8.4
  * Text Domain: print-my-blog
  * Update URI: https://github.com/grmt/printmyblog
@@ -21,7 +21,7 @@ if (! defined('PMB_MIN_PHP_VER_REQUIRED')) {
     define('PMB_MIN_PHP_VER_REQUIRED', '8.4.0');
 }
 if (! defined('PMB_MIN_WP_VER_REQUIRED')) {
-    define('PMB_MIN_WP_VER_REQUIRED', '4.7');
+    define('PMB_MIN_WP_VER_REQUIRED', '7.1');
 }
 global $wp_version;
 // make sure another version of PMB isn't installed
@@ -123,7 +123,7 @@ if (defined('PMB_VERSION')) {
     add_action('admin_notices', 'pmb_minimum_wp_version_error', 1, 0);
 } else {
     // it's all good! start bootstraping PMB.
-    define('PMB_VERSION', '3.27.18.1');
+    define('PMB_VERSION', '3.27.18.2');
     define('PMB_DIR', wp_normalize_path(__DIR__) . '/');
     define('PMB_MAIN_FILE', __FILE__);
     define('PMB_TEMPLATES_DIR', PMB_DIR . 'templates/');
