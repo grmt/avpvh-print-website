@@ -143,8 +143,6 @@ foreach($generations as $generation){
     <a class="button" href="<?php echo esc_url($edit_content_link);?>"><?php esc_html_e('Edit Content', 'avpvh-print-website');?></a>
     <a class="button" href="<?php echo esc_url($edit_metadata_link);?>"><?php esc_html_e('Edit Metadata', 'avpvh-print-website');?></a>
     <a class="button" href="<?php echo esc_url($clear_cache_link);?>"><?php esc_html_e('Clear Cached Resources', 'avpvh-print-website');?></a>
-    <a class="button" href="<?php echo esc_url(admin_url(AVPVH_PRWB_ADMIN_HELP_PAGE_PATH));?>"><span class="dashicons
-                dashicons-sos pmb-get-help-icon"></span> <?php esc_html_e('Get Help', 'avpvh-print-website');?></a>
 <?php
 avpvh_prwb_render_template('partials/project_footer.php');
 

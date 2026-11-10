@@ -138,13 +138,10 @@ if (defined('AVPVH_PRWB_VERSION')) {
     define('AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH', '/admin.php?page=' . AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG);
     define('AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG', 'avpvh-print-website-settings');
     define('AVPVH_PRWB_ADMIN_SETTINGS_PAGE_PATH', '/admin.php?page=' . AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG);
-    define('AVPVH_PRWB_ADMIN_HELP_PAGE_SLUG', 'avpvh-print-website-help');
     define('AVPVH_PRWB_ADMIN_DESIGNS_PAGE_SLUG', 'avpvh-print-website-designs');
     define('AVPVH_PRWB_ADMIN_DESIGNS_PAGE_PATH', '/admin.php?page=' . AVPVH_PRWB_ADMIN_DESIGNS_PAGE_SLUG);
-    define('AVPVH_PRWB_ADMIN_HELP_PAGE_PATH', '/admin.php?page=' . AVPVH_PRWB_ADMIN_HELP_PAGE_SLUG);
     define('AVPVH_PRWB_DESIGNS_DIR', AVPVH_PRWB_DIR . 'designs/');
     define('AVPVH_PRWB_TWINE_MAIN_FILE', AVPVH_PRWB_MAIN_FILE);
-    define('AVPVH_PRWB_SUPPORT_EMAIL', 'please@printmy.blog');
     if (! defined('AVPVH_PRWB_DISABLE_EXTERNAL_REQUESTS')) {
         define('AVPVH_PRWB_DISABLE_EXTERNAL_REQUESTS', true);
     }

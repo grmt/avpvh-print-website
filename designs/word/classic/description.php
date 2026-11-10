@@ -3,15 +3,6 @@
 <p><?php esc_html_e('A table of contents is generated and inserted at the requested location. Once in Microsoft Word, right click on the table of contents and click "Update Field"; or press Ctrl + A, then F9.', 'avpvh-print-website'); ?></p>
 <p><?php esc_html_e('Images may be bundled into the Word Document file so they can be used offline or if the website hosting the images goes offline.', 'avpvh-print-website'); ?></p>
 <p><?php esc_html_e('Image galleries are rearranged into a simple list of images which displays better on smaller devices.', 'avpvh-print-website'); ?></p>
-<p><?php
-    printf(
-    // translators: 1: opening HTML tag, 2: closing HTML tag
-        esc_html__('If there are any features or options you want, %1$splease get in touch.%2$s', 'avpvh-print-website'),
-        '<a href="' . esc_url_raw(admin_url(AVPVH_PRWB_ADMIN_HELP_PAGE_PATH)) . '">',
-        '</a>'
-    );
-    ?></p>
-
 <h2><?php esc_html_e('Features', 'avpvh-print-website'); ?></h2>
 <ul class="pmb-list">
     <li><?php esc_html_e('Supports nesting articles (like posts and pages) into “parts”', 'avpvh-print-website'); ?></li>

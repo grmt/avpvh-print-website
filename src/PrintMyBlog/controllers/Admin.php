@@ -31,22 +31,17 @@ use Avpvh\PrintWebsite\system\CustomPostTypes;
 use Avpvh\PrintWebsite\Twine\entities\notifications\OneTimeNotification;
 use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
 use Avpvh\PrintWebsite\Twine\forms\base\FormSectionBase;
-use Avpvh\PrintWebsite\Twine\forms\base\FormSectionHtml;
 use Avpvh\PrintWebsite\Twine\forms\helpers\InputOption;
 use Avpvh\PrintWebsite\Twine\forms\inputs\CheckboxMultiInput;
-use Avpvh\PrintWebsite\Twine\forms\inputs\HiddenInput;
 use Avpvh\PrintWebsite\Twine\forms\inputs\RadioButtonInput;
 use Avpvh\PrintWebsite\Twine\forms\inputs\SelectInput;
-use Avpvh\PrintWebsite\Twine\forms\inputs\TextAreaInput;
 use Avpvh\PrintWebsite\Twine\forms\inputs\TextInput;
-use Avpvh\PrintWebsite\Twine\forms\inputs\YesNoInput;
 use Avpvh\PrintWebsite\Twine\helpers\Array2;
 use Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager;
 use Avpvh\PrintWebsite\Twine\services\display\FormInputs;
 use Avpvh\PrintWebsite\Twine\controllers\BaseController;
 use Avpvh\PrintWebsite\Twine\services\filesystem\Folder;
 use Avpvh\PrintWebsite\Twine\services\notifications\OneTimeNotificationManager;
-use WP_Error;
 use WP_Post;
 use WP_Post_Type;
 use WP_Query;
@@ -130,11 +125,6 @@ class Admin extends BaseController
      * @var OneTimeNotificationManager
      */
     protected $notification_manager;
-    /**
-     * Somewhere to put the WP_Error emitted by wp_mail in an action (but not returned)
-     * @var WP_Error
-     */
-    protected $wp_error;
     /**
      * @var DebugInfo
      */
@@ -282,14 +272,6 @@ class Admin extends BaseController
             'manage_options',
             AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG,
             array($this, 'editSettingsPage')
-        );
-        add_submenu_page(
-            AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
-            __('Help Me AV-PvH Print Website', 'avpvh-print-website'),
-            __('Help', 'avpvh-print-website'),
-            AVPVH_PRWB_ADMIN_CAP,
-            AVPVH_PRWB_ADMIN_HELP_PAGE_SLUG,
-            [$this, 'helpPage']
         );
     }
 
@@ -470,197 +452,6 @@ class Admin extends BaseController
     }
 
     /**
-     * For sending help info to the dev.
-     */
-    public function helpPage()
-    {
-
-        if ($this->invalid_form instanceof FormSection) {
-            $form = $this->invalid_form;
-            $form_url = '';
-            $method = 'GET';
-            $button_text = '';
-        } else {
-            $form = $this->getEmailHelpForm();
-            $form_url = admin_url(AVPVH_PRWB_ADMIN_HELP_PAGE_PATH);
-            $method = 'POST';
-            $button_text = esc_html__('Email AV-PvH Print Website Support', 'avpvh-print-website');
-        }
-        avpvh_prwb_render_template(
-            'help.php',
-            [
-                'form' => $form,
-                'form_url' => $form_url,
-                'form_method' => $method,
-                'button_text' => $button_text,
-            ]
-        );
-    }
-
-    /**
-     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
-     */
-    public function sendHelp()
-    {
-        global $current_user;
-        $form = $this->getEmailHelpForm();
-        // Nonces verified by form class.
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $form->receiveFormSubmission($_REQUEST);
-        if (! $form->isValid()) {
-            $this->invalid_form = $form;
-            return;
-        }
-        // don't translate these strings. They're sent to the dev who speaks English.
-        add_action(
-            'wp_mail_failed',
-            [$this, 'sendHelpError'],
-            10
-        );
-
-        $headers = array(
-            'Reply-To: ' . $current_user->display_name . ' <' . $current_user->user_email . '>',
-        );
-        $subject = sprintf('Help for %s', site_url());
-        $message = sprintf(
-            'Name:%1$s
-            <br>
-            Message:%2$s
-            <br>
-            Consent:%3$s,
-            Data:%4$s',
-            $form->getInputValue('name'),
-            $form->getInputValue('reason'),
-            $form->getInputValue('consent') ? 'yes' : 'no',
-            $form->getInputValue('debug_info')
-        );
-        $success = wp_mail(
-            'please@printmy.blog',
-            $subject,
-            $message,
-            $headers
-        );
-
-        if ($success) {
-            $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_SUCCESS,
-                __('Email successfully sent. Expect a reply in the next 1-2 business days.', 'avpvh-print-website')
-            );
-        } else {
-            $error = $this->wp_error;
-            $this->notification_manager->addTextNotificationForCurrentUser(
-                OneTimeNotification::TYPE_ERROR,
-                sprintf(
-                    // translators: 1: error message, 2: email address, 3: subject of email, 4: content of email.
-                    __('There was an error sending an email from your website (it was "%1$s"). Please manually send an email to %2$s, with the subject "%3$s", with the content:', 'avpvh-print-website'),
-                    $error->get_error_message(),
-                    AVPVH_PRWB_SUPPORT_EMAIL,
-                    $subject
-                )
-                    . '<pre>' . $message . '</pre>'
-            );
-        }
-        wp_safe_redirect(
-            admin_url(AVPVH_PRWB_ADMIN_HELP_PAGE_PATH)
-        );
-    }
-
-    /**
-     * Callback for recording error when sending email.
-     * @param WP_Error $error
-     */
-    public function sendHelpError(WP_Error $error)
-    {
-        $this->wp_error = $error;
-    }
-
-    /**
-     * @return FormSection
-     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
-     */
-    protected function getEmailHelpForm()
-    {
-        global $current_user;
-
-        // reminder: Twine forms default to always add and check nonces.
-        return new FormSection(
-            [
-                'subsections' => [
-                    'reason' => new TextAreaInput(
-                        [
-                            'html_label_text' => __('Please explain what you did, what you expected, and what went wrong', 'avpvh-print-website'),
-                            'required' => true,
-                            'html_help_text' => __('Including links to screenshots is appreciated', 'avpvh-print-website'),
-                        ]
-                    ),
-                    'name' => new TextInput(
-                        [
-                            'html_label_text' => __('Your Name', 'avpvh-print-website'),
-                            'default' => $current_user->user_firstname
-                                ? $current_user->user_firstname . ' ' . $current_user->user_lastname
-                                : $current_user->display_name,
-                        ]
-                    ),
-                    'consent' => new YesNoInput(
-                        [
-                            'html_label_text' => __('Are you ok with us viewing your most recent generated documents?', 'avpvh-print-website'),
-                            'default' => true,
-                            'html_help_text' => __('Viewing your most recent generated documents saves a lot of time figuring out what is going wrong. We won’t share your content with anyone else.', 'avpvh-print-website'),
-                        ]
-                    ),
-                    'debug_info' => new TextAreaInput(
-                        [
-                            'html_label_text' => __('This debug info will also be sent.', 'avpvh-print-website'),
-                            'disabled' => true,
-                            'default' => $this->debug_info->getDebugInfoString(),
-                            'html_help_text' => __('This is mostly system information, list of active plugins, active theme, and some AV-PvH Print Website Pro info like your most recent projects.', 'avpvh-print-website'),
-                        ]
-                    ),
-                ],
-            ]
-        );
-    }
-
-    /**
-     * Now-unused method for getting a form to submit info to GitHub. Might add it back some day.
-     * @return FormSection
-     * @throws \Avpvh\PrintWebsite\Twine\forms\helpers\ImproperUsageException
-     */
-    protected function getGithubHelpForm()
-    {
-        return new FormSection(
-            [
-                'subsections' => [
-                    'explanatory_text' => new FormSectionHtml(
-                        '<h2>' . __('Support for your plan is offered on GitHub', 'avpvh-print-website') . '</h2>' .
-                            '<p>' . __('GitHub is a public forum to share your issues with the developer and other users.', 'avpvh-print-website') . '</p>' .
-                            '<p>' . sprintf(
-                                // translators: 1: opening anchor tag, 2: closing anchor tag, 3: opening anchor tag.
-                                __('You will need to first %1$screate a GitHub account%2$s. If you prefer to use email support please %3$spurchase a license that offers email support.%2$s', 'avpvh-print-website'),
-                                '<a target="_blank" href="https://github.com/signup">',
-                                '</a>',
-                                '<a href="' . esc_url(avpvh_prwb_upgrade_url()) . '">'
-                            )
-                            . '</p>'
-                    ),
-                    'body' => new HiddenInput(
-                        [
-                            'default' => '** Please describe what you were doing, what you expected to happen, and what the problem was. **
-                                 
-
-```
-' . substr($this->debug_info->getDebugInfoString(false), 0, 5000) . '
-```',
-                            'html_name' => 'body',
-                        ]
-                    ),
-                ],
-            ]
-        );
-    }
-
-
-    /**
      * Shows the setup page.
      * @since 1.0.0
      */
@@ -792,8 +583,8 @@ class Admin extends BaseController
                                     'cant_add' => __('Please select items to add to the project', 'avpvh-print-website'),
                                     'cant_remove' => __('Please select items to remove', 'avpvh-print-website'),
                                     'cant_move' => __('Please select items to move', 'avpvh-print-website'),
-                                    'insert_error' => __('Error inserting. Please use the PMB help page to get help', 'avpvh-print-website'),
-                                    'duplicate_error' => __('Error creating new print material. Please use the PMB help page to get help.', 'avpvh-print-website'),
+                                    'insert_error' => __('Error inserting.', 'avpvh-print-website'),
+                                    'duplicate_error' => __('Error creating new print material.', 'avpvh-print-website'),
                                     'empty_content_warning' => __('Your project\'s Body is empty. You may have forgetten to drag items from "Available Content" (on the left) into the "Chosen Project Content"\'s Body (on the right). Are you sure you want to leave your project\'s Body empty?', 'avpvh-print-website'),
                                 ],
                             ]
@@ -876,8 +667,8 @@ class Admin extends BaseController
                                     ]
                                 ),
                                 'translations' => [
-                                    'error_generating' => __('There was an error preparing your content. Please visit the AV-PvH Print Website Help page.', 'avpvh-print-website'),
-                                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the AV-PvH Print Website Help page.', 'avpvh-print-website'),
+                                    'error_generating' => __('There was an error preparing your content.', 'avpvh-print-website'),
+                                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
                                 ],
                             ]
                         );
@@ -1416,10 +1207,6 @@ class Admin extends BaseController
         // Don't bother checking for form submission if the "page" parameter isn't even set.
         if (! isset($_GET['page'])) {
             return;
-        }
-        if ($_GET['page'] === AVPVH_PRWB_ADMIN_HELP_PAGE_SLUG) {
-            $this->sendHelp();
-            exit;
         }
         if ($_GET['page'] === AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG) {
             $this->saveSettingsPage();

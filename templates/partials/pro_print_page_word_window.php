@@ -15,9 +15,6 @@
             </div>
             <div class="pmb-pro-window-title"><h1><?php esc_html_e('AV-PvH Print Website — Projects', 'avpvh-print-website');?></h1></div>
             <div class="pmb-pro-window-topbar-right">
-                <a class="pmb-pro-window-button" href="<?php echo esc_url(admin_url(AVPVH_PRWB_ADMIN_HELP_PAGE_PATH));?>" title="Get Help">
-                    <span class="pmb-spinner-container"><span class="dashicons
-                dashicons-sos pmb-icon"></span></span><?php esc_html_e('Help!', 'avpvh-print-website');?></a>
             </div>
         </div>
         <div class="pmb-pro-print-window-content">
