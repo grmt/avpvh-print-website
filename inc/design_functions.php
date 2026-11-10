@@ -159,15 +159,10 @@ function avpvh_prwb_design_styles(\Avpvh\PrintWebsite\orm\entities\Design $desig
 
 
 
-    // instruct PMB print service to add "powered by" for free users and cheap plans
-    $show_powered_by = true;
-    if (avpvh_prwb_has_required_plan('hobby')) {
-        $show_powered_by = false;
-    }
-    if ($design->getSetting('powered_by') || $show_powered_by) {
+    if ($design->getSetting('powered_by')) {
         $css .= "@page:first{
             @bottom{
-                content:'" . wp_strip_all_tags(__('Powered by AV-PvH Print Website Pro & WordPress', 'avpvh-print-website')) . "';
+                content:'" . wp_strip_all_tags(__('Powered by AV-PvH Print Website & WordPress', 'avpvh-print-website')) . "';
                 color:gray;
                 font-style:italic;
             }

@@ -504,13 +504,11 @@ class Admin extends BaseController
             [],
             filemtime(AVPVH_PRWB_STYLES_DIR . 'pmb-admin.css')
         );
-        if (avpvh_prwb_has_required_plan('hobbyist')) {
-            // Paid users don't need to be reminded what's pro and what's not
-            wp_add_inline_style(
-                'avpvh-print-website-admin',
-                '.pmb-pro-only, .pmb-pro-best{display:none;}'
-            );
-        }
+        // Everything is available, so there is nothing to mark as "pro".
+        wp_add_inline_style(
+            'avpvh-print-website-admin',
+            '.pmb-pro-only, .pmb-pro-best{display:none;}'
+        );
         // Nonce overkill for just checking which page they're on.
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if (isset($_GET['welcome']) || isset($_GET['upgrade_to_3'])) {
@@ -941,13 +939,11 @@ class Admin extends BaseController
             $design->getDesignTemplate();
         }
         $generations = $this->project->getAllGenerations();
-        $upgrade_url = avpvh_prwb_upgrade_url();
         $this->renderProjectTemplate(
             'project_edit_generate.php',
             [
                 'project' => $this->project,
                 'generations' => $generations,
-                'upgrade_url' => $upgrade_url,
                 'review_url' => wp_nonce_url(
                     add_query_arg(
                         [
@@ -1907,45 +1903,42 @@ class Admin extends BaseController
     {
         global $post;
         $actions = [];
-        // only paying members get the duplicate buttons
-        if (avpvh_prwb_has_required_plan('founding_members')) {
-            if ($post->post_type === CustomPostTypes::CONTENT) {
-                $original_id = get_post_meta($post->ID, '_avpvh_prwb_original_post', true);
-                $post_type = get_post_type_object(get_post_type($original_id));
-                $type_label = '';
-                if ($post_type instanceof WP_Post_Type && isset($post_type->labels, $post_type->labels->singular_name)) {
-                    $type_label = $post_type->labels->singular_name;
-                }
-                if ($original_id) {
-                    $actions[] = [
-                        'url' => get_edit_post_link($original_id),
-                        // translators: 1 post type label, 2: post title
-                        'title' => sprintf(__('Go to the %1$s "%2$s" was copied from.', 'avpvh-print-website'), $type_label, $post->post_title),
-                        // translators: %s: type label.
-                        'text' => sprintf(esc_html__('Go to Original %s', 'avpvh-print-website'), $type_label)
-                    ];
-                }
+        if ($post->post_type === CustomPostTypes::CONTENT) {
+            $original_id = get_post_meta($post->ID, '_avpvh_prwb_original_post', true);
+            $post_type = get_post_type_object(get_post_type($original_id));
+            $type_label = '';
+            if ($post_type instanceof WP_Post_Type && isset($post_type->labels, $post_type->labels->singular_name)) {
+                $type_label = $post_type->labels->singular_name;
+            }
+            if ($original_id) {
+                $actions[] = [
+                    'url' => get_edit_post_link($original_id),
+                    // translators: 1 post type label, 2: post title
+                    'title' => sprintf(__('Go to the %1$s "%2$s" was copied from.', 'avpvh-print-website'), $type_label, $post->post_title),
+                    // translators: %s: type label.
+                    'text' => sprintf(esc_html__('Go to Original %s', 'avpvh-print-website'), $type_label)
+                ];
+            }
+        } else {
+            $print_material = null;
+            $print_materials = $this->post_manager->getByPostMeta('_avpvh_prwb_original_post', (string)$post->ID, 1);
+            if ($print_materials) {
+                $print_material = reset($print_materials);
+            }
+            if ($print_material) {
+                $actions[] = [
+                    'url' => get_edit_post_link($print_material->getWpPost()->ID),
+                    // translators: 1: post title
+                    'title' => sprintf(__('Go to Print Material "%s" was created from.', 'avpvh-print-website'), $print_material->getWpPost()->post_title),
+                    'text' => esc_html__('Go to Print Material', 'avpvh-print-website')
+                ];
             } else {
-                $print_material = null;
-                $print_materials = $this->post_manager->getByPostMeta('_avpvh_prwb_original_post', (string)$post->ID, 1);
-                if ($print_materials) {
-                    $print_material = reset($print_materials);
-                }
-                if ($print_material) {
-                    $actions[] = [
-                        'url' => get_edit_post_link($print_material->getWpPost()->ID),
-                        // translators: 1: post title
-                        'title' => sprintf(__('Go to Print Material "%s" was created from.', 'avpvh-print-website'), $print_material->getWpPost()->post_title),
-                        'text' => esc_html__('Go to Print Material', 'avpvh-print-website')
-                    ];
-                } else {
-                    $actions[] = [
-                        'url' => $this->getDuplicatePostAsPrintMaterialUrl($post),
-                        // translators: %s: post title
-                        'title' => sprintf(__('Copy "%s" to New Print Material for a AV-PvH Print Website project', 'avpvh-print-website'), $post->post_title),
-                        'text' => esc_html__('Copy to Print Material', 'avpvh-print-website')
-                    ];
-                }
+                $actions[] = [
+                    'url' => $this->getDuplicatePostAsPrintMaterialUrl($post),
+                    // translators: %s: post title
+                    'title' => sprintf(__('Copy "%s" to New Print Material for a AV-PvH Print Website project', 'avpvh-print-website'), $post->post_title),
+                    'text' => esc_html__('Copy to Print Material', 'avpvh-print-website')
+                ];
             }
         }
         // add other print buttons

@@ -112,7 +112,6 @@ class DebugInfo
 
         return [
             'pmb' => AVPVH_PRWB_VERSION,
-            'avpvh_prwb_pro' => avpvh_prwb_is_premium(),
             'php' => $php_version,
             'wp' => $core_version,
             'site_url' => $site_url,

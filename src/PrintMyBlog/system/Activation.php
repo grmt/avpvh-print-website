@@ -93,24 +93,6 @@ class Activation extends BaseActivation
         // on an upgrade, activation indicator will be false
         // so if previous version isnt set, and its not an activation it must be an upgrade
         parent::detectActivation();
-        // If someone upgrades to premium, ask for their license key immediately
-        if (
-            avpvh_prwb_is_premium() &&
-            in_array(
-                $this->request_type->getRequestType(),
-                [RequestType::REQUEST_TYPE_UPDATE, RequestType::REQUEST_TYPE_REACTIVATION],
-                true
-            ) &&
-            avpvh_prwb_is_anonymous_install() &&
-            avpvh_prwb_is_registered_install()
-        ) {
-            // although freemius rechecks on each reactivation, don't recheck on each update
-            $rechecked = get_option('avpvh_prwb_rechecked_on_upgrade', false);
-            if (! $rechecked) {
-                avpvh_prwb_connect_again();
-                update_option('avpvh_prwb_rechecked_on_upgrade', true);
-            }
-        }
         if ($activation_indicator === '' && $this->version_history->previousVersion() === null) {
                 wp_safe_redirect(
                     add_query_arg(

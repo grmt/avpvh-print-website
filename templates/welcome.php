@@ -1,8 +1,6 @@
 <div class="wrap nosubsub pmb-welcome">
     <h1>🎉<?php printf(
             esc_html__( 'Welcome to %s!', 'avpvh-print-website' ),
-            avpvh_prwb_is_premium() && ! avpvh_prwb_is_free_plan() ?
-                __('AV-PvH Print Website Pro', 'avpvh-print-website') :
             __('AV-PvH Print Website', 'avpvh-print-website')
         ); ?>🎉</h1>
     <p class="pmb-middle-important-text"><?php esc_html_e( 'What would you like to do?', 'avpvh-print-website' ); ?></p>

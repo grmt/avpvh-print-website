@@ -99,7 +99,7 @@ class DefaultDesignTemplates
                                                                         'footnote' => new InputOption(__('Replace with footnote', 'avpvh-print-website')),
                                                                     ],
                                                                     [
-                                                                        'default' => avpvh_prwb_is_premium() ? 'footnote' : 'parens',
+                                                                        'default' => 'parens',
                                                                         'html_label_text' => __('Internal Hyperlinks', 'avpvh-print-website') . avpvh_prwb_pro_print_service_only(__('Footnotes and page references only work with Pro PDF Service', 'avpvh-print-website')),
                                                                         'html_help_text' => __('How to display hyperlinks to content included in this project.', 'avpvh-print-website'),
                                                                     ]
@@ -132,7 +132,7 @@ class DefaultDesignTemplates
                                                                         ),
                                                                     ],
                                                                     [
-                                                                        'default' => avpvh_prwb_is_premium() ? 'footnote' : 'remove',
+                                                                        'default' => 'remove',
                                                                         'html_label_text' => __('External Hyperlinks', 'avpvh-print-website') . avpvh_prwb_pro_print_service_only(__('Footnotes require Pro', 'avpvh-print-website')),
                                                                         'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'avpvh-print-website'),
                                                                     ]
@@ -991,14 +991,7 @@ class DefaultDesignTemplates
             __('Your theme, "%1$s", can be used in conjunction with your design. Themes are often not intended for print and can conflict with the design, but you may have content that looks broken without the theme.', 'avpvh-print-website'),
             $theme->name
         );
-        if (! avpvh_prwb_has_required_plan('business')) {
-            $use_theme_help_text = __('Note: this option is only supported for the business license.', 'avpvh-print-website') . '<br>' . $use_theme_help_text;
-        }
-        if (avpvh_prwb_has_required_plan('hobby')) {
-            $powered_by_in_pro_service = false;
-        } else {
-            $powered_by_in_pro_service = true;
-        }
+        $powered_by_in_pro_service = false;
 
         $image_sizes = $this->image_helper->getAllImageSizes();
         $image_quality_options = [
@@ -1239,7 +1232,7 @@ class DefaultDesignTemplates
                                         ),
                                     ],
                                     [
-                                        'default' => avpvh_prwb_is_premium() ? 'parens' : 'remove',
+                                        'default' => 'remove',
                                         'html_label_text' => __('Internal Hyperlinks', 'avpvh-print-website') . avpvh_prwb_pro_print_service_best(__('Footnotes and page references only work with Pro PDF Service', 'avpvh-print-website')),
                                         'html_help_text' => __(
                                             'How to display hyperlinks to content included in this project.',
@@ -1276,7 +1269,7 @@ class DefaultDesignTemplates
                                         ),
                                     ],
                                     [
-                                        'default' => avpvh_prwb_is_premium() ? 'footnote' : 'leave',
+                                        'default' => 'leave',
                                         'html_label_text' => __('External Hyperlinks', 'avpvh-print-website') . avpvh_prwb_pro_print_service_best(__('Footnotes require Pro', 'avpvh-print-website')),
                                         'html_help_text' => __(
                                             'How to display hyperlinks to content not included in this project.',

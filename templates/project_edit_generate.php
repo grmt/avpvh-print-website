@@ -4,7 +4,6 @@
  * @var $project \Avpvh\PrintWebsite\orm\entities\Project
  * @var $steps_to_urls array
  * @var $current_step string
- * @var $upgrade_url string
  * @var $review_url string
  * @var $suggest_review boolean
  */

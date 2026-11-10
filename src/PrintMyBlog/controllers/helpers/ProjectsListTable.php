@@ -206,9 +206,7 @@ class ProjectsListTable extends WP_List_Table
         ?>
 <span class="pmb-dont-break-phrase">| &nbsp; 
         <?php
-        // only show duplicate feature for Professional and Business licenses
-        if (avpvh_prwb_has_required_plan('founding_members')) {
-            ?>
+        ?>
     <a class="pmb-duplicate" href="
             <?php
             echo esc_url(
@@ -226,15 +224,6 @@ class ProjectsListTable extends WP_List_Table
             );
             ?>
                                         "><?php esc_html_e('Duplicate', 'avpvh-print-website'); ?></a>
-                                        <?php
-        } else {
-            esc_html_e('Duplicate', 'avpvh-print-website');
-            echo '&nbsp;';
-            // We want to show HTML here.
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo avpvh_prwb_hover_tip(__('Feature included in Professional and Business licenses', 'avpvh-print-website'));
-        }
-        ?>
         </span>
         <?php
     }

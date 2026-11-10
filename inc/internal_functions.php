@@ -20,50 +20,6 @@ function avpvh_prwb_external_requests_enabled()
     return ! defined('AVPVH_PRWB_DISABLE_EXTERNAL_REQUESTS') || ! AVPVH_PRWB_DISABLE_EXTERNAL_REQUESTS;
 }
 
-function avpvh_prwb_is_premium()
-{
-    return false;
-}
-
-function avpvh_prwb_is_free_plan()
-{
-    return true;
-}
-
-function avpvh_prwb_has_required_plan($plan = '')
-{
-    return false;
-}
-
-function avpvh_prwb_upgrade_url()
-{
-    return admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH);
-}
-
-function avpvh_prwb_is_registered_install()
-{
-    return false;
-}
-
-function avpvh_prwb_is_anonymous_install()
-{
-    return false;
-}
-
-function avpvh_prwb_connect_again()
-{
-}
-
-function avpvh_prwb_license()
-{
-    return null;
-}
-
-function avpvh_prwb_site_registration()
-{
-    return null;
-}
-
 /**
  * Adds a help icon with text
  * @param string $explanation
@@ -334,33 +290,26 @@ function avpvh_prwb_content_item($posty_row, Project $project, $max_nesting = nu
                                 ?>"
                                 target="_blank"><span
                                     class="dashicons dashicons-edit pmb-icon pmb-clickable"></span></a><?php
-                        if (avpvh_prwb_has_required_plan('founding_members')) {
-                            $label = '';
-                            if ($post_type->name !== CustomPostTypes::CONTENT) {
-                                $print_material = null;
-                                $print_materials = Context::instance()->reuse('Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager')->getByPostMeta('_avpvh_prwb_original_post', (string)$id, 1);
-                                if ($print_materials) {
-                                    $print_material = reset($print_materials);
-                                }
-                                if ($print_material) {
-                                    // translators: 1: post title
-                                    $label = sprintf(__('Replace "%s" with the existing Print Material for customizing.', 'avpvh-print-website'), $print_material->getWpPost()->post_title);
-                                } else {
-                                    $label = sprintf(__('Replace "%s" with a New Print Material for customizing', 'avpvh-print-website'), $title);
-                                }
+                        $label = '';
+                        if ($post_type->name !== CustomPostTypes::CONTENT) {
+                            $print_material = null;
+                            $print_materials = Context::instance()->reuse('Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager')->getByPostMeta('_avpvh_prwb_original_post', (string)$id, 1);
+                            if ($print_materials) {
+                                $print_material = reset($print_materials);
                             }
-                            if ($label) {
-                                ?><a
-                                title="<?php
-                                echo esc_attr($label);
-                                ?>"
-                                data-id="<?php echo esc_attr($id); ?>" class="pmb-duplicate-post-button" tabindex="0"><span class="dashicons dashicons-update pmb-icon pmb-clickable"></span></a><?php
+                            if ($print_material) {
+                                // translators: 1: post title
+                                $label = sprintf(__('Replace "%s" with the existing Print Material for customizing.', 'avpvh-print-website'), $print_material->getWpPost()->post_title);
+                            } else {
+                                $label = sprintf(__('Replace "%s" with a New Print Material for customizing', 'avpvh-print-website'), $title);
                             }
-                        } else {
-                            if ($post_type->name !== CustomPostTypes::CONTENT) {
-                                ?><span tabindex="0" class="dashicons dashicons-update pmb-icon pmb-disabled-icon" title="<?php esc_attr_e('Upgrade to Professional License for one-click copying to Print Materials for customization.', 'avpvh-print-website'); ?>"></span>
-                                <?php
-                            }
+                        }
+                        if ($label) {
+                            ?><a
+                            title="<?php
+                            echo esc_attr($label);
+                            ?>"
+                            data-id="<?php echo esc_attr($id); ?>" class="pmb-duplicate-post-button" tabindex="0"><span class="dashicons dashicons-update pmb-icon pmb-clickable"></span></a><?php
                         }
                         ?><a
                                 title="<?php
