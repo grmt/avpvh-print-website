@@ -100,12 +100,6 @@ class Common extends BaseController
             ['jquery-ui-dialog'],
             '1.0.0'
         );
-        wp_register_script(
-            'docraptor',
-            AVPVH_PRWB_SCRIPTS_URL . 'docraptor.js',
-            [],
-            '1.0.0'
-        );
         // Enqueue the CSS for compatibility with known troublemaking plugins.
         wp_register_style(
             'avpvh-print-website-plugin-compatibility',

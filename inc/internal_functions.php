@@ -445,19 +445,3 @@ function avpvh_prwb_get_filename($url, $remove_extension = false){
     return $filename_and_extension;
 }
 
-/**
- * Returns whether or not to use PMB Central for generate requests. (We like to use DocRaptor's server on free sites
- * to keep the load down on printmy.blog; but for paying customers we like to monitor their API requests for quality assurance.)
- * @return int
- */
-function avpvh_prwb_use_avpvh_prwb_central(){
-    $use_avpvh_prwb_central = 0;
-    if (! avpvh_prwb_external_requests_enabled()) {
-        return $use_avpvh_prwb_central;
-    }
-    if (avpvh_prwb_has_required_plan('business') || (defined('AVPVH_PRWB_USE_CENTRAL') && AVPVH_PRWB_USE_CENTRAL)) {
-        $use_avpvh_prwb_central = 1;
-    }
-
-    return $use_avpvh_prwb_central;
-}

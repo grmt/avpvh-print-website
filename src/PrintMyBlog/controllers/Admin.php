@@ -24,7 +24,6 @@ use Avpvh\PrintWebsite\services\config\Config;
 use Avpvh\PrintWebsite\services\DebugInfo;
 use Avpvh\PrintWebsite\services\ExternalResourceCache;
 use Avpvh\PrintWebsite\services\FileFormatRegistry;
-use Avpvh\PrintWebsite\services\PmbCentral;
 use Avpvh\PrintWebsite\services\SvgDoer;
 use Avpvh\PrintWebsite\system\Context;
 use Avpvh\PrintWebsite\system\CustomPostTypes;
@@ -130,10 +129,6 @@ class Admin extends BaseController
      */
     protected $debug_info;
 
-    /**
-     * @var PmbCentral
-     */
-    protected $avpvh_prwb_central;
 
     /**
      * The project referenced on this request, if any.
@@ -164,7 +159,6 @@ class Admin extends BaseController
      * @param SvgDoer $svg_doer
      * @param OneTimeNotificationManager $notification_manager
      * @param DebugInfo $debug_info
-     * @param PmbCentral $avpvh_prwb_central
      * @param PostWrapperManager $post_manager
      * @param ExternalResourceCache $external_resource_cache
      * @param Config $config
@@ -179,7 +173,6 @@ class Admin extends BaseController
         SvgDoer $svg_doer,
         OneTimeNotificationManager $notification_manager,
         DebugInfo $debug_info,
-        PmbCentral $avpvh_prwb_central,
         PostWrapperManager $post_manager,
         ExternalResourceCache $external_resource_cache,
         Config $config
@@ -193,7 +186,6 @@ class Admin extends BaseController
         $this->svg_doer = $svg_doer;
         $this->notification_manager = $notification_manager;
         $this->debug_info = $debug_info;
-        $this->avpvh_prwb_central = $avpvh_prwb_central;
         $this->post_manager = $post_manager;
         $this->external_resource_cache = $external_resource_cache;
         $this->config = $config;
@@ -217,7 +209,6 @@ class Admin extends BaseController
 
         $this->makePrintContentsSaySaved();
         $this->notification_manager->showOneTimeNotifications();
-        $this->maybeRefreshCreditCache();
         $this->earlyResponseHandling();
     }
 
@@ -610,7 +601,7 @@ class Admin extends BaseController
                         wp_enqueue_script(
                             'avpvh-print-website-generate',
                             AVPVH_PRWB_SCRIPTS_URL . 'pmb-generate.js',
-                            ['avpvh-print-website-modal', 'docraptor'],
+                            ['avpvh-print-website-modal'],
                             filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'pmb-generate.js')
                         );
                         wp_enqueue_style(
@@ -637,35 +628,7 @@ class Admin extends BaseController
                                 ),
                                 'avpvh_prwb_ajax' => apply_filters('\Avpvh\PrintWebsite\controllers\Admin::enqueueScripts avpvh_prwb_ajax', avpvh_prwb_ajax_url(), $this->project),
                                 'site_url' => apply_filters('\Avpvh\PrintWebsite\controllers\Admin::enqueueScripts site_url', site_url(), $this->project),
-                                'use_avpvh_prwb_central_for_previews' => avpvh_prwb_use_avpvh_prwb_central(),
-                                'license_data' => [
-                                    'endpoint' => $this->avpvh_prwb_central->getCentralUrl(),
-                                    'license_id' => '',
-                                    'install_id' => '',
-                                    'authorization_header' => '',
-                                ],
 
-                                'doc_attrs' => apply_filters(
-                                    '\Avpvh\PrintWebsite\controllers\Admin::enqueueScripts doc_attrs',
-                                    [
-                                        'test' => defined('AVPVH_PRWB_TEST_LIVE') && AVPVH_PRWB_TEST_LIVE ? true : false,
-                                        'type' => 'pdf',
-                                        'javascript' => true, // Javascript by DocRaptor
-                                        'name' => $this->project->getPublishedTitle(),
-                                        'ignore_console_messages' => true,
-                                        'ignore_resource_errors' => true,
-                                        'pipeline' => '10.1',
-                                        'prince_options' => [
-                                            'base_url' => site_url(),
-                                            'media' => 'print',                                       // use screen
-                                            'http_timeout' => 60,
-                                            'http_insecure' => true,
-                                            // styles
-                                            // instead of print styles
-                                            // javascript: true, // use Prince's JS, which is more error tolerant
-                                        ],
-                                    ]
-                                ),
                                 'translations' => [
                                     'error_generating' => __('There was an error preparing your content.', 'avpvh-print-website'),
                                     'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
@@ -978,14 +941,12 @@ class Admin extends BaseController
             $design->getDesignTemplate();
         }
         $generations = $this->project->getAllGenerations();
-        $license_info = null;
         $upgrade_url = avpvh_prwb_upgrade_url();
         $this->renderProjectTemplate(
             'project_edit_generate.php',
             [
                 'project' => $this->project,
                 'generations' => $generations,
-                'license_info' => $license_info,
                 'upgrade_url' => $upgrade_url,
                 'review_url' => wp_nonce_url(
                     add_query_arg(
@@ -1796,18 +1757,6 @@ class Admin extends BaseController
         $upload_dir_info = wp_upload_dir();
         $folder = new Folder($upload_dir_info['basedir'] . '/pmb');
         $folder->delete();
-    }
-
-    /**
-     * We avoid asking PMB central for the credits alloted to a license as much as possible. But on the account page
-     * we make sure to refresh it. This is the page the user arrives at after upgrading or making a purchase, so
-     * the cache often needs to be refreshed here.
-     */
-    public function maybeRefreshCreditCache()
-    {
-        if (isset($_GET['page']) && $_GET['page'] === 'avpvh-print-website-projects-account') {
-            return;
-        }
     }
 
     /**

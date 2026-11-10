@@ -8,7 +8,6 @@ use Avpvh\PrintWebsite\domain\PrintNowSettings;
 use Avpvh\PrintWebsite\entities\ProjectProgress;
 use Avpvh\PrintWebsite\orm\managers\ProjectManager;
 use Avpvh\PrintWebsite\services\FileFormatRegistry;
-use Avpvh\PrintWebsite\services\PmbCentral;
 use Avpvh\PrintWebsite\system\Context;
 use Avpvh\PrintWebsite\Twine\controllers\BaseController;
 use Avpvh\PrintWebsite\Twine\helpers\Array2;
@@ -68,10 +67,6 @@ class Frontend extends BaseController
      */
     protected $format_registry;
 
-    /**
-     * @var PmbCentral
-     */
-    protected $avpvh_prwb_central;
 
     /**
      * @var \Avpvh\PrintWebsite\Twine\orm\entities\PostWrapper|null
@@ -82,16 +77,13 @@ class Frontend extends BaseController
      * Context injects these dependencies.
      * @param ProjectManager $project_manager
      * @param FileFormatRegistry $format_registry
-     * @param PmbCentral $avpvh_prwb_central
      */
     public function inject(
         ProjectManager $project_manager,
-        FileFormatRegistry $format_registry,
-        PmbCentral $avpvh_prwb_central
+        FileFormatRegistry $format_registry
     ) {
         $this->project_manager = $project_manager;
         $this->format_registry = $format_registry;
-        $this->avpvh_prwb_central = $avpvh_prwb_central;
     }
 
     /**
@@ -266,38 +258,10 @@ class Frontend extends BaseController
                 ),
                 'avpvh_prwb_ajax' => avpvh_prwb_ajax_url(),
                 'site_url' => site_url(),
-                'use_avpvh_prwb_central_for_previews' => avpvh_prwb_use_avpvh_prwb_central(),
-                'license_data' => [
-                    'endpoint' => $this->avpvh_prwb_central->getCentralUrl(),
-                    'license_id' => '',
-                    'install_id' => '',
-                    'authorization_header' => '',
-                ],
 
-                'doc_attrs' => apply_filters(
-                    '\Avpvh\PrintWebsite\controllers\Admin::enqueueScripts doc_attrs',
-                    [
-                        'test' => defined('AVPVH_PRWB_TEST_LIVE') && AVPVH_PRWB_TEST_LIVE ? true : false,
-                        'type' => 'pdf',
-                        'javascript' => true, // Javascript by DocRaptor
-                        'name' => $this->project->getPublishedTitle(),
-                        'ignore_console_messages' => true,
-                        'ignore_resource_errors' => true,
-                        'pipeline' => '10.1',
-                        'prince_options' => [
-                            'base_url' => site_url(),
-                            'media' => 'print',                                       // use screen
-                            'http_timeout' => 60,
-                            'http_insecure' => true,
-                            // styles
-                            // instead of print styles
-                            // javascript: true, // use Prince's JS, which is more error tolerant
-                        ],
-                    ]
-                ),
                 'translations' => [
-                    'error_generating' => __('There was an error preparing your content. Please visit the AV-PvH Print Website Help page.', 'avpvh-print-website'),
-                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public? Please visit the AV-PvH Print Website Help page.', 'avpvh-print-website'),
+                    'error_generating' => __('There was an error preparing your content.', 'avpvh-print-website'),
+                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
                 ],
             ]
         );

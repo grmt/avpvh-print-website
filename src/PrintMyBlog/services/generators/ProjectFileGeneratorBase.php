@@ -11,7 +11,6 @@ use Avpvh\PrintWebsite\orm\entities\Project;
 use Avpvh\PrintWebsite\entities\ProjectGeneration;
 use Avpvh\PrintWebsite\orm\entities\ProjectSection;
 use Avpvh\PrintWebsite\services\ExternalResourceCache;
-use Avpvh\PrintWebsite\services\PmbCentral;
 use Avpvh\PrintWebsite\services\SectionTemplateRegistry;
 use ReflectionObject;
 use stdClass;

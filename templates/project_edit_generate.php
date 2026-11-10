@@ -4,7 +4,6 @@
  * @var $project \Avpvh\PrintWebsite\orm\entities\Project
  * @var $steps_to_urls array
  * @var $current_step string
- * @var $license_info null|array with keys 'expiry_date', 'remaining_credits' and 'plan_credits'
  * @var $upgrade_url string
  * @var $review_url string
  * @var $suggest_review boolean
@@ -66,18 +65,6 @@ $clear_cache_link = wp_nonce_url(
 );
 do_action('project_edit_generate__under_header', $project, $generations);
 ?>
-<?php if (is_array($license_info)){
-   ?>
-    <p class="pmb-credit-reminder"><?php
-        printf(
-            esc_html__('You have %1$s/%2$s download credits left which expire on %3$s',
-                'avpvh-print-website'),
-            '<span class="pmb-credits-remaining">' . $license_info['remaining_credits'] . '</span>',
-            $license_info['plan_credits'],
-            date_i18n(get_option('date_format'),rest_parse_date($license_info['expiry_date'])))
-        ;?></p>
-    <?php
-}?>
 <?php
 foreach($generations as $generation){
     $generation_base_args = array_merge(

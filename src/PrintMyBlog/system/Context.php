@@ -58,7 +58,6 @@ class Context extends BaseContext
                 'Avpvh\PrintWebsite\services\SvgDoer' => self::REUSE,
                 'Avpvh\PrintWebsite\Twine\services\notifications\OneTimeNotificationManager' => self::REUSE,
                 'Avpvh\PrintWebsite\services\DebugInfo' => self::REUSE,
-                'Avpvh\PrintWebsite\services\PmbCentral' => self::REUSE,
                 'Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager' => self::REUSE,
                 'Avpvh\PrintWebsite\services\ExternalResourceCache' => self::REUSE,
                 'Avpvh\PrintWebsite\services\config\Config' => self::REUSE,
@@ -71,7 +70,6 @@ class Context extends BaseContext
                 'Avpvh\PrintWebsite\orm\managers\ProjectManager' => self::REUSE,
                 'Avpvh\PrintWebsite\services\FileFormatRegistry' => self::REUSE,
                 'Avpvh\PrintWebsite\db\PostFetcher' => self::REUSE,
-                'Avpvh\PrintWebsite\services\PmbCentral' => self::REUSE,
                 'Avpvh\PrintWebsite\Twine\orm\managers\PostWrapperManager' => self::REUSE,
                 'Avpvh\PrintWebsite\services\ExternalResourceCache' => self::REUSE,
             ],
@@ -168,7 +166,6 @@ class Context extends BaseContext
             'Avpvh\PrintWebsite\controllers\Frontend' => [
                 'Avpvh\PrintWebsite\orm\managers\ProjectManager' => self::REUSE,
                 'Avpvh\PrintWebsite\services\FileFormatRegistry'   => self::REUSE,
-                'Avpvh\PrintWebsite\services\PmbCentral' => self::REUSE,
             ],
             'Avpvh\PrintWebsite\system\FileUploads' => [],
         ];
