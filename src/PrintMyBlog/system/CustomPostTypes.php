@@ -43,8 +43,8 @@ class CustomPostTypes
         register_post_type(
             self::PROJECT,
             [
-                'label' => esc_html__('Projects', 'avpvh-print-website'),
-                'description' => esc_html__('Projects for printing with AV-PvH Print Website', 'avpvh-print-website'),
+                'label' => esc_html__('Saved Prints', 'avpvh-print-website'),
+                'description' => esc_html__('Saved prints for printing with AV-PvH Print Website', 'avpvh-print-website'),
                 'capability_type' => 'avpvh_prwb_project',
                 'capabilities' => array(
                     'publish_posts' => 'publish_avpvh_prwb_projects',

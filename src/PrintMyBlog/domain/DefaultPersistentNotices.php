@@ -29,7 +29,7 @@ class DefaultPersistentNotices
                 '<p>'
                 . sprintf(
                     // translators: 1: html tag, 2: html tag
-                    __('This is the quick-and-easy option, best for making printouts for your own records. For a designed document with a title page, table of contents and chosen content, use %1$sPro Print%2$s.', 'avpvh-print-website'),
+                    __('This is the quick-and-easy option, best for making printouts for your own records. For a designed document with a title page, table of contents and chosen content, use %1$sSaved Prints%2$s.', 'avpvh-print-website'),
                     '<a href="'
                     . esc_attr(admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH))
                     . '">',
@@ -40,9 +40,9 @@ class DefaultPersistentNotices
             ),
             new Notice(
                 'avpvh_prwb_free_notice',
-                __('About Pro Print', 'avpvh-print-website'),
+                __('About Saved Prints', 'avpvh-print-website'),
                 '<p>'
-                . __('Pro Print makes designed documents from your content: PDF, ePub and Word, generated in your browser.', 'avpvh-print-website')
+                . __('A saved print is a document you set up once (which content, in which order, with which design and format) and can generate again whenever the content changes: PDF, ePub or Word, made in your browser.', 'avpvh-print-website')
                 . '</p><p>'
                 . sprintf(
                     // translators: 1: html tag, 2: html tag
@@ -63,7 +63,7 @@ class DefaultPersistentNotices
             ),
             new Notice(
                 'avpvh_prwb_choose_design',
-                __('Project Designs are like WordPress Themes', 'avpvh-print-website'),
+                __('Designs are like WordPress Themes', 'avpvh-print-website'),
                 '<p>' . __('Each has a different look and options that can be customized.', 'avpvh-print-website') . '</p>'
                 . '<p>' . __('The "Classic" design is the most similar AV-PvH Print Website’s Quick Print, so it’s a good default choice.', 'avpvh-print-website') . '</p>'
                 . '<p>' . __('Click on the preview image for more details, and feel free to come back to this page later if you want to try a different design.', 'avpvh-print-website') . '</p>',
@@ -74,27 +74,27 @@ class DefaultPersistentNotices
                 __('Each Design has Different Options and is Reusable', 'avpvh-print-website'),
                 '<p>' . __('Below are your chosen design’s customization options.', 'avpvh-print-website') . '</p>'
                 . '<p>' . __('If you don’t see an option you need, you may want to go back and choose a different design, or ask the design’s author for it.', 'avpvh-print-website') . '</p>'
-                . '<p>' . __('Note: designs are reused between projects. So customizations to this design will be reused by other projects using this same design', 'avpvh-print-website') . '</p>',
+                . '<p>' . __('Note: designs are reused between saved prints. So customizations to this design will be reused by other saved prints using this same design', 'avpvh-print-website') . '</p>',
                 $this->getOptionsForProjectSubaction('customize_design')
             ),
             new Notice(
                 'avpvh_prwb_edit_content2',
-                __('How to Edit Project Content', 'avpvh-print-website'),
+                __('How to Edit Saved Print Content', 'avpvh-print-website'),
                 '<ol>'
-                . '<li>' . __('Find the articles (posts, pages, other post types) from WordPress you want to add on the left, and add it to your project on the right by dragging', 'avpvh-print-website') . '</li>'
-                . '<li>' . __('Title Page and Table of Contents print materials are automatically added to each project, but you can remove or customize them.', 'avpvh-print-website') . '</li>'
-                . '<li>' . __('Place articles in either front matter, body, or back matter, according to how you want your project organized. Each design can style them differently (eg front matter is often is numbered with roman numerals)', 'avpvh-print-website') . '</li>'
+                . '<li>' . __('Find the articles (posts, pages, other post types) from WordPress you want to add on the left, and add it to your saved print on the right by dragging', 'avpvh-print-website') . '</li>'
+                . '<li>' . __('Title Page and Table of Contents print materials are automatically added to each saved print, but you can remove or customize them.', 'avpvh-print-website') . '</li>'
+                . '<li>' . __('Place articles in either front matter, body, or back matter, according to how you want your saved print organized. Each design can style them differently (eg front matter is often is numbered with roman numerals)', 'avpvh-print-website') . '</li>'
                 . '<li>' . __('Nest content inside others to create parts', 'avpvh-print-website') . '</li>'
                 . '</ol>',
                 $this->getOptionsForProjectSubaction('content')
             ),
             new Notice(
                 'avpvh_prwb_edit_meta',
-                __('Everything Else About Your Project is Stored Here', 'avpvh-print-website'),
-                '<p>' . __('Different formats and designs may require other information about your project.', 'avpvh-print-website') .
+                __('Everything Else About Your Saved Print is Stored Here', 'avpvh-print-website'),
+                '<p>' . __('Different formats and designs may require other information about your saved print.', 'avpvh-print-website') .
                 '</p>'
                 . '<p>' . __('Some examples of metadata are: title page info, file info, or copyright data.', 'avpvh-print-website') . '</p>'
-                . '<p>' . __('So although your choice of design may affect what metadata is required, it is not shared with other projects.', 'avpvh-print-website')
+                . '<p>' . __('So although your choice of design may affect what metadata is required, it is not shared with other saved prints.', 'avpvh-print-website')
                 . '</p>',
                 $this->getOptionsForProjectSubaction('metadata')
             ),
@@ -102,7 +102,7 @@ class DefaultPersistentNotices
                 'avpvh_prwb_generate',
                 __('Generate and View Your File', 'avpvh-print-website'),
                 '<p>' .
-                    __('Your project is ready to be generated! Clicking "Generate" will compile your content into a print-page.', 'avpvh-print-website') .
+                    __('Your saved print is ready to be generated! Clicking "Generate" will compile your content into a print-page.', 'avpvh-print-website') .
                 '</p>'
                 . '<p>' . __('On the print page, use “Print with Browser” and choose “Save as PDF” to get a PDF file.', 'avpvh-print-website') . '</p>',
                 $this->getOptionsForProjectSubaction('generate')
@@ -110,7 +110,7 @@ class DefaultPersistentNotices
             new Notice(
                 'avpvh_prwb_print_materials',
                 __('Posts just for AV-PvH Print Website', 'avpvh-print-website'),
-                '<p>' . __('AV-PvH Print Website "Print Materials" are like private posts. They aren’t visible to site visitors, but you can use them in your Pro Print Projects.', 'avpvh-print-website') . '</p>',
+                '<p>' . __('AV-PvH Print Website "Print Materials" are like private posts. They aren’t visible to site visitors, but you can use them in your saved prints.', 'avpvh-print-website') . '</p>',
                 $this->getOptionsForScreen('edit-avpvh_prwb_content')
             ),
 

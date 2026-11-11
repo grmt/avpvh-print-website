@@ -102,7 +102,7 @@ class LegacyMigration
                 sprintf(
                     // translators: 1: number of projects, designs and contents, 2: number of posts and widgets.
                     __(
-                        'AV-PvH Print Website moved over the Print My Blog data: %1$d projects, designs and contents, and the shortcodes in %2$d posts or widgets. The Print My Blog plugin is deactivated and can be deleted.',
+                        'AV-PvH Print Website moved over the Print My Blog data: %1$d saved prints, designs and contents, and the shortcodes in %2$d posts or widgets. The Print My Blog plugin is deactivated and can be deleted.',
                         'avpvh-print-website'
                     ),
                     (int) ($done['posts'] ?? 0),

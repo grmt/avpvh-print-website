@@ -520,7 +520,7 @@ class Project extends PostWrapper
                     'subsections' => [
                         'post_title' => new TextInput(
                             [
-                                'html_label_text' => __('Project Title', 'avpvh-print-website'),
+                                'html_label_text' => __('Title', 'avpvh-print-website'),
                             ]
                         ),
                     ],

@@ -134,7 +134,7 @@ class PrintOptions
                 //phpcs:enable
             ],
             'font_size' => [
-                'label' => esc_html__('Font Size', 'avpvh-print-website') . ($upsells ? avpvh_prwb_pro_better(__('Pro Print lets you specify header and text size and font', 'avpvh-print-website')) : ''),
+                'label' => esc_html__('Font Size', 'avpvh-print-website') . ($upsells ? avpvh_prwb_pro_better(__('Saved Prints lets you specify header and text size and font', 'avpvh-print-website')) : ''),
                 'default' => 'normal',
                 'options' => [
                     'tiny' => esc_html__('Tiny (1/2 size)', 'avpvh-print-website'),
@@ -158,7 +158,7 @@ class PrintOptions
                 //phpcs:enable
             ],
             'links' => [
-                'label' => esc_html__('Include Hyperlinks', 'avpvh-print-website') . ($upsells ? avpvh_prwb_pro_better(__('Pro Print with Pro PDF Service supports changing hyperlinks to page references or footnotes', 'avpvh-print-website')) : ''),
+                'label' => esc_html__('Include Hyperlinks', 'avpvh-print-website') . ($upsells ? avpvh_prwb_pro_better(__('Saved Prints with Pro PDF Service supports changing hyperlinks to page references or footnotes', 'avpvh-print-website')) : ''),
                 'default' => 'include',
                 'options' => [
                     'include' => esc_html__('Include', 'avpvh-print-website'),

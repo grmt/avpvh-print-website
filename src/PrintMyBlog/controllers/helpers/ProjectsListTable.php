@@ -261,7 +261,7 @@ class ProjectsListTable extends WP_List_Table
      */
     public function no_items()
     {
-        esc_html_e('Click "Add New Project" 👆 To Make Your First Project!', 'avpvh-print-website');
+        esc_html_e('Click "Add New Saved Print" 👆 To Make Your First Saved Print!', 'avpvh-print-website');
     }
 
     /**

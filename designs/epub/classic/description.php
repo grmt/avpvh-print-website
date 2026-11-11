@@ -6,10 +6,10 @@
 <h2><?php esc_html_e('Features', 'avpvh-print-website'); ?></h2>
 <ul class="pmb-list">
     <li><?php esc_html_e('Supports nesting articles (like posts and pages) into “parts”', 'avpvh-print-website'); ?></li>
-    <li><?php esc_html_e('External hyperlinks (links to web pages not in the project) are left as working hyperlinks', 'avpvh-print-website'); ?></li>
-    <li><?php esc_html_e('Internal hyperlinks (links to content included in the project) are converted into links to the appropriate page of the eBook', 'avpvh-print-website'); ?>
+    <li><?php esc_html_e('External hyperlinks (links to web pages not in the saved print) are left as working hyperlinks', 'avpvh-print-website'); ?></li>
+    <li><?php esc_html_e('Internal hyperlinks (links to content included in the saved print) are converted into links to the appropriate page of the eBook', 'avpvh-print-website'); ?>
     </li>
-    <li><?php esc_html_e('The default title page can include: Project Title, Subtitle, Site URL, Date Printed, Credit to AV-PvH Print Website', 'avpvh-print-website'); ?>
+    <li><?php esc_html_e('The default title page can include: Title, Subtitle, Site URL, Date Printed, Credit to AV-PvH Print Website', 'avpvh-print-website'); ?>
     </li>
     <li><?php esc_html_e('Each article can include: Title, ID, Author, URL, Date Published, Categories and Tags, Featured Image, Excerpt, Custom Fields, Content', 'avpvh-print-website'); ?>
     </li>

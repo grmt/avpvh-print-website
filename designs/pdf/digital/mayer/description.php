@@ -26,7 +26,7 @@
         ?></li>
     <li><?php
         esc_html_e(
-            'Internal links (hyperlinks to content included in the project) are replaced with page references.',
+            'Internal links (hyperlinks to content included in the saved print) are replaced with page references.',
             'avpvh-print-website'
         );
         ?><?php avpvh_prwb_pro_print_service_only_e(); ?></li>

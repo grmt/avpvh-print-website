@@ -95,9 +95,9 @@ class PdfGenerator extends HtmlBaseGenerator
                 'domains_to_not_map' => $this->external_resource_cache->domainsToNotMap(),
                 'translations' => [
                     'error_generating' => __('There was an error preparing your content.', 'avpvh-print-website'),
-                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
-                    'many_articles' => __('Your project is very big and you might have errors downloading the file. If so, try splitting your content into multiple projects and instead creating multiple smaller files.', 'avpvh-print-website'),
-                    'many_images' => __('Your project has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple projects or reducing the image quality set on your design.', 'avpvh-print-website'),
+                    'socket_error' => __('Your saved print could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
+                    'many_articles' => __('Your saved print is very big and you might have errors downloading the file. If so, try splitting your content into multiple saved prints and instead creating multiple smaller files.', 'avpvh-print-website'),
+                    'many_images' => __('Your saved print has lots of images and you might have errors downloading the file. If so, try spltting your content into multiple saved prints or reducing the image quality set on your design.', 'avpvh-print-website'),
                 ],
             ]
         );

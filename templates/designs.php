@@ -6,8 +6,8 @@
  */
 ?>
 <div class="wrap nosubsub">
-    <h1 class="wp-heading-inline"><?php _e('Pro Print ― Designs', 'avpvh-print-website');?></h1>
-    <p><?php _e('Designs in AV-PvH Print Website are like Themes in WordPress: their settings affect how the projects are displayed. Edit them below or change which ones are used by default.', 'avpvh-print-website');?></p>
+    <h1 class="wp-heading-inline"><?php _e('Designs', 'avpvh-print-website');?></h1>
+    <p><?php _e('Designs in AV-PvH Print Website are like Themes in WordPress: their settings affect how the saved prints are displayed. Edit them below or change which ones are used by default.', 'avpvh-print-website');?></p>
 <?php
 foreach($formats as $format){
     ?>

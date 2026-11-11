@@ -21,7 +21,7 @@ $generate_url = add_query_arg(
                     <?php esc_html_e('Back', 'avpvh-print-website'); ?>
                 </a>
             </div>
-            <div class="pmb-pro-window-title"><h1><?php esc_html_e('AV-PvH Print Website — Projects', 'avpvh-print-website');?></h1></div>
+            <div class="pmb-pro-window-title"><h1><?php esc_html_e('AV-PvH Print Website — Saved Prints', 'avpvh-print-website');?></h1></div>
             <div class="pmb-pro-window-topbar-right">
             </div>
         </div>

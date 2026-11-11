@@ -15,7 +15,7 @@ use Avpvh\PrintWebsite\domain\FrontendPrintSettings;
     <form method="post">
         <h2><?php esc_html_e('Front-End Print Buttons', 'avpvh-print-website'); ?></h2>
         <p><?php _e('Viewers will see these buttons when they visit your website.', 'avpvh-print-website'); ?></p>
-        <p class="pmb-help"><?php _e('These are the legacy print buttons which use the "Quick Print" technology. We\'re currently working on new print buttons that will use "Pro Print" technology.', 'avpvh-print-website'); ?></p>
+        <p class="pmb-help"><?php _e('These print buttons use the "Quick Print" technology.', 'avpvh-print-website'); ?></p>
 
         <table class="form-table">
             <tbody>
@@ -103,7 +103,7 @@ use Avpvh\PrintWebsite\domain\FrontendPrintSettings;
         <hr>
         <h2><?php _e('Admin Print Buttons', 'avpvh-print-website'); ?></h2>
         <p><?php _e('Administrators and other privileged users will see these in the wp-admin (like when editing a post.)', 'avpvh-print-website'); ?></p>
-        <p class="pmb-help"><?php _e('These print buttons use "Pro Print" technology (which has both free and paid options.)', 'avpvh-print-website'); ?></p>
+        <p class="pmb-help"><?php _e('These print buttons use the same technology as Saved Prints.', 'avpvh-print-website'); ?></p>
         <?php echo $settings_form->getHtmlAndJs(); ?>
         <?php wp_nonce_field('pmb-settings'); ?>
         <button class="button-primary"><?php esc_html_e('Save Settings', 'avpvh-print-website'); ?></button> <input name="pmb-reset" class="button button-secondary" onclick="return confirm('<?php echo esc_attr(__('Are you sure you want to reset the settings back to defaults?', 'avpvh-print-website')); ?>');" type="submit" value="<?php esc_html_e('Reset to Defaults', 'avpvh-print-website'); ?>">

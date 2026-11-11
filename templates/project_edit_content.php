@@ -19,7 +19,7 @@ avpvh_prwb_render_template(
 	'partials/project_header.php',
 	[
 		'project' => $project,
-		'page_title' => __('Edit Project Content', 'avpvh-print-website'),
+		'page_title' => __('Edit Saved Print Content', 'avpvh-print-website'),
 		'current_step' => $current_step,
 		'steps_to_urls' => $steps_to_urls
 	]
@@ -36,7 +36,7 @@ avpvh_prwb_render_template(
                     <div class="pmb-project-choices-text"><h2 class="pmb-inline-header pmb-snug-header"><span class="dashicons dashicons-search"></span><?php _e('Available Content', 'avpvh-print-website');?>
                         <?php
                         echo avpvh_prwb_hover_help(
-                                __('Select content from your website, then move it into your project.', 'avpvh-print-website')
+                                __('Select content from your website, then move it into your saved print.', 'avpvh-print-website')
                         );
                         ?></h2>
                             <span id="pmb-use-ctrl-key" class="pmb-comment pmb-use-ctrl-key"><?php _e('Use <em>CTRL</em> or <em>SHIFT</em> to select multiple items', 'avpvh-print-website');?></span></div>
@@ -123,7 +123,7 @@ avpvh_prwb_render_template(
                                 <tr>
                                     <th><label for="pmb-show-included"><?php esc_html_e('Show Included Content?', 'avpvh-print-website');?></label></th>
                                     <td><input type="checkbox" form="pmb-filter-form" name="pmb-show-included" id="pmb-show-included">
-                                        <p class="pmb-help"><?php esc_html_e('Show content already added to project', 'avpvh-print-website');?></p>
+                                        <p class="pmb-help"><?php esc_html_e('Show content already added to saved print', 'avpvh-print-website');?></p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -171,7 +171,7 @@ avpvh_prwb_render_template(
                 <div class="pmb-actions-column">
                     <button id="pmb-add-item" class="button" title="<?php
                     echo esc_attr(
-                            __('Add selected items to project', 'avpvh-print-website')
+                            __('Add selected items to saved print', 'avpvh-print-website')
                     );
                     ?>"></span><span class="dashicons dashicons-plus"></span></button>
                     <button id="pmb-remove-item" class="button" title="<?php
@@ -191,7 +191,7 @@ avpvh_prwb_render_template(
                     ?>"><span class="dashicons dashicons-arrow-down-alt2"></span></button>
                 </div>
                 <div class="pmb-project-column pmb-project-matters-wrapper">
-                    <h2 class="pmb-snug-header"><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Chosen Project Content', 'avpvh-print-website');?></h2>
+                    <h2 class="pmb-snug-header"><span class="dashicons dashicons-portfolio"></span> <?php esc_html_e('Chosen Saved Print Content', 'avpvh-print-website');?></h2>
                     <div class="pmb-project-matters pmb-scrollable-window">
                         <?php if($project_support_front_matter){
                            ?>
