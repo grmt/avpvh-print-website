@@ -241,7 +241,7 @@ function avpvh_prwb_content_item($posty_row, Project $project, $max_nesting = nu
         <div class="pmb-project-item-header" title="<?php
         echo esc_attr(
             sprintf(
-                __('Drag the %s "%s" into your project', 'avpvh-print-website'),
+                __('Drag the %s "%s" into your saved print', 'avpvh-print-website'),
                 $post_type->labels->singular_name,
                 $title
             )
@@ -316,7 +316,7 @@ function avpvh_prwb_content_item($posty_row, Project $project, $max_nesting = nu
                                 echo esc_attr(
                                     sprintf(
                                             // translators: %s: post title
-                                        __('Add "%s" to project', 'avpvh-print-website'),
+                                        __('Add "%s" to saved print', 'avpvh-print-website'),
                                         esc_html($title)
                                     )
                                 );

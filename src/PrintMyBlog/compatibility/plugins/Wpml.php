@@ -483,7 +483,7 @@ class Wpml extends CompatibilityBase
                                 )
                             )
                             . $html_helper->div(
-                                __('Translate Project Metadata', 'avpvh-print-website')
+                                __('Translate Saved Print Metadata', 'avpvh-print-website')
                                 . $post_status_display->get_status_html($project->getWpPost()->ID, $language_code)
                             )
                             . $design_translations_html

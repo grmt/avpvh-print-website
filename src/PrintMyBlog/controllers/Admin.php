@@ -230,8 +230,8 @@ class Admin extends BaseController
 
         $projects_page = add_submenu_page(
             AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
-            esc_html__('Pro Print', 'avpvh-print-website'),
-            esc_html__('Pro Print', 'avpvh-print-website'),
+            esc_html__('Saved Prints', 'avpvh-print-website'),
+            esc_html__('Saved Prints', 'avpvh-print-website'),
             AVPVH_PRWB_ADMIN_CAP,
             AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG,
             array($this, 'renderProjects')
@@ -565,12 +565,12 @@ class Admin extends BaseController
                                 'levels' => $this->project->getLevelsAllowed(),
                                 'default_rest_url' => function_exists('rest_url') ? rest_url('/wp/v2') : '',
                                 'translations' => [
-                                    'cant_add' => __('Please select items to add to the project', 'avpvh-print-website'),
+                                    'cant_add' => __('Please select items to add to the saved print', 'avpvh-print-website'),
                                     'cant_remove' => __('Please select items to remove', 'avpvh-print-website'),
                                     'cant_move' => __('Please select items to move', 'avpvh-print-website'),
                                     'insert_error' => __('Error inserting.', 'avpvh-print-website'),
                                     'duplicate_error' => __('Error creating new print material.', 'avpvh-print-website'),
-                                    'empty_content_warning' => __('Your project\'s Body is empty. You may have forgetten to drag items from "Available Content" (on the left) into the "Chosen Project Content"\'s Body (on the right). Are you sure you want to leave your project\'s Body empty?', 'avpvh-print-website'),
+                                    'empty_content_warning' => __('Your saved print\'s Body is empty. You may have forgetten to drag items from "Available Content" (on the left) into the "Chosen Saved Print Content"\'s Body (on the right). Are you sure you want to leave your saved print\'s Body empty?', 'avpvh-print-website'),
                                 ],
                             ]
                         );
@@ -625,7 +625,7 @@ class Admin extends BaseController
 
                                 'translations' => [
                                     'error_generating' => __('There was an error preparing your content.', 'avpvh-print-website'),
-                                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
+                                    'socket_error' => __('Your saved print could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
                                 ],
                             ]
                         );
@@ -652,7 +652,7 @@ class Admin extends BaseController
                     'avpvh_prwb_data',
                     [
                         'translations' => [
-                            'confirm_duplicate' => __('Are you sure you want to duplicate this project?', 'avpvh-print-website'),
+                            'confirm_duplicate' => __('Are you sure you want to duplicate this saved print?', 'avpvh-print-website'),
                         ],
                     ]
                 );
@@ -1041,7 +1041,7 @@ class Admin extends BaseController
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
-                __('%1$s is now the default design the %2$s on all new projects.', 'avpvh-print-website'),
+                __('%1$s is now the default design the %2$s on all new saved prints.', 'avpvh-print-website'),
                 $design->getWpPost()->post_title,
                 $format->title()
             )
@@ -1227,7 +1227,7 @@ class Admin extends BaseController
                     'subsections' => [
                         'title' => new TextInput(
                             [
-                                'html_label_text' => __('Project Title', 'avpvh-print-website'),
+                                'html_label_text' => __('Title', 'avpvh-print-website'),
                                 'required' => true,
                                 'default' => $this->project instanceof Project ? $this->project->getWpPost()->post_title : '',
                                 'other_html_attributes' => [
@@ -1310,7 +1310,7 @@ class Admin extends BaseController
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
                 // translators: %s project name.
-                __('Successfully setup the project "%s".', 'avpvh-print-website'),
+                __('Successfully setup the saved print "%s".', 'avpvh-print-website'),
                 $this->project->getWpPost()->post_title
             )
         );
@@ -1371,7 +1371,7 @@ class Admin extends BaseController
         foreach ($this->project->getAllGenerations() as $project_generation) {
             $project_generation->addDirtyReason(
                 'content_update',
-                __('The content in your project has changed', 'avpvh-print-website')
+                __('The content in your saved print has changed', 'avpvh-print-website')
             );
         }
         $this->project->setProjectDepth(intval(Array2::setOr($_POST, 'pmb-project-depth', 0)));
@@ -1399,7 +1399,7 @@ class Admin extends BaseController
         $this->project->getProgress()->markStepComplete(ProjectProgress::EDIT_CONTENT_STEP);
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
-            __('Updated project content.', 'avpvh-print-website')
+            __('Updated saved print content.', 'avpvh-print-website')
         );
         $this->redirectToNextStep($this->project);
     }
@@ -1467,7 +1467,7 @@ class Admin extends BaseController
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
                 // translators: %s: design name
-                __('The design "%s" has been customized, and its changes will be reflected in all projects that use it.', 'avpvh-print-website'),
+                __('The design "%s" has been customized, and its changes will be reflected in all saved prints that use it.', 'avpvh-print-website'),
                 $design->getWpPost()->post_title
             )
         );
@@ -1513,7 +1513,7 @@ class Admin extends BaseController
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
                 // translators: 1: design name, 2: format name.
-                __('You chose the design "%1$s" for the %2$s of your project.', 'avpvh-print-website'),
+                __('You chose the design "%1$s" for the %2$s of your saved print.', 'avpvh-print-website'),
                 $design->getWpPost()->post_title,
                 $format->title()
             )
@@ -1554,13 +1554,13 @@ class Admin extends BaseController
         foreach ($project_generations as $generation) {
             $generation->addDirtyReason(
                 'metadata',
-                __('You changed projected metadata', 'avpvh-print-website')
+                __('You changed the metadata', 'avpvh-print-website')
             );
         }
         $this->project->getProgress()->markStepComplete(ProjectProgress::EDIT_METADATA_STEP);
         $this->notification_manager->addTextNotificationForCurrentUser(
             OneTimeNotification::TYPE_SUCCESS,
-            __('Project metadata updated.', 'avpvh-print-website')
+            __('Saved Print metadata updated.', 'avpvh-print-website')
         );
         /**
          * Hook for doing more processing when project metadata is saved.
@@ -1685,7 +1685,7 @@ class Admin extends BaseController
             OneTimeNotification::TYPE_SUCCESS,
             sprintf(
                 // translators: 1: the name of the new project.
-                __('Project successfully duplicated. It is titled "%1$s".', 'avpvh-print-website'),
+                __('Saved Print successfully duplicated. It is titled "%1$s".', 'avpvh-print-website'),
                 $new_project->getWpPost()->post_title
             )
         );
@@ -1913,7 +1913,7 @@ class Admin extends BaseController
                 $actions[] = [
                     'url' => $this->getDuplicatePostAsPrintMaterialUrl($post),
                     // translators: %s: post title
-                    'title' => sprintf(__('Copy "%s" to New Print Material for a AV-PvH Print Website project', 'avpvh-print-website'), $post->post_title),
+                    'title' => sprintf(__('Copy "%s" to New Print Material for a saved print', 'avpvh-print-website'), $post->post_title),
                     'text' => esc_html__('Copy to Print Material', 'avpvh-print-website')
                 ];
             }

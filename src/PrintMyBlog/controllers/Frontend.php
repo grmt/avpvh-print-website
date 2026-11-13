@@ -261,7 +261,7 @@ class Frontend extends BaseController
 
                 'translations' => [
                     'error_generating' => __('There was an error preparing your content.', 'avpvh-print-website'),
-                    'socket_error' => __('Your project could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
+                    'socket_error' => __('Your saved print could not be accessed in order to generate the file. Maybe your website is not public?', 'avpvh-print-website'),
                 ],
             ]
         );

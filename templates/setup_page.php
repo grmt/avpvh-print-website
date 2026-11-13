@@ -91,7 +91,7 @@ avpvh_prwb_render_template('partials/free_header.php');
                 <table class="form-table">
                     <tbody>
                     <tr>
-                        <th scope="row"><?php esc_html_e('Post Selection','avpvh-print-website' ); avpvh_prwb_pro_better_e(__('Pro Print supports custom post types, combining posts with pages, and print-only materials', 'avpvh-print-website'));?></th>
+                        <th scope="row"><?php esc_html_e('Post Selection','avpvh-print-website' ); avpvh_prwb_pro_better_e(__('Saved Prints supports custom post types, combining posts with pages, and print-only materials', 'avpvh-print-website'));?></th>
                         <td>
                             <label><input class="pmb-post-type" type="radio" name="post-type" value="post" checked="checked"><?php esc_html_e('Posts', 'avpvh-print-website');?></label>
                             <br>
@@ -100,7 +100,7 @@ avpvh_prwb_render_template('partials/free_header.php');
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e('Order', 'avpvh-print-website'); avpvh_prwb_pro_better_e(__('Pro Print supports drag-and-drop ordering of content.', 'avpvh-print-website'));?></th>
+                        <th scope="row"><?php esc_html_e('Order', 'avpvh-print-website'); avpvh_prwb_pro_better_e(__('Saved Prints supports drag-and-drop ordering of content.', 'avpvh-print-website'));?></th>
                         <td>
                             <div id="pmb-order-by-date">
                                 <p><?php esc_html_e('Posts will be ordered:', 'avpvh-print-website'); ?></p>
@@ -144,7 +144,7 @@ avpvh_prwb_render_template('partials/free_header.php');
                     ?>
                     </tbody>
                 </table>
-                <h2><?php esc_html_e('Filters', 'avpvh-print-website');?> <?php avpvh_prwb_pro_better_e(__('Pro Print supports filtering by custom taxonomies.', 'avpvh-print-website'));?> <div style="display:inline-block" id="pmb-categories-spinner"><div class="pmb-spinner"></div></div></h2>
+                <h2><?php esc_html_e('Filters', 'avpvh-print-website');?> <?php avpvh_prwb_pro_better_e(__('Saved Prints supports filtering by custom taxonomies.', 'avpvh-print-website'));?> <div style="display:inline-block" id="pmb-categories-spinner"><div class="pmb-spinner"></div></div></h2>
                 <table class="form-table">
                     <tbody id="pmb-dynamic-categories">
                     </tbody>

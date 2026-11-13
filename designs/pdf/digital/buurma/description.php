@@ -6,7 +6,7 @@
 <ul class="pmb-list">
     <li><?php esc_html_e('Easier content editing because there are no nesting parts.', 'avpvh-print-website'); ?></li>
     <li><?php esc_html_e('All hyperlinks converted into footnotes', 'avpvh-print-website'); ?><?php avpvh_prwb_pro_print_service_only_e(); ?></li>
-    <li><?php esc_html_e('The title page can include your organization’s name, project title, issue number, list of authors, and an introductory paragraph.', 'avpvh-print-website'); ?></li>
+    <li><?php esc_html_e('The title page can include your organization’s name, saved print title, issue number, list of authors, and an introductory paragraph.', 'avpvh-print-website'); ?></li>
     <li><?php esc_html_e('Each article includes just its title and content', 'avpvh-print-website'); ?></li>
 </ul>
 <h2><?php esc_html_e('Page Layout', 'avpvh-print-website'); ?></h2>

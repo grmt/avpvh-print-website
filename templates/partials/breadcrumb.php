@@ -12,7 +12,7 @@ use \Avpvh\PrintWebsite\orm\entities\Project
 		if($project){
 			$projects_url = admin_url(AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH);
 			?>
-			<span><a href="<?php echo esc_attr($projects_url);?>"><?php esc_html_e('Pro Print', 'avpvh-print-website');?></a></span>
+			<span><a href="<?php echo esc_attr($projects_url);?>"><?php esc_html_e('Saved Prints', 'avpvh-print-website');?></a></span>
 			<?php
 		}
 		if($project instanceof Project){

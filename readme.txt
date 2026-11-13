@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 4.0.0
+Stable tag: 4.0.1
 
 Print WordPress content, or turn it into PDF, ePub and Word documents. For you and your visitors.
 
@@ -18,7 +18,7 @@ It has three parts:
 
 1. **Quick Print**: print many posts or pages at once, in a few clicks.
 2. **Print Buttons**: let visitors print or save individual posts and pages.
-3. **Pro Print**: make designed documents (projects) from chosen content.
+3. **Saved Prints**: set up a document once (which content, in which order, with which design and format) and generate it again whenever the content changes.
 
 All three remove the site header, menus, sidebars and footer, and avoid page breaks inside images, between an image and its caption, and right after a heading.
 
@@ -38,18 +38,18 @@ All three remove the site header, menus, sidebars and footer, and avoid page bre
 * get just the URL of the print page with `[avpvh_print_website_print_page_url]`
 * choose the button text and the print settings per format
 
-= Pro Print =
+= Saved Prints =
 
-* saved projects with a title page and automatic table of contents
+* saved prints with a title page and automatic table of contents
 * digital PDF, print-ready PDF, ePub and Word document
-* pick posts, pages, custom post types and "Print Materials" (posts only used in projects); search and filter them
+* pick posts, pages, custom post types and "Print Materials" (posts only used in saved prints); search and filter them
 * drag-and-drop ordering, parts, front matter and back matter
-* designs (like themes, but for print), each with its own settings and custom CSS, reusable across projects
-* duplicate projects, and copy posts to Print Materials to adjust them for print
+* designs (like themes, but for print), each with its own settings and custom CSS, reusable across saved prints
+* duplicate saved prints, and copy posts to Print Materials to adjust them for print
 * choose image quality and size, fonts, page sizes and article templates
 * optionally apply the active theme's CSS
 
-PDFs are made by the browser: on the print page, use "Print with Browser" and choose "Save as PDF". Before printing, [Paged.js](https://pagedjs.org) (MIT, included) lays the project out in pages using the designs' CSS, so page numbers, running headers, table of contents page numbers, "see page X" references and footnotes work, as they did with the original plugin's paid Prince service. Not supported: the Haller design's repeating headers and side notes, and moving images to the top or bottom of a page.
+PDFs are made by the browser: on the print page, use "Print with Browser" and choose "Save as PDF". Before printing, [Paged.js](https://pagedjs.org) (MIT, included) lays the saved print out in pages using the designs' CSS, so page numbers, running headers, table of contents page numbers, "see page X" references and footnotes work, as they did with the original plugin's paid Prince service. Not supported: the Haller design's repeating headers and side notes, and moving images to the top or bottom of a page.
 
 = Translations =
 
@@ -74,10 +74,10 @@ Includes German, French, Spanish, Italian, Japanese and Chinese translations, in
 1. Next to "Show print buttons on:", check "Posts" and/or "Pages".
 1. Click "Save Settings".
 
-**Pro Print**
+**Saved Prints**
 
-1. Under "AV-PvH Print Website", click "Pro Print".
-1. Add a project and follow the steps: setup, design, content, metadata, generate.
+1. Under "AV-PvH Print Website", click "Saved Prints".
+1. Add a saved print and follow the steps: setup, design, content, metadata, generate.
 
 **Print form for visitors**
 
@@ -96,7 +96,7 @@ Note: Images may be missing from very large PDFs. See the FAQ "My PDFs are missi
 In the browser's print dialog, open "More settings" and uncheck "Headers and footers" (Chrome, Edge), or set the header and footer fields to blank (Firefox).
 
 = How do I create an eBook using AV-PvH Print Website? =
-Choose the ePub format in Quick Print, in the print buttons, or in a Pro Print project. The file is made in your browser.
+Choose the ePub format in Quick Print, in the print buttons, or in a saved print. The file is made in your browser.
 
 Once the eBook has been generated, you can read it from your computer (here's instructions on how to [read ePubs](https://www.wikihow.com/Open-EPUB-Files) and [MOBI files](https://www.howtogeek.com/360419/what-is-a-mobi-file/)), or a phone or tablet.
 
@@ -112,7 +112,7 @@ If your print-page has hundreds of images, browsers may generate PDFs that are m
 To fix this, just retry "Generate the PDF". Each time the browser will fetch more images. Continue re-generating the PDF until the images at the end are included.
 
 = The Print Page says "There seems to be an error initializing...", or is stuck on "Loading Content", or I can't filter by categories or terms from the print setup page=
-*This only affects Quick Print and the print buttons; Pro Print does not use the REST API for this.*
+*This only affects Quick Print and the print buttons; Saved Prints do not use the REST API for this.*
 
 A plugin has probably disabled the WP REST API, which AV-PvH Print Website uses for loading data.
 
@@ -148,7 +148,7 @@ Use the shortcodes `[avpvh_print_website_print_only_text]...text, text, text...[
 [Alternatively, add the CSS class](https://technicalsupport.blog/2019/01/04/how-to-add-a-custom-css-class-to-gutenberg-blocks/) "pmb-print-only". See the above question for more details.
 
 = How do I show or hide background colors in the printout? =
-* In Pro Print, the background colors are dictated by your project's design, which might be easily customizable. Go to your project's "Customize Design" step and see what settings are available. You can also switch to a different design on the "Choose Design" step, or add some custom CSS to your design (`body{background-color:black;}`).*
+* In Saved Prints, the background colors are dictated by your saved print's design, which might be easily customizable. Go to your saved print's "Customize Design" step and see what settings are available. You can also switch to a different design on the "Choose Design" step, or add some custom CSS to your design (`body{background-color:black;}`).*
 
 If you're using Quick Print, the background colors are controlled by your WordPress theme and the browser.
 
@@ -236,12 +236,16 @@ options are the same as when printing out multiple posts simultaneously: you can
 2. Quick Print Setup page. Start printing right away, or customize which posts to print and how to print them.
 3. Print Button settings page. Select whether to show on posts or pages and save. Or customize the appearance of the buttons and printout.
 4. Print Buttons on a post. Notice how much clutter is removed from the printout!
-5. Pro Print project organizer. Search for content, drag-and-drop it into your project, organize it into front matter, back matter, and parts.
-6. Pro Print print-ready PDF table of contents. Notice the page references and how the content is grouped into 3 parts.
-7. Pro Print print-ready PDF page spread. Notice the running head of the article title (yellow), the graphs generated via a plugin using Javascript (green), the external hyperlinks converted to footnotes (blue), and the page numbers are on the outside of each page (pink).
-8. Pro Print digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
+5. Saved print organizer. Search for content, drag-and-drop it into your saved print, organize it into front matter, back matter, and parts.
+6. Print-ready PDF table of contents. Notice the page references and how the content is grouped into 3 parts.
+7. Print-ready PDF page spread. Notice the running head of the article title (yellow), the graphs generated via a plugin using Javascript (green), the external hyperlinks converted to footnotes (blue), and the page numbers are on the outside of each page (pink).
+8. Digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 4.0.1 November 11, 2026 =
+* "Pro Print" and "projects" are now called "Saved Prints": a document set up once and generated again whenever the content changes. Quick Print keeps its name; "Pro Print ―" is gone from the Designs page titles.
+* The "Powered by" setting and the print button settings no longer mention the paid service.
+
 = 4.0.0 November 10, 2026 =
 * Removed the paid printmy.blog PDF service, the DocRaptor test PDFs, licence credits, the Help page (which mailed the upstream author), the review prompts and the sales notices. PDFs are made by the browser.
 * PDF print pages are laid out with Paged.js 0.4.3 before printing: page numbers, running headers, table of contents page numbers, page references and footnotes now work when saving as PDF from the browser.

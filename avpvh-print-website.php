@@ -9,7 +9,7 @@
  * Description: Make printing your blog easy and impressive. For you & your visitors. One post or thousands.
  * Author: grmt, based on Print My Blog by Michael Nelson
  * Author URI: https://github.com/grmt/avpvh-print-website
- * Version: 4.0.0
+ * Version: 4.0.1
  * Requires at least: 7.1
  * Requires PHP: 8.4
  * Text Domain: avpvh-print-website
@@ -123,7 +123,7 @@ if (defined('AVPVH_PRWB_VERSION')) {
     add_action('admin_notices', 'avpvh_prwb_minimum_wp_version_error', 1, 0);
 } else {
     // it's all good! start bootstraping PMB.
-    define('AVPVH_PRWB_VERSION', '4.0.0');
+    define('AVPVH_PRWB_VERSION', '4.0.1');
     define('AVPVH_PRWB_DIR', wp_normalize_path(__DIR__) . '/');
     define('AVPVH_PRWB_MAIN_FILE', __FILE__);
     define('AVPVH_PRWB_TEMPLATES_DIR', AVPVH_PRWB_DIR . 'templates/');

@@ -10,7 +10,7 @@ avpvh_prwb_render_template(
         'partials/project_header.php',
         [
                 'project' => $project,
-                'page_title' => __('Edit Project', 'avpvh-print-website'),
+                'page_title' => __('Edit Saved Print', 'avpvh-print-website'),
                 'current_step' => $current_step,
                 'steps_to_urls' => $steps_to_urls
         ]

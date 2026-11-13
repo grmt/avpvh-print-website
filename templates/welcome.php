@@ -41,13 +41,13 @@
                 <h2><?php esc_html_e( 'Make Professional Books and Documents', 'avpvh-print-website' ); ?></h2>
                 <p>
                     <a class="button button-primary" href="<?php echo admin_url( AVPVH_PRWB_ADMIN_PROJECTS_PAGE_PATH );?>">
-                    <?php esc_html_e( 'Use Projects', 'avpvh-print-website' );
+                    <?php esc_html_e( 'Use Saved Prints', 'avpvh-print-website' );
                         ?>
                     </a>
                     <span class="description"><?php esc_html_e('Create PDFs, ePub files, and Word documents', 'avpvh-print-website');?></span>
                 </p>
                 <ul class="pmb-ul">
-                    <li><?php esc_html_e( 'Drag-and-drop content into projects', 'avpvh-print-website' ); ?></li>
+                    <li><?php esc_html_e( 'Drag-and-drop content into saved prints', 'avpvh-print-website' ); ?></li>
                     <li><?php esc_html_e( 'Include any post types, in any order', 'avpvh-print-website' ); ?></li>
                     <li><?php esc_html_e( 'Automatic Table of Contents', 'avpvh-print-website' ); ?></li>
                     <li><?php esc_html_e( 'Choose and Customize Many Designs, or code your own', 'avpvh-print-website' ); ?></li>

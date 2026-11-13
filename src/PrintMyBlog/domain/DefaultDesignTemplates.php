@@ -100,7 +100,7 @@ class DefaultDesignTemplates
                                                                     [
                                                                         'default' => 'parens',
                                                                         'html_label_text' => __('Internal Hyperlinks', 'avpvh-print-website') . avpvh_prwb_pro_print_service_only(__('Footnotes and page references only work with Pro PDF Service', 'avpvh-print-website')),
-                                                                        'html_help_text' => __('How to display hyperlinks to content included in this project.', 'avpvh-print-website'),
+                                                                        'html_help_text' => __('How to display hyperlinks to content included in this saved print.', 'avpvh-print-website'),
                                                                     ]
                                                                 ),
                                                                 'parens' => new FormSection(
@@ -133,7 +133,7 @@ class DefaultDesignTemplates
                                                                     [
                                                                         'default' => 'remove',
                                                                         'html_label_text' => __('External Hyperlinks', 'avpvh-print-website') . avpvh_prwb_pro_print_service_only(__('Footnotes require Pro', 'avpvh-print-website')),
-                                                                        'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'avpvh-print-website'),
+                                                                        'html_help_text' => __('How to display hyperlinks to content not included in this saved print.', 'avpvh-print-website'),
                                                                     ]
                                                                 ),
                                                                 'footnote' => new FormSection(
@@ -270,7 +270,7 @@ class DefaultDesignTemplates
                                     'byline' => new TextAreaInput(
                                         [
                                             'html_label_text' => __('ByLine', 'avpvh-print-website'),
-                                            'html_help_text' => __('Project Author(s)', 'avpvh-print-website'),
+                                            'html_help_text' => __('Author(s)', 'avpvh-print-website'),
                                         ]
                                     ),
                                     'date' => new DatepickerInput(
@@ -366,7 +366,7 @@ class DefaultDesignTemplates
                         $sections['byline'] = new TextInput(
                             [
                                 'html_display_text' => __('Byline', 'avpvh-print-website'),
-                                'html_help_text' => __('Project author(s)', 'avpvh-print-website'),
+                                'html_help_text' => __('Author(s)', 'avpvh-print-website'),
                             ]
                         );
                         $sections['cover_preamble'] = new TextAreaInput(
@@ -488,7 +488,7 @@ class DefaultDesignTemplates
                                         'byline' => new TextAreaInput(
                                             [
                                                 'html_label_text' => __('ByLine', 'avpvh-print-website'),
-                                                'html_help_text' => __('Project Author(s)', 'avpvh-print-website'),
+                                                'html_help_text' => __('Author(s)', 'avpvh-print-website'),
                                             ]
                                         ),
                                         'post_content' => new TextAreaInput(
@@ -500,7 +500,7 @@ class DefaultDesignTemplates
                                         'cover' => new AdminFileUploaderInput(
                                             [
                                                 'html_label_text' => __('Cover Image', 'avpvh-print-website'),
-                                                'html_help_text' => __('Cover image used on eBook file (does not necessarily appear inside project). Ideal dimensions are 2,560 x 1,600 pixels.', 'avpvh-print-website'),
+                                                'html_help_text' => __('Cover image used on eBook file (does not necessarily appear inside saved print). Ideal dimensions are 2,560 x 1,600 pixels.', 'avpvh-print-website'),
                                                 'default' => plugins_url('assets/images/icon-128x128.jpg', AVPVH_PRWB_MAIN_FILE),
                                             ]
                                         ),
@@ -601,7 +601,7 @@ class DefaultDesignTemplates
                                         [
                                             'default' => 'leave',
                                             'html_label_text' => __('Internal Hyperlinks', 'avpvh-print-website'),
-                                            'html_help_text' => __('How to display hyperlinks to content included in this project.', 'avpvh-print-website'),
+                                            'html_help_text' => __('How to display hyperlinks to content included in this saved print.', 'avpvh-print-website'),
                                         ]
                                     ),
                                     'external_links' => new SelectRevealInput(
@@ -616,7 +616,7 @@ class DefaultDesignTemplates
                                         [
                                             'default' => 'leave',
                                             'html_label_text' => __('External Hyperlinks', 'avpvh-print-website'),
-                                            'html_help_text' => __('How to display hyperlinks to content not included in this project.', 'avpvh-print-website'),
+                                            'html_help_text' => __('How to display hyperlinks to content not included in this saved print.', 'avpvh-print-website'),
                                         ]
                                     ),
                                 ]
@@ -640,7 +640,7 @@ class DefaultDesignTemplates
                                         'byline' => new TextAreaInput(
                                             [
                                                 'html_label_text' => __('ByLine', 'avpvh-print-website'),
-                                                'html_help_text' => __('Project Author(s)', 'avpvh-print-website'),
+                                                'html_help_text' => __('Author(s)', 'avpvh-print-website'),
                                             ]
                                         ),
                                     ],
@@ -797,7 +797,7 @@ class DefaultDesignTemplates
             $sections['byline'] = new TextInput(
                 [
                     'html_label_text' => __('Byline', 'avpvh-print-website'),
-                    'html_help_text' => __('Project author(s)', 'avpvh-print-website'),
+                    'html_help_text' => __('Author(s)', 'avpvh-print-website'),
                 ]
             );
         }
@@ -828,7 +828,7 @@ class DefaultDesignTemplates
                 'subsections' => [
                     'header_content' => new CheckboxMultiInput(
                         [
-                            'title' => new InputOption(__('Project Title', 'avpvh-print-website')),
+                            'title' => new InputOption(__('Title', 'avpvh-print-website')),
                             'subtitle' => new InputOption(__('Subtitle', 'avpvh-print-website')),
                             'byline' => new InputOption(__('Byline', 'avpvh-print-website')),
                             'url' => new InputOption(__('Site URL', 'avpvh-print-website')),
@@ -1051,13 +1051,13 @@ class DefaultDesignTemplates
                                         'custom_css' => new TextAreaInput(
                                             [
                                                 'html_label_text' => __('Custom CSS', 'avpvh-print-website'),
-                                                'html_help_text'  => __('Styles to be applied only when printing projects using this design.', 'avpvh-print-website'),
+                                                'html_help_text'  => __('Styles to be applied only when printing saved prints using this design.', 'avpvh-print-website'),
                                             ]
                                         ),
                                         'powered_by' => new YesNoInput(
                                             [
                                                 'html_label_text' => __('Add "Powered By"', 'avpvh-print-website') . ( $powered_by_in_pro_service ? avpvh_prwb_hover_help(__('In compliance with WordPress.org guidelines, not added when printing from your browser.', 'avpvh-print-website')) : ''),
-                                                'html_help_text' => __('Instructs the Pro PDF Service to add "Powered by AV-PvH Print Website Pro & WordPress" to your project. Does not appear when printing using your browser.', 'avpvh-print-website'),
+                                                'html_help_text' => __('Adds "Powered by AV-PvH Print Website & WordPress" to the bottom of the first page.', 'avpvh-print-website'),
                                                 'default' => $powered_by_in_pro_service,
                                                 'disabled' => $powered_by_in_pro_service,
                                             ]
@@ -1228,7 +1228,7 @@ class DefaultDesignTemplates
                                         'default' => 'remove',
                                         'html_label_text' => __('Internal Hyperlinks', 'avpvh-print-website') . avpvh_prwb_pro_print_service_best(__('Footnotes and page references only work with Pro PDF Service', 'avpvh-print-website')),
                                         'html_help_text' => __(
-                                            'How to display hyperlinks to content included in this project.',
+                                            'How to display hyperlinks to content included in this saved print.',
                                             'avpvh-print-website'
                                         ),
                                     ]
@@ -1265,7 +1265,7 @@ class DefaultDesignTemplates
                                         'default' => 'leave',
                                         'html_label_text' => __('External Hyperlinks', 'avpvh-print-website') . avpvh_prwb_pro_print_service_best(__('Footnotes require Pro', 'avpvh-print-website')),
                                         'html_help_text' => __(
-                                            'How to display hyperlinks to content not included in this project.',
+                                            'How to display hyperlinks to content not included in this saved print.',
                                             'avpvh-print-website'
                                         ),
                                     ]

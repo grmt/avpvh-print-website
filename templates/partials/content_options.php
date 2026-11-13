@@ -15,7 +15,7 @@ use Avpvh\PrintWebsite\services\display\FormInputs;
     <tbody>
     <tr>
         <th scope="row">
-            <label ><?php esc_html_e('Header Content to Print','avpvh-print-website' ); $upsells ? avpvh_prwb_pro_better_e(__('Pro Print supports full-page title pages, custom title pages, or no title page', 'avpvh-print-website')) : null?></label>
+            <label ><?php esc_html_e('Header Content to Print','avpvh-print-website' ); $upsells ? avpvh_prwb_pro_better_e(__('Saved Prints supports full-page title pages, custom title pages, or no title page', 'avpvh-print-website')) : null?></label>
             <p class="description"><?php esc_html_e('Appears at the top of the first page.', 'avpvh-print-website'); ?></p>
         </th>
         <td>

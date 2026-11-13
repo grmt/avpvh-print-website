@@ -9,7 +9,7 @@
 // outputs the form for the design
 ?>
 <div class="wrap nosubsub">
-    <h1 class="wp-heading-inline"><?php _e('Pro Print ― Customize Design', 'avpvh-print-website');?></h1>
+    <h1 class="wp-heading-inline"><?php _e('Customize Design', 'avpvh-print-website');?></h1>
 <?php
 avpvh_prwb_render_template(
 'partials/customize_design.php',
