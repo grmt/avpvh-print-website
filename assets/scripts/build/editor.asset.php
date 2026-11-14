@@ -1,1 +1,7 @@
-<?php return array('dependencies' => array('react-jsx-runtime', 'wp-plugins'), 'version' => '18930d767e618d00b282');
+<?php return array(
+	'dependencies' => array(
+		'react-jsx-runtime',
+		'wp-plugins'
+	),
+	'version' => '72b2df3932323e1b96a2'
+);
