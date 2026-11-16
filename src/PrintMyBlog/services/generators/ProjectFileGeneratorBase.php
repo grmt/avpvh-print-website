@@ -179,25 +179,26 @@ abstract class ProjectFileGeneratorBase
     protected function sortPostsAndAttachSections(WP_Query $query, $sections)
     {
         $ordered_posts = [];
-        $unordered_posts = $query->posts;
+        $unordered_posts = is_array($query->posts) ? $query->posts : [];
         foreach (apply_filters('\Avpvh\PrintWebsite\services\generators\ProjectFileGeneratorBase->sortPostsAndAttachSections $sections', $sections, $this, $unordered_posts) as $section) {
             $found = false;
             $post = null;
-            foreach ($unordered_posts as $post) {
+            foreach ($unordered_posts as $candidate_post) {
                 $post_id_from_section = $section->getPostId();
-                if ($post_id_from_section === $post->ID) {
+                if ($candidate_post instanceof WP_Post && $post_id_from_section === $candidate_post->ID) {
+                    $post = $candidate_post;
                     $found = true;
                     break;
                 }
             }
             // if the post is somehow missing from the query results, fix that. Especially helpful if a section was added via the filter.
-            if (! $found) {
+            if (! $found || ! $post instanceof WP_Post) {
                 $post = get_post($section->getPostId());
             } else {
                 // use a clone so posts can have different section info (i.e., be included in different spots in the project)
                 $post = clone $post;
             }
-            if ($post) {
+            if ($post instanceof WP_Post) {
                 $post->avpvh_prwb_section = $section;
                 $ordered_posts[] = $post;
             }

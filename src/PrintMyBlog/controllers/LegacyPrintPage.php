@@ -137,7 +137,7 @@ class LegacyPrintPage extends BaseController
                 ),
                 'object'
             );
-            if (is_array($post_types_using_query_var)) {
+            if (is_array($post_types_using_query_var) && ! empty($post_types_using_query_var)) {
                 $post_type_info = reset($post_types_using_query_var);
                 $avpvh_prwb_post_type = $post_type_info->label;
             } else {
@@ -168,8 +168,10 @@ class LegacyPrintPage extends BaseController
                         )
                     );
                     $term_names = array();
-                    foreach ($term_objects as $term_object) {
-                        $term_names[] = $term_object->name;
+                    if (is_array($term_objects)) {
+                        foreach ($term_objects as $term_object) {
+                            $term_names[] = $term_object->name;
+                        }
                     }
                     $avpvh_prwb_taxonomy_filters[] = array(
                         'taxonomy' => $taxonomy_object,

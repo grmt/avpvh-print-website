@@ -1,0 +1,2629 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Function avpvh_prwb_design_styles\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: inc/design_functions.php
+
+		-
+			message: '#^Call to an undefined method object\:\:getByPostMeta\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_get_contents\(\) has parameter \$filename with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_get_filename\(\) has parameter \$remove_extension with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_get_filename\(\) has parameter \$url with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_pro_print_service_best\(\) has parameter \$explanation with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_pro_print_service_only\(\) has parameter \$explanation with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Parameter \#1 \$post_type of function get_post_type_object expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Parameter \#1 \$text of function esc_attr expects string, int given\.$#'
+			identifier: argument.type
+			count: 4
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Parameter \#1 \$text of function esc_attr expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Parameter \#1 \$text of function esc_attr expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Parameter \#3 \$length of function substr expects int\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: inc/internal_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_convert_url_to_anchor\(\) never returns void so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_get_domain\(\) never returns array\<string\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_get_domain\(\) never returns void so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_get_the_post_anchor\(\) never returns WP_Error so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_get_the_post_anchor\(\) never returns bool so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_get_the_post_anchor\(\) should return bool\|string\|WP_Error but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_permalink_as_attr\(\) never returns void so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Function avpvh_prwb_section_template_selector\(\) has parameter \$selected_template with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Parameter \#1 \$post of function get_the_permalink expects int\|WP_Post, WP_Post\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Parameter \#1 \$search of function str_replace expects array\<string\>\|string, array\<int, array\<string\>\|string\|null\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Parameter \#1 \$text of function esc_attr expects string, bool\|string\|WP_Error given\.$#'
+			identifier: argument.type
+			count: 2
+			path: inc/template_functions.php
+
+		-
+			message: '#^Parameter \#1 \$url of function avpvh_prwb_convert_url_to_anchor expects string, bool\|string\|WP_Error given\.$#'
+			identifier: argument.type
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Parameter \#1 \$url of function avpvh_prwb_convert_url_to_anchor expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Parameter \#2 \$array of function array_map expects array, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: inc/template_functions.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function add_action expects callable\(\)\: mixed, array\{mixed, ''flags''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/GoogleLanguageTranslator.php
+
+		-
+			message: '#^Call to Avpvh\\PrintWebsite\\Twine\\compatibility\\CompatibilityBase\:\:setRenderingHooks\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/TablePress.php
+
+		-
+			message: '#^Call to function method_exists\(\) with ''TablePress'' and ''load_controller'' will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 2
+			path: src/PrintMyBlog/compatibility/plugins/TablePress.php
+
+		-
+			message: '#^Cannot call method init_shortcodes\(\) on class\-string\|object\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/TablePress.php
+
+		-
+			message: '#^Offset ''pimg'' on array\{img\: string, video\: string, pimg\: string, stereo\: string, width\: string, height\: string\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/WpVrView.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\orm\\entities\\Design and Avpvh\\PrintWebsite\\orm\\entities\\Design will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/Wpml.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\orm\\entities\\Project and Avpvh\\PrintWebsite\\orm\\entities\\Project will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 2
+			path: src/PrintMyBlog/compatibility/plugins/Wpml.php
+
+		-
+			message: '#^Instanceof between WP_Post and WP_Post will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/Wpml.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/Wpml.php
+
+		-
+			message: '#^Parameter \#1 \$options_array of class Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection constructor expects array\<array\>, array\<string, array\<Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection\|Avpvh\\PrintWebsite\\Twine\\forms\\inputs\\SelectRevealInput\>\|\(Closure\)\|string\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/Wpml.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function add_action expects callable\(\)\: mixed, array\{mixed, ''parse_query''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/Wpml.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function add_filter expects callable\(\)\: mixed, array\{mixed, ''posts_join_filter''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/Wpml.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function add_filter expects callable\(\)\: mixed, array\{mixed, ''posts_where_filter''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/Wpml.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/PrintMyBlog/compatibility/plugins/Wpml.php
+
+		-
+			message: '#^@param Avpvh\\PrintWebsite\\orm\\entities\\Design \$design does not accept actual type of parameter\: Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^@param Avpvh\\PrintWebsite\\orm\\entities\\Project \$project does not accept actual type of parameter\: Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: parameter.phpDocType
+			count: 2
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to an undefined method object\:\:formatSlugs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to an undefined method object\:\:save\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to an undefined method object\:\:setFormatActive\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to an undefined method object\:\:setFormatFrontendLabel\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to an undefined method object\:\:setOpenNewTab\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to an undefined method object\:\:setPlaceAbove\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to an undefined method object\:\:setPrintOptions\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to an undefined method object\:\:setShowButtons\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to an undefined method object\:\:setShowButtonsPages\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot access property \$ID on WP_Post\|null\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method add_help_tab\(\) on WP_Screen\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method duplicate\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getAllGenerations\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getDesignFor\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getDesignTemplate\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getDesigns\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getFormatSlugsSelected\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getGenerationFor\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getLevelsAllowed\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getMetaForm\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getProgress\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 12
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getSections\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getSetting\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getWpPost\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getWpPost\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 10
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method setCode\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method setDesignFor\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method setFormatsSelected\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method setProjectDepth\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method setSetting\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method setSetting\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method setTitle\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method slug\(\) on Avpvh\\PrintWebsite\\entities\\FileFormat\|null\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method supported\(\) on Avpvh\\PrintWebsite\\entities\\FileFormat\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method supportsDivision\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method title\(\) on Avpvh\\PrintWebsite\\entities\\FileFormat\|null\.$#'
+			identifier: method.nonObject
+			count: 5
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 4
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Instanceof between WP_Post and WP_Post will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\controllers\\Admin\:\:getGeneratePostProjectUrl\(\) has parameter \$format with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\controllers\\Admin\:\:getGeneratePostProjectUrl\(\) has parameter \$post_id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 8
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$args of function get_posts expects array\{numberposts\?\: int, category\?\: int\|string, include\?\: array\<int\>, exclude\?\: array\<int\>, suppress_filters\?\: bool, attachment_id\?\: int, author\?\: int\|string, author_name\?\: string, \.\.\.\}\|null, array\{orderby\: ''desc'', posts_per_page\: ''1''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$concise_text of method Avpvh\\PrintWebsite\\controllers\\Admin\:\:getPostActionButtonLinks\(\) expects bool, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$location of function wp_safe_redirect expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$options_array of class Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection constructor expects array\<array\>, array\<string, array\<string, Avpvh\\PrintWebsite\\Twine\\forms\\inputs\\CheckboxMultiInput\|Avpvh\\PrintWebsite\\Twine\\forms\\inputs\\TextInput\>\|string\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$post_type of function get_post_type_object expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$project of method Avpvh\\PrintWebsite\\controllers\\Admin\:\:redirectToNextStep\(\) expects Avpvh\\PrintWebsite\\orm\\entities\\Project, Avpvh\\PrintWebsite\\orm\\entities\\Project\|null given\.$#'
+			identifier: argument.type
+			count: 5
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$project of method Avpvh\\PrintWebsite\\controllers\\Admin\:\:setSectionFromRequest\(\) expects Avpvh\\PrintWebsite\\orm\\entities\\Project, Avpvh\\PrintWebsite\\orm\\entities\\Project\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$project_id of method Avpvh\\PrintWebsite\\orm\\managers\\ProjectSectionManager\:\:clearSectionsFor\(\) expects string, int\<0, max\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$slug of method Avpvh\\PrintWebsite\\services\\FileFormatRegistry\:\:getFormat\(\) expects string, Avpvh\\PrintWebsite\\entities\\FileFormat\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$slug of method Avpvh\\PrintWebsite\\services\\FileFormatRegistry\:\:getFormat\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#1 \$subaction of method Avpvh\\PrintWebsite\\entities\\ProjectProgress\:\:mapSubactionToStep\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#2 \$help_text of class Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\InputOption constructor expects null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#2 \$request_data of method Avpvh\\PrintWebsite\\controllers\\Admin\:\:setSectionFromRequest\(\) expects array, string given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 7
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_style expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 7
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Parameter \#6 \$icon_url of function add_menu_page expects string, array\<string\>\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Property WP_Post_Type\:\:\$labels \(stdClass\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 1
+			path: src/PrintMyBlog/controllers/Admin.php
+
+		-
+			message: '#^Cannot call method getGenerationFor\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Cannot call method getProgress\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Cannot call method slug\(\) on Avpvh\\PrintWebsite\\entities\\FileFormat\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 3
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Parameter \#1 \$posty_row of function avpvh_prwb_content_item expects Avpvh\\PrintWebsite\\orm\\entities\\ProjectSection\|WP_Post, WP_Post\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Parameter \#1 \$text of function esc_attr expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function add_action expects callable\(\)\: mixed, array\{\$this\(Avpvh\\PrintWebsite\\controllers\\Ajax\), string\} given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Parameter \#2 \$project of function avpvh_prwb_content_item expects Avpvh\\PrintWebsite\\orm\\entities\\Project, Avpvh\\PrintWebsite\\orm\\entities\\Project\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 5
+			path: src/PrintMyBlog/controllers/Ajax.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_style expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Common.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_register_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 5
+			path: src/PrintMyBlog/controllers/Common.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_register_style expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 5
+			path: src/PrintMyBlog/controllers/Common.php
+
+		-
+			message: '#^@param Avpvh\\PrintWebsite\\domain\\FrontendPrintSettings \$avpvh_prwb_print_settings does not accept actual type of parameter\: object\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Call to an undefined method object\:\:activePostTypes\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Call to an undefined method object\:\:getHtmlForPrintButtons\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Call to an undefined method object\:\:showButtonsAbove\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Cannot call method getDesignFor\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Cannot call method getGenerationFor\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Cannot call method getPmbMeta\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Cannot call method getProgress\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Cannot call method getWpPost\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Project\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Cannot call method slug\(\) on Avpvh\\PrintWebsite\\entities\\FileFormat\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_style expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 3
+			path: src/PrintMyBlog/controllers/Frontend.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\controllers\\GutenbergBlock\:\:block_dynamic_render_cb\(\) should return string but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/controllers/GutenbergBlock.php
+
+		-
+			message: '#^Parameter \#3 \$deps of function wp_enqueue_script expects array\<non\-empty\-string\>, '''' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/GutenbergBlock.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, WP_Post_Type\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/PrintMyBlog/controllers/LegacyPrintPage.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, WP_Taxonomy\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/PrintMyBlog/controllers/LegacyPrintPage.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\controllers\\LegacyPrintPage\:\:templateRedirect\(\) has parameter \$template with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/PrintMyBlog/controllers/LegacyPrintPage.php
+
+		-
+			message: '#^Parameter \#1 \$slug of method Avpvh\\PrintWebsite\\controllers\\LegacyPrintPage\:\:loadThemeCompatibilityIfItExists\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/LegacyPrintPage.php
+
+		-
+			message: '#^Parameter \#1 \$string of function strlen expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/PrintMyBlog/controllers/LegacyPrintPage.php
+
+		-
+			message: '#^Parameter \#2 \$output of function get_post_types expects ''names''\|''objects'', ''object'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/LegacyPrintPage.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/PrintMyBlog/controllers/LegacyPrintPage.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_style expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/PrintMyBlog/controllers/LegacyPrintPage.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_register_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/PrintMyBlog/controllers/LegacyPrintPage.php
+
+		-
+			message: '#^Call to an undefined method object\:\:getHtmlForPrintButtons\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Shortcodes.php
+
+		-
+			message: '#^Call to an undefined method object\:\:getUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/controllers/Shortcodes.php
+
+		-
+			message: '#^Cannot call method getSettings\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/controllers/Shortcodes.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\entities\\DesignTemplate and Avpvh\\PrintWebsite\\entities\\DesignTemplate will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/controllers/Shortcodes.php
+
+		-
+			message: '#^Parameter \#1 \$string of function html_entity_decode expects string, string\|true\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/controllers/Shortcodes.php
+
+		-
+			message: '#^Parameter \#2 \$output of function get_post_types expects ''names''\|''objects'', string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/db/PostFetcher.php
+
+		-
+			message: '#^Ternary operator condition is always false\.$#'
+			identifier: ternary.alwaysFalse
+			count: 1
+			path: src/PrintMyBlog/domain/DefaultDesignTemplates.php
+
+		-
+			message: '#^Instanceof between WP_User and WP_User will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/domain/DefaultDesigns.php
+
+		-
+			message: '#^Call to function method_exists\(\) with wpdb and ''strip_invalid_text…'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/PrintMyBlog/domain/FrontendPrintSettings.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\domain\\PrintOptions and Avpvh\\PrintWebsite\\domain\\PrintOptions will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/domain/FrontendPrintSettings.php
+
+		-
+			message: '#^Parameter \#1 \$key of function array_key_exists expects int\|string, bool\|int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/domain/FrontendPrintSettings.php
+
+		-
+			message: '#^Call to function is_int\(\) with null will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/PrintMyBlog/domain/PrintButtons.php
+
+		-
+			message: '#^Call to function is_string\(\) with null will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/PrintMyBlog/domain/PrintButtons.php
+
+		-
+			message: '#^Instanceof between null and WP_Post will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/PrintMyBlog/domain/PrintButtons.php
+
+		-
+			message: '#^Parameter \#1 \$post of function get_post expects int\|numeric\-string\|WP_Post\|null, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/domain/PrintPageUrlGenerator.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\domain\\PrintPageUrlGenerator\:\:\$post \(WP_Post\) does not accept WP_Post\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/domain/PrintPageUrlGenerator.php
+
+		-
+			message: '#^Cannot call method fallbackSlug\(\) on Avpvh\\PrintWebsite\\entities\\SectionTemplate\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/entities/DesignTemplate.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/entities/DesignTemplate.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\entities\\FileFormat and Avpvh\\PrintWebsite\\entities\\FileFormat will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/entities/DesignTemplate.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\entities\\DesignTemplate\:\:templateFileExists\(\) should return bool but returns bool\|string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/entities/DesignTemplate.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\entities\\DesignTemplate\:\:\$format \(Avpvh\\PrintWebsite\\entities\\FileFormat\) does not accept Avpvh\\PrintWebsite\\entities\\FileFormat\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/entities/DesignTemplate.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\entities\\DesignTemplate and Avpvh\\PrintWebsite\\entities\\DesignTemplate will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/entities/FileFormat.php
+
+		-
+			message: '#^Parameter \#2 \$code of class Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\ImproperUsageException constructor expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/entities/FileFormat.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/PrintMyBlog/entities/ProjectGeneration.php
+
+		-
+			message: '#^Call to function is_string\(\) with array will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/PrintMyBlog/entities/ProjectGeneration.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\services\\generators\\ProjectFileGeneratorBase and Avpvh\\PrintWebsite\\services\\generators\\ProjectFileGeneratorBase will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/entities/ProjectGeneration.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\entities\\ProjectGeneration\:\:addDirtyReason\(\) should return bool but returns bool\|int\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/entities/ProjectGeneration.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\entities\\ProjectGeneration\:\:setIntermediaryGeneratedTime\(\) should return bool but returns bool\|int\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/entities/ProjectGeneration.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\entities\\ProjectGeneration\:\:setLastSectionId\(\) should return bool but returns bool\|int\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/entities/ProjectGeneration.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\factories\\FileFormatFactory\:\:create\(\) should return Avpvh\\PrintWebsite\\entities\\FileFormat but returns object\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/factories/FileFormatFactory.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\factories\\ProjectFileGeneratorFactory\:\:create\(\) should return Avpvh\\PrintWebsite\\services\\generators\\ProjectFileGeneratorBase but returns object\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/factories/ProjectFileGeneratorFactory.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\factories\\ProjectGenerationFactory\:\:create\(\) should return Avpvh\\PrintWebsite\\entities\\ProjectGeneration but returns object\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/factories/ProjectGenerationFactory.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 2
+			path: src/PrintMyBlog/orm/entities/Design.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\entities\\DesignTemplate and Avpvh\\PrintWebsite\\entities\\DesignTemplate will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Design.php
+
+		-
+			message: '#^Cannot call method getDesignTemplate\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Cannot call method getProjectForm\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\entities\\ProjectGeneration and Avpvh\\PrintWebsite\\entities\\ProjectGeneration will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\entities\\ProjectProgress and Avpvh\\PrintWebsite\\entities\\ProjectProgress will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\orm\\entities\\Project\:\:setCode\(\) should return bool but returns bool\|int\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\orm\\entities\\Project\:\:setDesignFor\(\) should return bool but returns bool\|int\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Parameter \#1 \$options_array of class Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection constructor expects array\<array\>, array\<string, array\<string, Avpvh\\PrintWebsite\\Twine\\forms\\inputs\\TextInput\>\|string\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Parameter \#1 \$project_id of method Avpvh\\PrintWebsite\\orm\\managers\\ProjectSectionManager\:\:clearSectionsFor\(\) expects string, int\<0, max\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Parameter \#2 \$format of method Avpvh\\PrintWebsite\\factories\\ProjectGenerationFactory\:\:create\(\) expects Avpvh\\PrintWebsite\\entities\\FileFormat, Avpvh\\PrintWebsite\\entities\\FileFormat\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Parameter \#2 \$user_id of function get_the_author_meta expects int\|false, ''''\|numeric\-string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Parameter \#6 \$placement of method Avpvh\\PrintWebsite\\orm\\managers\\ProjectSectionManager\:\:getSectionsFor\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\orm\\entities\\Project\:\:\$custom_templates \(array\<Avpvh\\PrintWebsite\\entities\\SectionTemplate\>\) does not accept array\<string, Avpvh\\PrintWebsite\\entities\\SectionTemplate\|null\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/orm/entities/Project.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 2
+			path: src/PrintMyBlog/orm/managers/ExternalResourceManager.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\orm\\managers\\ExternalResourceManager\:\:createObjsFromRows\(\) should return array\<Avpvh\\PrintWebsite\\orm\\entities\\ExternalResource\> but returns list\<Avpvh\\PrintWebsite\\orm\\entities\\ExternalResource\|null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/orm/managers/ExternalResourceManager.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/PrintMyBlog/orm/managers/ExternalResourceManager.php
+
+		-
+			message: '#^If condition is always false\.$#'
+			identifier: if.alwaysFalse
+			count: 1
+			path: src/PrintMyBlog/orm/managers/ProjectSectionManager.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/orm/managers/ProjectSectionManager.php
+
+		-
+			message: '#^Parameter \#5 \$placement of method Avpvh\\PrintWebsite\\orm\\managers\\ProjectSectionManager\:\:getFlatSectionRowsFor\(\) expects null, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/orm/managers/ProjectSectionManager.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\services\\ColorGuru\:\:convertHexToRgb\(\) should return array\|false but returns array\{int\|null, int\|null, int\|null\}\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/services/ColorGuru.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\services\\DebugInfo\:\:getDebugInfoString\(\) should return string but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/services/DebugInfo.php
+
+		-
+			message: '#^Parameter \#1 \$value of function wp_convert_hr_to_bytes expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/PrintMyBlog/services/DebugInfo.php
+
+		-
+			message: '#^Parameter \#2 \$flags of function wp_json_encode expects int, int\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/DebugInfo.php
+
+		-
+			message: '#^Cannot call method getDesignForm\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/services/DesignRegistry.php
+
+		-
+			message: '#^Cannot call method setPmbMeta\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/PrintMyBlog/services/DesignRegistry.php
+
+		-
+			message: '#^Cannot call method setSetting\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/services/DesignRegistry.php
+
+		-
+			message: '#^Parameter \#1 \$design of method Avpvh\\PrintWebsite\\services\\DesignRegistry\:\:setArgsForDesign\(\) expects Avpvh\\PrintWebsite\\orm\\entities\\Design, Avpvh\\PrintWebsite\\orm\\entities\\Design\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/DesignRegistry.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\entities\\DesignTemplate and Avpvh\\PrintWebsite\\entities\\DesignTemplate will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/services/DesignTemplateRegistry.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\services\\DesignTemplateRegistry\:\:\$design_templates \(array\<Avpvh\\PrintWebsite\\entities\\DesignTemplate\>\) does not accept array\<object\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/services/DesignTemplateRegistry.php
+
+		-
+			message: '#^Cannot cast array\|string to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: src/PrintMyBlog/services/ExternalResourceCache.php
+
+		-
+			message: '#^Instanceof between array\<string, array\<int\|string, int\|string\|WP_Http_Cookie\>\|string\|WP_HTTP_Requests_Response\|WpOrg\\Requests\\Utility\\CaseInsensitiveDictionary\|null\> and WP_Error will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/PrintMyBlog/services/ExternalResourceCache.php
+
+		-
+			message: '#^Parameter \#2 \$filename of method Avpvh\\PrintWebsite\\orm\\managers\\ExternalResourceManager\:\:map\(\) expects string, null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/PrintMyBlog/services/ExternalResourceCache.php
+
+		-
+			message: '#^Parameter \#2 \$offset of function substr expects int, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/ExternalResourceCache.php
+
+		-
+			message: '#^Parameter \#3 \$length of function substr expects int\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/ExternalResourceCache.php
+
+		-
+			message: '#^Call to an undefined method object\:\:constructFinalize\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/services/SectionTemplateRegistry.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\services\\SectionTemplateRegistry\:\:get\(\) should return Avpvh\\PrintWebsite\\entities\\SectionTemplate\|null but returns object\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PrintMyBlog/services/SectionTemplateRegistry.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function call_user_func expects callable\(\)\: mixed, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/SectionTemplateRegistry.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\services\\SectionTemplateRegistry\:\:\$callback_args \(array\<array\<array\>\>\) does not accept array\<array\<array\>\|\(callable\)\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/services/SectionTemplateRegistry.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\services\\SectionTemplateRegistry\:\:\$instances \(array\<Avpvh\\PrintWebsite\\entities\\SectionTemplate\>\) does not accept array\<object\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/services/SectionTemplateRegistry.php
+
+		-
+			message: '#^Parameter \#1 \$svg_content of method Avpvh\\PrintWebsite\\services\\SvgDoer\:\:dataizeAndEncode\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/SvgDoer.php
+
+		-
+			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/SvgDoer.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\services\\SvgDoer\:\:\$raw_svgs \(array\<string\>\) does not accept array\<bool\|string\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/services/SvgDoer.php
+
+		-
+			message: '#^Cannot call method getDefaultDesignTemplate\(\) on Avpvh\\PrintWebsite\\entities\\FileFormat\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/services/config/Config.php
+
+		-
+			message: '#^Parameter \#1 \$format of method Avpvh\\PrintWebsite\\services\\config\\Config\:\:getSettingNameForDefaultDesignForFormat\(\) expects Avpvh\\PrintWebsite\\entities\\FileFormat\|string, Avpvh\\PrintWebsite\\entities\\FileFormat\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/config/Config.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/PrintMyBlog/services/generators/EpubGenerator.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_style expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/generators/EpubGenerator.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_register_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/PrintMyBlog/services/generators/EpubGenerator.php
+
+		-
+			message: '#^Parameter \#5 \$media of function wp_enqueue_style expects string, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/generators/EpubGenerator.php
+
+		-
+			message: '#^Cannot access property \$ID on WP_Post\|null\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: src/PrintMyBlog/services/generators/HtmlBaseGenerator.php
+
+		-
+			message: '#^Cannot access property \$post_type on WP_Post\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: src/PrintMyBlog/services/generators/HtmlBaseGenerator.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\services\\filesystem\\File and Avpvh\\PrintWebsite\\Twine\\services\\filesystem\\File will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/services/generators/HtmlBaseGenerator.php
+
+		-
+			message: '#^Parameter \#3 \$deps of function wp_enqueue_style expects array\<string\>, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/generators/PdfGenerator.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/PrintMyBlog/services/generators/PdfGenerator.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_style expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/PrintMyBlog/services/generators/PdfGenerator.php
+
+		-
+			message: '#^Parameter \#5 \$media of function wp_enqueue_style expects string, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/generators/PdfGenerator.php
+
+		-
+			message: '#^Cannot call method getDesignTemplate\(\) on Avpvh\\PrintWebsite\\orm\\entities\\Design\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/PrintMyBlog/services/generators/ProjectFileGeneratorBase.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\entities\\ProjectGeneration and Avpvh\\PrintWebsite\\entities\\ProjectGeneration will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/services/generators/ProjectFileGeneratorBase.php
+
+		-
+			message: '#^Parameter \#1 \$id of method Avpvh\\PrintWebsite\\entities\\ProjectGeneration\:\:setLastSectionId\(\) expects int, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/generators/ProjectFileGeneratorBase.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/PrintMyBlog/services/generators/WordGenerator.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_style expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/PrintMyBlog/services/generators/WordGenerator.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_register_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/generators/WordGenerator.php
+
+		-
+			message: '#^Parameter \#5 \$media of function wp_enqueue_style expects string, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/services/generators/WordGenerator.php
+
+		-
+			message: '#^Cannot call method addDefaultContents\(\) on Avpvh\\PrintWebsite\\domain\\DefaultProjectContents\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/system/Activation.php
+
+		-
+			message: '#^Cannot call method createRegisteredDesigns\(\) on Avpvh\\PrintWebsite\\services\\DesignRegistry\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/PrintMyBlog/system/Activation.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\system\\Activation\:\:\$capabilities \(Avpvh\\PrintWebsite\\system\\Capabilities\) does not accept Avpvh\\PrintWebsite\\system\\Capabilities\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/system/Activation.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\system\\Activation\:\:\$migration_manager \(Avpvh\\PrintWebsite\\db\\migrations\\MigrationManager\) does not accept Avpvh\\PrintWebsite\\db\\migrations\\MigrationManager\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/system/Activation.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\system\\Activation\:\:\$table_manager \(Avpvh\\PrintWebsite\\db\\TableManager\) does not accept Avpvh\\PrintWebsite\\db\\TableManager\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/PrintMyBlog/system/Activation.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\system\\Activation\:\:\$version_history is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/PrintMyBlog/system/Activation.php
+
+		-
+			message: '#^Instanceof between WP_Post_Type and WP_Post_Type will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PrintMyBlog/system/Capabilities.php
+
+		-
+			message: '#^Parameter \#2 \$args of function register_post_type expects array\{label\?\: string, labels\?\: array\<string\>, description\?\: string, public\?\: bool, hierarchical\?\: bool, exclude_from_search\?\: bool, publicly_queryable\?\: bool, show_ui\?\: bool, \.\.\.\}, array\{labels\: array\{name\: string, singular_name\: string, menu_name\: string, name_admin_bar\: string, add_new\: string, add_new_item\: string, new_item\: string, edit_item\: string, \.\.\.\}, has_archive\: true, public\: true, show_ui\: true, show_in_menu\: ''avpvh\-print\-website…'', rewrite\: array\{slug\: ''avpvh\-print\-website''\}, show_in_rest\: true, supports\: array\{''title'', ''editor'', ''revisions'', ''author'', ''thumbnail'', ''custom\-fields''\}, \.\.\.\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/system/CustomPostTypes.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\system\\FileUploads\:\:filterCheckFileType\(\) has parameter \$defaults with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/PrintMyBlog/system/FileUploads.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\system\\FileUploads\:\:filterCheckFileType\(\) has parameter \$file with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/PrintMyBlog/system/FileUploads.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\system\\FileUploads\:\:filterCheckFileType\(\) has parameter \$filename with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/PrintMyBlog/system/FileUploads.php
+
+		-
+			message: '#^Call to Avpvh\\PrintWebsite\\Twine\\system\\Init\:\:earlyInit\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: src/PrintMyBlog/system/Init.php
+
+		-
+			message: '#^Call to an undefined method object\:\:detectActivation\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/system/Init.php
+
+		-
+			message: '#^Call to an undefined method object\:\:detectAndActivateGlobalCompatibilityMods\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/system/Init.php
+
+		-
+			message: '#^Call to an undefined method object\:\:register\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/system/Init.php
+
+		-
+			message: '#^Call to an undefined method object\:\:setHooks\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: src/PrintMyBlog/system/Init.php
+
+		-
+			message: '#^Call to an undefined method object\:\:setup\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/PrintMyBlog/system/Init.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function add_filter expects callable\(\)\: mixed, array\{object, ''activateRenderingCo…''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/PrintMyBlog/system/Init.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\admin\\news\\DashboardNews\:\:__construct\(\) has parameter \$news_item_count with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Twine/admin/news/DashboardNews.php
+
+		-
+			message: '#^Parameter \#3 \$subject of function preg_replace expects array\<float\|int\|string\>\|string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/admin/news/DashboardNews.php
+
+		-
+			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/admin/news/DashboardNews.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\db\\migrations\\MigrationManagerBase\:\:getApplicableMigrations\(\) should return array\<Avpvh\\PrintWebsite\\Twine\\db\\migrations\\MigrationBase\> but returns array\<object\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/db/migrations/MigrationManagerBase.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\Twine\\db\\migrations\\MigrationManagerBase\:\:\$applicable_migrations \(array\<Avpvh\\PrintWebsite\\Twine\\db\\migrations\\MigrationBase\>\) does not accept array\<object\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Twine/db/migrations/MigrationManagerBase.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\Twine\\db\\migrations\\MigrationManagerBase\:\:\$migrations \(array\<Avpvh\\PrintWebsite\\Twine\\db\\migrations\\MigrationBase\>\) does not accept array\<object\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Twine/db/migrations/MigrationManagerBase.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\entities\\FileSubmission\:\:determineType\(\) should return string but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/entities/FileSubmission.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionBase and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionBase will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 2
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionValidatable and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionValidatable will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\ValidationError and Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\ValidationError will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\inputs\\FormInputBase and Avpvh\\PrintWebsite\\Twine\\forms\\inputs\\FormInputBase will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 2
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function call_user_func_array expects callable\(\)\: mixed, array\{\$this\(Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection\), non\-falsy\-string\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Parameter \#1 \$haystack of function strpos expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Parameter \#1 \$name of method Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection\:\:getSubsection\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Parameter \#1 \$parent_form_section of method Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection\:\:constructFinalize\(\) expects Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Parameter \#1 \$req_data of method Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection\:\:getCachedRequest\(\) expects null, array\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Parameter \#1 \$string of function substr expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_style expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_register_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between \*NEVER\* and array will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between null and null will always evaluate to false\.$#'
+			identifier: notIdentical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Twine/forms/base/FormSection.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/base/FormSectionBase.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSectionBase.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionBase will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSectionBase.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSectionBase.php
+
+		-
+			message: '#^Parameter \#1 \$haystack of function strpos expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/base/FormSectionBase.php
+
+		-
+			message: '#^Parameter \#1 \$string of function substr expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/base/FormSectionBase.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSectionBase.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Twine/forms/base/FormSectionBase.php
+
+		-
+			message: '#^Parameter \#1 \$options_array of method Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection\:\:__construct\(\) expects array\<array\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/base/FormSectionDetails.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\ValidationError and Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\ValidationError will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/base/FormSectionValidatable.php
+
+		-
+			message: '#^Parameter \#1 \$message of method Exception\:\:__construct\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/helpers/ValidationError.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\ValidationError\:\:\$form_section \(Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionValidatable\) does not accept Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionValidatable\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Twine/forms/helpers/ValidationError.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\ValidationError\:\:\$string_code \(string\) does not accept string\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Twine/forms/helpers/ValidationError.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Cannot cast array\|string to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\DisplayBase and Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\DisplayBase will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase and Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 2
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Offset 1 on array\{list\<string\>, list\<string\>\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Parameter \#1 \$value_to_normalize of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\normalization\\NormalizationBase\:\:normalize\(\) expects string, array\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Result of \|\| is always false\.$#'
+			identifier: booleanOr.alwaysFalse
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/inputs/FormInputBase.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments true, list\<\(int\|string\)\> and true will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Twine/forms/inputs/FormInputWithOptionsBase.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\InputOption and Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\InputOption will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/inputs/FormInputWithOptionsBase.php
+
+		-
+			message: '#^Parameter \#1 \$answer_options of method Avpvh\\PrintWebsite\\Twine\\forms\\inputs\\SelectInput\:\:__construct\(\) expects array\<Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\InputOption\>, array\<int, int\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/inputs/MonthInput.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\DisplayBase and Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\DisplayBase will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/inputs/TextAreaInput.php
+
+		-
+			message: '#^Parameter \#1 \$answer_options of method Avpvh\\PrintWebsite\\Twine\\forms\\inputs\\SelectInput\:\:__construct\(\) expects array\<Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\InputOption\>, array\<int, int\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/inputs/YearInput.php
+
+		-
+			message: '#^Call to Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\DisplayBase\:\:enqueueJs\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: src/Twine/forms/strategies/display/AdminFileUploaderDisplay.php
+
+		-
+			message: '#^Instanceof between array\<string, array\<int\|string, int\|string\|WP_Http_Cookie\>\|string\|WP_HTTP_Requests_Response\|WpOrg\\Requests\\Utility\\CaseInsensitiveDictionary\|null\> and WP_Error will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/display/AdminFileUploaderDisplay.php
+
+		-
+			message: '#^Parameter \#1 \$haystack of function strpos expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/display/AdminFileUploaderDisplay.php
+
+		-
+			message: '#^Parameter \#1 \$src of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\AdminFileUploaderDisplay\:\:srcExists\(\) expects string, array\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/display/AdminFileUploaderDisplay.php
+
+		-
+			message: '#^Parameter \#1 \$src of method Avpvh\\PrintWebsite\\Twine\\helpers\\Html\:\:img\(\) expects string, array\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/display/AdminFileUploaderDisplay.php
+
+		-
+			message: '#^Parameter \#2 \$id of method Avpvh\\PrintWebsite\\Twine\\helpers\\Html\:\:div\(\) expects string, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/display/AdminFileUploaderDisplay.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\normalization\\NormalizationBase and Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\normalization\\NormalizationBase will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/display/ButtonDisplay.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/display/CheckboxDisplay.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 2
+			path: src/Twine/forms/strategies/display/DisplayBase.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\NumberInputDisplay\:\:\$step \(float\) does not accept int\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Twine/forms/strategies/display/NumberInputDisplay.php
+
+		-
+			message: '#^Result of \|\| is always true\.$#'
+			identifier: booleanOr.alwaysTrue
+			count: 3
+			path: src/Twine/forms/strategies/display/NumberInputDisplay.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between int\|null and ''any'' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/display/NumberInputDisplay.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between null and null will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 3
+			path: src/Twine/forms/strategies/display/NumberInputDisplay.php
+
+		-
+			message: '#^Parameter \#1 \$option_value of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\CompoundInputDisplay\:\:getSubInputId\(\) expects string, array\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/display/RadioButtonDisplay.php
+
+		-
+			message: '#^Parameter \#1 \$options of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\SelectDisplay\:\:displayOptions\(\) expects array\<Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\InputOption\>, Avpvh\\PrintWebsite\\Twine\\forms\\helpers\\InputOption given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/display/SelectDisplay.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\normalization\\NormalizationBase and Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\normalization\\NormalizationBase will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/display/SubmitInputDisplay.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\display\\WysiwygDisplay\:\:display\(\) should return string but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/forms/strategies/display/WysiwygDisplay.php
+
+		-
+			message: '#^Parameter \#1 \$content of function wp_editor expects string, array\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/display/WysiwygDisplay.php
+
+		-
+			message: '#^Instanceof between \*NEVER\* and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionHtml will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/layout/AdminOneColumnLayout.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/layout/AdminOneColumnLayout.php
+
+		-
+			message: '#^Result of \|\| is always true\.$#'
+			identifier: booleanOr.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/layout/AdminOneColumnLayout.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Twine/forms/strategies/layout/AdminOneColumnLayout.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between non\-empty\-string and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/layout/FormSectionLayoutBase.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/strategies/layout/NoLayout.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\layout\\TemplateLayout\:\:renderTemplate\(\) should return string but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/forms/strategies/layout/TemplateLayout.php
+
+		-
+			message: '#^Parameter \#1 \$form_section of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\layout\\TemplateLayout\:\:layoutSubsection\(\) expects Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection, Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionBase given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Twine/forms/strategies/layout/TemplateLayout.php
+
+		-
+			message: '#^Instanceof between \*NEVER\* and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSectionHtml will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/layout/TwoColumnLayout.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection and Avpvh\\PrintWebsite\\Twine\\forms\\base\\FormSection will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/layout/TwoColumnLayout.php
+
+		-
+			message: '#^Result of \|\| is always true\.$#'
+			identifier: booleanOr.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/layout/TwoColumnLayout.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Twine/forms/strategies/layout/TwoColumnLayout.php
+
+		-
+			message: '#^Call to function is_null\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 2
+			path: src/Twine/forms/strategies/normalization/FileNormalization.php
+
+		-
+			message: '#^Instanceof between string and Avpvh\\PrintWebsite\\Twine\\entities\\FileSubmission will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 2
+			path: src/Twine/forms/strategies/normalization/FileNormalization.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/strategies/normalization/FloatNormalization.php
+
+		-
+			message: '#^Parameter \#2 \$subject of function preg_match expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/normalization/FloatNormalization.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between 3 and 3 will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/normalization/FloatNormalization.php
+
+		-
+			message: '#^Call to function is_float\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Twine/forms/strategies/normalization/IntNormalization.php
+
+		-
+			message: '#^Call to function is_int\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Twine/forms/strategies/normalization/IntNormalization.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/strategies/normalization/IntNormalization.php
+
+		-
+			message: '#^Parameter \#2 \$subject of function preg_match expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/normalization/IntNormalization.php
+
+		-
+			message: '#^Result of \|\| is always false\.$#'
+			identifier: booleanOr.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/normalization/IntNormalization.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between 3 and 3 will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/normalization/IntNormalization.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between int and '''' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/normalization/IntNormalization.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between int and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/normalization/IntNormalization.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/normalization/IntNormalization.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/strategies/normalization/ManyValuedNormalization.php
+
+		-
+			message: '#^Cannot call method normalize\(\) on array\|Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\normalization\\NormalizationBase\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Twine/forms/strategies/normalization/ManyValuedNormalization.php
+
+		-
+			message: '#^Cannot call method unnormalize\(\) on array\|Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\normalization\\NormalizationBase\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Twine/forms/strategies/normalization/ManyValuedNormalization.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\normalization\\ManyValuedNormalization\:\:unnormalizeOne\(\) should return string but returns array\|string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/forms/strategies/normalization/ManyValuedNormalization.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/normalization/ManyValuedNormalization.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between array and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/normalization/ManyValuedNormalization.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\normalization\\NormalizationBase\:\:unnormalizeOne\(\) should return string but returns array\|string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/forms/strategies/normalization/NormalizationBase.php
+
+		-
+			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Twine/forms/strategies/normalization/TextNormalization.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 2
+			path: src/Twine/forms/strategies/normalization/TextNormalization.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php
+
+		-
+			message: '#^Parameter \#1 \$validation_error_message of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:__construct\(\) expects null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between non\-empty\-string and array\{\} will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between non\-empty\-string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/validation/ConditionallyRequiredValidation.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\EmailValidation\:\:validateEmail\(\) should return bool but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/EmailValidation.php
+
+		-
+			message: '#^Call to Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:validate\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: src/Twine/forms/strategies/validation/EnumValidation.php
+
+		-
+			message: '#^Parameter \#2 \$array of function implode expects array, array\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/EnumValidation.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/validation/EnumValidation.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and false will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/validation/EnumValidation.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and true will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/validation/EnumValidation.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/validation/FloatValidation.php
+
+		-
+			message: '#^Parameter \#1 \$validation_error_message of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:__construct\(\) expects null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/FloatValidation.php
+
+		-
+			message: '#^Call to Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:validate\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: src/Twine/forms/strategies/validation/FullHtmlValidation.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/validation/FullHtmlValidation.php
+
+		-
+			message: '#^Parameter \#1 \$validation_error_message of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:__construct\(\) expects null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/FullHtmlValidation.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/validation/IntValidation.php
+
+		-
+			message: '#^Parameter \#1 \$validation_error_message of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:__construct\(\) expects null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/IntValidation.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/strategies/validation/ManyValuedValidation.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/strategies/validation/ManyValuedValidation.php
+
+		-
+			message: '#^Call to function is_string\(\) with non\-falsy\-string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/strategies/validation/MaxLengthValidation.php
+
+		-
+			message: '#^Parameter \#1 \$validation_error_message of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:__construct\(\) expects null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/MaxLengthValidation.php
+
+		-
+			message: '#^Call to function is_string\(\) with non\-falsy\-string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Twine/forms/strategies/validation/MinLengthValidation.php
+
+		-
+			message: '#^Call to Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:validate\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: src/Twine/forms/strategies/validation/PlaintextValidation.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/validation/PlaintextValidation.php
+
+		-
+			message: '#^Parameter \#1 \$validation_error_message of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:__construct\(\) expects null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/PlaintextValidation.php
+
+		-
+			message: '#^Parameter \#1 \$validation_error_message of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:__construct\(\) expects null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/RequiredValidation.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between non\-empty\-string and array\{\} will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/validation/RequiredValidation.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between non\-empty\-string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Twine/forms/strategies/validation/RequiredValidation.php
+
+		-
+			message: '#^Offset 0 might not exist on string\|null\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/Twine/forms/strategies/validation/TextValidation.php
+
+		-
+			message: '#^Parameter \#1 \$haystack of function strrpos expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/TextValidation.php
+
+		-
+			message: '#^Parameter \#1 \$string of function substr expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/TextValidation.php
+
+		-
+			message: '#^Parameter \#1 \$validation_error_message of method Avpvh\\PrintWebsite\\Twine\\forms\\strategies\\validation\\ValidationBase\:\:__construct\(\) expects null, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/forms/strategies/validation/TextValidation.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between null and null will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 1
+			path: src/Twine/forms/strategies/validation/ValidationBase.php
+
+		-
+			message: '#^Parameter \#2 \$offset of function array_slice expects int, int\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/helpers/Array2.php
+
+		-
+			message: '#^Parameter \#2 \$offset of function array_splice expects int, int\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/helpers/Array2.php
+
+		-
+			message: '#^Parameter \#3 \$data_comp_func of function array_udiff expects callable\(mixed, mixed\)\: int, array\{''self'', ''_compare_objects''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/helpers/Array2.php
+
+		-
+			message: '#^Parameter \#3 \$length of function array_slice expects int\|null, int\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/helpers/Array2.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\helpers\\Html\:\:sanitizeId\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/helpers/Html.php
+
+		-
+			message: '#^Call to function is_string\(\) with WP_Post will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Twine/orm/entities/PostWrapper.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\orm\\entities\\PostWrapper\:\:duplicatePost\(\) should return WP_Post but returns WP_Post\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/orm/entities/PostWrapper.php
+
+		-
+			message: '#^Parameter \#1 \$object_type of function get_object_taxonomies expects array\<string\>\|string\|WP_Post, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/orm/entities/PostWrapper.php
+
+		-
+			message: '#^Parameter \#2 \$terms of function wp_set_object_terms expects array\|int\|string, array\<int\<0, max\>, string\>\|WP_Error given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/orm/entities/PostWrapper.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\Twine\\orm\\entities\\PostWrapper\:\:\$wp_post \(WP_Post\) does not accept WP_Post\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Twine/orm/entities/PostWrapper.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\orm\\managers\\CustomTableManager\:\:createEntityFromRow\(\) should return Avpvh\\PrintWebsite\\Twine\\orm\\entities\\CustomTableRow but returns object\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/orm/managers/CustomTableManager.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\orm\\managers\\CustomTableManager\:\:save\(\) should return bool\|int but returns array\|float\|int\|string\|false\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Twine/orm/managers/CustomTableManager.php
+
+		-
+			message: '#^Parameter \#1 \$objectOrClass of class ReflectionClass constructor expects class\-string\<T of object\>\|T of object, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/orm/managers/CustomTableManager.php
+
+		-
+			message: '#^Cannot access property \$found_posts on WP_Query\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: src/Twine/orm/managers/PostWrapperManager.php
+
+		-
+			message: '#^Cannot call method get_posts\(\) on WP_Query\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Twine/orm/managers/PostWrapperManager.php
+
+		-
+			message: '#^Parameter \#1 \$post of function get_post expects int\|numeric\-string\|WP_Post\|null, int\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/orm/managers/PostWrapperManager.php
+
+		-
+			message: '#^Parameter \#1 \$post of method Avpvh\\PrintWebsite\\Twine\\orm\\managers\\PostWrapperManager\:\:createWrapperAroundPost\(\) expects WP_Post, WP_Post\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/orm/managers/PostWrapperManager.php
+
+		-
+			message: '#^Parameter \#1 \$posts of method Avpvh\\PrintWebsite\\Twine\\orm\\managers\\PostWrapperManager\:\:createWrapperAroundPosts\(\) expects array\<WP_Post\>, array\<int\|WP_Post\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/orm/managers/PostWrapperManager.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\services\\config\\Config\:\:getDefault\(\) has parameter \$setting_name with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Twine/services/config/Config.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\services\\config\\Config\:\:resetSetting\(\) has parameter \$setting with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Twine/services/config/Config.php
+
+		-
+			message: '#^Offset string might not exist on array\|null\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/Twine/services/config/Config.php
+
+		-
+			message: '#^Parameter \#2 \$array of function array_key_exists expects array, array\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Twine/services/config/Config.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\Twine\\services\\config\\SettingNotDefinedException\:\:__construct\(\) has parameter \$setting_name with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Twine/services/config/SettingNotDefinedException.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\Twine\\services\\config\\SettingNotDefinedException\:\:\$setting_name has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Twine/services/config/SettingNotDefinedException.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\services\\filesystem\\Folder and Avpvh\\PrintWebsite\\Twine\\services\\filesystem\\Folder will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/services/filesystem/File.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Twine/services/filesystem/File.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\Twine\\services\\filesystem\\File\:\:\$file_handle \(resource\) does not accept resource\|false\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Twine/services/filesystem/File.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\services\\filesystem\\Folder and Avpvh\\PrintWebsite\\Twine\\services\\filesystem\\Folder will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/services/filesystem/Folder.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Twine/services/filesystem/Folder.php
+
+		-
+			message: '#^Instanceof between Avpvh\\PrintWebsite\\Twine\\entities\\notifications\\OneTimeNotification and Avpvh\\PrintWebsite\\Twine\\entities\\notifications\\OneTimeNotification will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/services/notifications/OneTimeNotificationManager.php
+
+		-
+			message: '#^Instanceof between WP_User and WP_User will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Twine/services/notifications/OneTimeNotificationManager.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function call_user_func_array expects callable\(\)\: mixed, array\{object, ''inject''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/system/Context.php
+
+		-
+			message: '#^Parameter \#1 \$objectOrClass of class ReflectionClass constructor expects class\-string\<T of object\>\|T of object, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Twine/system/Context.php
+
+		-
+			message: '#^Method Avpvh\\PrintWebsite\\mnelson4\\AdminNotices\\Dismiss\:\:__construct\(\) has parameter \$capability with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/mnelson4/AdminNotices/Dismiss.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\mnelson4\\AdminNotices\\Dismiss\:\:\$capability has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/mnelson4/AdminNotices/Dismiss.php
+
+		-
+			message: '#^Offset ''query_args'' on non\-empty\-array in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.offset
+			count: 1
+			path: src/mnelson4/AdminNotices/Notice.php
+
+		-
+			message: '#^Offset ''screens'' on non\-empty\-array in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.offset
+			count: 1
+			path: src/mnelson4/AdminNotices/Notice.php
+
+		-
+			message: '#^Parameter \#4 \$ver of function wp_enqueue_script expects bool\|string\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/mnelson4/AdminNotices/Notices.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 1
+			path: src/mnelson4/rest_api_detector/RestApiDetector.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between 2 and 2 will always evaluate to false\.$#'
+			identifier: notIdentical.alwaysFalse
+			count: 1
+			path: src/mnelson4/rest_api_detector/RestApiDetector.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/mnelson4/rest_api_detector/RestApiDetector.php
+
+		-
+			message: '#^Property Avpvh\\PrintWebsite\\mnelson4\\rest_api_detector\\RestApiDetectorError\:\:\$string_code \(string\) does not accept int\|string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/mnelson4/rest_api_detector/RestApiDetectorError.php

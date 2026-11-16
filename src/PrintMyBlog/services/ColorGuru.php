@@ -27,6 +27,9 @@ class ColorGuru
     public function convertHextToRgba($hex_code, $alpha)
     {
         $rgb = $this->convertHexToRgb($hex_code);
+        if (! is_array($rgb)) {
+            $rgb = [0, 0, 0];
+        }
         $rgb[] = $alpha;
         return 'rgba(' . implode(
             ',',
