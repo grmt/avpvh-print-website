@@ -1,5 +1,5 @@
-# Dependabot: weekly, minor and patch updates grouped into one PR per
-# ecosystem, major updates as separate PRs (see the shared CLAUDE.md, CI).
+# Minor and patch updates come as one PR per ecosystem a week; majors stay
+# separate PRs.
 version: 2
 updates:
 - package-ecosystem: github-actions
