@@ -204,7 +204,21 @@ class PostWrapper
         );
     }
     /**
-     * Creates a new post from the wrapped post
+     * Whether the current user may copy this post, which copies its content and all its meta to a post they own.
+     * @return bool
+     */
+    public function currentUserCanCopy()
+    {
+        $post = $this->getWpPost();
+        if (! current_user_can('read_post', $post->ID)) {
+            return false;
+        }
+        // read_post ignores post passwords; only people who may edit the post may copy a protected one.
+        return $post->post_password === '' || current_user_can('edit_post', $post->ID);
+    }
+
+    /**
+     * Creates a new post from the wrapped post, with its terms and meta. Callers must check currentUserCanCopy() first.
      * @param array $args_override args to override from their defaults when inserting
      * @param array $new_post_metas keys are meta keys, values are their values
      * @return WP_Post

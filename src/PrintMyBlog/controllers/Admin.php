@@ -1151,6 +1151,8 @@ class Admin extends BaseController
         if (! isset($_GET['page'])) {
             return;
         }
+        // admin_init runs before WordPress checks the page's capability, so check it here.
+        $this->dieUnlessCurrentUserCanUsePage(sanitize_key($_GET['page']));
         if ($_GET['page'] === AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG) {
             $this->saveSettingsPage();
         }
@@ -1710,8 +1712,16 @@ class Admin extends BaseController
         if (! check_admin_referer(self::SLUG_ACTION_DUPLICATE_PRINT_MATERIAL)) {
             wp_die('The request has expired. Please refresh the previous page and try again.');
         }
-        $post_id = Array2::setOr($_GET, 'ID', 0);
+        $post_id = (int)Array2::setOr($_GET, 'ID', 0);
+        // The copy is owned by the current user, so they must be allowed to read the original (and its meta).
         $wrapped_post = $this->post_manager->getById($post_id);
+        if (
+            ! $wrapped_post
+            || ! current_user_can('publish_avpvh_prwb_contents')
+            || ! $wrapped_post->currentUserCanCopy()
+        ) {
+            wp_die(esc_html__('You do not have sufficient permissions to do this.', 'avpvh-print-website'), '', 403);
+        }
         $new_post = $wrapped_post->duplicateAsPrintMaterial();
         wp_safe_redirect(
             get_edit_post_link($new_post->ID, 'not_display')
@@ -1742,6 +1752,28 @@ class Admin extends BaseController
     }
 
     /**
+     * Stops the request unless the current user has the capability of our admin page with this slug (the same one
+     * its menu entry uses). Slugs that aren't ours are ignored.
+     * @param string $page
+     */
+    protected function dieUnlessCurrentUserCanUsePage($page)
+    {
+        $caps = [
+            AVPVH_PRWB_ADMIN_SETTINGS_PAGE_SLUG => 'manage_options',
+            AVPVH_PRWB_ADMIN_DESIGNS_PAGE_SLUG => 'manage_options',
+            AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG => AVPVH_PRWB_ADMIN_CAP,
+            AVPVH_PRWB_ADMIN_PAGE_SLUG => AVPVH_PRWB_ADMIN_CAP,
+        ];
+        if (isset($caps[$page]) && ! current_user_can($caps[$page])) {
+            wp_die(
+                esc_html__('You do not have sufficient permissions to do this.', 'avpvh-print-website'),
+                '',
+                403
+            );
+        }
+    }
+
+    /**
      * Handles responses for PMB requests early on
      */
     private function earlyResponseHandling()
@@ -1762,6 +1794,8 @@ class Admin extends BaseController
         if (! isset($_GET['page'])) {
             return;
         }
+        // admin_init runs before WordPress checks the page's capability, so check it here.
+        $this->dieUnlessCurrentUserCanUsePage(sanitize_key($_GET['page']));
         if ($_GET['page'] === AVPVH_PRWB_ADMIN_PROJECTS_PAGE_SLUG) {
             $action = isset($_GET['action']) ? sanitize_key($_GET['action']) : null;
             if ($action === self::SLUG_ACTION_UNINSTALL) {

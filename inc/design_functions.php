@@ -168,7 +168,8 @@ function avpvh_prwb_design_styles(\Avpvh\PrintWebsite\orm\entities\Design $desig
             }
         }";
     }
-    return $css;
+    // This ends up in a <style> element; a closing tag in a setting would end it and let HTML (and scripts) follow.
+    return preg_replace('#<\s*/\s*style#i', '<\\/style', $css);
 }
 
 /**

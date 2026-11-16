@@ -64,19 +64,20 @@ class ExternalResourceCache
             $external_url_sans_querystring = $external_url;
         }
 
-        $copy_filename = sanitize_file_name($external_url_sans_querystring);
-
-        $extension = pathinfo($external_url, PATHINFO_EXTENSION);
-        if (! $extension) {
-            $copy_filename .= '.avif';
-        }
+        $url_path = (string) wp_parse_url($external_url_sans_querystring, PHP_URL_PATH);
+        $extension = strtolower(pathinfo($url_path, PATHINFO_EXTENSION));
+        $basename = sanitize_file_name(
+            $extension
+                ? substr($external_url_sans_querystring, 0, -1 - strlen($extension))
+                : $external_url_sans_querystring
+        );
 
         $folder = $this->getCacheDir();
 
-        $response = wp_remote_get(
+        // wp_safe_remote_get() refuses local and private addresses, so this can't be used to reach internal services.
+        $response = wp_safe_remote_get(
             $external_url,
             [
-                'sslverify' => false,
                 'timeout' => 15,
                 'user-agent' => 'PostmanRuntime/7.26.8',
                 'httpversion' => '1.1',
@@ -85,7 +86,16 @@ class ExternalResourceCache
             // 'filename'=> $folder . $copy_filename,
             ]
         );
+        $safe_extension = null;
         if (is_array($response) && $response['response']['code'] === 200 && ! $response instanceof WP_Error) {
+            $safe_extension = $this->safeImageExtension(
+                $extension,
+                (string) wp_remote_retrieve_header($response, 'content-type')
+            );
+        }
+        if ($safe_extension !== null) {
+            // Only image extensions are ever written, so the cache can't be used to drop scripts on the server.
+            $copy_filename = $basename . '.' . $safe_extension;
             $filepath = $folder . '/' . $copy_filename;
             $content = $response['body'];
             $file = new File($filepath);
@@ -96,6 +106,32 @@ class ExternalResourceCache
         }
 
         return $this->getLocalUrlFromExternalUrl($external_url);
+    }
+
+    /**
+     * Picks the extension to save a fetched resource under: the URL's extension if it is an image one, otherwise the
+     * one that matches the response's image Content-Type. Anything else isn't cached.
+     * @param string $url_extension lowercase extension from the URL path, or ''
+     * @param string $content_type the response's Content-Type header
+     * @return string|null
+     */
+    protected function safeImageExtension($url_extension, $content_type)
+    {
+        $allowed = [
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'webp' => 'image/webp',
+            'avif' => 'image/avif',
+            'bmp' => 'image/bmp',
+        ];
+        if (isset($allowed[$url_extension])) {
+            return $url_extension;
+        }
+        $mime = strtolower(trim(explode(';', $content_type)[0]));
+        $by_mime = array_search($mime, $allowed, true);
+        return $by_mime === false ? null : $by_mime;
     }
 
     /**

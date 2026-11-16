@@ -226,7 +226,7 @@ if (!class_exists('Updraft_Dashboard_News')) :
             wp_dashboard_primary_output('dashboard_primary', $feeds);
             $original_formatted_news = ob_get_clean();
             $formatted_news = preg_replace('/<a(.+?)>(.+?)<\/a>/i', "<a$1>" . $this->translations['item_prefix'] . ": $2</a>", $original_formatted_news);
-            $formatted_news = str_replace('<li>', '<li class="' . $this->slug . '_dashboard_news_item">' . '<a href="' . $this->get_current_clean_url() . '" class="dashicons dashicons-no-alt" title="' . esc_attr($this->translations['dismiss_tooltip']) . '" onClick="' . $this->slug . '_dismiss_dashboard_news(); return false;" style="float: right; box-shadow: none; margin-left: 5px;"></a>', $formatted_news);
+            $formatted_news = str_replace('<li>', '<li class="' . $this->slug . '_dashboard_news_item">' . '<a href="#" class="dashicons dashicons-no-alt" title="' . esc_attr($this->translations['dismiss_tooltip']) . '" onClick="' . $this->slug . '_dismiss_dashboard_news(); return false;" style="float: right; box-shadow: none; margin-left: 5px;"></a>', $formatted_news);
             set_transient($this->slug . '_dashboard_news', $formatted_news, 43200); // 12 hours
 
             return $formatted_news;
@@ -273,10 +273,6 @@ if (!class_exists('Updraft_Dashboard_News')) :
         
             update_user_meta(get_current_user_id(), $this->slug . '_dismiss_dashboard_news', true);
             die();
-        }
-        private function get_current_clean_url()
-        {
-            return "://" . Array2::setOr($_SERVER,'HTTP_HOST','') . Array2::setOr($_SERVER,'REQUEST_URI','');
         }
     }
 endif;

@@ -54,9 +54,10 @@ class Folder extends ThingOnServer
     public function ensureExists()
     {
         if (! $this->exists()) {
+            // Parents first, so each one gets its index file.
             $this->parentFolder()->ensureExists();
-            mkdir($this->getPath());
-            chmod($this->getPath(), 0777);
+            // wp_mkdir_p() creates missing parents and uses the permissions of the parent folder, not 0777.
+            wp_mkdir_p($this->getPath());
             $this->exists = true;
             $this->secure();
         }
@@ -97,7 +98,36 @@ class Folder extends ThingOnServer
      */
     public function delete()
     {
-        array_map('unlink', glob($this->getPath() . '/*.*'));
-        return rmdir($this->getPath());
+        return self::deleteRecursively($this->getPath());
+    }
+
+    /**
+     * Deletes a folder with everything in it, including subfolders. Symlinks are removed, not followed.
+     * @param string $path
+     * @return bool success
+     */
+    protected static function deleteRecursively($path)
+    {
+        if (! is_dir($path) || is_link($path)) {
+            return false;
+        }
+        $entries = scandir($path);
+        if ($entries === false) {
+            return false;
+        }
+        foreach ($entries as $entry) {
+            if ($entry === '.' || $entry === '..') {
+                continue;
+            }
+            $entry_path = $path . '/' . $entry;
+            if (is_dir($entry_path) && ! is_link($entry_path)) {
+                self::deleteRecursively($entry_path);
+            } else {
+                // phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink
+                unlink($entry_path);
+            }
+        }
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
+        return rmdir($path);
     }
 }

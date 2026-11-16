@@ -46,6 +46,8 @@ class Dismiss
      */
     private $scope;
 
+    private $capability;
+
     /**
      * Constructor.
      *
@@ -55,8 +57,9 @@ class Dismiss
      * @param string $prefix The prefix that will be used for the option/user-meta.
      * @param string $scope  Controls where the dismissal will be saved: user or global.
      */
-    public function __construct($id, $prefix, $scope = 'global')
+    public function __construct($id, $prefix, $scope = 'global', $capability = 'edit_theme_options')
     {
+        $this->capability = $capability;
 
         // Set the object properties.
         $this->id     = sanitize_key($id);
@@ -145,6 +148,11 @@ class Dismiss
 
         // Security check: Make sure nonce is OK.
         check_ajax_referer('wptrt_dismiss_notice_' . $this->id, 'nonce', true);
+
+        // Only users who may see the notice may dismiss it (a global dismissal hides it for everyone).
+        if (! current_user_can($this->capability)) {
+            wp_die('', '', 403);
+        }
 
         // If we got this far, we need to dismiss the notice.
         $this->dismiss_notice();
