@@ -3,7 +3,7 @@ define('AVPVH_PRWB_TWINE_MAIN_FILE', __FILE__);
 define('AVPVH_PRWB_MAIN_FILE', __FILE__);
 define('AVPVH_PRWB_DIR', __DIR__ . '/');
 define('AVPVH_PRWB_VENDOR_DIR', AVPVH_PRWB_DIR . 'vendor/');
-define('AVPVH_PRWB_VERSION', '4.0.1');
+define('AVPVH_PRWB_VERSION', '4.0.2');
 define('AVPVH_PRWB_MIN_PHP_VER_REQUIRED', '8.4.0');
 define('AVPVH_PRWB_MIN_WP_VER_REQUIRED', '7.1');
 define('AVPVH_PRWB_TEMPLATES_DIR', AVPVH_PRWB_DIR . 'templates/');
