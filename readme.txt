@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 4.0.1
+Stable tag: 4.0.2
 
 Print WordPress content, or turn it into PDF, ePub and Word documents. For you and your visitors.
 
@@ -242,6 +242,15 @@ options are the same as when printing out multiple posts simultaneously: you can
 8. Digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 4.0.2 November 16, 2026 =
+* Security: generating a print, saving settings, designs and saved prints, searching posts and copying a post as print material now check the user's permissions. Private, draft and password-protected posts can no longer be printed or copied by people who may not read them.
+* Security: the external image cache only fetches public addresses and only saves images; the REST API site check only fetches public addresses.
+* Security: escaped output on the print page, the setup page and in design CSS.
+* Folders for generated prints are no longer world-writable, uninstalling removes them completely, and a copied saved print gets its own folder.
+* Only users who may see a notice can dismiss it.
+* Fixed: the loading page for printing a single post did not start.
+* Fixed: "Save & Proceed" on the content step did nothing after adding items on that page.
+
 = 4.0.1 November 11, 2026 =
 * "Pro Print" and "projects" are now called "Saved Prints": a document set up once and generated again whenever the content changes. Quick Print keeps its name; "Pro Print ―" is gone from the Designs page titles.
 * The "Powered by" setting and the print button settings no longer mention the paid service.
