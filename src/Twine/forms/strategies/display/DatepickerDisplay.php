@@ -10,9 +10,8 @@ class DatepickerDisplay extends TextInputDisplay
 {
     /**
      * DatepickerDisplay constructor.
-     * @param string $type
      */
-    public function __construct($type = 'text')
+    public function __construct()
     {
         parent::__construct('datepicker');
     }

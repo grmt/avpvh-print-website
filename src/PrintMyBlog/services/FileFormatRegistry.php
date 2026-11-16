@@ -33,7 +33,7 @@ class FileFormatRegistry
     /**
      * @param string $slug
      *
-     * @return FileFormat
+     * @return FileFormat|null
      */
     public function getFormat($slug)
     {

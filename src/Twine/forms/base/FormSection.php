@@ -30,7 +30,7 @@ class FormSection extends FormSectionValidatable
     /**
      * Subsections
      *
-     * @var FormSectionValidatable[]
+     * @var FormSectionBase[]
      */
     protected $subsections = array();
 
@@ -152,7 +152,7 @@ class FormSection extends FormSectionValidatable
          * assuming you don't care what the form section's name, HTML ID, or HTML name etc are.
          * Also see AH_FormSectionProper___construct_finalize__end
          *
-         * @param FormSection $this before __construct is done, but all of its logic,
+         * @param FormSection $form_section before __construct is done, but all of its logic,
          *                                              except maybe calling _construct_finalize has been done
          * @param array                  $options_array options passed into the constructor
          *
@@ -188,7 +188,10 @@ class FormSection extends FormSectionValidatable
         foreach ($other_form->subsections(false) as $name => $subsection) {
             if ($this->subsectionExists($name)) {
                 if ($subsection instanceof FormSection) {
-                    $this->getSubsection($name, false)->merge($subsection);
+                    $existing = $this->getSubsection($name, false);
+                    if ($existing instanceof FormSection) {
+                        $existing->merge($subsection);
+                    }
                 }
                 // else it's a conflicting input. Leave the original.
             } else {
@@ -235,7 +238,7 @@ class FormSection extends FormSectionValidatable
          * If you need to modify the form or its subsections before _construct_finalize is called on it (and we've
          * ensured it has a name, HTML IDs, etc
          *
-         * @param FormSection      $this
+         * @param FormSection      $form_section
          * @param FormSection|null $parent_form_section
          * @param string                      $name
          */
@@ -904,7 +907,7 @@ class FormSection extends FormSectionValidatable
      * Sanitizes all the data and sets the sanitized value of each field
      *
      * @param array $req_data like $_POST
-     * @return void
+     * @return bool
      */
     protected function normalize($req_data)
     {
@@ -920,6 +923,7 @@ class FormSection extends FormSectionValidatable
                 $subsection->addValidationError($e);
             }
         }
+        return ! empty($this->getValidationErrorsAccumulated());
     }
 
 
@@ -942,6 +946,7 @@ class FormSection extends FormSectionValidatable
             }
             $subsection->validate();
         }
+        return $this->isValid();
     }
 
 
@@ -1013,7 +1018,7 @@ class FormSection extends FormSectionValidatable
      *                                                      (realizing that the subsections' html names might not be
      *                                                      set yet, etc.)
      *
-     * @return FormSectionValidatable[]
+     * @return FormSectionBase[]
      * @throws ImproperUsageException
      */
     public function subsections($require_construction_to_be_finalized = true)
@@ -1306,7 +1311,9 @@ class FormSection extends FormSectionValidatable
     public function cleanSensitiveData()
     {
         foreach ($this->getValidatableSubsections() as $subsection) {
-            $subsection->cleanSensitiveData();
+            if ($subsection instanceof FormSection) {
+                $subsection->cleanSensitiveData();
+            }
         }
     }
 
@@ -1482,9 +1489,9 @@ class FormSection extends FormSectionValidatable
             if ($validation_error instanceof ValidationError) {
                 $form_section = $validation_error->getFormSection();
                 if ($form_section instanceof FormInputBase) {
-                    $label = $validation_error->getFormSection()->htmlLabelText();
+                    $label = $form_section->htmlLabelText();
                 } elseif ($form_section instanceof FormSectionValidatable) {
-                    $label = $validation_error->getFormSection()->name();
+                    $label = $form_section->name();
                 } else {
                     $label = esc_html__('Unknown', 'avpvh-print-website');
                 }
@@ -1513,7 +1520,7 @@ class FormSection extends FormSectionValidatable
      * Etc
      *
      * @param string|false $form_section_path we accept false also because substr( '../', '../' ) = false
-     * @return FormSectionBase
+     * @return FormSectionBase|null
      * @throws ImproperUsageException
      */
     public function findSectionFromPath($form_section_path)

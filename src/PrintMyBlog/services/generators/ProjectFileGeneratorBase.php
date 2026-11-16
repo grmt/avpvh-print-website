@@ -294,8 +294,8 @@ abstract class ProjectFileGeneratorBase
      * @return void
      */
     abstract protected function maybeGenerateDivisionStart(
-        ProjectSection $last_section = null,
-        ProjectSection $current_section = null
+        ?ProjectSection $last_section = null,
+        ?ProjectSection $current_section = null
     );
 
     /**
@@ -304,8 +304,8 @@ abstract class ProjectFileGeneratorBase
      * @return void
      */
     abstract protected function maybeGenerateDivisionEnd(
-        ProjectSection $previous_section = null,
-        ProjectSection $current_section = null
+        ?ProjectSection $previous_section = null,
+        ?ProjectSection $current_section = null
     );
 
     /**

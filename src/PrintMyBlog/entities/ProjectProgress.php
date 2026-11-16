@@ -166,6 +166,7 @@ class ProjectProgress
     public function getNextStep()
     {
         $step_progress = $this->getStepProgress();
+        $step_slug = self::SETUP_STEP;
         foreach ($step_progress as $step_slug => $complete) {
             if (! $complete) {
                 return $step_slug;
@@ -197,7 +198,7 @@ class ProjectProgress
             'ID' => $this->project->getWpPost()->ID,
             'action' => Admin::SLUG_ACTION_EDIT_PROJECT,
         ];
-        $mapping = [];
+        $mappings = [];
         foreach ($this->getSteps() as $step => $label) {
             $args = $this->mapStepToSubactionArgs($step);
             $mappings[$step] = add_query_arg(

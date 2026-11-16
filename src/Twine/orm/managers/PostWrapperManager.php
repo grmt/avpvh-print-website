@@ -59,7 +59,7 @@ class PostWrapperManager
      *
      * @return array|PostWrapper[]
      */
-    public function getAll(WP_Query $query = null)
+    public function getAll(?WP_Query $query = null)
     {
         $query = $this->setQueryForThisPostType($query);
         return $this->createWrapperAroundPosts($query->get_posts());
@@ -81,7 +81,7 @@ class PostWrapperManager
      * @param WP_Query|null $query
      * @return WP_Query|null
      */
-    protected function setQueryForThisPostType(WP_Query $query = null)
+    protected function setQueryForThisPostType(?WP_Query $query = null)
     {
         if (! $query instanceof WP_Query) {
             $query = new WP_Query(
@@ -119,7 +119,7 @@ class PostWrapperManager
         );
 
         /**
-         * @var $post_wrapper PostWrapper
+         * @var PostWrapper $post_wrapper
          */
         return $post_wrapper;
     }

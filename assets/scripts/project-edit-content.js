@@ -34,7 +34,10 @@ jQuery(document).ready(function(){
 		var first_item = main_sections.children('.pmb-project-item:first');
 		var depth = 1;
 		if(first_item.length){
-			depth = first_item[0].attributes['data-height'].nodeValue;
+			// avpvh_prwb_update_heights() (above) stores heights with .data(); items added on this page (search
+			// results, quick-add) have no data-height attribute, so don't read the attribute.
+			var height = first_item.data('height');
+			depth = height === undefined ? 0 : height;
 		} else {
 			// they haven't entered any body. Let's double-check they're really done.
 			if(! window.confirm(avpvh_prwb_project_edit_content_data.translations.empty_content_warning)){

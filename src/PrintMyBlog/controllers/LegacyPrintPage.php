@@ -21,7 +21,7 @@ use Avpvh\PrintWebsite\Twine\controllers\BaseController;
 class LegacyPrintPage extends BaseController
 {
     /**
-     * @var URL of domain we'd like this site to proxy for, so we can print that blog instead.
+     * @var string|null URL of domain we'd like this site to proxy for, so we can print that blog instead.
      */
     protected $proxy_for;
 

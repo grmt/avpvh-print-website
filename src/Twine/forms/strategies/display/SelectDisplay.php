@@ -104,7 +104,7 @@ class SelectDisplay extends DisplayBase
      * Checks if that value is the one selected
      *
      * @param string|int $option_value unnormalized value option (string). How it will appear in the HTML.
-     * @return string
+     * @return bool
      */
     protected function checkIfOptionSelected($option_value)
     {

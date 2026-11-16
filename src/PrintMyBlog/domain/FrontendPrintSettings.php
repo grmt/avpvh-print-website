@@ -46,7 +46,7 @@ class FrontendPrintSettings
      * @param PrintOptions|null $print_options optional. This is injected since PMB 3.6.0
      * @param bool $load_from_db
      */
-    public function __construct(PrintOptions $print_options = null, $load_from_db = true)
+    public function __construct(?PrintOptions $print_options = null, $load_from_db = true)
     {
         if (isset($print_options) && $print_options instanceof PrintOptions) {
             $this->print_options = $print_options;
@@ -64,7 +64,7 @@ class FrontendPrintSettings
         // Remove emojis if the database doesn't support it.
         global $wpdb;
         foreach ($this->formats as $key => $settings) {
-            if (method_exists($wpdb, 'strip_invalid_text_for_column')) {
+            if ($wpdb instanceof \wpdb && method_exists($wpdb, 'strip_invalid_text_for_column')) {
                 $this->formats[$key]['admin_label'] = $wpdb->strip_invalid_text_for_column(
                     $wpdb->options,
                     'option_value',

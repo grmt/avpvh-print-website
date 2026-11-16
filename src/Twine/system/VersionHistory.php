@@ -17,7 +17,7 @@ class VersionHistory
     /**
      * Begins as 'false' which indicates its not initialized yet. Once initialized it will be a string
      * or null (to indicate brand new install)
-     * @var string
+     * @var string|false|null
      */
     protected $previous_version = false;
 

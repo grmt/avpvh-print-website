@@ -70,13 +70,13 @@ abstract class Init
     protected function initRequest()
     {
         /**
-         * @var $request_type RequestType
+         * @var RequestType $request_type
          */
         $request_type = $this->context->reuse('Avpvh\PrintWebsite\Twine\system\RequestType');
         $request_type->getRequestType();
 
         /**
-         * @var $version_history VersionHistory
+         * @var VersionHistory $version_history
          */
         $version_history = $this->context->reuse('Avpvh\PrintWebsite\Twine\system\VersionHistory');
         $version_history->maybeRecordVersionChange();

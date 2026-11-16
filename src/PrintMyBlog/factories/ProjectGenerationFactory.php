@@ -3,6 +3,7 @@
 namespace Avpvh\PrintWebsite\factories;
 
 use Avpvh\PrintWebsite\entities\FileFormat;
+use Avpvh\PrintWebsite\entities\ProjectGeneration;
 use Avpvh\PrintWebsite\orm\entities\Project;
 use Avpvh\PrintWebsite\system\Context;
 

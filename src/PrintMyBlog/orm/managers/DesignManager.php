@@ -9,6 +9,10 @@ use \WP_Query;
 /**
  * Class DesignManager
  * @package Avpvh\PrintWebsite\orm\managers
+ * @method Design|null getById($id)
+ * @method Design|null getBySlug($slug)
+ * @method Design[] getAll(?\WP_Query $query = null)
+ * @method Design createWrapperAroundPost(\WP_Post $post)
  */
 class DesignManager extends PostWrapperManager
 {

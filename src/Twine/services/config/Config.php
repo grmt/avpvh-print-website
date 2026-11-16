@@ -11,7 +11,7 @@ use Exception;
 abstract class Config
 {
     /**
-     * @var array|null, keys are setting names, values are whatever we want. null until initialized.
+     * @var array|null keys are setting names, values are whatever we want. null until initialized.
      */
     protected $settings = null;
 

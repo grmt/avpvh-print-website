@@ -118,7 +118,7 @@ class DefaultPersistentNotices
     }
 
     /**
-     * @return string[]
+     * @return array<string, mixed>
      */
     protected function getNoticeDefaultOptions()
     {
@@ -131,7 +131,7 @@ class DefaultPersistentNotices
 
     /**
      * @param string $screen_id
-     * @return string[]
+     * @return array<string, mixed>
      */
     protected function getOptionsForScreen($screen_id)
     {
@@ -142,7 +142,7 @@ class DefaultPersistentNotices
 
     /**
      * @param string $subaction
-     * @return string[]
+     * @return array<string, mixed>
      */
     protected function getOptionsForProjectSubaction($subaction)
     {

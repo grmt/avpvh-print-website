@@ -171,7 +171,7 @@ class FileSubmission
 
     /**
      * Gets the error code PHP reported for the file upload.
-     * @return string
+     * @return int|string
      */
     public function getErrorCode()
     {

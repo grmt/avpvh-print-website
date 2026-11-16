@@ -4,6 +4,7 @@ namespace Avpvh\PrintWebsite\domain;
 
 use Avpvh\PrintWebsite\helpers\ImageHelper;
 use Avpvh\PrintWebsite\orm\entities\Design;
+use Avpvh\PrintWebsite\Twine\forms\base\FormSectionBase;
 use Avpvh\PrintWebsite\Twine\forms\base\FormSectionDetails;
 use Avpvh\PrintWebsite\Twine\forms\base\FormSection;
 use Avpvh\PrintWebsite\Twine\forms\helpers\InputOption;
@@ -12,6 +13,7 @@ use Avpvh\PrintWebsite\Twine\forms\inputs\CheckboxMultiInput;
 use Avpvh\PrintWebsite\Twine\forms\inputs\ColorInput;
 use Avpvh\PrintWebsite\Twine\forms\inputs\DatepickerInput;
 use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputBase;
+use Avpvh\PrintWebsite\Twine\forms\inputs\FormInputWithOptionsBase;
 use Avpvh\PrintWebsite\Twine\forms\inputs\IntegerInput;
 use Avpvh\PrintWebsite\Twine\forms\inputs\SelectInput;
 use Avpvh\PrintWebsite\Twine\forms\inputs\SelectRevealInput;
@@ -351,14 +353,20 @@ class DefaultDesignTemplates
                                 ],
                             ]
                         ))->merge($this->getGenericDesignForm());
-                        $design_form->findSection('image_placement')->removeOption('dynamic-resize');
-                        $design_form->findSection('post_content')->setDefault(
-                        [
-                            'title',
-                            'featured_image',
-                            'content',
-                        ]
-                        );
+                        $image_placement_section = $design_form->findSection('image_placement');
+                        if ($image_placement_section instanceof FormInputWithOptionsBase) {
+                            $image_placement_section->removeOption('dynamic-resize');
+                        }
+                        $post_content_section = $design_form->findSection('post_content');
+                        if ($post_content_section instanceof CheckboxMultiInput) {
+                            $post_content_section->setDefault(
+                                [
+                                    'title',
+                                    'featured_image',
+                                    'content',
+                                ]
+                            );
+                        }
                         $design_form->removeSubsection('dynamic-resize');
                         return $design_form;
                     },
@@ -1172,7 +1180,7 @@ class DefaultDesignTemplates
 
     /**
      * Gets the image placement input and its sister dynamic-resize input (which gets revealed when choosing to resize images)
-     * @return FormInputBase[]
+     * @return FormSectionBase[]
      */
     protected function getImageSnapInputs()
     {

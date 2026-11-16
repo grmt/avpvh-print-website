@@ -16,14 +16,14 @@ use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 class MaxLengthValidation extends ValidationBase
 {
     /**
-     * @var int $max_length
+     * @var int|float $max_length
      */
     protected $max_length;
 
     /**
      * MaxLengthValidation constructor.
-     * @param null $validation_error_message
-     * @param int $max_length
+     * @param string|null $validation_error_message
+     * @param int|float $max_length
      */
     public function __construct($validation_error_message = null, $max_length = INF)
     {

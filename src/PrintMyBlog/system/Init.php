@@ -98,32 +98,32 @@ class Init extends BaseInit
         $uploads->setup();
 
         /**
-         * @var $cpt CustomPostTypes
+         * @var CustomPostTypes $cpt
          */
         $cpt = $this->context->reuse('Avpvh\PrintWebsite\system\CustomPostTypes');
         $cpt->register();
         $this->setUrls();
 
         /**
-         * @var $default_formats DefaultFileFormats
+         * @var DefaultFileFormats $default_formats
          */
         $default_formats = $this->context->reuse('Avpvh\PrintWebsite\domain\DefaultFileFormats');
         $default_formats->registerFileFormats();
 
         /**
-         * @var $default_design_templates DefaultDesignTemplates
+         * @var DefaultDesignTemplates $default_design_templates
          */
         $default_design_templates = $this->context->reuse('Avpvh\PrintWebsite\domain\DefaultDesignTemplates');
         $default_design_templates->registerDesignTemplates();
 
         /**
-         * @var $default_designs DefaultDesigns
+         * @var DefaultDesigns $default_designs
          */
         $default_designs = $this->context->reuse('Avpvh\PrintWebsite\domain\DefaultDesigns');
         $default_designs->registerDefaultDesigns();
 
         /**
-         * @var $default_section_templates DefaultSectionTemplates
+         * @var DefaultSectionTemplates $default_section_templates
          */
         $default_section_templates = $this->context->reuse('Avpvh\PrintWebsite\domain\DefaultSectionTemplates');
         $default_section_templates->registerDefaultSectionTemplates();
@@ -148,7 +148,7 @@ class Init extends BaseInit
             $persistent_messages = $this->context->reuse('Avpvh\PrintWebsite\services\PersistentNotices');
             $persistent_messages->register();
         }
-        if (defined('DOING_AJAX') && DOING_AJAX) {
+        if (wp_doing_ajax()) {
             $ajax = $this->context->reuse('Avpvh\PrintWebsite\controllers\Ajax');
             $ajax->setHooks();
         } elseif (is_admin()) {

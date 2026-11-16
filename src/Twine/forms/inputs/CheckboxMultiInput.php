@@ -23,8 +23,8 @@ class CheckboxMultiInput extends FormInputWithOptionsBase
 {
 
     /**
-     * @param array $answer_options
-     * @param InputOption $input_settings
+     * @param array|InputOption[] $answer_options
+     * @param array $input_settings
      */
     public function __construct($answer_options, $input_settings = array())
     {

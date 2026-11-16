@@ -45,7 +45,7 @@ class PrintButtons
             return '<!-- PMB print buttons are not displayed because there is no valid post of post type "post" or "page"-->';
         }
         /**
-         * @var $url_generator PrintPageUrlGenerator
+         * @var PrintPageUrlGenerator $url_generator
          */
         $url_generator = Context::instance()->useNew('Avpvh\PrintWebsite\domain\PrintPageUrlGenerator', [$post]);
 

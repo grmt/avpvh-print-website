@@ -70,6 +70,6 @@ abstract class CompoundInputDisplay extends DisplayBase
                 )
             );
         }
-        return parent::getInput();
+        return $this->input;
     }
 }

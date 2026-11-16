@@ -99,8 +99,8 @@ if (!class_exists('Updraft_Dashboard_News')) :
          */
         private function get_transient_name()
         {
+            global $wp_version;
             $locale = function_exists('get_user_locale') ? get_user_locale() : get_locale();
-            include(ABSPATH . WPINC . '/version.php');
             $dash_prefix = version_compare($wp_version, '4.8', '>=') ? 'dash_v2_' : 'dash_';
             return version_compare($wp_version, '4.3', '>=') ? $dash_prefix . md5('dashboard_primary_' . $locale) : 'dash_' . md5('dashboard_primary');
         }

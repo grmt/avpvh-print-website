@@ -64,12 +64,12 @@ class Activation extends BaseActivation
      */
     public function inject(
         RequestType $request_type,
-        TableManager $table_manager = null,
-        Capabilities $capabilities = null,
-        DesignRegistry $design_registry = null,
-        DefaultProjectContents $project_contents = null,
-        MigrationManager $migration_manager = null,
-        VersionHistory $version_history = null
+        ?TableManager $table_manager = null,
+        ?Capabilities $capabilities = null,
+        ?DesignRegistry $design_registry = null,
+        ?DefaultProjectContents $project_contents = null,
+        ?MigrationManager $migration_manager = null,
+        ?VersionHistory $version_history = null
     ) {
         parent::inject($request_type);
         $this->table_manager = $table_manager;

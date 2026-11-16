@@ -2,7 +2,6 @@
 
 namespace Avpvh\PrintWebsite\Twine\forms\strategies\validation;
 
-use EventEspresso\core\services\validators\URLValidator;
 use InvalidArgumentException;
 use Avpvh\PrintWebsite\Twine\forms\helpers\ValidationError;
 
@@ -19,14 +18,9 @@ class UrlValidation extends ValidationBase
 {
 
     /**
-     * @var @boolean whether we should check if the file exists or not
+     * @var bool whether we should check if the file exists or not
      */
     protected $check_file_exists;
-
-    /**
-     * @var URLValidator
-     */
-    protected $url_validator;
 
 
 

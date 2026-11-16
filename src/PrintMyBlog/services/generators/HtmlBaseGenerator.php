@@ -144,8 +144,8 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
      * @param ProjectSection|null $current_section
      */
     protected function maybeGenerateDivisionStart(
-        ProjectSection $last_section = null,
-        ProjectSection $current_section = null
+        ?ProjectSection $last_section = null,
+        ?ProjectSection $current_section = null
     ) {
         if (! $current_section instanceof ProjectSection) {
             return;
@@ -168,8 +168,8 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
      * @param ProjectSection|null $current_section
      */
     protected function maybeGenerateDivisionEnd(
-        ProjectSection $previous_section = null,
-        ProjectSection $current_section = null
+        ?ProjectSection $previous_section = null,
+        ?ProjectSection $current_section = null
     ) {
         if (! $previous_section) {
             // no transition necessary
@@ -241,8 +241,8 @@ abstract class HtmlBaseGenerator extends ProjectFileGeneratorBase
     abstract public function enqueueStylesAndScripts();
 
     /**
-     * Gets the URL back to the page to generate step.
-     * @return string
+     * Writes out the print window to the page.
+     * @return void
      */
     abstract protected function addPrintWindowToPage();
 
