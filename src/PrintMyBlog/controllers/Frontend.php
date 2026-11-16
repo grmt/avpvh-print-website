@@ -9,6 +9,7 @@ use Avpvh\PrintWebsite\entities\ProjectProgress;
 use Avpvh\PrintWebsite\orm\managers\ProjectManager;
 use Avpvh\PrintWebsite\services\FileFormatRegistry;
 use Avpvh\PrintWebsite\system\Context;
+use Avpvh\PrintWebsite\system\CustomPostTypes;
 use Avpvh\PrintWebsite\Twine\controllers\BaseController;
 use Avpvh\PrintWebsite\Twine\helpers\Array2;
 use WP_Post;
@@ -194,6 +195,29 @@ class Frontend extends BaseController
         return $template;
     }
 
+    /**
+     * Whether the current user may generate a file from the given saved print or post. Generating renders the
+     * content into a file anyone with the URL can open, and it ignores post passwords and post status, so:
+     * - saved prints need the capability of the Saved Prints admin page;
+     * - a single post needs edit rights, or read rights on a post that isn't password protected.
+     * @param int $post_id
+     * @return bool
+     */
+    public static function currentUserCanGenerate($post_id)
+    {
+        $post = get_post((int)$post_id);
+        if (! $post instanceof WP_Post) {
+            return false;
+        }
+        if ($post->post_type === CustomPostTypes::PROJECT) {
+            return current_user_can(AVPVH_PRWB_ADMIN_CAP);
+        }
+        if (current_user_can('edit_post', $post->ID)) {
+            return true;
+        }
+        return current_user_can('read_post', $post->ID) && ! post_password_required($post);
+    }
+
     public function templateRedirect(){
         // check for PMB ajax
         if (isset($_REQUEST[self::AVPVH_PRWB_AJAX_INDICATOR], $_REQUEST['action']) && $_REQUEST['action'] === self::AVPVH_PRWB_PROJECT_STATUS_ACTION) {
@@ -214,6 +238,9 @@ class Frontend extends BaseController
         $post_id = Array2::setOr($_REQUEST, self::AVPVH_PRWB_QUERYARG_POST, 0);
         if( ! $post_id){
             throw new Exception(__('Invalid Post ID. The link you used to get here may be old. If it\'s new, please contact AV-PvH Print Website support.', 'avpvh-print-website'));
+        }
+        if (! self::currentUserCanGenerate($post_id)) {
+            wp_die(esc_html__('You are not allowed to print this.', 'avpvh-print-website'), '', 403);
         }
         $this->project = $this->project_manager->getById($post_id);
         add_action(
@@ -243,7 +270,7 @@ class Frontend extends BaseController
         $use_theme = $design->getPmbMeta('use_theme');
         wp_localize_script(
             'avpvh-print-website-loading',
-            'avpvh-print-website-loading',
+            'avpvh_prwb_loading',
             [
                 'external_requests_enabled' => avpvh_prwb_external_requests_enabled(),
                 'generate_ajax_data' => apply_filters(
@@ -293,8 +320,19 @@ class Frontend extends BaseController
             // phpcs:enable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
         }
         // Find project by ID.
+        $project_id = (int)Array2::setOr($_REQUEST, 'ID', '');
+        if (! self::currentUserCanGenerate($project_id)) {
+            wp_send_json_error(
+                [
+                    'error' => 'unauthorized',
+                    'message' => __('You are not allowed to print this.', 'avpvh-print-website'),
+                ],
+                403
+            );
+            return;
+        }
         // @var $project Project just so PHPstorm knows what it's dealing with.
-        $project = $this->project_manager->getById((int)Array2::setOr($_REQUEST, 'ID', ''));
+        $project = $this->project_manager->getById($project_id);
         $format = $this->format_registry->getFormat(sanitize_key(Array2::setOr($_REQUEST, 'format', '')));
         // @var $project_generation ProjectGeneration just so PHPstorm knows what I'm doing.
         $project_generation = $project->getGenerationFor($format);

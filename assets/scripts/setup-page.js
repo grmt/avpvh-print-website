@@ -111,7 +111,7 @@ function PmbSetupPage(avpvh_prwb_instance_vars, translations) {
 
 	this.reportNoRestApiUrl = function(error_string, code) {
 		this.site_bad.show();
-		this.site_status.html(error_string + ' [' + code + '] ');
+		this.site_status.text(error_string + ' [' + code + '] ');
 	};
 
 	this.getTaxonomies = function() {
@@ -188,7 +188,9 @@ function PmbSetupPage(avpvh_prwb_instance_vars, translations) {
 		jQuery.each(this.taxonomies, (index, taxonomy)=>{
 			const slug = taxonomy.rest_base;
 			this.dynamic_categories.append(
-				'<tr><th scope="row"><label for="' + slug + '">' + taxonomy.name+ '</label></th><td><select id="' + slug + '" class="pmb-taxonomies-select" name="taxonomies[' + slug + '][]" multiple="multiple"></select></td></tr>'
+				jQuery('<tr><th scope="row"><label></label></th><td><select class="pmb-taxonomies-select" multiple="multiple"></select></td></tr>')
+					.find('label').attr('for', slug).text(taxonomy.name).end()
+					.find('select').attr({id: slug, name: 'taxonomies[' + slug + '][]'}).end()
 			);
 			jQuery('#'+slug).select2({
 				width: 'resolve',

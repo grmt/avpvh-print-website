@@ -30,7 +30,8 @@ function PmbPrintPage(avpvh_prwb_instance_vars, translations) {
     this.total_comments = 0;
     this.ordered_comments = [];
     this.rendering_wait = avpvh_prwb_instance_vars.rendering_wait;
-    this.include_inline_js = avpvh_prwb_instance_vars.include_inline_js;
+    // Never run another site's scripts: inline JS is only kept for content from this site.
+    this.include_inline_js = avpvh_prwb_instance_vars.include_inline_js && ! avpvh_prwb_instance_vars.proxy_for;
     this.excludeExternalContent = avpvh_prwb_instance_vars.exclude_external_content;
     this.links = avpvh_prwb_instance_vars.links;
     this.showUrl = avpvh_prwb_instance_vars.show_url;
@@ -592,16 +593,16 @@ function PmbPrintPage(avpvh_prwb_instance_vars, translations) {
             && typeof post._embedded === 'object'
             && typeof post._embedded.author === 'object'
             && typeof post._embedded.author[0] === 'object') {
-            html_to_add += '<span class="byline"><span class="author-name pmb-post-meta">' + this.translations.by + ' ' + post._embedded.author[0].name + '</span></span>';
+            html_to_add += '<span class="byline"><span class="author-name pmb-post-meta">' + this.translations.by + ' ' + this.escapeHTML(post._embedded.author[0].name) + '</span></span>';
         }
 		if(this.showId) {
 			html_to_add += '<span class="post-id pmb-post-meta">' +this.translations.id + post.id + '</span> ';
 		}
         if(this.showUrl) {
             html_to_add += '<span class="url pmb-post-meta"><a href="'
-                + post.link
+                + this.escapeAttribute(post.link)
                 + '">'
-                + post.link
+                + this.escapeHTML(post.link)
                 + '</a></span> ';
         }
         if(this.showDate) {

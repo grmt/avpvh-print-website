@@ -248,11 +248,11 @@ class RestApiDetector
      */
     protected function sendHttpGetRequest($url)
     {
-        return wp_remote_get(
+        // wp_safe_remote_get() refuses local and private addresses, so a remote site can't point us at internal services.
+        return wp_safe_remote_get(
             $url,
             [
                 'timeout' => 30,
-                'sslverify' => false,
                 'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
             ]
         );

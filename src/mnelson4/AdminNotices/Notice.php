@@ -157,7 +157,7 @@ class Notice
         $this->allowed_html = apply_filters('wptrt_admin_notices_allowed_html', $this->allowed_html);
 
         // Instantiate the Dismiss object.
-        $this->dismiss = new Dismiss($this->id, $this->options['option_prefix'], $this->options['scope']);
+        $this->dismiss = new Dismiss($this->id, $this->options['option_prefix'], $this->options['scope'], $this->options['capability']);
     }
 
     /**

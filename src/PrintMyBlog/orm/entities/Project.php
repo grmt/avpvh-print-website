@@ -726,6 +726,8 @@ class Project extends PostWrapper
     {
         global $wpdb;
         $new_post = $this->duplicatePost();
+        // The copy needs its own folder for generated files, so don't share the original's code.
+        delete_post_meta($new_post->ID, self::META_PREFIX . self::POSTMETA_CODE);
         // keys are old section IDs, values are their new values
         $section_map = [0 => 0];
         foreach ($this->section_manager->getFlatSectionRowsFor($this->getWpPost()->ID, 100000) as $section_row) {

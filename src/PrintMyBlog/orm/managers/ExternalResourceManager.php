@@ -45,11 +45,7 @@ class ExternalResourceManager
         if (! $row){
             return null;
         }
-        return $this->createObjFromRow(
-        // todo: cache
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-
-        );
+        return $this->createObjFromRow($row);
     }
 
     /**

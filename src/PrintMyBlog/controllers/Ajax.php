@@ -169,8 +169,19 @@ class Ajax extends BaseController
             // phpcs:enable WordPress.PHP.DevelopmentFunctions.prevent_path_disclosure_error_reporting, WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting, WordPress.PHP.IniSet.display_errors_Blacklisted
         }
         // Find project by ID.
+        $project_id = (int)Array2::setOr($_REQUEST, 'ID', '');
+        if (! Frontend::currentUserCanGenerate($project_id)) {
+            wp_send_json_error(
+                [
+                    'error' => 'unauthorized',
+                    'message' => __('You are not allowed to print this.', 'avpvh-print-website'),
+                ],
+                403
+            );
+            return;
+        }
         // @var $project Project just so PHPstorm knows what it's dealing with.
-        $project = $this->project_manager->getById((int)Array2::setOr($_REQUEST, 'ID', ''));
+        $project = $this->project_manager->getById($project_id);
         $format = $this->format_registry->getFormat(sanitize_key(Array2::setOr($_REQUEST, 'format', '')));
         // @var $project_generation ProjectGeneration just so PHPstorm knows what I'm doing.
         $project_generation = $project->getGenerationFor($format);
@@ -210,6 +221,15 @@ class Ajax extends BaseController
                 ?>
             </div>
             <?php
+            exit;
+        }
+        if (! current_user_can(AVPVH_PRWB_ADMIN_CAP)) {
+            ?>
+            <div class="pmb-no-results no-drag">
+                <?php esc_html_e('You do not have sufficient permissions to do this.', 'avpvh-print-website'); ?>
+            </div>
+            <?php
+            exit;
         }
         $requested_posts = 50;
         $query_params = [
@@ -295,10 +315,16 @@ class Ajax extends BaseController
         }
         $posts = get_posts(apply_filters('\Avpvh\PrintWebsite\controllers\Ajax->handlePostSearch $query_params', $query_params));
         $posts = apply_filters('\Avpvh\PrintWebsite\controllers\Ajax->handlePostSearch $posts', $posts, $query_params);
+        // get_posts() doesn't check permissions for the requested statuses, so only list what the user may read.
+        // Count before filtering, so "Show more" still appears when a page had unreadable posts.
+        $found_count = count($posts);
         foreach ($posts as $post) {
+            if (! current_user_can('read_post', $post->ID)) {
+                continue;
+            }
             avpvh_prwb_content_item($post, $project, 0);
         }
-        if ($requested_posts === count($posts)) {
+        if ($requested_posts === $found_count) {
             ?>
             <div class="pmb-show-more">
                 <div
@@ -310,7 +336,7 @@ class Ajax extends BaseController
                 </div>
             </div>
             <?php
-        } elseif (count($posts) === 0 && (int)$page === 1) {
+        } elseif ($found_count === 0 && (int)$page === 1) {
             ?>
             <div class="pmb-no-results no-drag">
                 <?php
@@ -394,6 +420,15 @@ class Ajax extends BaseController
         $project_id = (int)Array2::setOr($_REQUEST, 'project', 0);
         $project = $this->project_manager->getById($project_id);
         $wrapped_post = $this->post_manager->getById($post_id);
+        // The copy is owned by the current user, so they must be allowed to read the original (and its meta).
+        if (! $wrapped_post || ! $wrapped_post->currentUserCanCopy()) {
+            return wp_send_json_error(
+                [
+                    'code' => 'unauthorized',
+                    'message' => __('You do not have sufficient permissions to do this.', 'avpvh-print-website'),
+                ]
+            );
+        }
         // check if a duplicate was already made
         $print_materials = $this->post_manager->getByPostMeta('_avpvh_prwb_original_post', (string)$post_id, 1);
         if ($print_materials) {
@@ -408,7 +443,7 @@ class Ajax extends BaseController
         wp_send_json_success(
             [
                 'html' => $html,
-                'post_ID' => $print_material->ID,
+                'post_ID' => $print_material_post->ID,
             ]
         );
         exit;

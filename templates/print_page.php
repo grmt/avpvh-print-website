@@ -166,10 +166,10 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
         ?>
 
             <?php if ($avpvh_prwb_show_site_title) { ?>
-                <h1 class="site-title"><?php echo $avpvh_prwb_site_name; ?></h1>
+                <h1 class="site-title"><?php echo esc_html($avpvh_prwb_site_name); ?></h1>
             <?php } ?>
             <?php if ($avpvh_prwb_show_site_tagline) { ?>
-                <p class="site-description"><?php echo $avpvh_prwb_site_description; ?></p>
+                <p class="site-description"><?php echo esc_html($avpvh_prwb_site_description); ?></p>
             <?php } ?>
             <?php
             if ($avpvh_prwb_show_filters) {
@@ -204,8 +204,8 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     $taxonomy_filters_strings[] = sprintf(
                     // translators: 1 taxonomy name, 2: list of terms that apply to this post
                         esc_html__('%1$s: %2$s', 'avpvh-print-website'),
-                        count($terms) > 1 ? $taxonomy->labels->name : $taxonomy->labels->singular_name,
-                        implode(', ', $terms)
+                        esc_html(count($terms) > 1 ? $taxonomy->labels->name : $taxonomy->labels->singular_name),
+                        esc_html(implode(', ', $terms))
                     );
 
                 }
@@ -218,9 +218,9 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     ) :
                     '';
                 if($avpvh_prwb_author){
-                    $filters_string .= ' ' . sprintf(esc_html__('by %s', 'avpvh-print-website'), $avpvh_prwb_author->display_name);
+                    $filters_string .= ' ' . sprintf(esc_html__('by %s', 'avpvh-print-website'), esc_html($avpvh_prwb_author->display_name));
                 }
-                $content_description = $avpvh_prwb_post_type . ' ' . $date_range_string . ' ' . $filters_string;
+                $content_description = esc_html($avpvh_prwb_post_type) . ' ' . $date_range_string . ' ' . $filters_string;
 
                 ?>
                 <?php
@@ -235,10 +235,10 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                     // translators: 1 description of printout, 2: site URL
                         esc_html__('%1$s from %2$s.', 'avpvh-print-website'),
                         $content_description,
-                        $avpvh_prwb_site_url
+                        esc_html($avpvh_prwb_site_url)
                     );
                 } elseif ($avpvh_prwb_show_site_url && ! $content_description) {
-                        echo $avpvh_prwb_site_url;
+                        echo esc_html($avpvh_prwb_site_url);
                 } elseif ($content_description) {
                     // if we're not showing the site's URL, but there's a content description to show, by all means...
                     // it should still be shown.
