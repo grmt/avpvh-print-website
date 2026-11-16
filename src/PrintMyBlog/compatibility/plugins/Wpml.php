@@ -278,8 +278,8 @@ class Wpml extends CompatibilityBase
 
     /**
      * Tell WP_Query to use filters, and add some so we only select posts of the requested language on Ajax requests searching for posts.
-     * @param WP_Query $wp_query
-     * @return mixed
+     * @param array<string, mixed> $wp_query
+     * @return array<string, mixed>
      */
     public function setupWpQueryWithWpml($wp_query)
     {
