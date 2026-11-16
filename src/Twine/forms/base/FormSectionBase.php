@@ -427,7 +427,7 @@ abstract class FormSectionBase
      *
      * @param string|false $form_section_path we accept false also because substr( '../', '../' ) = false
      *
-     * @return FormSectionBase
+     * @return FormSectionBase|null
      */
     public function findSectionFromPath($form_section_path)
     {

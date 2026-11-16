@@ -15,12 +15,12 @@ use Avpvh\PrintWebsite\system\Context;
 class DesignTemplateRegistry
 {
     /**
-     * @var $design_template_callbacks callable[]
+     * @var callable[]
      */
     protected $design_template_callbacks;
 
     /**
-     * @var $design_templates DesignTemplate[]
+     * @var DesignTemplate[]
      */
     protected $design_templates;
 

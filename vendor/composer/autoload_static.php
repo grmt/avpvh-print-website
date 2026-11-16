@@ -215,7 +215,6 @@ class ComposerStaticInitAvpvhPrintWebsite
         'Avpvh\\PrintWebsite\\services\\ExternalResourceCache' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/ExternalResourceCache.php',
         'Avpvh\\PrintWebsite\\services\\FileFormatRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/FileFormatRegistry.php',
         'Avpvh\\PrintWebsite\\services\\PersistentNotices' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/PersistentNotices.php',
-        'Avpvh\\PrintWebsite\\services\\PmbCentral' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/PmbCentral.php',
         'Avpvh\\PrintWebsite\\services\\SectionTemplateRegistry' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/SectionTemplateRegistry.php',
         'Avpvh\\PrintWebsite\\services\\SvgDoer' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/SvgDoer.php',
         'Avpvh\\PrintWebsite\\services\\config\\Config' => __DIR__ . '/../..' . '/src/PrintMyBlog/services/config/Config.php',

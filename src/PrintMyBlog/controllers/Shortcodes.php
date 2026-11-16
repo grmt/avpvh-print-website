@@ -180,6 +180,7 @@ class Shortcodes extends BaseController
                 DesignTemplate::TEMPLATE_TITLE_PAGE
             );
             require $template_path;
+            return '';
         } else {
             return do_shortcode('<h1>[avpvh_print_website_project_title]</h1>');
         }

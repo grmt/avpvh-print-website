@@ -22,7 +22,7 @@ class TablePress extends CompatibilityBase
         $a = property_exists('TablePress', 'controller');
         $b = method_exists('TablePress', 'load_controller');
         if (
-            defined('DOING_AJAX') && DOING_AJAX
+            wp_doing_ajax()
             && class_exists('TablePress')
             && property_exists('TablePress', 'controller')
             && method_exists('TablePress', 'load_controller')

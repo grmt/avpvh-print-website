@@ -22,5 +22,6 @@ class FixedHiddenInput extends HiddenInput
      */
     protected function normalize($req_data)
     {
+        return false;
     }
 }

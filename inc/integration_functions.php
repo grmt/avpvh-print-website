@@ -11,7 +11,7 @@ function avpvh_prwb_check_db()
 {
     $context = \Avpvh\PrintWebsite\system\Context::instance();
     /**
-     * @var $activation \Avpvh\PrintWebsite\system\Activation
+     * @var \Avpvh\PrintWebsite\system\Activation $activation
      */
     $activation = $context->reuse('Avpvh\PrintWebsite\system\Activation');
     $activation->install();
@@ -25,7 +25,7 @@ function avpvh_prwb_generic_design_form()
 {
     $context = \Avpvh\PrintWebsite\system\Context::instance();
     /**
-     * @var $default_design_templates \Avpvh\PrintWebsite\domain\DefaultDesignTemplates
+     * @var \Avpvh\PrintWebsite\domain\DefaultDesignTemplates $default_design_templates
      */
     $default_design_templates = $context->reuse('Avpvh\PrintWebsite\domain\DefaultDesignTemplates');
     return $default_design_templates->getGenericDesignForm();
@@ -38,7 +38,7 @@ function avpvh_prwb_generic_design_form()
 function avpvh_prwb_register_file_format($file_format_slug, $args)
 {
     /**
-     * @var $file_format_registry \Avpvh\PrintWebsite\services\FileFormatRegistry
+     * @var \Avpvh\PrintWebsite\services\FileFormatRegistry $file_format_registry
      */
     $file_format_registry = Context::instance()->reuse(
         'Avpvh\PrintWebsite\services\FileFormatRegistry'
@@ -56,7 +56,7 @@ function avpvh_prwb_register_file_format($file_format_slug, $args)
 function avpvh_prwb_register_design_template($slug, $design_template_args_callback)
 {
     /**
-     * @var $design_template_registry DesignTemplateRegistry
+     * @var DesignTemplateRegistry $design_template_registry
      */
     $design_template_registry = Context::instance()->reuse(
         'Avpvh\PrintWebsite\services\DesignTemplateRegistry'
@@ -73,7 +73,7 @@ function avpvh_prwb_register_design_template($slug, $design_template_args_callba
 function avpvh_prwb_register_design($design_template_slug, $design_slug, $design_args_callback)
 {
     /**
-     * @var $design_registry \Avpvh\PrintWebsite\services\DesignRegistry
+     * @var \Avpvh\PrintWebsite\services\DesignRegistry $design_registry
      */
     $design_registry = Context::instance()->reuse(
         'Avpvh\PrintWebsite\services\DesignRegistry'
@@ -88,12 +88,12 @@ function avpvh_prwb_register_design($design_template_slug, $design_slug, $design
 /**
  * @param string $slug
  * @param string[] $design_templates
- * @param callback $section_template_args_callback see \Avpvh\PrintWebsite\entities\SectionTemplate::__construct()
+ * @param callable $section_template_args_callback see \Avpvh\PrintWebsite\entities\SectionTemplate::__construct()
  */
 function avpvh_prwb_register_section_template($slug, $design_templates, $section_template_args_callback)
 {
     /**
-     * @var $section_template_registry Avpvh\PrintWebsite\services\SectionTemplateRegistry
+     * @var \Avpvh\PrintWebsite\services\SectionTemplateRegistry $section_template_registry
      */
     $section_template_registry = Context::instance()->reuse(
         'Avpvh\PrintWebsite\services\SectionTemplateRegistry'

@@ -50,9 +50,12 @@ class Capabilities
      */
     public function grantCapsForCPT($post_type, $role = 'administrator')
     {
-        $role = get_role($role);
-        foreach ($post_type->cap as $capability) {
-            $role->add_cap($capability, true);
+        $role_obj = get_role($role);
+        if (! $role_obj instanceof \WP_Role) {
+            return;
+        }
+        foreach ((array) $post_type->cap as $capability) {
+            $role_obj->add_cap($capability, true);
         }
     }
 }

@@ -1077,7 +1077,7 @@ class Admin extends BaseController
         $designs_by_format = [];
         foreach ($designs as $design) {
             /**
-             * @var $design Design
+             * @var Design $design
              */
             if ($design->designTemplateExists()) {
                 $designs_by_format[$design->getDesignTemplate()->getFormat()->slug()][] = $design;

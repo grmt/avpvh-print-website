@@ -77,7 +77,7 @@ function avpvh_prwb_convert_url_to_anchor($url)
 function avpvh_prwb_include_design_template($relative_filepath, $context_variables = [])
 {
     /**
-     * @var $avpvh_prwb_design Design
+     * @var Design $avpvh_prwb_design
      */
     global $avpvh_prwb_project, $avpvh_prwb_design, $avpvh_prwb_project_generation;
     extract($context_variables);

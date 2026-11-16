@@ -11,6 +11,10 @@ use WP_Post;
 /**
  * Class ProjectManager
  * @package Avpvh\PrintWebsite\orm\managers
+ * @method \Avpvh\PrintWebsite\orm\entities\Project|null getById($id)
+ * @method \Avpvh\PrintWebsite\orm\entities\Project|null getBySlug($slug)
+ * @method \Avpvh\PrintWebsite\orm\entities\Project[] getAll(?\WP_Query $query = null)
+ * @method \Avpvh\PrintWebsite\orm\entities\Project createWrapperAroundPost(\WP_Post $post)
  */
 class ProjectManager extends PostWrapperManager
 {

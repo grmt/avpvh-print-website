@@ -192,35 +192,41 @@ class CustomPostTypes
 
         /* If editing, deleting, or reading a project, get the post and post type object. */
         if ('edit_' . $cap_slug === $cap || 'delete_' . $cap_slug === $cap || 'read_' . $cap_slug === $cap) {
-            $post = get_post($args[0]);
+            $post = isset($args[0]) ? get_post($args[0]) : null;
+            if (! $post instanceof \WP_Post) {
+                return ['do_not_allow'];
+            }
             $post_type = get_post_type_object($post->post_type);
+            if (! $post_type instanceof \WP_Post_Type) {
+                return ['do_not_allow'];
+            }
 
             /* Set an empty array for the caps. */
             $caps = array();
-        }
 
-        /* If editing a project, assign the required capability. */
-        if ('edit_' . $cap_slug === $cap) {
-            if ($user_id === $post->post_author) {
-                $caps[] = $post_type->cap->edit_posts;
-            } else {
-                $caps[] = $post_type->cap->edit_others_posts;
-            }
-        } elseif ('delete_' . $cap_slug === $cap) {
-            /* If deleting a project, assign the required capability. */
-            if ($user_id === $post->post_author) {
-                $caps[] = $post_type->cap->delete_posts;
-            } else {
-                $caps[] = $post_type->cap->delete_others_posts;
-            }
-        } elseif ('read_' . $cap_slug === $cap) {
-            /* If reading a private project, assign the required capability. */
-            if ('private' !== $post->post_status) {
-                $caps[] = 'read';
-            } elseif ($user_id === $post->post_author) {
-                $caps[] = 'read';
-            } else {
-                $caps[] = $post_type->cap->read_private_posts;
+            /* If editing a project, assign the required capability. */
+            if ('edit_' . $cap_slug === $cap) {
+                if ((int) $user_id === (int) $post->post_author) {
+                    $caps[] = $post_type->cap->edit_posts;
+                } else {
+                    $caps[] = $post_type->cap->edit_others_posts;
+                }
+            } elseif ('delete_' . $cap_slug === $cap) {
+                /* If deleting a project, assign the required capability. */
+                if ((int) $user_id === (int) $post->post_author) {
+                    $caps[] = $post_type->cap->delete_posts;
+                } else {
+                    $caps[] = $post_type->cap->delete_others_posts;
+                }
+            } elseif ('read_' . $cap_slug === $cap) {
+                /* If reading a private project, assign the required capability. */
+                if ('private' !== $post->post_status) {
+                    $caps[] = 'read';
+                } elseif ((int) $user_id === (int) $post->post_author) {
+                    $caps[] = 'read';
+                } else {
+                    $caps[] = $post_type->cap->read_private_posts;
+                }
             }
         }
 

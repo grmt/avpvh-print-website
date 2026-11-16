@@ -28,6 +28,7 @@ class GTranslate extends CompatibilityBase
     public function enqueueScripts(){
         // gTranslate adds a unique, random code onto the end of their script handle. So we need to do some digging to find it.
         global $wp_scripts;
+        $gt_script_handle = null;
         foreach($wp_scripts->queue as $key => $item){
             if(strpos($item,'gt_widget_script_') === 0){
                 $gt_script_handle = $item;

@@ -30,7 +30,7 @@ class PrintPageUrlGenerator
 
     /**
      * PrintPageUrlGenerator constructor.
-     * @param WP_Post|int}string $post
+     * @param WP_Post|int|string $post
      */
     public function __construct($post)
     {

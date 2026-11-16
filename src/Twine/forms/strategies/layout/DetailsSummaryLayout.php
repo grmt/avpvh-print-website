@@ -15,7 +15,7 @@ use Avpvh\PrintWebsite\Twine\helpers\Html;
 class DetailsSummaryLayout extends FormSectionLayoutBase
 {
     /**
-     * @var FormSectionBase
+     * @var FormSectionLayoutBase
      */
     protected $inner_layout;
 

@@ -190,7 +190,6 @@ return array(
     'Avpvh\\PrintWebsite\\services\\ExternalResourceCache' => $baseDir . '/src/PrintMyBlog/services/ExternalResourceCache.php',
     'Avpvh\\PrintWebsite\\services\\FileFormatRegistry' => $baseDir . '/src/PrintMyBlog/services/FileFormatRegistry.php',
     'Avpvh\\PrintWebsite\\services\\PersistentNotices' => $baseDir . '/src/PrintMyBlog/services/PersistentNotices.php',
-    'Avpvh\\PrintWebsite\\services\\PmbCentral' => $baseDir . '/src/PrintMyBlog/services/PmbCentral.php',
     'Avpvh\\PrintWebsite\\services\\SectionTemplateRegistry' => $baseDir . '/src/PrintMyBlog/services/SectionTemplateRegistry.php',
     'Avpvh\\PrintWebsite\\services\\SvgDoer' => $baseDir . '/src/PrintMyBlog/services/SvgDoer.php',
     'Avpvh\\PrintWebsite\\services\\config\\Config' => $baseDir . '/src/PrintMyBlog/services/config/Config.php',

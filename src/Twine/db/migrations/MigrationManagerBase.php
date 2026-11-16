@@ -27,7 +27,7 @@ abstract class MigrationManagerBase
     protected $option_prefix;
 
     /**
-     * @var MigrationBase[];
+     * @var MigrationBase[]
      */
     protected $migrations;
 

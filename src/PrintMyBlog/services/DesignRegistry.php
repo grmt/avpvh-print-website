@@ -20,7 +20,7 @@ class DesignRegistry
 {
 
     /**
-     * @var $design_callbacks callable[][] top-level keys are design template slugs, next-level keys are design slugs
+     * @var callable[][] top-level keys are design template slugs, next-level keys are design slugs
      * whose values are callbacks that return the args to pass into createNewDesign()
      */
     protected $design_callbacks;

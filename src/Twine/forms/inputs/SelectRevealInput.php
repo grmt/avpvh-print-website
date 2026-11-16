@@ -32,10 +32,7 @@ class SelectRevealInput extends SelectInput
                 continue;
             }
             $sibling_section = $this->findSectionFromPath('../' . $sibling_section_name);
-            if (
-                $sibling_section instanceof FormSectionBase
-                && ! empty($sibling_section_name)
-            ) {
+            if ($sibling_section instanceof FormSectionBase) {
                 $sibling_sections[ $sibling_section_name ] = $sibling_section;
             }
         }

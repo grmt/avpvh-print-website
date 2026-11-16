@@ -22,7 +22,7 @@ namespace Avpvh\PrintWebsite\Twine\helpers;
 class Html
 {
     /**
-     * @var Html
+     * @var Html|null
      */
     protected static $instance;
 

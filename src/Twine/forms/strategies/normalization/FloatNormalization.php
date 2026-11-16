@@ -25,8 +25,8 @@ class FloatNormalization extends NormalizationBase
 
 
     /**
-     * @param string $value_to_normalize
-     * @return float
+     * @param string|int|float|null $value_to_normalize
+     * @return float|null
      * @throws ValidationError
      */
     public function normalize($value_to_normalize)

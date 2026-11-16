@@ -43,8 +43,8 @@ class FileUploads
 
     /**
      * Allows uploading font files.
-     * @param string $mimes
-     * @return mixed
+     * @param array<string, string> $mimes
+     * @return array<string, string>
      */
     public function filterUploadMimeTypes($mimes)
     {

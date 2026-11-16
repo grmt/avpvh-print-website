@@ -21,7 +21,7 @@ class EasyFootnotes extends CompatibilityBase
 {
 
     /**
-     * @var $old_wp_query_is_singular_value boolean used to store WP_Query->is_singular's original value
+     * @var bool used to store WP_Query->is_singular's original value
      *      which we temporarily reassign.
      */
     protected $old_wp_query_is_singular_value;

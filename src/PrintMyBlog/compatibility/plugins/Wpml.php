@@ -244,7 +244,7 @@ class Wpml extends CompatibilityBase
      * Outputs the HTML for the language picker. Uses directly HTML because this form needed to be very custom-made.
      *
      */
-    public function addLanguageFilter(Project $project = null)
+    public function addLanguageFilter(?Project $project = null)
     {
         if (! function_exists('wpml_get_active_languages') || ! function_exists('wpml_get_default_language')) {
             // This is an error condition so express it as such.

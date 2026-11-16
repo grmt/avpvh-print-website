@@ -44,7 +44,7 @@ class DetectAndActivate
     {
         if ($this->compatibility_mods === null) {
             /**
-             * @var $compatiblity_mods_to_activate CompatibilityBase[]
+             * @var CompatibilityBase[] $compatiblity_mods_to_activate
              */
             $compatiblity_mods_to_activate = [
                 new LazyLoadingFeaturePlugin(),

@@ -37,11 +37,11 @@ class MonthInput extends SelectInput
 
     /**
      * Changes int 1 to 01, etc. Useful with array_walk
-     * @param int $input
+     * @param int|string $input
      * @param mixed $key
      */
     protected function zeroPad(&$input, $key)
     {
-        $input = str_pad($input, 2, '0', STR_PAD_LEFT);
+        $input = str_pad((string) $input, 2, '0', STR_PAD_LEFT);
     }
 }

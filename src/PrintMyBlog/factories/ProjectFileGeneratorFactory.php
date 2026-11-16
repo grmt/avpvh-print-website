@@ -19,7 +19,7 @@ class ProjectFileGeneratorFactory
      * @param Design|null $design
      * @return ProjectFileGeneratorBase
      */
-    public function create($classname, ProjectGeneration $project_generation, Design $design = null)
+    public function create($classname, ProjectGeneration $project_generation, ?Design $design = null)
     {
         return Context::instance()->useNew(
             $classname,

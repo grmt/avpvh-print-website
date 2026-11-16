@@ -94,7 +94,7 @@ class DesignTemplate
      */
     protected $supports = array();
     /**
-     * @var SectionTemplate[] keys are slugs
+     * @var string[] slugs of custom templates
      */
     protected $custom_templates = array();
     /**
@@ -315,7 +315,7 @@ class DesignTemplate
 
     /**
      * Calculates where thie template file SHOULD be in this design template, if it exists at all.
-     * @param string bool $division
+     * @param string $division
      * @param bool $beginning
      *
      * @return string
@@ -331,7 +331,7 @@ class DesignTemplate
 
     /**
      * @param string $division
-     * @param string $beginning
+     * @param bool $beginning
      * @param bool $use_fallback
      * @return bool
      */

@@ -70,7 +70,7 @@ class Frontend extends BaseController
 
 
     /**
-     * @var \Avpvh\PrintWebsite\Twine\orm\entities\PostWrapper|null
+     * @var \Avpvh\PrintWebsite\orm\entities\Project|null
      */
     protected $project;
 
