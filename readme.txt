@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 
 Print WordPress content, or turn it into PDF, ePub and Word documents. For you and your visitors.
 
@@ -242,6 +242,12 @@ options are the same as when printing out multiple posts simultaneously: you can
 8. Digital PDF using Buurma Whitepaper design. The design adds a background color with a gradient, and a custom logo behind the page number. Designers can use the full power of HTML and CSS in their PDF designs!
 
 == Changelog ==
+= 4.0.3 November 21, 2026 =
+* New: Quick Print can export the selected posts or pages as one Markdown file, or as a ZIP with one Markdown file per item. Files are numbered in the selected order, follow the content options and keep the original image URLs.
+* Fixed: Quick Print no longer hangs on "Initializing" on sites that allow the REST API only for logged-in users.
+* Fixed: a REST API error during printing now shows its message once, instead of retrying endlessly or showing the timeout alert on top.
+* Updated the development dependencies for security fixes.
+
 = 4.0.2 November 16, 2026 =
 * Security: generating a print, saving settings, designs and saved prints, searching posts and copying a post as print material now check the user's permissions. Private, draft and password-protected posts can no longer be printed or copied by people who may not read them.
 * Security: the external image cache only fetches public addresses and only saves images; the REST API site check only fetches public addresses.
