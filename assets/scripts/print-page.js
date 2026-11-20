@@ -88,14 +88,22 @@ function PmbPrintPage(avpvh_prwb_instance_vars, translations) {
 				(jqxhr,textStatus,errorThrown) => {
 				    // Somehow different browsers + server configurations return different error responses, even when it's the same unauthorized error
                     // This accounts for when it's "Forbidden", "Unauthorized" or "" (blank, but there's a response code in the JSON)
-					if(errorThrown==='Forbidden' || errorThrown === 'Unauthorized' || (jqxhr.responseJSON instanceof Object && jqxhr.responseJSON.code === 'rest_cannot_view')){
+					var isAuthError = errorThrown === 'Forbidden'
+						|| errorThrown === 'Unauthorized'
+						|| jqxhr.status === 401
+						|| jqxhr.status === 403
+						|| (jqxhr.responseJSON instanceof Object && (jqxhr.responseJSON.code === 'rest_cannot_view' || jqxhr.responseJSON.code === 'rest_forbidden'));
+					if(this.can_view_sensitive_data && isAuthError){
 						// They might be logged-in but not have permission to
-						// edit the post. So try again but in read context.
+						// edit the post. So try again once in read context.
 						this.can_view_sensitive_data = false;
 						this.preloadTaxonomies();
 					} else {
-						this.stopAndShowError(errorThrown);
-          }
+						var errorMessage = (jqxhr.responseJSON instanceof Object && jqxhr.responseJSON.message)
+							? jqxhr.responseJSON.message
+							: (errorThrown || textStatus || String(jqxhr.status || ''));
+						this.stopAndShowError(errorMessage);
+					}
 
 				});
     }
@@ -997,8 +1005,9 @@ function PmbPrintPage(avpvh_prwb_instance_vars, translations) {
 
     }
     this.stopAndShowError = function(errorText){
+        this.working = true;
         this.header.html(this.translations.error);
-        this.status_span.html(this.translations.error_fetching_posts + errorText +'<br>' + this.translations.troubleshooting);
+        this.status_span.html(this.translations.error_fetching_posts + this.escapeHTML(String(errorText || '')) +'<br>' + this.translations.troubleshooting);
     }
 }
 
@@ -1051,33 +1060,35 @@ jQuery(document).ready(function () {
         // Change the jQuery AJAX "converters" text-to-json method.
 		options.converters = {
 			'text json': function(result) {
-			    let new_result = result;
-			    // Sometimes other plugins echo out junk before the start of the real JSON response.
-        // So we need to chop off all that extra stuff.
-        do{
-            // Find the first spot that could be the beginning of valid JSON...
-					var start_of_json = Math.min(
+				let new_result = result;
+				try {
+					return JSON.parse(new_result);
+				} catch (error) {
+					// Sometimes other plugins echo out junk before the start of the real JSON response.
+					// Hunt for the first spot that could be the beginning of valid JSON.
+				}
+				while (new_result.length > 0) {
+					var candidates = [
 						new_result.indexOf('{'),
 						new_result.indexOf('['),
 						new_result.indexOf('true'),
 						new_result.indexOf('false'),
 						new_result.indexOf('"')
-					);
-					// Remove everything before it...
+					].filter(function(idx) { return idx !== -1; });
+					if (candidates.length === 0) {
+						break;
+					}
+					var start_of_json = Math.min.apply(null, candidates);
 					new_result = new_result.substring(start_of_json);
-					try{
-					    // Try to parse it...
-						let i = jQuery.parseJSON(new_result);
-						// If that didn't have an error, great. We found valid JSON!
-						return i;
-          }catch(error){
-					    // There was an error parsing that substring. So let's chop off some more and keep hunting for valid JSON.
-            // Chop off the character that made this look like it could be valid JSON, and then continue iterating...
-            new_result = new_result.substring(1);
-          }
-        }while(start_of_json !== false);
+					try {
+						return JSON.parse(new_result);
+					} catch (error) {
+						// Chop off the candidate character and keep hunting for valid JSON.
+						new_result = new_result.substring(1);
+					}
+				}
 				// Never found any valid JSON. Throw the error.
-        throw "No JSON found in AJAX response using custom JSON parser.";
+				throw new Error("No JSON found in AJAX response using custom JSON parser.");
 			}
 		};
         return original_backbone_sync(method,model,options);
