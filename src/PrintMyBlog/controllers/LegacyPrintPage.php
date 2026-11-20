@@ -255,7 +255,7 @@ class LegacyPrintPage extends BaseController
     public function enqueueScripts()
     {
         do_action('Avpvh\PrintWebsite\controllers\PmbPrintPage->enqueueScripts');
-        $format = $this->getFromRequest('format', 'print');
+        $format = $this->getFromRequest('avpvh_prwb_f', $this->getFromRequest('format', 'print'));
         wp_enqueue_script(
             'avpvh-print-website-print-page',
             AVPVH_PRWB_ASSETS_URL . 'scripts/print-page.js',
@@ -281,6 +281,8 @@ class LegacyPrintPage extends BaseController
             $this->enqueueLocalEpubScripts();
         } elseif ($format === 'word') {
             $this->enqueueLocalWordScripts();
+        } elseif (in_array($format, ['markdown', 'markdown_zip'], true)) {
+            $this->enqueueLocalMarkdownScripts($format);
         }
 
         $post_type = $this->getFromRequest('post-type', 'post');
@@ -414,6 +416,8 @@ class LegacyPrintPage extends BaseController
         $extension_map = [
             'epub' => '.epub',
             'word' => '.doc',
+            'markdown' => '.md',
+            'markdown_zip' => '.zip',
         ];
         if (! isset($extension_map[$format])) {
             return '';
@@ -480,6 +484,56 @@ class LegacyPrintPage extends BaseController
         wp_localize_script('avpvh-print-website-word', 'avpvh_prwb_design_options', [
             'image_size' => $this->getImageRelativeSize(),
         ]);
+    }
+
+    /**
+     * Load bundled Markdown tools. Export runs locally after the selected content has loaded.
+     *
+     * @param string $format
+     * @return void
+     */
+    protected function enqueueLocalMarkdownScripts($format)
+    {
+        global $avpvh_prwb_download_file_name;
+
+        $dependencies = ['jquery', 'avpvh-print-website-print-page'];
+        $libraries = [
+            'turndown' => 'turndown.js',
+            'turndown-gfm' => 'turndown-plugin-gfm.js',
+        ];
+        if ($format === 'markdown_zip') {
+            $libraries['jszip'] = 'jszip.min.js';
+        }
+        foreach ($libraries as $handle => $filename) {
+            $script_handle = 'avpvh-print-website-' . $handle;
+            wp_enqueue_script(
+                $script_handle,
+                AVPVH_PRWB_SCRIPTS_URL . 'libs/' . $filename,
+                $handle === 'turndown-gfm' ? ['avpvh-print-website-turndown'] : [],
+                (string) filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'libs/' . $filename)
+            );
+            $dependencies[] = $script_handle;
+        }
+        wp_enqueue_script(
+            'avpvh-print-website-markdown',
+            AVPVH_PRWB_SCRIPTS_URL . 'markdown-generator.js',
+            $dependencies,
+            (string) filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'markdown-generator.js')
+        );
+        wp_localize_script(
+            'avpvh-print-website-markdown',
+            'avpvh_prwb_markdown',
+            [
+                'format' => $format,
+                'filename' => $avpvh_prwb_download_file_name,
+                'i18n' => [
+                    'generating' => __('Generating Markdown…', 'avpvh-print-website'),
+                    'ready' => __('Markdown download ready.', 'avpvh-print-website'),
+                    'empty' => __('No posts or pages matched your selection.', 'avpvh-print-website'),
+                    'error' => __('Could not generate Markdown. Please try again.', 'avpvh-print-website'),
+                ],
+            ]
+        );
     }
 
     /**

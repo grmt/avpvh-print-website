@@ -2425,7 +2425,7 @@ parameters:
 			path: src/Twine/orm/entities/PostWrapper.php
 
 		-
-			message: '#^Parameter \#2 \$terms of function wp_set_object_terms expects array\|int\|string, array\<int\<0, max\>, string\>\|WP_Error given\.$#'
+			message: '#^Parameter \#2 \$terms of function wp_set_object_terms expects array\|int\|string, (?:array\<int\<0, max\>, string\>|list\<string\>)\|WP_Error given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Twine/orm/entities/PostWrapper.php

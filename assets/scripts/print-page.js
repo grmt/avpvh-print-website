@@ -480,7 +480,7 @@ function PmbPrintPage(avpvh_prwb_instance_vars, translations) {
      */
     this.prettyUpPrintedPage = function()
     {
-        if (! this.excludeExternalContent && avpvh_prwb.external_requests_enabled !== false) {
+        if (! this.isMarkdown() && ! this.excludeExternalContent && avpvh_prwb.external_requests_enabled !== false) {
             avpvh_prwb_convert_youtube_videos_to_images();
         }
 
@@ -532,6 +532,9 @@ function PmbPrintPage(avpvh_prwb_instance_vars, translations) {
 
         }
         jQuery(document).trigger('avpvh_prwb_wrap_up');
+        if (this.isMarkdown()) {
+            jQuery(document).trigger('avpvh_prwb_markdown_ready');
+        }
     };
 
     /**
@@ -569,7 +572,8 @@ function PmbPrintPage(avpvh_prwb_instance_vars, translations) {
         if(this.format !== 'ebook'){
             // added CSS class "entry" for Hueman theme https://wordpress.org/themes/hueman/ whch adds that CSS class on the frontend
             // and uses it for styling.
-            html_to_add += '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' entry hentry pmb-post-article pmb-section" data-depth="0">'
+            html_to_add += '<article id="post-' + post.id + '" class="post-' + post.id + ' post type-' + this.post_type + ' status-' + post.status + ' entry hentry pmb-post-article pmb-section" data-depth="0" data-pmb-source-url="'
+                + this.escapeAttribute(post.link || '') + '" data-pmb-slug="' + this.escapeAttribute(post.slug || '') + '">'
 			+ '<header class="pmb-post-header entry-header">';
         }
         if(this.showTitle) {
@@ -753,13 +757,18 @@ function PmbPrintPage(avpvh_prwb_instance_vars, translations) {
         return wrapper.innerHTML;
     };
 
+    this.isMarkdown = function(){
+        return this.format === 'markdown' || this.format === 'markdown_zip';
+    };
+
     /**
      * Whether browser-print headings should link back to the original post.
      * @param post
      * @returns {boolean}
      */
     this.shouldLinkBrowserHeadings = function(post){
-        return ! this.excludeExternalContent
+        return ! this.isMarkdown()
+            && ! this.excludeExternalContent
             && this.links !== 'remove'
             && typeof post.link === 'string'
             && post.link !== '';
