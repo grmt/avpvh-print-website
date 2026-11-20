@@ -510,7 +510,7 @@ class LegacyPrintPage extends BaseController
                 $script_handle,
                 AVPVH_PRWB_SCRIPTS_URL . 'libs/' . $filename,
                 $handle === 'turndown-gfm' ? ['avpvh-print-website-turndown'] : [],
-                filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'libs/' . $filename)
+                (string) filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'libs/' . $filename)
             );
             $dependencies[] = $script_handle;
         }
@@ -518,7 +518,7 @@ class LegacyPrintPage extends BaseController
             'avpvh-print-website-markdown',
             AVPVH_PRWB_SCRIPTS_URL . 'markdown-generator.js',
             $dependencies,
-            filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'markdown-generator.js')
+            (string) filemtime(AVPVH_PRWB_SCRIPTS_DIR . 'markdown-generator.js')
         );
         wp_localize_script(
             'avpvh-print-website-markdown',
