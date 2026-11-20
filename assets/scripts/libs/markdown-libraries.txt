@@ -3,6 +3,7 @@ Bundled libraries used by Quick Print Markdown export (no CDN requests at runtim
 turndown.js: Turndown 7.2.5, MIT
 https://github.com/mixmark-io/turndown
 Source: npm package turndown@7.2.5, dist/turndown.js
+Local patch: escape backslashes in link destinations and link titles.
 License: turndown-7.2.5-LICENSE.txt
 
 turndown-plugin-gfm.js: turndown-plugin-gfm 1.0.2, MIT

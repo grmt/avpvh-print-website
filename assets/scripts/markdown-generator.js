@@ -47,7 +47,16 @@
             var source = image.getAttribute('data-src-fg') || image.getAttribute('data-src')
                 || image.getAttribute('data-lazy-src') || image.getAttribute('src');
             if (source) {
-                image.setAttribute('src', source);
+                try {
+                    var imageUrl = new URL(source, baseUrl);
+                    if (imageUrl.protocol === 'https:' || imageUrl.protocol === 'http:') {
+                        image.setAttribute('src', imageUrl.href);
+                    } else {
+                        image.removeAttribute('src');
+                    }
+                } catch (error) {
+                    image.removeAttribute('src');
+                }
             }
         });
         copy.querySelectorAll('a[href], img[src]').forEach(function (node) {
@@ -115,7 +124,10 @@
         converter.addRule('markdownTableCell', {
             filter: ['th', 'td'],
             replacement: function (content, node) {
-                return (node.cellIndex === 0 ? '| ' : ' ') + content.trim().replace(/\|/g, '\\|').replace(/\n+/g, '<br>') + ' |';
+                var escaped = content.trim().replace(/(\\*)\|/g, function (match, backslashes) {
+                    return backslashes + (backslashes.length % 2 ? '|' : '\\|');
+                }).replace(/\n+/g, '<br>');
+                return (node.cellIndex === 0 ? '| ' : ' ') + escaped + ' |';
             }
         });
         converter.remove(['script', 'style', 'noscript', 'button']);

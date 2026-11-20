@@ -74,6 +74,7 @@ async function render(page, empty = false) {
                     <tbody><tr><td>Café | Tea</td><td>€ 2</td></tr></tbody></table><table></table>
                     <ul><li><input type="checkbox" checked>Complete</li></ul>
                     <p><img src="/media/picture.jpg" alt="A photo"></p>
+                    <img data-src="data:image/svg+xml,unsafe-image" alt="Untrusted image">
                     <iframe src="https://video.test/embed/123" title="Watch video"></iframe>
                     <span hidden>hidden-secret</span><span style="display:none">css-secret</span>
                     <script type="application/json">script-secret</script><a href="javascript:void(0)">unsafe link</a>` },
@@ -113,12 +114,21 @@ try {
         '![A photo](https://example.test/media/picture.jpg)', '[Watch video](https://video.test/embed/123)', 'First page comment', 'Second page comment']) {
         assert.ok(text.includes(expected), `Combined export should contain ${expected}\n${text}`);
     }
-    for (const unexpected of ['hidden-secret', 'css-secret', 'script-secret', 'javascript:', '<script', '[First & Café]']) {
+    for (const unexpected of ['hidden-secret', 'css-secret', 'script-secret', 'javascript:', 'data:image', 'unsafe-image', '<script', '[First & Café]']) {
         assert.ok(!text.includes(unexpected), `Must omit ${unexpected}`);
     }
     assert.ok(text.indexOf('First & Café') < text.indexOf('Second page'));
     assert.equal((await getDownload(single)).buffer.toString('utf8'), text);
     assert.equal(await single.locator('.pmb-posts').innerHTML(), preview, 'Export must preserve the preview');
+    const escapedLink = await single.evaluate(() => {
+        const link = document.createElement('a');
+        link.textContent = 'Link';
+        link.setAttribute('href', String.raw`/path\)`);
+        link.setAttribute('title', String.raw`slash\"quote`);
+        return new TurndownService().turndown(link.outerHTML);
+    });
+    assert.ok(escapedLink.includes(String.raw`/path\\\)`), 'Link destinations must escape backslashes and parentheses');
+    assert.ok(escapedLink.includes(String.raw`slash\\\"quote`), 'Link titles must escape backslashes and quotes');
     await single.close();
 
     const multiple = await fixture('markdown_zip');
