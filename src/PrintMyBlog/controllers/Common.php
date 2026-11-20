@@ -180,5 +180,46 @@ class Common extends BaseController
             array(),
             filemtime(AVPVH_PRWB_ASSETS_DIR . 'styles/pmb-common.css')
         );
+        $this->addWpApiSchemaNonceWorkaround();
+    }
+
+    /**
+     * WordPress core's wp.api.models.Schema omits a nonce() method, so wp.api.init() fetches
+     * /wp-json/wp/v2/ without an X-WP-Nonce header. On sites that restrict the REST API to
+     * logged-in users, that schema request fails with 403 and leaves wp.api.loadPromise
+     * unresolved forever. Attach the nonce to local Schema fetches before wp-api.js runs.
+     *
+     * @return void
+     */
+    protected function addWpApiSchemaNonceWorkaround()
+    {
+        static $added = false;
+        if ($added || ! wp_script_is('wp-api', 'registered')) {
+            return;
+        }
+        $added = true;
+        $inline_js = '(function(){'
+            . 'if(!window.Backbone||typeof Backbone.sync!=="function"||Backbone.sync.__avpvhPrwbSchemaNonceWrapped){return;}'
+            . 'if(!window.wpApiSettings||!wpApiSettings.root||!wpApiSettings.nonce){return;}'
+            . 'var origSync=Backbone.sync;'
+            . 'var wrappedSync=function(method,model,options){'
+            . 'options=options||{};'
+            . 'var isSchema=window.wp&&wp.api&&wp.api.models&&wp.api.models.Schema&&model instanceof wp.api.models.Schema;'
+            . 'var hasModelNonce=model&&typeof model.nonce==="function"&&model.nonce();'
+            . 'var hasHeaderNonce=options.headers&&(options.headers["X-WP-Nonce"]||options.headers["x-wp-nonce"]);'
+            . 'var url=model&&typeof model.url==="function"?model.url():"";'
+            . 'if(isSchema&&!hasModelNonce&&!hasHeaderNonce&&typeof url==="string"&&url.indexOf(wpApiSettings.root)===0){'
+            . 'var prevBeforeSend=options.beforeSend;'
+            . 'options.beforeSend=function(xhr){'
+            . 'xhr.setRequestHeader("X-WP-Nonce",wpApiSettings.nonce);'
+            . 'if(prevBeforeSend){return prevBeforeSend.apply(this,arguments);}'
+            . '};'
+            . '}'
+            . 'return origSync.call(this,method,model,options);'
+            . '};'
+            . 'wrappedSync.__avpvhPrwbSchemaNonceWrapped=true;'
+            . 'Backbone.sync=wrappedSync;'
+            . '})();';
+        wp_add_inline_script('wp-api', $inline_js, 'before');
     }
 }
