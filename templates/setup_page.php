@@ -62,6 +62,14 @@ avpvh_prwb_render_template('partials/free_header.php');
 						    'label' => esc_html__('HTML', 'avpvh-print-website'),
 						    'help_text' => esc_html__('Easily copy-and-paste into another program like Microsoft Word or Google Docs. Note: this is not recommended for customizing printouts, as other programs usually format the content poorly. Instead, use AV-PvH Print Website’s CSS classes to remove or add content from printouts.', 'avpvh-print-website')
 					    ),
+					    'markdown' => array(
+						    'label' => esc_html__('Markdown (.md)', 'avpvh-print-website'),
+						    'help_text' => esc_html__('Download the selected posts or pages together in one Markdown file.', 'avpvh-print-website'),
+					    ),
+					    'markdown_zip' => array(
+						    'label' => esc_html__('Markdown folder (.zip)', 'avpvh-print-website'),
+						    'help_text' => esc_html__('Download a ZIP containing a folder with one Markdown file per selected post or page. Extract the ZIP to open the folder.', 'avpvh-print-website'),
+					    ),
 				    );
 				    foreach($formats as $key => $details){
 					    ?>

@@ -13,6 +13,24 @@ This project uses Composer for PHP code sniffing. Go to the root directory and r
 ## Building Javascript
 This project uses NPM and webpack for building some Javascript. Go to the root directory and run `npm run build` to re-build the JS files in `assets/scripts/src`.
 
+## Markdown export
+
+In **Quick Print**, choose **Markdown (.md)** for one combined document, or
+**Markdown folder (.zip)** for a ZIP containing one `.md` file per post or page.
+Under **Show More Print Options**, select **Pages** to export pages instead of posts,
+and choose the order, filters, and content to include. Prepare the print page,
+then click the Markdown download button once the content has loaded.
+
+Extract the ZIP to open the folder. Files are numbered to preserve the selected
+order and keep duplicate titles from overwriting one another. Markdown exports
+retain headings, links, lists, code blocks, and supported tables. Images link to
+their original URLs; image files are not bundled. Conversion and ZIP generation
+run in the browser using bundled libraries, without a conversion service.
+
+Run the browser regression checks with `node scripts/test-markdown-export.mjs`
+(requires Chrome and Playwright). Set `JQUERY_PATH` to a local `jquery.min.js`
+if it is not installed at `/usr/share/javascript/jquery/jquery.min.js`.
+
 ## Deploying the Plugin with Playwright
 This repo now includes a simple browser-driven deploy flow for uploading the plugin zip through the WordPress admin.
 

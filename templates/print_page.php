@@ -138,6 +138,18 @@ if(apply_filters('pmb-print-page-treat-as-single', true)){
                 <div class="pmb-small-instructions"><?php esc_html_e('Build a Word-compatible document locally in your browser.', 'avpvh-print-website'); ?></div>
                 <div style="display:none" class="pmb-warning" id="pmb-print-page-warnings"></div>
                 <?php
+            } elseif (in_array($avpvh_prwb_format, ['markdown', 'markdown_zip'], true)) {
+                ?>
+                <button type="button" class="button button-primary" id="pmb-download-markdown" disabled><?php
+                    if ($avpvh_prwb_format === 'markdown_zip') {
+                        esc_html_e('Download Markdown Folder (.zip)', 'avpvh-print-website');
+                    } else {
+                        esc_html_e('Download Markdown (.md)', 'avpvh-print-website');
+                    }
+                ?></button>
+                <div class="pmb-small-instructions"><?php esc_html_e('Images remain linked to their original URLs.', 'avpvh-print-website'); ?></div>
+                <div role="status" id="pmb-markdown-status" class="pmb-small-instructions"></div>
+                <?php
             } else { // default: print
                 ?>
                 <input type="submit" disabled="disabled" class="pmb-print-page-print-button"  onclick="window.print()" value="<?php esc_attr_e('Print', 'avpvh-print-website'); ?>"/>
